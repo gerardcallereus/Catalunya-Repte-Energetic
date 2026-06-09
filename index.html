@@ -1,51 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catalunya: Repte Energètic</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontSize: {
-              'xs': ['13px', { lineHeight: '1.2rem' }],
-              'sm': ['15px', { lineHeight: '1.4rem' }],
-              'base': ['17px', { lineHeight: '1.6rem' }],
-            },
-            colors: {
-              'theme-easy-bg': '#f0fdf4',
-              'theme-easy-text': '#14532d',
-              'theme-easy-border': '#22c55e',
-              'theme-medium-bg': '#f8fafc',
-              'theme-medium-text': '#1e293b',
-              'theme-medium-border': '#475569',
-              'theme-hard-bg': '#fef2f2',
-              'theme-hard-text': '#7f1d1d',
-              'theme-hard-border': '#ef4444',
-            }
-          }
-        }
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World - Catalunya: Repte Energètic</title>
+  
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.4);
+      --bg-gradient-1: #0f172a;
+      --bg-gradient-2: #020617;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 50%, var(--bg-gradient-1), var(--bg-gradient-2));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: var(--text-main);
+      perspective: 1000px;
+    }
+
+    /* Animated background glow */
+    .glow-orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(16, 185, 129, 0) 70%);
+      top: -10%;
+      left: -10%;
+      z-index: 0;
+      animation: float 15s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .glow-orb-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+      bottom: -15%;
+      right: -10%;
+      z-index: 0;
+      animation: float 20s ease-in-out infinite alternate-reverse;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
       }
-    </script>
-  <script async src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "recharts": "https://aistudiocdn.com/recharts@^3.1.2",
-    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1",
-    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
-  }
-}
-</script>
-<link rel="stylesheet" href="/styles.css">
+      100% {
+        transform: translate(100px, 50px) scale(1.1);
+      }
+    }
+
+    /* Glassmorphic Card */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      width: 90%;
+      max-width: 480px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      z-index: 1;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Title Styling with gradient text */
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 30%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Interactive elements */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.8rem 2rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      outline: none;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Footer / Repository info */
+    .footer-info {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: rgba(148, 163, 184, 0.5);
+    }
+
+    .footer-info a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-info a:hover {
+      color: #34d399;
+      text-decoration: underline;
+    }
+
+    /* Interactive greeting area */
+    .greeting-message {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #34d399;
+      min-height: 24px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .greeting-message.show {
+      opacity: 1;
+    }
+  </style>
 </head>
-  <body class="text-slate-800 m-0 bg-slate-50">
-    <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+<body>
+
+  <!-- Decorative Orbs -->
+  <div class="glow-orb"></div>
+  <div class="glow-orb-2"></div>
+
+  <!-- Main Card -->
+  <main class="card">
+    <header>
+      <h1>Hello World!</h1>
+    </header>
+    <p>Benvingut a <strong>Catalunya: Repte Energètic</strong>. Aquesta és una pàgina de prova allotjada correctament a GitHub Pages.</p>
+    
+    <button class="btn" id="helloBtn">Prem aquí</button>
+    <div class="greeting-message" id="greetingText"></div>
+
+    <footer class="footer-info">
+      Projecte de <a href="https://github.com/gerardcallereus/Catalunya-Repte-Energetic" target="_blank">gerardcallereus</a>
+    </footer>
+  </main>
+
+  <script>
+    const btn = document.getElementById('helloBtn');
+    const greeting = document.getElementById('greetingText');
+    const messages = [
+      "Hola des de Catalunya! 🌍",
+      "El repte energètic comença aquí. ⚡",
+      "Tot a punt per a GitHub Pages! 🚀",
+      "Entorn net i funcionant! ✨"
+    ];
+    let currentIndex = 0;
+
+    btn.addEventListener('click', () => {
+      greeting.classList.remove('show');
+      
+      // Wait for fadeout before changing text
+      setTimeout(() => {
+        greeting.textContent = messages[currentIndex];
+        greeting.classList.add('show');
+        currentIndex = (currentIndex + 1) % messages.length;
+      }, 200);
+    });
+  </script>
 </body>
 </html>
