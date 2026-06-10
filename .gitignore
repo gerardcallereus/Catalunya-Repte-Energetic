@@ -29,3 +29,11 @@ dist-ssr
 *.sln
 *.sw?
 .antigravity/
+
+# Lock files and LibreOffice temp files
+*.~lock.*#
+.~lock.*#
+DOC/.~lock.*#
+
+# Generated files
+DOC/pdf_content.txt

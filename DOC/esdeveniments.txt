@@ -1,0 +1,6 @@
+canvia el nom del botó inici que acabes de crear per "Reiniciar". 
+Fes que el mandat, en comptes de començar en el 2026, comenci segons la data actual mirant en quin trimestre de l'any estem.
+M'agradaria modificar una mica l'estil de tot el joc i que faci servir colors més clars. Ara mateix crec que l'entorn s'ha convertit en massa fosc.
+Fes que la versió sigui la 2.4.
+
+

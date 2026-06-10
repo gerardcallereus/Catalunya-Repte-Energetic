@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World - Catalunya: Repte Energètic</title>
+  <title>Catalunya: Repte Energètic - Guia Didàctica i de Suport</title>
   
   <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #10b981;
-      --primary-glow: rgba(16, 185, 129, 0.4);
-      --bg-gradient-1: #0f172a;
-      --bg-gradient-2: #020617;
-      --card-bg: rgba(30, 41, 59, 0.7);
+      --bg-dark: #030712;
+      --bg-card: rgba(17, 24, 39, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      
+      /* Accents */
+      --primary: #10b981; /* Verd esmeralda (Renovables) */
+      --primary-glow: rgba(16, 185, 129, 0.15);
+      --secondary: #06b6d4; /* Blau cian (Xarxa/Tecnologia) */
+      --amber: #f59e0b; /* Groc ambre (Demanda/Alertes) */
+      --rose: #f43f5e; /* Vermell rosa (Dèficit/Contaminació) */
+      --indigo: #6366f1; /* Blau/lila (Polítiques/Diners) */
     }
 
     * {
@@ -30,200 +35,1986 @@
 
     body {
       font-family: 'Outfit', sans-serif;
-      background: radial-gradient(circle at 50% 50%, var(--bg-gradient-1), var(--bg-gradient-2));
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 60%);
+      background-attachment: fixed;
       color: var(--text-main);
-      perspective: 1000px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
     }
 
-    /* Animated background glow */
-    .glow-orb {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--primary-glow) 0%, rgba(16, 185, 129, 0) 70%);
-      top: -10%;
-      left: -10%;
-      z-index: 0;
-      animation: float 15s ease-in-out infinite alternate;
-      pointer-events: none;
+    /* Layout Utility */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
-    .glow-orb-2 {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
-      bottom: -15%;
-      right: -10%;
-      z-index: 0;
-      animation: float 20s ease-in-out infinite alternate-reverse;
-      pointer-events: none;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        transform: translate(100px, 50px) scale(1.1);
-      }
-    }
-
-    /* Glassmorphic Card */
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+    /* Glassmorphism card */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 3.5rem 2.5rem;
-      width: 90%;
-      max-width: 480px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Header styling */
+    header {
+      padding: 4rem 0 2rem 0;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      z-index: 1;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      position: relative;
     }
 
-    @keyframes slideUp {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    /* Title Styling with gradient text */
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+    .badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--primary);
+      padding: 0.4rem 1.2rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #ffffff 30%, #a7f3d0 100%);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.1rem;
-      font-weight: 300;
+    .lead {
+      font-size: 1.25rem;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      font-weight: 300;
     }
 
-    /* Interactive elements */
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-2 {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+
+    /* Buttons */
     .btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
       color: #020617;
       font-weight: 600;
       font-size: 1rem;
-      padding: 0.8rem 2rem;
-      border-radius: 9999px;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      outline: none;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s ease;
       text-decoration: none;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
     }
 
-    .btn:active {
-      transform: translateY(1px);
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      box-shadow: none;
     }
 
-    /* Footer / Repository info */
-    .footer-info {
-      margin-top: 2rem;
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Trilemma Visualizer */
+    .trilemma-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+
+    .trilemma-svg {
+      width: 280px;
+      height: 250px;
+      filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.2));
+    }
+
+    .trilemma-node {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .trilemma-node:hover circle {
+      fill-opacity: 0.3;
+      stroke-width: 3;
+    }
+
+    .trilemma-text {
+      font-weight: 600;
+      font-size: 13px;
+      fill: var(--text-main);
+      user-select: none;
+    }
+
+    .trilemma-details {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      padding: 1.2rem;
+      width: 100%;
+      text-align: left;
+    }
+
+    /* Simulador de MW styling */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .sim-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+    }
+
+    .control-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .control-val {
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      outline: none;
+      -webkit-appearance: none;
+      transition: background 0.3s;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .btn-toggle-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-toggle {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn-toggle:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-toggle.active {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: var(--secondary);
+      color: var(--text-main);
+      box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
+    }
+
+    /* Plant Toggles */
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .plant-toggle-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .plant-toggle-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .plant-toggle-card.active {
+      border-color: var(--primary);
+      background: rgba(16, 185, 129, 0.08);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+    }
+
+    .plant-toggle-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .plant-toggle-stat {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    /* Simulation Output Panel */
+    .sim-output {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sim-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sim-bar-label {
+      display: flex;
+      justify-content: space-between;
       font-size: 0.85rem;
-      color: rgba(148, 163, 184, 0.5);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .footer-info a {
+    .sim-bar-outer {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      height: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sim-bar-inner {
+      height: 100%;
+      transition: width 0.4s ease, background-color 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #030712;
+      font-family: monospace;
+    }
+
+    .sim-status-box {
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .sim-status-box.ok {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--primary);
+    }
+
+    .sim-status-box.deficit {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.2);
+      color: var(--rose);
+    }
+
+    .sim-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .sim-metric-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .sim-metric-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sim-metric-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    /* Accordions & Catalogue Cards */
+    .catalog-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .catalog-header {
+      padding: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.01);
+      transition: background-color 0.2s ease;
+    }
+
+    .catalog-header:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .catalog-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .catalog-body {
+      display: none;
+      padding: 1.5rem;
+      border-top: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.1);
+      animation: slideDown 0.3s ease;
+    }
+
+    .catalog-body.active {
+      display: block;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+    .tech-pill.renewable { background: rgba(16, 185, 129, 0.15); color: var(--primary); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .tech-pill.non-renewable { background: rgba(244, 63, 94, 0.15); color: var(--rose); border: 1px solid rgba(244, 63, 94, 0.2); }
+
+    .catalog-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+
+    .catalog-stat-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.25rem;
+    }
+
+    .catalog-stat-lbl {
+      color: var(--text-muted);
+    }
+
+    .catalog-stat-val {
+      font-family: monospace;
+      font-weight: 600;
+    }
+
+    .real-world-link {
+      background: rgba(6, 182, 212, 0.05);
+      border-left: 3px solid var(--secondary);
+      padding: 0.8rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      color: #e5e7eb;
+    }
+
+    .real-world-title {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    /* Decision Maker Widget */
+    .decision-widget {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .decision-selector {
+      width: 100%;
+      background: #111827;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.8rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .decision-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .decision-panel {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+
+    /* Radar/Grid of approvals */
+    .ratings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .rating-bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .rating-bar-lbl {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .rating-bar-outer {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .rating-bar-inner {
+      height: 100%;
+      background-color: var(--primary);
+      width: 50%;
+      border-radius: 9999px;
+      transition: width 0.4s ease, background-color 0.4s ease;
+    }
+
+    .rating-change-indicator {
+      font-weight: bold;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+    .rating-change-indicator.positive { color: var(--primary); }
+    .rating-change-indicator.negative { color: var(--rose); }
+    .rating-change-indicator.neutral { color: var(--text-muted); }
+
+    .decision-explanation-box {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      padding: 1.2rem;
+      border: 1px solid var(--card-border);
+      font-size: 0.9rem;
+    }
+
+    .decision-pro-con {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .decision-pro-col h5 { color: var(--primary); font-weight: 600; margin-bottom: 0.25rem; }
+    .decision-con-col h5 { color: var(--rose); font-weight: 600; margin-bottom: 0.25rem; }
+
+    /* Policy list */
+    .policy-search-bar {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .policy-search-bar:focus {
+      border-color: var(--secondary);
+    }
+
+    .policy-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .policy-filter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .policy-filter-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .policy-filter-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--indigo);
+      color: var(--text-main);
+    }
+
+    .policy-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .policy-card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .policy-card-cat {
+      font-size: 0.75rem;
+      color: var(--indigo);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .policy-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .policy-card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: #9ca3af;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Copiable Textbox */
+    .copy-box-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .copy-box-code {
+      width: 100%;
+      height: 250px;
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      color: #cbd5e1;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .btn-copy {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Footer styling */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
       color: var(--primary);
       text-decoration: none;
-      transition: color 0.2s ease;
     }
 
-    .footer-info a:hover {
-      color: #34d399;
+    footer a:hover {
       text-decoration: underline;
-    }
-
-    /* Interactive greeting area */
-    .greeting-message {
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
-      color: #34d399;
-      min-height: 24px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .greeting-message.show {
-      opacity: 1;
     }
   </style>
 </head>
 <body>
 
   <!-- Decorative Orbs -->
-  <div class="glow-orb"></div>
-  <div class="glow-orb-2"></div>
+  <div style="position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0) 70%); top: -10%; left: -10%; z-index: -1; pointer-events: none;"></div>
+  <div style="position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0) 70%); bottom: 10%; right: -10%; z-index: -1; pointer-events: none;"></div>
 
-  <!-- Main Card -->
-  <main class="card">
-    <header>
-      <h1>Hello World!</h1>
-    </header>
-    <p>Benvingut a <strong>Catalunya: Repte Energètic</strong>. Aquesta és una pàgina de prova allotjada correctament a GitHub Pages.</p>
+  <div class="container">
     
-    <button class="btn" id="helloBtn">Prem aquí</button>
-    <div class="greeting-message" id="greetingText"></div>
+    <!-- HEADER -->
+    <header>
+      <div class="badge">Eina de Suport Educatiu</div>
+      <h1>Catalunya: Repte Energètic</h1>
+      <p class="lead">Comprèn les bases científiques, ambientals i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
+    </header>
 
-    <footer class="footer-info">
-      Projecte de <a href="https://github.com/gerardcallereus/Catalunya-Repte-Energetic" target="_blank">gerardcallereus</a>
+    <!-- TABS NAVIGATION -->
+    <nav class="tabs-nav" aria-label="Navegació principal">
+      <button class="tab-btn active" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-didactica')">Recursos per a l'Aula</button>
+    </nav>
+
+    <!-- TAB 1: EL REPTE DE GOVERN -->
+    <section id="tab-repte" class="tab-content active">
+      <div class="grid-2">
+        <div class="glass-card">
+          <h2>
+            <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+            Ets el Conseller o Consellera d'Energia
+          </h2>
+          <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+            Acabes de ser nomenat/da cap del Departament d'Energia de la Generalitat de Catalunya. Tens un mandat fix de <strong>4 anys (16 trimestres)</strong>.
+          </p>
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">
+            L'electricitat és l'energia invisible que fa funcionar els nostres mòbils, el transport de les ciutats, els hospitals i les indústries. Com a governant, el teu repte no és senzill: has de garantir que sempre hi hagi electricitat disponible sense arruïnar les finances públiques i sense malmetre la qualitat de l'aire ni el clima de la Terra.
+          </p>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            A la vida real, Catalunya es troba en una cruïlla històrica: més del 50% de l'electricitat prové de tres reactors nuclears que tancaran en la propera dècada, tenim un dèficit històric d'instal·lacions renovables en comparació amb altres regions i patim sequeres intenses que ens deixen gairebé sense producció hidroelèctrica.
+          </p>
+          <div style="background: rgba(99,102,241,0.05); border: 1px solid rgba(99,102,241,0.15); padding: 1.2rem; border-radius: 12px; margin-top: 1rem;">
+            <h4 style="color: var(--indigo); font-weight:600; margin-bottom:0.5rem;">Com es perde la partida? (Game Over)</h4>
+            <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.9rem; color: var(--text-main); display: flex; flex-direction: column; gap: 0.4rem;">
+              <li><strong>Bancarrota Econòmica</strong>: Si el pressupost cau per sota de 0 M€.</li>
+              <li><strong>Revolta Social</strong>: Si l'aprovació mitjana de la societat baixa del 15%.</li>
+              <li><strong>Incompliment Climàtic</strong>: Si al final de la legislatura has superat els nivells màxims d'emissions de CO₂ permesos per Europa.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="glass-card" style="text-align: center;">
+          <h2>El Trilema Energètic</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Selecciona una de les tres potes del trilema per veure'n la descripció i la seva relació amb la realitat.</p>
+          
+          <div class="trilemma-container">
+            <svg class="trilemma-svg" viewBox="0 0 100 90">
+              <!-- Grid line lines connecting vertices -->
+              <polygon points="50,15 15,75 85,75" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+              
+              <!-- Vertex 1: Seguretat -->
+              <g class="trilemma-node" onclick="showTrilemma('seguretat')">
+                <circle cx="50" cy="15" r="7" fill="var(--secondary)" fill-opacity="0.15" stroke="var(--secondary)" stroke-width="1.5" />
+                <text x="50" y="27" text-anchor="middle" class="trilemma-text" style="font-size:5px;">Seguretat</text>
+              </g>
+              
+              <!-- Vertex 2: Planeta (Ambiental) -->
+              <g class="trilemma-node" onclick="showTrilemma('planeta')">
+                <circle cx="15" cy="75" r="7" fill="var(--primary)" fill-opacity="0.15" stroke="var(--primary)" stroke-width="1.5" />
+                <text x="15" y="87" text-anchor="middle" class="trilemma-text" style="font-size:5px;">Planeta / CO₂</text>
+              </g>
+              
+              <!-- Vertex 3: Economia (Diners) -->
+              <g class="trilemma-node" onclick="showTrilemma('economia')">
+                <circle cx="85" cy="75" r="7" fill="var(--indigo)" fill-opacity="0.15" stroke="var(--indigo)" stroke-width="1.5" />
+                <text x="85" y="87" text-anchor="middle" class="trilemma-text" style="font-size:5px;">Pressupost</text>
+              </g>
+
+              <!-- Center label -->
+              <text x="50" y="52" text-anchor="middle" fill="var(--text-muted)" style="font-size:4px; font-weight:bold; letter-spacing:0.05em; text-transform:uppercase;">Equilibri</text>
+            </svg>
+
+            <div class="trilemma-details" id="trilemma-details-box">
+              <h4 id="trilemma-title" style="color: var(--secondary); margin-bottom: 0.5rem;">Seguretat del Subministrament</h4>
+              <p id="trilemma-desc" style="font-size: 0.85rem; color: var(--text-muted);">
+                Has d'assegurar-te que la producció (en Megawatts, MW) cobreixi sempre la demanda del territori. Si la producció és insuficient, es produeix un dèficit. Per cobrir-lo, la Generalitat es veu obligada a comprar electricitat importada a preus molt alts, perjudicant directament la tresoreria pública i rebent crítiques per la pèrdua de Sobirania Energètica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: SIMULADOR DE LA BALANÇA -->
+    <section id="tab-balanca" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Simulador de la Balança de MW
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Juga amb la producció i la demanda en aquesta simulació. Activa o desactiva diferents tipus de centrals energètiques reals de Catalunya, canvia el trimestre i observa l'efecte del clima o d'una sequera sobre el balanç final.
+        </p>
+
+        <div class="sim-grid">
+          <!-- Controls Panel -->
+          <div>
+            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--secondary);">1. Ajusta la demanda i l'entorn</h3>
+            
+            <div class="control-group">
+              <div class="control-label">
+                <span>Demanda Base del País:</span>
+                <span><span id="val-demanda" class="control-val">7.200</span> MW</span>
+              </div>
+              <input type="range" id="input-demanda" min="4000" max="9500" value="7200" step="100" class="slider" oninput="updateSimulation()">
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Estació de l'Any (Trimestre):</span>
+              <div class="btn-toggle-group">
+                <button class="btn-toggle" id="btn-q1" onclick="setSimQuarter('Q1')">Q1 - Primavera</button>
+                <button class="btn-toggle active" id="btn-q2" onclick="setSimQuarter('Q2')">Q2 - Estiu</button>
+                <button class="btn-toggle" id="btn-q3" onclick="setSimQuarter('Q3')">Q3 - Tardor</button>
+                <button class="btn-toggle" id="btn-q4" onclick="setSimQuarter('Q4')">Q4 - Hivern</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Estat Climatològic Especial:</span>
+              <div class="btn-toggle-group">
+                <button class="btn-toggle active" id="btn-clim-normal" onclick="setSimClimate('normal')">Clima Normal</button>
+                <button class="btn-toggle" id="btn-clim-sequera" onclick="setSimClimate('sequera')">Sequera Històrica (10% Hidro)</button>
+                <button class="btn-toggle" id="btn-clim-temporal" onclick="setSimClimate('temporal')">Temporal Marítim (50% Eòlica)</button>
+              </div>
+            </div>
+
+            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary);">2. Activa/desactiva les Centrals disponibles</h3>
+            <div class="plant-grid">
+              <!-- Nuclear -->
+              <div class="plant-toggle-card active" id="card-nuc" onclick="toggleSimPlant('nuc')">
+                <span class="plant-toggle-name">Central Nuclear (Ascó/Vandellòs)</span>
+                <span class="plant-toggle-stat">3.000 MW · 0 CO₂</span>
+              </div>
+              <!-- Gas -->
+              <div class="plant-toggle-card active" id="card-gas" onclick="toggleSimPlant('gas')">
+                <span class="plant-toggle-name">Cicle Combinat (Gas Besòs)</span>
+                <span class="plant-toggle-stat">2.400 MW · 960t CO₂</span>
+              </div>
+              <!-- Solar -->
+              <div class="plant-toggle-card active" id="card-sol" onclick="toggleSimPlant('sol')">
+                <span class="plant-toggle-name">Parcs Solars Fotovoltaics</span>
+                <span class="plant-toggle-stat">1.200 MW · 0 CO₂</span>
+              </div>
+              <!-- Eòlica -->
+              <div class="plant-toggle-card active" id="card-eol" onclick="toggleSimPlant('eol')">
+                <span class="plant-toggle-name">Parcs Eòlics Terrestres</span>
+                <span class="plant-toggle-stat">1.500 MW · 0 CO₂</span>
+              </div>
+              <!-- Hidràulica -->
+              <div class="plant-toggle-card active" id="card-hid" onclick="toggleSimPlant('hid')">
+                <span class="plant-toggle-name">Embassaments (Hidroelèctrica)</span>
+                <span class="plant-toggle-stat">1.000 MW · 0 CO₂</span>
+              </div>
+              <!-- Biomassa -->
+              <div class="plant-toggle-card" id="card-bio" onclick="toggleSimPlant('bio')">
+                <span class="plant-toggle-name">Planta de Biomassa Comarcal</span>
+                <span class="plant-toggle-stat">200 MW · 20t CO₂</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation Outputs -->
+          <div class="sim-output">
+            <h3 style="text-align: center; color: #fff; margin-bottom: 0;">Resolució de la Balança</h3>
+            
+            <div id="sim-status-banner" class="sim-status-box ok">
+              SISTEMA ESTABLE (SUPERÀVIT DE 1.100 MW)
+            </div>
+
+            <div class="sim-bar-container">
+              <div class="sim-bar-label">
+                <span>Demanda del País</span>
+                <span><span id="sim-lbl-demand">8.280</span> MW</span>
+              </div>
+              <div class="sim-bar-outer">
+                <div id="sim-bar-demand" class="sim-bar-inner" style="background-color: var(--amber); width: 80%;">DEMANDA</div>
+              </div>
+            </div>
+
+            <div class="sim-bar-container">
+              <div class="sim-bar-label">
+                <span>Producció Efectiva</span>
+                <span><span id="sim-lbl-prod">9.100</span> MW</span>
+              </div>
+              <div class="sim-bar-outer">
+                <div id="sim-bar-prod" class="sim-bar-inner" style="background-color: var(--primary); width: 90%;">PRODUCCIÓ</div>
+              </div>
+            </div>
+
+            <div class="sim-metrics-grid">
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Emissions CO₂</div>
+                <div class="sim-metric-val" id="sim-val-co2" style="color: var(--rose);">960 t</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Importació de Llum</div>
+                <div class="sim-metric-val" id="sim-val-import" style="color: var(--text-main);">0 MW</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Mix Renovables</div>
+                <div class="sim-metric-val" id="sim-val-mix" style="color: var(--primary);">40.7%</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Impacte Financer</div>
+                <div class="sim-metric-val" id="sim-val-impact" style="color: var(--primary);">+41.0 M€</div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;">
+              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW en lloc del seu valor nominal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CATÀLEG DE CENTRALS -->
+    <section id="tab-centrals" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          El Catàleg de Tecnologies de Generació
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Explora com funcionen físicament les diferents centrals que pots construir, els seus avantatges i inconvenients en el simulador, i on es troben localitzades a la Catalunya real.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;" id="catalog-accordion">
+          
+          <!-- Nuclear -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Central Nuclear (Energia de Base)
+              </span>
+              <span class="tech-pill non-renewable">No Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Es basa en la fissió (divisió) de nuclis d'àtoms d'Urani dins d'un reactor. Aquesta reacció allibera una quantitat ingent d'energia tèrmica (calor), que s'utilitza per bullir aigua. El vapor d'aigua a alta pressió mou una turbina gegant acoblada a un generador elèctric, creant electricitat. Tot seguit, el vapor es refreda en torres de refrigeració amb l'aigua d'un riu o del mar.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stats">
+                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">3.500 a 9.000 M€</span></div>
+                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
+                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Molt Alt (40 a 180 M€)</span></div>
+                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+                </div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És la central de major capacitat de base. És ideal per evitar dèficits, però és caríssima de mantenir, tarda molt a construir-se, enfada la facció ecologista i activa esdeveniments de residus nuclears o avaries que posen en risc l'estabilitat política.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Catalunya depèn molt d'aquesta tecnologia: compta amb els reactors actius d'<strong>Ascó I i II</strong> (a la Ribera d'Ebre) i <strong>Vandellòs II</strong> (al Baix Camp). Generen més del 50% de l'electricitat catalana. El seu tancament està previst pel govern espanyol de forma esglaonada entre 2030 i 2035, creant un intens debat social sobre com substituir-les sense disparar els cicles de gas.
+              </div>
+            </div>
+          </div>
+
+          <!-- Fossil Gas -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Cicle Combinat de Gas (Reserva de Base)
+              </span>
+              <span class="tech-pill non-renewable">No Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Es crema gas natural per accionar una turbina de gas (similar a la d'un avió). Els gasos d'escapament, encara molt calents, s'aprofiten en una caldera de recuperació per generar vapor que fa moure una segona turbina (de vapor) connectada al mateix eix. D'aquí prové el nom de "cicle combinat", que assoleix rendiments molt més alts que les tèrmiques clàssiques.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">500 a 1.200 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (15 a 45 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Elevades (0.4t/MW)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És ràpida de construir i barata en inversió inicial. Serveix per tapar un dèficit ràpidament. Per contra, les seves emissions de CO₂ t'exposen a sancions de la UE i causen un greu desgast en l'aprovació ecologista, a més de patir per l'encariment del preu del combustible fòssil.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                A Catalunya hi ha grans centrals de cicle combinat als polígons industrials del <strong>Besòs</strong> (Barcelona) i de <strong>Tarragona</strong> (plana de la Canonja). Són les encarregades d'assegurar el sistema quan les renovables no produeixen o s'aturen les nuclears, però són molt criticades per impedir el conformitat dels objectius de reducció de gasos d'efecte hivernacle.
+              </div>
+            </div>
+          </div>
+
+          <!-- Solar -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Solar Fotovoltaica (Renovable Variable)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Les plaques solars contenen cel·les fetes de materials semiconductors (com el silici). Quan els fotons de la llum solar colpegen les plaques, alliberen electrons del silici, generant un corrent elèctric directe (DC). Un dispositiu anomenat *inversor* el converteix en corrent altern (AC), compatible amb les cases i les línies de transport.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">400 a 1.300 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (4 a 15 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És neta i no emet gasos. A l'estiu rep un gran impuls (1.5x de rendiment), però té una forta intermitència (a l'hivern baixa a 0.6x). Si es construeixen grans parcs, es poden disparar protestes d'agricultors o veïns per l'ocupació de sòl rural.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Catalunya té un desplegament molt alt d'autoconsum a teulades particulars i naus industrials, però va molt endarrerida en la creació de grans parcs solars fotovoltaics a causa de les complexes normatives d'aprovació mediambiental, la protecció del sòl agrari a zones com Ponent o les comarques de Girona, i el rebuig d'entitats de defensa del territori.
+              </div>
+            </div>
+          </div>
+
+          <!-- Eolica -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Eòlica Terrestre (Renovable Variable)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Les masses d'aire en moviment mouen les pales dels aerogeneradors, transformant l'energia cinètica del vent en energia mecànica de rotació. Dins de la góndola de la turbina, una caixa multiplicadora augmenta la velocitat del rotor per accionar un alternador, que és la màquina elèctrica que genera l'electricitat.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">600 a 2.000 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Sota (9 a 32 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Rendeix molt millor a la tardor i sobretot a l'hivern (1.2x), complementant perfectament la solar. Construir grans parcs eòlics redueix greument l'aprovació ciutadana dels municipis on s'instal·len pel rebuig visual i acústic.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                La producció de vent a Catalunya està molt concentrada a comarques ventoses com la <strong>Terra Alta</strong>, el Baix Ebre i l'Anoia. Això ha provocat denúncies històriques de "massificació eòlica", amb plataformes com *Salvem lo Territori* que s'oposen a la saturació paisatgística, mentre que altres zones de Catalunya amb molt de vent (com l'Empordà) tenen una instal·lació eòlica gairebé nul·la pel gran rebuig social local.
+              </div>
+            </div>
+          </div>
+
+          <!-- Hidraulica -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Hidroelèctrica (Bateria Natural Gestionable)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Aprofita l'energia potencial de l'aigua emmagatzemada en un embassament a gran alçada. Quan s'obre la resclosa, l'aigua es canalitza a pressió per canonades forçades fins a la base de la presa, on xoca contra els àleps d'una turbina (Francis, Pelton o Kaplan) fent-la girar. Aquest moviment fa girar un alternador que produeix electricitat de forma instantània.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.500 a 4.000 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">5 a 8 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Sota-Mitjà (12 a 30 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És l'única font renovable convencional completament gestionable (la pots obrir quan vulguis). Però té una debilitat mortal: depèn de la pluja. Si s'activa l'esdeveniment de sequera, el seu rendiment cau en picat.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Catalunya té preses històriques a la conca dels rius Noguera Pallaresa i Ribagorçana al Pirineu (com **Talarn** o Tremp), i embassaments clau a la xarxa Ter-Llobregat (**Sau i Susqueda**). La sequera dels anys 2021-2024 va reduir les reserves de Sau a mínims històrics del 10%, demostrant que l'energia hidroelèctrica ja no pot ser un suport estable durant èpoques de canvi climàtic sever.
+              </div>
+            </div>
+          </div>
+
+          <!-- Eolica Marina -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Eòlica Marina (Renovable de Gran Escala)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Funciona amb el mateix principi que l'eòlica terrestre, peró les turbines es col·loquen en el mar, sovint sobre plataformes flotants ancorades al fons marí a causa de la gran profunditat de la costa mediterrània. En el mar, el vent és molt més constant i fort, permetent la utilització d'aerogeneradors gegants amb el doble de capacitat de producció.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">2.500 a 7.000 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Alt (40 a 120 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Abans de poder-la fabricar, has de gastar diners en la política "Desbloqueig de l'Eòlica Marina". Produeix una gran quantitat de MW verds de forma constant, peró té una inversió inicial gegantina i requereix temps per acabar les obres.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Aquesta és una de les principals apostes del govern català a mitjà termini, amb el projecte del **Parc Tramuntana** dissenyat al **Golf de Roses** (Alt Empordà). El projecte preveu aerogeneradors flotants a uns 20 km de la costa, generant polèmica social a causa de l'impacte visual en una zona de gran valor turístic i els efectes sobre els ecosistemes marins del Cap de Creus.
+              </div>
+            </div>
+          </div>
+
+          <!-- Termosolar -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Termosolar (Renovable Gestionable Avançada)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Utilitza un camp de miralls orientables (heliòstats) que segueixen el sol per reflectir i concentrar els raigs solars a la punta d'una torre central. En aquesta torre circula un fluid (generalment sals foses) que s'escalfa fins a més de 550°C. Les sals calentes es guarden en tancs aïllats térmicament i es fan servir per bullir aigua i moure una turbina de vapor convencional quan es necessita.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.800 a 5.000 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">5 a 9 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (25 a 70 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> També està bloquejada d'inici (requereix la política "Pla de Desenvolupament Termosolar"). Rendeix molt a l'estiu (1.5x) i, a diferència de la solar fotovoltaica, permet conservar part de la producció a la nit gràcies a l'emmagatzematge de sals, fent-la gestionable.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Espanya és líder mundial en potència termosolar instal·lada, sobretot a Andalusia i Extremadura. A Catalunya gairebé no s'ha desenvolupat a causa dels seus grans requeriments de terreny pla molt assolellat i l'alt cost dels projectes inicials, tot i ser considerada clau per l'Agència Internacional de l'Energia (AIE) per a la transició verda.
+              </div>
+            </div>
+          </div>
+
+          <!-- Biomassa -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Biomassa i Biogàs (Renovable de Base)
+              </span>
+              <span class="tech-pill renewable">Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <p><strong>Funcionament Físic:</strong> Consisteix a cremar biomassa sòlida (com estelles de fusta forestal, pinyols d'oliva o biomassa residual agrícola) o cremar el biogàs obtingut de la fermentació de fems de les granges de porcs i vaques. Aquesta combustió genera escalfor per bullir aigua i moure una turbina de vapor elèctrica. Es considera renovable perquè el carboni cremat s'ha absorbit prèviament per les plantes de l'entorn durant el seu creixement.</p>
+              <div class="catalog-stats">
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">300 a 900 M€</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (8 a 25 M€)</span></div>
+                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Molt Baixes (0.1t/MW)</span></div>
+              </div>
+              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Funciona com una central de base barata i constant. Emet una quantitat molt reduïda de CO₂ en comparació amb el gas natural. La seva construcció sol rebre oposició local a causa de les queixes per males olors o contaminació per fum local.</p>
+              <div class="real-world-link">
+                <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                Catalunya té un potencial immens en biogàs a les zones de gran concentració ramadera de la comarca d'<strong>Osona</strong> o de Lleida, servint com a solució per tractar el greu problema ecològic dels purins porcins. La biomassa forestal s'aprofita especialment a comarques amb molta superfície de bosc (com la Garrotxa o la Selva) per a calderes i petites centrals industrials de base.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: GUIA D'ACTORS SOCIALS -->
+    <section id="tab-actors" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.48 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Els Actors Socials i la Presa de Decisions
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Trobar el consens social és el repte més gran de la transició energètica. Cada decisió política i construcció de centrals enfronta els interessos de quatre faccions de la societat real de Catalunya.
+        </p>
+
+        <div class="decision-widget">
+          <h3>Posa't a prova: Quines conseqüències tindran les teves polítiques?</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Selecciona una de les grans decisions polítiques del joc per veure de forma instantània el seu impacte real en l'aprovació dels diferents grups socials.</p>
+          
+          <select id="select-decision" class="decision-selector" onchange="updateDecisionWidget()">
+            <option value="carbon_tax">Impost a les Emissions de CO₂ (Fiscalitat verda)</option>
+            <option value="aeroport">Projecte d'Ampliació de l'Aeroport del Prat (La Ricarda)</option>
+            <option value="nuclear_life">Aprovar l'extensió de vida de les Nuclears a Catalunya</option>
+            <option value="autoconsum">Subvencionar el model d'Autoconsum Solar a les teulades</option>
+            <option value="aragmat">Acord Bilateral d'Energia amb Aragó (Línies MAT)</option>
+          </select>
+
+          <div class="decision-panel">
+            <!-- Approvals (Ratings list) -->
+            <div>
+              <h4 style="margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.25rem;">Impacte en els Grups:</h4>
+              <div class="ratings-list">
+                
+                <!-- Citizen -->
+                <div class="rating-bar-row">
+                  <div class="rating-bar-lbl">
+                    <span>Ciutadania (Poble)</span>
+                    <span id="chg-citizen" class="rating-change-indicator positive">+2%</span>
+                  </div>
+                  <div class="rating-bar-outer">
+                    <div id="bar-citizen" class="rating-bar-inner" style="width: 50%;"></div>
+                  </div>
+                </div>
+
+                <!-- Business -->
+                <div class="rating-bar-row">
+                  <div class="rating-bar-lbl">
+                    <span>Empresariat (PIMEC / Foment)</span>
+                    <span id="chg-business" class="rating-change-indicator negative">-5%</span>
+                  </div>
+                  <div class="rating-bar-outer">
+                    <div id="bar-business" class="rating-bar-inner" style="width: 50%; background-color: var(--indigo);"></div>
+                  </div>
+                </div>
+
+                <!-- Environmentalist -->
+                <div class="rating-bar-row">
+                  <div class="rating-bar-lbl">
+                    <span>Ecologistes (Salvem l'Empordà...)</span>
+                    <span id="chg-environmentalist" class="rating-change-indicator positive">+5%</span>
+                  </div>
+                  <div class="rating-bar-outer">
+                    <div id="bar-environmentalist" class="rating-bar-inner" style="width: 50%; background-color: var(--secondary);"></div>
+                  </div>
+                </div>
+
+                <!-- Political -->
+                <div class="rating-bar-row">
+                  <div class="rating-bar-lbl">
+                    <span>Polítics (Consens Parlamentari)</span>
+                    <span id="chg-political" class="rating-change-indicator neutral">0%</span>
+                  </div>
+                  <div class="rating-bar-outer">
+                    <div id="bar-political" class="rating-bar-inner" style="width: 50%; background-color: var(--amber);"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Strategic Advice & Context -->
+            <div class="decision-explanation-box">
+              <h4 style="color: var(--indigo); margin-bottom: 0.5rem;" id="dec-title">Impost a les Emissions de CO₂</h4>
+              <p id="dec-text" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.5rem;">
+                Aprovar una taxa ecològica sobre les empreses que cremen gas natural per produir electricitat. Genera ingressos addicionats per a la Generalitat, peró té oposició econòmica.
+              </p>
+              <p style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;" id="dec-context">
+                <strong>Vincle real:</strong> Catalunya aplica des del 2021 un impost sobre emissions de CO₂ en vehicles i un cànon industrial, fet que ha creat estira-i-arronses amb les empreses, que demanaven suspendre'l durant la inflació.
+              </p>
+              <div class="decision-pro-con">
+                <div class="decision-pro-col">
+                  <h5>Pros</h5>
+                  <p id="dec-pros" style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">+200 M€ trimestrals recurrents, millora l'aprovació ecologista pel rebuig al carbó.</p>
+                </div>
+                <div class="decision-con-col">
+                  <h5>Contres</h5>
+                  <p id="dec-cons" style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">Fuerte pèrdua d'aprovació de l'Empresariat.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: POLÍTIQUES PÚBLIQUES -->
+    <section id="tab-politiques" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          L'Arsenal Legislatiu: Guia de les 23 Polítiques Públiques
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Com a governant, el teu pressupost no només es destina a aixecar formigó i turbines. Pots aprovar lleis que redueixen el consum, milloren el preu de l'energia o fomenten el desenvolupament tecnològic de la xarxa.
+        </p>
+
+        <input type="text" id="policy-search" class="policy-search-bar" placeholder="Cerca polítiques per títol o efecte (ex: autoconsum, MAT, impost)..." onkeyup="filterPolicies()">
+        
+        <div class="policy-filters">
+          <button class="policy-filter-btn active" id="pol-filter-all" onclick="filterPolicyCategory('all')">Totes les Polítiques</button>
+          <button class="policy-filter-btn" id="pol-filter-demanda" onclick="filterPolicyCategory('demanda')">Eficiència i Demanda</button>
+          <button class="policy-filter-btn" id="pol-filter-fiscal" onclick="filterPolicyCategory('fiscal')">Fiscalitat i Mercat</button>
+          <button class="policy-filter-btn" id="pol-filter-infra" onclick="filterPolicyCategory('infra')">Infraestructura i R+D</button>
+        </div>
+
+        <div class="grid-3" id="policies-grid">
+          <!-- Rehabilitation -->
+          <div class="policy-card" data-category="demanda" data-search="pla de rehabilitació energètica eficiència demanda reducció demanda">
+            <div>
+              <div class="policy-card-title">Rehabilitació Energètica</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Subvenciona l'aïllament tèrmic d'habitatges per reduir el consum de calefacció a l'hivern i aire condicionat a l'estiu.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.200 M€</span>
+              <span>Demanda: -150 MW</span>
+            </div>
+          </div>
+
+          <!-- Carbon Tax -->
+          <div class="policy-card" data-category="fiscal" data-search="impost a les emissions de co2 fiscalitat mercat ingressos recaptació">
+            <div>
+              <div class="policy-card-title">Impost al CO₂</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Aplica un gravamen als cicles combinats proporcional al gas cremat, millorant l'aprovació ecològica.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 0 M€ (Llei)</span>
+              <span>Ingressos: +200 M€/t</span>
+            </div>
+          </div>
+
+          <!-- Grid Modernization -->
+          <div class="policy-card" data-category="infra" data-search="llei de modernització de la xarxa infraestructura preu venda excedent compra dèficit">
+            <div>
+              <div class="policy-card-title">Modernització de la Xarxa</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Redueix les pèrdues de transport de llum. Millora el preu de venda d'excedent (+10%) i redueix el de compra (-10%).</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 900 M€</span>
+              <span>Èxit base: 80%</span>
+            </div>
+          </div>
+
+          <!-- Windfall Tax -->
+          <div class="policy-card" data-category="fiscal" data-search="taxa als beneficis extraordinaris de les elèctriques windfall tax fiscalitat">
+            <div>
+              <div class="policy-card-title">Taxa Beneficis Extraordinaris</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Taxa directa als beneficis caiguts del cel de les elèctriques. Augmenta els ingressos en 250 M€/torn. Ciutadania +10%, Empresariat -12%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 0 M€</span>
+              <span>Ingressos: +250 M€/t</span>
+            </div>
+          </div>
+
+          <!-- Autoconsum -->
+          <div class="policy-card" data-category="demanda" data-search="llei d'impuls a l'autoconsum solar teulades eficiència demanda">
+            <div>
+              <div class="policy-card-title">Impuls a l'Autoconsum</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Simplifica la instal·lació de plaques solars en teulades privades. Redueix la demanda de la xarxa elèctrica de forma permanent en 100 MW.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 500 M€</span>
+              <span>Demanda: -100 MW</span>
+            </div>
+          </div>
+
+          <!-- Bateries -->
+          <div class="policy-card" data-category="infra" data-search="pla d'emmagatzematge bateries infraestructura tecnologia r+d solar eòlica">
+            <div>
+              <div class="policy-card-title">Emmagatzematge (Bateries)</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Finança parcs de bateries d'ió liti de gran escala. Incrementa l'efectivitat i aprofitament de solars i eòliques un 20% permanentment.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 2.000 M€</span>
+              <span>Èxit base: 70%</span>
+            </div>
+          </div>
+
+          <!-- Aragó Pact -->
+          <div class="policy-card" data-category="infra" data-search="acord bilateral d'energia amb aragó línies mat transport infraestructura">
+            <div>
+              <div class="policy-card-title">Acord amb Aragó (MAT)</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Estableix acords per a la importació de llum aragonesa barata mitjançant línies de Molt Alta Tensió. Millora un 15% els costos i exportacions.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 400 M€</span>
+              <span>Polítics: +4%</span>
+            </div>
+          </div>
+
+          <!-- Bureaucracy -->
+          <div class="policy-card" data-category="infra" data-search="simplificació burocràtica per a renovables infraestructura temps construcció">
+            <div>
+              <div class="policy-card-title">Simplificació Burocràtica</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Retalla els tràmits per obrir projectes verds. Redueix en 1 trimestre el temps de construcció de solars i eòliques. Empresariat +4%, Ecologistes -3%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 150 M€</span>
+              <span>Èxit base: 75%</span>
+            </div>
+          </div>
+
+          <!-- Green Hydrogen -->
+          <div class="policy-card" data-category="infra" data-search="projecte pilot d'hidrogen verd r+d tecnologia manteniment gas">
+            <div>
+              <div class="policy-card-title">Projecte Hidrogen Verd</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Inverteix en la creació d'hidrogen verd per a suport tèrmic. Redueix un 25% permanentment el cost de manteniment de les centrals de gas.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.300 M€</span>
+              <span>Ecologistes: +5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: RECURSOS DIDÀCTICS -->
+    <section id="tab-didactica" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.5L12 15.83l6.11-3.33c-.37-.77-1.12-1.35-2.01-1.57L12 13.06 7.9 10.93c-.89.22-1.64.8-2.01 1.57z"/></svg>
+          Recursos per a l'Aula i Unitats Didàctiques
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Copia aquestes estructures i plantilles per utilitzar-les a les teves classes de secundària, facilitant l'avaluació competencial a través de la gamificació.
+        </p>
+
+        <h3 style="color: var(--secondary);">Recurs 1: Diari del Conseller/a (Fitxa de Seguiment de la Partida)</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">Utilitza aquesta taula de registre per fer que l'alumnat reflecteixi per escrit la seva estratègia i les conseqüències observades.</p>
+        <div class="copy-box-wrapper">
+          <button class="btn-copy" onclick="copyText('code-diari')">Copiar Markdown</button>
+          <textarea id="code-diari" class="copy-box-code" readonly>
+# Diari de Mandat - Catalunya: Repte Energètic
+Nom de l'alumne/a: ___________________________   Data: _____________
+Grup/Classe: ______________                      Dificultat: _________
+
+| Torn/Trimestre | Pressupost (M€) | Aprovació (%) | Emissions CO₂ (t) | Decisió Presa (Central / Llei / Esdeveniment) | Justificació de la Decisió (Per què?) | Conseqüència Observada (Resultat obtingut) |
+|---|---|---|---|---|---|---|
+| Inicial (Q0) | | | | - | - | - |
+| Torn 1 | | | | | | |
+| Torn 2 | | | | | | |
+| Torn 3 | | | | | | |
+| Torn 4 | | | | | | |
+| Torn 5 | | | | | | |
+| Torn 6 | | | | | | |
+| Torn 7 | | | | | | |
+| Torn 8 | | | | (Ampliació Aeroport del Prat) | | |
+| Torn 9 | | | | | | |
+| Torn 10 | | | | | | |
+| Torn 11 | | | | | | |
+| Torn 12 | | | | | | |
+| Torn 13 | | | | | | |
+| Torn 14 | | | | | | |
+| Torn 15 | | | | | | |
+| Final (Q16) | | | | - | - | **Puntuació Final: ____ / 10** |
+          </textarea>
+        </div>
+
+        <h3 style="color: var(--indigo); margin-top: 2.5rem;">Recurs 2: Joc de Rol (Debat Parlamentari)</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">Estructura per organitzar un joc de rol i debat parlamentari basat en algun esdeveniment crític (com el Parc Tramuntana o l'Aeroport).</p>
+        <div class="copy-box-wrapper">
+          <button class="btn-copy" onclick="copyText('code-rol')">Copiar Text</button>
+          <textarea id="code-rol" class="copy-box-code" readonly>
+ACTIVITAT DE DEBAT PARLAMENTARI: LA DECISIÓ DEL TRAMUNTANA
+
+1. CONTEXT:
+El govern ha d'aprovar el desbloqueig de l'Eòlica Marina per tirar endavant el projecte del "Parc Tramuntana" al Golf de Roses.
+
+2. REPARTIMENT DE ROLS (Es divideix la classe en 5 grups):
+- GRUP A (El Govern de la Generalitat): Ha de moderar el debat i prendre una decisió final per decret. L'objectiu és aconseguir energia i reduir CO₂ sense perdre més d'un 10% de suport polític.
+- GRUP B (L'Empresariat i Cambra de Comerç): Defensar la necessitat del parc. Necessiten energia barata i abundants inversions industrials per evitar la dependència d'Aragó.
+- GRUP C (Ecologistes i Plataformes del Territori): Oposició al parc en aquest punt concret pel seu fort impacte paisatgístic, afectació al fons marí i amenaça al turisme local. Proposen l'alternativa de l'Autoconsum o rehabilitació d'edificis.
+- GRUP D (Associacions de Veïns i Sector Turístic/Pesquer): Alerten que els molins flotants destrossaran la bellesa del Cap de Creus, afectant els hotels, els esports nàutics i els pescadors locals.
+- GRUP E (La Unió Europea - Comissió de Sostenibilitat): Exigeixen que Catalunya redueixi les seves emissions de CO₂ un 55% abans de 2030, alertant de multes multimilionàries en cas contrari.
+
+3. DESENVOLUPAMENT:
+- Fase 1 (15 min): Els grups preparen les seves intervencions escrites utilitzant dades reals.
+- Fase 2 (20 min): Renda de ponències coordinada pel Conseller d'Energia. Cada part exposa els seus pros i contres de 3 minuts.
+- Fase 3 (10 min): Rèplica lliure i negociació de compensacions (ex. oferir millores fiscals, xecs elèctrics o canons de compensació al territori afectat).
+- Fase 4 (5 min): Resolució del Govern: S'aprova totalment, es rebutja, o s'aprova una alternativa de compromís.
+          </textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Desenvolupat per a la comunitat educativa. Catalunya: Repte Energètic és una eina Open Source adaptada per a l'ESO catalana.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Generalitat de Catalunya · Departament d'Educació · <a href="https://github.com/gerardcallereus/Catalunya-Repte-Energetic" target="_blank">Repositori de Codi a GitHub</a></p>
     </footer>
-  </main>
 
+  </div>
+
+  <!-- SCRIPT FOR SIMULATORS & INTERACTIVITY -->
   <script>
-    const btn = document.getElementById('helloBtn');
-    const greeting = document.getElementById('greetingText');
-    const messages = [
-      "Hola des de Catalunya! 🌍",
-      "El repte energètic comença aquí. ⚡",
-      "Tot a punt per a GitHub Pages! 🚀",
-      "Entorn net i funcionant! ✨"
-    ];
-    let currentIndex = 0;
+    // Tab switching logic
+    function switchTab(evt, tabId) {
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(tab => tab.classList.remove('active'));
 
-    btn.addEventListener('click', () => {
-      greeting.classList.remove('show');
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // Trilemma Visualizer data switcher
+    const trilemmaData = {
+      seguretat: {
+        title: "Seguretat del Subministrament",
+        desc: "Has d'assegurar-te que la producció (en Megawatts, MW) cobreixi sempre la demanda del territori. Si la producció és insuficient, es produeix un dèficit. Per cobrir-lo, la Generalitat es veu obligada a comprar electricitat importada a preus molt alts, perjudicant directament la tresoreria pública i rebent crítiques per la pèrdua de Sobirania Energètica.",
+        color: "var(--secondary)"
+      },
+      planeta: {
+        title: "Sostenibilitat Ambiental (Planeta / CO₂)",
+        desc: "Catalunya ha de reduir les seves emissions de gasos d'efecte hivernacle. Cremar combustibles fòssils (Gas) puja el CO₂. Superar els límits legals imposats per Brussel·les suposa multes molt elevades de fins a 1.500 M€ en el joc i reaccions molt dures dels moviments ecologistes locals.",
+        color: "var(--primary)"
+      },
+      economia: {
+        title: "Sostenibilitat Econòmica (Pressupost)",
+        desc: "Cada decisió de construcció costa diners. Les centrals nuclears i els grans parcs requereixen inversions inicials de milers de milions d'euros. També has de fer front als costos de manteniment trimestrals de les centrals actives. Si el pressupost arriba a 0 €, la partida acaba per fallida de la Generalitat.",
+        color: "var(--indigo)"
+      }
+    };
+
+    function showTrilemma(key) {
+      const data = trilemmaData[key];
+      const titleEl = document.getElementById('trilemma-title');
+      const descEl = document.getElementById('trilemma-desc');
+      const boxEl = document.getElementById('trilemma-details-box');
+
+      titleEl.textContent = data.title;
+      titleEl.style.color = data.color;
+      descEl.textContent = data.desc;
+      boxEl.style.borderColor = data.color;
+    }
+
+    // ACCORDION FOR CATALOGUE
+    function toggleAccordion(header) {
+      // Toggle current panel
+      const body = header.nextElementSibling;
+      body.classList.toggle('active');
+
+      // Optional: Close others
+      const cards = document.querySelectorAll('.catalog-body');
+      cards.forEach(c => {
+        if (c !== body && c.classList.contains('active')) {
+          c.classList.remove('active');
+        }
+      });
+    }
+
+    // SIMULADOR DE MW CODE
+    let simState = {
+      demandaBase: 7200,
+      quarter: 'Q2', // Estiu
+      climate: 'normal',
+      plants: {
+        nuc: true,
+        gas: true,
+        sol: true,
+        eol: true,
+        hid: true,
+        bio: false
+      }
+    };
+
+    const plantCapacities = {
+      nuc: 3000,
+      gas: 2400,
+      sol: 1200,
+      eol: 1500,
+      hid: 1000,
+      bio: 200
+    };
+
+    const plantCO2Factors = {
+      nuc: 0,
+      gas: 0.4, // t per MW
+      sol: 0,
+      eol: 0,
+      hid: 0,
+      bio: 0.1
+    };
+
+    function setSimQuarter(q) {
+      simState.quarter = q;
+      document.querySelectorAll('[id^="btn-q"]').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${q.toLowerCase()}`).classList.add('active');
+      updateSimulation();
+    }
+
+    function setSimClimate(c) {
+      simState.climate = c;
+      document.querySelectorAll('[id^="btn-clim-"]').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-clim-${c}`).classList.add('active');
+      updateSimulation();
+    }
+
+    function toggleSimPlant(p) {
+      simState.plants[p] = !simState.plants[p];
+      document.getElementById(`card-${p}`).classList.toggle('active');
+      updateSimulation();
+    }
+
+    function updateSimulation() {
+      const inputVal = parseInt(document.getElementById('input-demanda').value);
+      simState.demandaBase = inputVal;
+      document.getElementById('val-demanda').textContent = inputVal.toLocaleString();
+
+      // 1. Calculate Demand multipliers
+      let demandMultiplier = 1.0;
+      let notesText = "";
+      if (simState.quarter === 'Q2') {
+        demandMultiplier = 1.15; // Estiu (AC)
+        notesText = "<strong>Nota d'Estiu</strong>: Un increment de demanda base a " + inputVal + " MW genera una demanda total de " + Math.round(inputVal * 1.15) + " MW pels aires condicionats. Les solars multipliquen la seva eficàcia (1.5x) aportant energia verda abundant de dia.";
+      } else if (simState.quarter === 'Q4') {
+        demandMultiplier = 1.10; // Hivern (Calefacció)
+        notesText = "<strong>Nota d'Hivern</strong>: La demanda puja un 10% pels radiadors. Les solars redueixen el rendiment al 60% per la manca de llum, però el vent (1.2x) i les eòliques salven el sistema d'apagades.";
+      } else if (simState.quarter === 'Q1') {
+        notesText = "<strong>Nota de Primavera</strong>: El desglaç de les muntanyes augmenta el rendiment hidroelèctric (1.2x), fent d'aquesta bateria natural una eina imprescindible.";
+      } else {
+        notesText = "<strong>Nota de Tardor</strong>: Demanda estable. El clima és moderat, permetent fer reparacions programades a les centrals fòssils.";
+      }
+
+      const totalDemand = Math.round(simState.demandaBase * demandMultiplier);
+      document.getElementById('sim-lbl-demand').textContent = totalDemand.toLocaleString();
+
+      // 2. Calculate seasonal & climate multipliers for production
+      let solarMult = 1.0;
+      let windMult = 1.0;
+      let hydroMult = 1.0;
+
+      // Seasonal base multipliers
+      if (simState.quarter === 'Q2') { solarMult = 1.5; }
+      else if (simState.quarter === 'Q4') { solarMult = 0.6; windMult = 1.2; }
+      else if (simState.quarter === 'Q1') { hydroMult = 1.2; windMult = 1.1; }
+      else if (simState.quarter === 'Q3') { hydroMult = 1.1; }
+
+      // Climate condition modifiers
+      if (simState.climate === 'sequera') {
+        hydroMult *= 0.10; // Sequera destrueix la hidràulica
+        notesText += " <span style='color: var(--rose)'><strong>ALERTA DE SEQUERA</strong>: La hidràulica cau un 90% per la manca d'aigua en els pantans de Sau i Susqueda.</span>";
+      } else if (simState.climate === 'temporal') {
+        windMult *= 0.50; // Temporal apaga eòliques terrestres per protecció
+        notesText += " <span style='color: var(--amber)'><strong>ALERTA DE TEMPORAL</strong>: El vent és massa fort i es desconnecten parcialment aerogeneradors de la Terra Alta per motius de seguretat.</span>";
+      }
+
+      // 3. Compute active production
+      let totalProd = 0;
+      let co2Emissions = 0;
+
+      if (simState.plants.nuc) {
+        totalProd += plantCapacities.nuc;
+      }
+      if (simState.plants.gas) {
+        const gasProd = plantCapacities.gas;
+        totalProd += gasProd;
+        co2Emissions += gasProd * plantCO2Factors.gas;
+      }
+      if (simState.plants.sol) {
+        totalProd += Math.round(plantCapacities.sol * solarMult);
+      }
+      if (simState.plants.eol) {
+        totalProd += Math.round(plantCapacities.eol * windMult);
+      }
+      if (simState.plants.hid) {
+        totalProd += Math.round(plantCapacities.hid * hydroMult);
+      }
+      if (simState.plants.bio) {
+        const bioProd = plantCapacities.bio;
+        totalProd += bioProd;
+        co2Emissions += bioProd * plantCO2Factors.bio;
+      }
+
+      document.getElementById('sim-lbl-prod').textContent = totalProd.toLocaleString();
+      document.getElementById('sim-val-co2').textContent = Math.round(co2Emissions) + " t";
+
+      // 4. Calculate deficit / surplus
+      const diff = totalProd - totalDemand;
+      const banner = document.getElementById('sim-status-banner');
+      let deficitMW = 0;
+
+      if (diff >= 0) {
+        banner.className = "sim-status-box ok";
+        banner.textContent = "SISTEMA ESTABLE (SUPERÀVIT DE " + diff.toLocaleString() + " MW)";
+        document.getElementById('sim-val-import').textContent = "0 MW";
+      } else {
+        deficitMW = Math.abs(diff);
+        banner.className = "sim-status-box deficit";
+        banner.textContent = "SISTEMA EN DÈFICIT (FALTEN " + deficitMW.toLocaleString() + " MW)";
+        document.getElementById('sim-val-import').textContent = deficitMW.toLocaleString() + " MW";
+      }
+
+      // 5. Renewable Mix
+      let renewProd = 0;
+      if (simState.plants.sol) renewProd += Math.round(plantCapacities.sol * solarMult);
+      if (simState.plants.eol) renewProd += Math.round(plantCapacities.eol * windMult);
+      if (simState.plants.hid) renewProd += Math.round(plantCapacities.hid * hydroMult);
+      const mixPercent = totalProd > 0 ? ((renewProd / totalProd) * 100).toFixed(1) : "0.0";
+      document.getElementById('sim-val-mix').textContent = mixPercent + "%";
+
+      // 6. Financial Impact
+      // Cost of deficit is 0.15 M€ per MW, surplus sale is 0.04 M€ per MW (base values)
+      let financeImpact = 600; // base taxes revenue per turn
+      let upkeepCost = 0;
+      if (simState.plants.nuc) upkeepCost += 120;
+      if (simState.plants.gas) upkeepCost += 30;
+      if (simState.plants.sol) upkeepCost += 8;
+      if (simState.plants.eol) upkeepCost += 18;
+      if (simState.plants.hid) upkeepCost += 20;
+      if (simState.plants.bio) upkeepCost += 15;
+
+      let deficitCost = deficitMW * 0.15; // molt car
+      let surplusRev = diff > 0 ? diff * 0.04 : 0;
+
+      let finalFinance = financeImpact - upkeepCost - deficitCost + surplusRev;
+      const financeVal = document.getElementById('sim-val-impact');
+      if (finalFinance >= 0) {
+        financeVal.textContent = "+" + finalFinance.toFixed(1) + " M€";
+        financeVal.style.color = "var(--primary)";
+      } else {
+        financeVal.textContent = finalFinance.toFixed(1) + " M€";
+        financeVal.style.color = "var(--rose)";
+      }
+
+      // 7. Bars widths (relative to max value 12000 MW)
+      const maxMW = 12000;
+      const demandPct = Math.min(100, (totalDemand / maxMW) * 100);
+      const prodPct = Math.min(100, (totalProd / maxMW) * 100);
+
+      document.getElementById('sim-bar-demand').style.width = demandPct + "%";
+      document.getElementById('sim-bar-prod').style.width = prodPct + "%";
+
+      // 8. Update text
+      document.querySelector('.sim-output div[style*="font-size: 0.8rem"]').innerHTML = notesText;
+    }
+
+    // INITIAL TRIGGER
+    updateSimulation();
+
+
+    // DECISION WIDGET DATABASE & CODE
+    const decisionsDb = {
+      carbon_tax: {
+        title: "Impost a les Emissions de CO₂",
+        text: "Aprova una taxa sobre les emissions per a cada MW/h cremat per gas de cicle combinat. La recaptació trimestral puja de forma permanent, però és impopular.",
+        context: "<strong>Vincle real:</strong> Catalunya aplica des del 2021 un impost sobre emissions de CO₂ en vehicles i un cànon industrial, fet que ha creat estira-i-arronses amb les empreses, que demanaven suspendre'l durant la inflació.",
+        citizen: 2,
+        business: -12,
+        environmentalist: 8,
+        political: 0,
+        pros: "Recaptació recurrent de +200 M€/trimestre i millora de l'aprovació ecologista pel rebuig al carbó.",
+        cons: "Provoca una forta oposició de les indústries pel sobrecost energètic que comporta."
+      },
+      aeroport: {
+        title: "Ampliació de l'Aeroport del Prat",
+        text: "Habilitar la pista sobre la llacuna de La Ricarda per permetre vols de llarg radi a Barcelona. Gran reclam econòmic, però catàstrofe natural.",
+        context: "<strong>Vincle real:</strong> Aquest ha estat el major conflicte de la dècada a Catalunya. Foment i AENA defensen que sense l'ampliació Catalunya perdrà connexió mundial, mentre que la societat i Brussel·les recorden la protecció europea sobre l'espai protegit de la Ricarda (Xarxa Natura 2000).",
+        citizen: -5,
+        business: 12,
+        environmentalist: -15,
+        political: -4,
+        pros: "Aprovació màxima de l'empresariat, fomentant un 10% d'aprovació econòmica.",
+        cons: "Rebuig ecològic massiu de -15%, multes de la UE i destrucció d'aiguamolls."
+      },
+      nuclear_life: {
+        title: "Extensió de Vida de les Nuclears",
+        text: "Aprova allargar el funcionament de les centrals d'Ascó i Vandellòs més enllà del 2030 per mantenir l'estabilitat i preus de la llum.",
+        context: "<strong>Vincle real:</strong> Actualment les nuclears catalanes estan gestionades per ANAV (Endesa i Iberdrola). El lobby de la indústria demana retardar-ne el tancament per evitar dependre d'importacions i pujades de la llum.",
+        citizen: -5,
+        business: 10,
+        environmentalist: -15,
+        political: -2,
+        pros: "Seguretat garantida (3.000 MW estables), satisfacció de l'empresariat.",
+        cons: "Molt rebutjada pels ecologistes per la generació de residus radioactius i oposició parlamentària."
+      },
+      autoconsum: {
+        title: "Impuls de l'Autoconsum Solar",
+        text: "Finança un pla de subvencions ràpides per instal·lar plaques fotovoltaiques als teulats dels ciutadans, rebaixant la demanda global.",
+        context: "<strong>Vincle real:</strong> L'ICAEN (Institut Català d'Energia) ha liderat l'impuls de l'autoconsum a Catalunya, que va assolir un rècord de més de 100.000 instal·lacions domèstiques gràcies a ajudes de fons Next Generation.",
+        citizen: 8,
+        business: 2,
+        environmentalist: 6,
+        political: 4,
+        pros: "Redueix 100 MW de demanda permanentment. Puja l'aprovació del poble i els ecologistes.",
+        cons: "Despesa inicial de 500 M€ de les arques de la Generalitat."
+      },
+      aragmat: {
+        title: "Acord Bilateral d'Energia amb Aragó (MAT)",
+        text: "Autoritza les línies de Molt Alta Tensió (MAT) per importar l'energia renovable barata que es produeix als camps eòlics d'Aragó.",
+        context: "<strong>Vincle real:</strong> Aragó produeix molta més energia verda de la que consumeix i exporta l'excés. Hi ha fortes protestes veïnals pel fet de creuar Catalunya amb gegantines torres d'alta tensió per abastar l'àrea de Barcelona.",
+        citizen: -4,
+        business: 6,
+        environmentalist: -3,
+        political: 4,
+        pros: "Energia barata, preus d'importació rebaixats en un 15% i estalvi trimestral.",
+        cons: "Tensions territorials, impacte paisatgístic a les zones rurals afectades."
+      }
+    };
+
+    function updateDecisionWidget() {
+      const select = document.getElementById('select-decision');
+      const val = select.value;
+      const data = decisionsDb[val];
+
+      document.getElementById('dec-title').textContent = data.title;
+      document.getElementById('dec-text').textContent = data.text;
+      document.getElementById('dec-context').innerHTML = data.context;
+      document.getElementById('dec-pros').textContent = data.pros;
+      document.getElementById('dec-cons').textContent = data.cons;
+
+      // Update bars and changes indicators
+      updateRatingBar('citizen', data.citizen);
+      updateRatingBar('business', data.business);
+      updateRatingBar('environmentalist', data.environmentalist);
+      updateRatingBar('political', data.political);
+    }
+
+    // SCRIPT CONT.
+    function updateRatingBar(actor, change) {
+      const bar = document.getElementById(`bar-${actor}`);
+      const indicator = document.getElementById(`chg-${actor}`);
+
+      // Base bar value is 50%, show impact relative to it
+      const finalPct = 50 + (change * 2);
+      bar.style.width = Math.max(5, Math.min(100, finalPct)) + "%";
+
+      if (change > 0) {
+        indicator.textContent = "+" + change + "%";
+        indicator.className = "rating-change-indicator positive";
+      } else if (change < 0) {
+        indicator.textContent = change + "%";
+        indicator.className = "rating-change-indicator negative";
+      } else {
+        indicator.textContent = "0%";
+        indicator.className = "rating-change-indicator neutral";
+      }
+    }
+
+    // Trigger initial widget state
+    updateDecisionWidget();
+
+
+    // POLICY SEARCH AND FILTER CODE
+    function filterPolicies() {
+      const input = document.getElementById('policy-search').value.toLowerCase();
+      const cards = document.querySelectorAll('.policy-card');
       
-      // Wait for fadeout before changing text
+      cards.forEach(card => {
+        const searchText = card.getAttribute('data-search');
+        if (searchText.includes(input)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterPolicyCategory(cat) {
+      // Manage buttons state
+      document.querySelectorAll('.policy-filter-btn').forEach(btn => btn.classList.remove('active'));
+      
+      let btnId = 'pol-filter-all';
+      if (cat === 'demanda') btnId = 'pol-filter-demanda';
+      else if (cat === 'fiscal') btnId = 'pol-filter-fiscal';
+      else if (cat === 'infra') btnId = 'pol-filter-infra';
+      
+      document.getElementById(btnId).classList.add('active');
+
+      const cards = document.querySelectorAll('.policy-card');
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (cat === 'all' || cardCat === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+
+    // COPY CLIPBOARD SNIPPETS
+    function copyText(id) {
+      const textarea = document.getElementById(id);
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // For mobile
+      document.execCommand('copy');
+      
+      const btn = textarea.previousElementSibling;
+      const originalText = btn.textContent;
+      btn.textContent = "Copiat!";
       setTimeout(() => {
-        greeting.textContent = messages[currentIndex];
-        greeting.classList.add('show');
-        currentIndex = (currentIndex + 1) % messages.length;
-      }, 200);
-    });
+        btn.textContent = originalText;
+      }, 2000);
+    }
   </script>
 </body>
 </html>
