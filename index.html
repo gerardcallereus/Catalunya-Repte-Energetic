@@ -3065,6 +3065,29 @@
             </div>
           </div>
 
+          <!-- Impacte social acumulat -->
+          <div style="margin-bottom: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--card-border);">
+            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Impacte Estimat en l'Aprovació Social (Acumulat):</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem; text-align: center;">
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column;">
+                <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">Ciutadania</span>
+                <strong id="policy-impact-citizen" style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">0%</strong>
+              </div>
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column;">
+                <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">Empresariat</span>
+                <strong id="policy-impact-business" style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">0%</strong>
+              </div>
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column;">
+                <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">Ecologistes</span>
+                <strong id="policy-impact-environmentalist" style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">0%</strong>
+              </div>
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column;">
+                <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">Polítics</span>
+                <strong id="policy-impact-political" style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">0%</strong>
+              </div>
+            </div>
+          </div>
+
           <!-- Barra de progrés de pressupost -->
           <div style="height: 10px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 0.5rem; position: relative;">
             <div id="policy-budget-bar" style="height: 100%; width: 0%; background: var(--primary); transition: width 0.3s ease;"></div>
@@ -4481,6 +4504,11 @@
       let totalCost = 0;
       let totalDemand = 0;
       
+      let citizenChg = 0;
+      let businessChg = 0;
+      let ecoChg = 0;
+      let politicsChg = 0;
+      
       selectedCards.forEach(card => {
         const metaSpans = card.querySelectorAll('.policy-card-meta span');
         if (metaSpans.length > 0) {
@@ -4499,11 +4527,39 @@
             }
           }
         }
+        
+        // Parse approvals from card description
+        const descEl = card.querySelector('.policy-card-desc');
+        if (descEl) {
+          const descText = descEl.textContent;
+          const approvalIndex = descText.indexOf("Afecta aprovació:");
+          if (approvalIndex !== -1) {
+            const approvalText = descText.substring(approvalIndex);
+            
+            const citizenMatch = approvalText.match(/Ciutadans\s*([+-]\d+)%/);
+            if (citizenMatch) citizenChg += parseInt(citizenMatch[1], 10);
+            
+            const businessMatch = approvalText.match(/Empresaris\s*([+-]\d+)%/);
+            if (businessMatch) businessChg += parseInt(businessMatch[1], 10);
+            
+            const ecoMatch = approvalText.match(/Ecologistes\s*([+-]\d+)%/);
+            if (ecoMatch) ecoChg += parseInt(ecoMatch[1], 10);
+            
+            const politicsMatch = approvalText.match(/Polítics\s*([+-]\d+)%/);
+            if (politicsMatch) politicsChg += parseInt(politicsMatch[1], 10);
+          }
+        }
       });
       
       document.getElementById('policy-total-cost').textContent = `${totalCost.toLocaleString('ca-ES')} M€ / ${budgetLimit.toLocaleString('ca-ES')} M€`;
       document.getElementById('policy-total-demand').textContent = `-${totalDemand.toLocaleString('ca-ES')} MW`;
       document.getElementById('policy-selected-count').textContent = `${selectedCards.length} ${selectedCards.length === 1 ? 'política seleccionada' : 'polítiques seleccionades'}`;
+      
+      // Update approvals UI
+      updatePolicyApprovalUI('citizen', citizenChg);
+      updatePolicyApprovalUI('business', businessChg);
+      updatePolicyApprovalUI('environmentalist', ecoChg);
+      updatePolicyApprovalUI('political', politicsChg);
       
       const pct = Math.min(100, (totalCost / budgetLimit) * 100);
       const budgetBar = document.getElementById('policy-budget-bar');
@@ -4518,6 +4574,21 @@
         budgetBar.style.backgroundColor = 'var(--primary)';
         warningEl.textContent = "Dins del límit pressupostari";
         warningEl.style.color = 'var(--primary)';
+      }
+    }
+
+    function updatePolicyApprovalUI(actor, value) {
+      const el = document.getElementById(`policy-impact-${actor}`);
+      if (!el) return;
+      if (value > 0) {
+        el.textContent = `+${value}%`;
+        el.style.color = 'var(--primary)';
+      } else if (value < 0) {
+        el.textContent = `${value}%`;
+        el.style.color = 'var(--rose)';
+      } else {
+        el.textContent = '0%';
+        el.style.color = 'var(--text-muted)';
       }
     }
 
