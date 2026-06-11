@@ -977,6 +977,320 @@
       height: 12px;
       border-radius: 3px;
     }
+
+    /* CSS per al Mini-Joc d'Actors Socials */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .role-card {
+      background: var(--bg-card);
+      border: 2px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .role-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--secondary);
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.1);
+    }
+    .role-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .role-icon-wrapper svg {
+      width: 32px;
+      height: 32px;
+      fill: currentColor;
+    }
+    .role-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+    .role-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+    .role-btn-select {
+      background: #f1f5f9;
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .role-card:hover .role-btn-select {
+      background: var(--secondary);
+      color: white;
+    }
+    .game-play-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .game-badge {
+      background: #e2e8f0;
+      color: var(--text-main);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .role-badge {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .game-play-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 2rem;
+    }
+    @media (max-width: 768px) {
+      .game-play-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .scenario-box {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 576px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .option-card {
+      background: var(--bg-card);
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      position: relative;
+    }
+    .option-card:hover {
+      border-color: var(--indigo);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+    }
+    .option-card.selected {
+      border-color: var(--indigo);
+      background: rgba(79, 70, 229, 0.04);
+    }
+    .option-card.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .option-letter {
+      background: var(--indigo);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .option-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+    .feedback-panel {
+      margin-top: 1.5rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .feedback-accent-box {
+      background: #f0fdf4;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .news-box-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border-top: 3px solid #f59e0b;
+    }
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .news-tag {
+      color: #b45309;
+    }
+    .news-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+    .news-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--secondary);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .news-link-btn:hover {
+      text-decoration: underline;
+    }
+    .btn-game-next {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .btn-game-next:hover {
+      background: #047857;
+    }
+    .game-sidebar-panel {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      height: fit-content;
+    }
+    .rating-bar-row.role-focus {
+      border: 2px solid var(--amber);
+      background: #ffffff;
+      padding: 0.75rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .rating-bar-row.role-focus .rating-bar-outer {
+      height: 12px;
+    }
+    .rating-val-indicator {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .rating-chg-indicator {
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.35rem;
+    }
+    .rating-chg-indicator.pos {
+      color: var(--primary);
+    }
+    .rating-chg-indicator.neg {
+      color: var(--rose);
+    }
+    .rating-chg-indicator.neu {
+      color: var(--text-muted);
+    }
+    .results-box-score {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 576px) {
+      .results-box-score {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    .results-score-item {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .score-lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .score-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+    .verdict-card {
+      max-width: 550px;
+      margin: 0 auto 2rem auto;
+      background: #f1f5f9;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .btn-game-restart {
+      background: var(--indigo);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .btn-game-restart:hover {
+      background: #3730a3;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -1001,7 +1315,6 @@
       <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-didactica')">Recursos per a l'Aula</button>
     </nav>
 
     <!-- TAB 1: EL REPTE DE GOVERN -->
@@ -2470,106 +2783,208 @@
     </section>
 
     <!-- TAB 4: GUIA D'ACTORS SOCIALS -->
+    <!-- TAB 4: GUIA D'ACTORS SOCIALS (MINI-JOC) -->
     <section id="tab-actors" class="tab-content">
       <div class="glass-card">
         <h2>
           <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.48 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-          Els Actors Socials i la Presa de Decisions
+          Mini-Joc de Consens Social: El Repte dels Actors
         </h2>
         <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-          Trobar el consens social és el repte més gran de la transició energètica. Cada decisió política i construcció de centrals enfronta els interessos de quatre faccions de la societat real de Catalunya.
+          Posa't a la pell dels diferents col·lectius de la societat catalana. Tria un rol, pren les 5 grans decisions del mandat i intenta aconseguir el màxim suport del teu propi grup sense enfonsar el consens del país.
         </p>
 
-        <div class="decision-widget">
-          <h3>Posa't a prova: Quines conseqüències tindran les teves polítiques?</h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Selecciona una de les grans decisions polítiques del joc per veure de forma instantània el seu impacte real en l'aprovació dels diferents grups socials.</p>
-          
-          <select id="select-decision" class="decision-selector" onchange="updateDecisionWidget()">
-            <option value="carbon_tax">Impost a les Emissions de CO₂ (Fiscalitat verda)</option>
-            <option value="aeroport">Projecte d'Ampliació de l'Aeroport del Prat (La Ricarda)</option>
-            <option value="nuclear_life">Aprovar l'extensió de vida de les Nuclears a Catalunya</option>
-            <option value="autoconsum">Subvencionar el model d'Autoconsum Solar a les teulades</option>
-            <option value="aragmat">Acord Bilateral d'Energia amb Aragó (Línies MAT)</option>
-            <option value="energetica_publica">Creació de l'empresa pública L'Energètica de Catalunya</option>
-          </select>
-
-          <div class="decision-panel">
-            <!-- Approvals (Ratings list) -->
-            <div>
-              <h4 style="margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.25rem;">Impacte en els Grups:</h4>
-              <div class="ratings-list">
-                
-                <!-- Citizen -->
-                <div class="rating-bar-row">
-                  <div class="rating-bar-lbl">
-                    <span>Ciutadania (Poble)</span>
-                    <span id="chg-citizen" class="rating-change-indicator positive">+2%</span>
-                  </div>
-                  <div class="rating-bar-outer">
-                    <div id="bar-citizen" class="rating-bar-inner" style="width: 50%;"></div>
-                  </div>
+        <div id="game-container">
+          <!-- Pantalla 1: Selecció de Rol -->
+          <div id="game-screen-setup" class="game-screen">
+            <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--indigo);">Tria el teu Rol de Joc:</h3>
+            <div class="role-grid">
+              
+              <!-- Rol 1: Ciutadania -->
+              <div class="role-card" onclick="selectGameRole('citizen')">
+                <div class="role-icon-wrapper" style="background: rgba(2, 132, 199, 0.1); color: var(--secondary);">
+                  <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.48 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
-
-                <!-- Business -->
-                <div class="rating-bar-row">
-                  <div class="rating-bar-lbl">
-                    <span>Empresariat (PIMEC / Foment)</span>
-                    <span id="chg-business" class="rating-change-indicator negative">-5%</span>
-                  </div>
-                  <div class="rating-bar-outer">
-                    <div id="bar-business" class="rating-bar-inner" style="width: 50%; background-color: var(--indigo);"></div>
-                  </div>
-                </div>
-
-                <!-- Environmentalist -->
-                <div class="rating-bar-row">
-                  <div class="rating-bar-lbl">
-                    <span>Ecologistes (Salvem l'Empordà...)</span>
-                    <span id="chg-environmentalist" class="rating-change-indicator positive">+5%</span>
-                  </div>
-                  <div class="rating-bar-outer">
-                    <div id="bar-environmentalist" class="rating-bar-inner" style="width: 50%; background-color: var(--secondary);"></div>
-                  </div>
-                </div>
-
-                <!-- Political -->
-                <div class="rating-bar-row">
-                  <div class="rating-bar-lbl">
-                    <span>Polítics (Consens Parlamentari)</span>
-                    <span id="chg-political" class="rating-change-indicator neutral">0%</span>
-                  </div>
-                  <div class="rating-bar-outer">
-                    <div id="bar-political" class="rating-bar-inner" style="width: 50%; background-color: var(--amber);"></div>
-                  </div>
-                </div>
-
+                <h4>Ciutadania</h4>
+                <p>El poble català vol preus elèctrics assequibles, sobirania local i protecció del territori, evitant macroprojectes o línies de transport forçades.</p>
+                <div class="role-btn-select">Juga com a Poble</div>
               </div>
+
+              <!-- Rol 2: Empresariat -->
+              <div class="role-card" onclick="selectGameRole('business')">
+                <div class="role-icon-wrapper" style="background: rgba(79, 70, 229, 0.1); color: var(--indigo);">
+                  <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm8 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2z"/></svg>
+                </div>
+                <h4>Empresariat (PIMEC/Foment)</h4>
+                <p>Els sectors econòmics i industrials prioritzen el creixement, la seguretat del subministrament elèctric i garantir preus competitius de l'energia.</p>
+                <div class="role-btn-select">Juga com a Indústria</div>
+              </div>
+
+              <!-- Rol 3: Ecologistes -->
+              <div class="role-card" onclick="selectGameRole('environmentalist')">
+                <div class="role-icon-wrapper" style="background: rgba(5, 150, 105, 0.1); color: var(--primary);">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <h4>Ecologistes</h4>
+                <p>Les plataformes ambientals defensen aturar les emissions de CO₂, accelerar el tancament de nuclears i vetllar per la biodiversitat terrestre i marina.</p>
+                <div class="role-btn-select">Juga com a Ecologista</div>
+              </div>
+
+              <!-- Rol 4: Polítics -->
+              <div class="role-card" onclick="selectGameRole('political')">
+                <div class="role-icon-wrapper" style="background: rgba(217, 119, 6, 0.1); color: var(--amber);">
+                  <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <h4>Polítics</h4>
+                <p>El Consens Parlamentari exigeix estabilitat de govern, compliment dels tractats de descarbonització de la UE i la gestió del pressupost públic.</p>
+                <div class="role-btn-select">Juga com a Govern</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Pantalla 2: Pantalla de Joc (Decisions) -->
+          <div id="game-screen-play" class="game-screen" style="display: none;">
+            <div class="game-play-header">
+              <span id="game-step-counter" class="game-badge">Decisió 1 de 5</span>
+              <span id="game-active-role" class="game-badge role-badge">Rol: Ciutadania</span>
             </div>
 
-            <!-- Strategic Advice & Context -->
-            <div class="decision-explanation-box">
-              <h4 style="color: var(--indigo); margin-bottom: 0.5rem;" id="dec-title">Impost a les Emissions de CO₂</h4>
-              <p id="dec-text" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.5rem;">
-                Aprovar una taxa ecològica sobre les empreses que cremen gas natural per produir electricitat. Genera ingressos addicionats per a la Generalitat, peró té oposició econòmica.
-              </p>
-              <p style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;" id="dec-context">
-                <strong>Vincle real:</strong> Catalunya aplica des del 2021 un impost sobre emissions de CO₂ en vehicles i un cànon industrial, fet que ha creat estira-i-arronses amb les empreses, que demanaven suspendre'l durant la inflació.
-              </p>
-              <div class="decision-pro-con">
-                <div class="decision-pro-col">
-                  <h5>Pros</h5>
-                  <p id="dec-pros" style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">+200 M€ trimestrals recurrents, millora l'aprovació ecologista pel rebuig al carbó.</p>
+            <div class="game-play-layout">
+              <!-- Esquerra: Dilema i Opcions -->
+              <div class="game-main-panel">
+                <div class="scenario-box">
+                  <h3 id="game-scenario-title" style="margin-bottom: 0.75rem; color: var(--indigo)">Títol de la Decisió</h3>
+                  <p id="game-scenario-desc" style="color: var(--text-muted); font-size: 1.05rem;">Descripció del dilema polític real...</p>
                 </div>
-                <div class="decision-con-col">
-                  <h5>Contres</h5>
-                  <p id="dec-cons" style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;">Fuerte pèrdua d'aprovació de l'Empresariat.</p>
+
+                <!-- Opcions -->
+                <div id="game-options-container" class="options-grid">
+                  <div class="option-card" id="opt-a-card" onclick="chooseGameOption('A')">
+                    <div class="option-letter">A</div>
+                    <div class="option-text" id="opt-a-text">Opció A</div>
+                  </div>
+                  <div class="option-card" id="opt-b-card" onclick="chooseGameOption('B')">
+                    <div class="option-letter">B</div>
+                    <div class="option-text" id="opt-b-text">Opció B</div>
+                  </div>
+                </div>
+
+                <!-- Feedback (Ocult inicialment) -->
+                <div id="game-feedback-panel" class="feedback-panel" style="display: none;">
+                  <div class="feedback-accent-box">
+                    <h4 style="margin-bottom: 0.5rem; color: var(--primary)">Efecte de la Decisió:</h4>
+                    <p id="feedback-explanation" style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 1rem;">Explicació de les conseqüències reals...</p>
+                    
+                    <!-- Notícia Relacionada -->
+                    <div class="news-box-card">
+                      <div class="news-header">
+                        <span class="news-tag">🗞️ NOTÍCIA EN PREMSA</span>
+                        <span id="news-source" class="news-source">Diari Ara</span>
+                      </div>
+                      <h5 id="news-title" class="news-title">Títol de la notícia real en català...</h5>
+                      <a id="news-link" href="#" target="_blank" rel="noopener" class="news-link-btn">
+                        Llegir la notícia original a la premsa
+                        <svg style="width:14px; height:14px; fill:currentColor" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <button onclick="advanceGameStep()" class="btn-game-next">
+                    Següent Decisió
+                    <svg style="width:18px; height:18px; fill:currentColor; margin-left:5px" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21 12l-8.15-8.15-1.42 1.42 5.43 5.43H5v2z"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dreta: Estat del Suport (Barres) -->
+              <div class="game-sidebar-panel">
+                <h4 style="margin-bottom: 1.2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; text-align: center; color: var(--text-main);">Suport de la Societat:</h4>
+                <div class="ratings-list">
+                  
+                  <!-- Citizen -->
+                  <div class="rating-bar-row" id="row-bar-citizen">
+                    <div class="rating-bar-lbl">
+                      <span>Ciutadania (Poble)</span>
+                      <span id="game-val-citizen" class="rating-val-indicator">50%</span>
+                      <span id="game-chg-citizen" class="rating-chg-indicator">0%</span>
+                    </div>
+                    <div class="rating-bar-outer">
+                      <div id="game-bar-citizen" class="rating-bar-inner" style="width: 50%;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Business -->
+                  <div class="rating-bar-row" id="row-bar-business">
+                    <div class="rating-bar-lbl">
+                      <span>Empresariat (PIMEC)</span>
+                      <span id="game-val-business" class="rating-val-indicator">50%</span>
+                      <span id="game-chg-business" class="rating-chg-indicator">0%</span>
+                    </div>
+                    <div class="rating-bar-outer">
+                      <div id="game-bar-business" class="rating-bar-inner" style="width: 50%; background-color: var(--indigo);"></div>
+                    </div>
+                  </div>
+
+                  <!-- Environmentalist -->
+                  <div class="rating-bar-row" id="row-bar-environmentalist">
+                    <div class="rating-bar-lbl">
+                      <span>Ecologistes</span>
+                      <span id="game-val-environmentalist" class="rating-val-indicator">50%</span>
+                      <span id="game-chg-environmentalist" class="rating-chg-indicator">0%</span>
+                    </div>
+                    <div class="rating-bar-outer">
+                      <div id="game-bar-environmentalist" class="rating-bar-inner" style="width: 50%; background-color: var(--primary);"></div>
+                    </div>
+                  </div>
+
+                  <!-- Political -->
+                  <div class="rating-bar-row" id="row-bar-political">
+                    <div class="rating-bar-lbl">
+                      <span>Polítics (Consens)</span>
+                      <span id="game-val-political" class="rating-val-indicator">50%</span>
+                      <span id="game-chg-political" class="rating-chg-indicator">0%</span>
+                    </div>
+                    <div class="rating-bar-outer">
+                      <div id="game-bar-political" class="rating-bar-inner" style="width: 50%; background-color: var(--amber);"></div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Pantalla 3: Resultats Finals -->
+          <div id="game-screen-results" class="game-screen" style="display: none; text-align: center;">
+            <div class="results-trophy-wrapper">
+              <svg style="width: 80px; height: 80px; fill: var(--amber); margin-bottom: 1rem;" viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v3c0 2.44 1.72 4.48 4 4.88v2.12c0 2.21 1.79 4 4 4h2v2H9v2h6v-2h-2v-2h2c2.21 0 4-1.79 4-4v-2.12c2.28-.4 4-2.44 4-4.88V7c0-1.1-.9-2-2-2zM5 10V7h2v3H5zm14 0h-2V7h2v3z"/></svg>
+            </div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text-main);" id="results-headline">Mandat Finalitzat!</h3>
+            <p id="results-sub" style="color: var(--text-muted); margin-bottom: 2rem;">Veurem com ha valorat el teu col·lectiu la teva gestió.</p>
+
+            <div class="results-box-score">
+              <div class="results-score-item">
+                <span class="score-lbl">Suport del teu Col·lectiu:</span>
+                <span id="final-own-score" class="score-num" style="color: var(--secondary)">50%</span>
+              </div>
+              <div class="results-score-item">
+                <span class="score-lbl">Consens del País (Mitjana):</span>
+                <span id="final-avg-score" class="score-num" style="color: var(--primary)">50%</span>
+              </div>
+            </div>
+
+            <div class="verdict-card" id="results-verdict-box">
+              <h4 id="verdict-title" style="margin-bottom: 0.5rem; color: var(--text-main);">Títol del Veredicte</h4>
+              <p id="verdict-text" style="font-size: 0.95rem; color: var(--text-muted);">Text del veredicte polític...</p>
+            </div>
+
+            <button onclick="restartActorsGame()" class="btn-game-restart">
+              Tornar a Jugar (Triar un altre rol)
+              <svg style="width:18px; height:18px; fill:currentColor; margin-left:5px" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            </button>
+          </div>
         </div>
-      </div>
     </section>
 
     <!-- TAB 5: POLÍTIQUES PÚBLIQUES -->
@@ -2895,74 +3310,7 @@
       </div>
     </section>
 
-    <!-- TAB 6: RECURSOS DIDÀCTICS -->
-    <section id="tab-didactica" class="tab-content">
-      <div class="glass-card">
-        <h2>
-          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.5L12 15.83l6.11-3.33c-.37-.77-1.12-1.35-2.01-1.57L12 13.06 7.9 10.93c-.89.22-1.64.8-2.01 1.57z"/></svg>
-          Recursos per a l'Aula i Unitats Didàctiques
-        </h2>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">
-          Copia aquestes estructures i plantilles per utilitzar-les a les teves classes de secundària, facilitant l'avaluació competencial a través de la gamificació.
-        </p>
 
-        <h3 style="color: var(--secondary);">Recurs 1: Diari del Conseller/a (Fitxa de Seguiment de la Partida)</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">Utilitza aquesta taula de registre per fer que l'alumnat reflecteixi per escrit la seva estratègia i les conseqüències observades.</p>
-        <div class="copy-box-wrapper">
-          <button class="btn-copy" onclick="copyText('code-diari')">Copiar Markdown</button>
-          <textarea id="code-diari" class="copy-box-code" readonly>
-# Diari de Mandat - Catalunya: Repte Energètic
-Nom de l'alumne/a: ___________________________   Data: _____________
-Grup/Classe: ______________                      Dificultat: _________
-
-| Torn/Trimestre | Pressupost (M€) | Aprovació (%) | Emissions CO₂ (t) | Decisió Presa (Central / Llei / Esdeveniment) | Justificació de la Decisió (Per què?) | Conseqüència Observada (Resultat obtingut) |
-|---|---|---|---|---|---|---|
-| Inicial (Q0) | | | | - | - | - |
-| Torn 1 | | | | | | |
-| Torn 2 | | | | | | |
-| Torn 3 | | | | | | |
-| Torn 4 | | | | | | |
-| Torn 5 | | | | | | |
-| Torn 6 | | | | | | |
-| Torn 7 | | | | | | |
-| Torn 8 | | | | (Ampliació Aeroport del Prat) | | |
-| Torn 9 | | | | | | |
-| Torn 10 | | | | | | |
-| Torn 11 | | | | | | |
-| Torn 12 | | | | | | |
-| Torn 13 | | | | | | |
-| Torn 14 | | | | | | |
-| Torn 15 | | | | | | |
-| Final (Q16) | | | | - | - | <strong>Puntuació Final: ____ / 10</strong> |
-          </textarea>
-        </div>
-
-        <h3 style="color: var(--indigo); margin-top: 2.5rem;">Recurs 2: Joc de Rol (Debat Parlamentari)</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">Estructura per organitzar un joc de rol i debat parlamentari basat en algun esdeveniment crític (com el Parc Tramuntana o l'Aeroport).</p>
-        <div class="copy-box-wrapper">
-          <button class="btn-copy" onclick="copyText('code-rol')">Copiar Text</button>
-          <textarea id="code-rol" class="copy-box-code" readonly>
-ACTIVITAT DE DEBAT PARLAMENTARI: LA DECISIÓ DEL TRAMUNTANA
-
-1. CONTEXT:
-El govern ha d'aprovar el desbloqueig de l'Eòlica Marina per tirar endavant el projecte del "Parc Tramuntana" al Golf de Roses.
-
-2. REPARTIMENT DE ROLS (Es divideix la classe en 5 grups):
-- GRUP A (El Govern de la Generalitat): Ha de moderar el debat i prendre una decisió final per decret. L'objectiu és aconseguir energia i reduir CO₂ sense perdre més d'un 10% de suport polític.
-- GRUP B (L'Empresariat i Cambra de Comerç): Defensar la necessitat del parc. Necessiten energia barata i abundants inversions industrials per evitar la dependència d'Aragó.
-- GRUP C (Ecologistes i Plataformes del Territori): Oposició al parc en aquest punt concret pel seu fort impacte paisatgístic, afectació al fons marí i amenaça al turisme local. Proposen l'alternativa de l'Autoconsum o rehabilitació d'edificis.
-- GRUP D (Associacions de Veïns i Sector Turístic/Pesquer): Alerten que els molins flotants destrossaran la bellesa del Cap de Creus, afectant els hotels, els esports nàutics i els pescadors locals.
-- GRUP E (La Unió Europea - Comissió de Sostenibilitat): Exigeixen que Catalunya redueixi les seves emissions de CO₂ un 55% abans de 2030, alertant de multes multimilionàries en cas contrari.
-
-3. DESENVOLUPAMENT:
-- Fase 1 (15 min): Els grups preparen les seves intervencions escrites utilitzant dades reals.
-- Fase 2 (20 min): Renda de ponències coordinada pel Conseller d'Energia. Cada part exposa els seus pros i contres de 3 minuts.
-- Fase 3 (10 min): Rèplica lliure i negociació de compensacions (ex. oferir millores fiscals, xecs elèctrics o canons de compensació al territori afectat).
-- Fase 4 (5 min): Resolució del Govern: S'aprova totalment, es rebutja, o s'aprova una alternativa de compromís.
-          </textarea>
-        </div>
-      </div>
-    </section>
 
     <!-- FOOTER -->
     <footer>
@@ -3222,117 +3570,764 @@ El govern ha d'aprovar el desbloqueig de l'Eòlica Marina per tirar endavant el 
     updateSimulation();
 
 
-    // DECISION WIDGET DATABASE & CODE
-    const decisionsDb = {
-      carbon_tax: {
-        title: "Impost a les Emissions de CO₂",
-        text: "Aprova una taxa sobre les emissions per a cada MW/h cremat per gas de cicle combinat. La recaptació trimestral puja de forma permanent, però és impopular.",
-        context: "<strong>Vincle real:</strong> Catalunya aplica des del 2021 un impost sobre emissions de CO₂ en vehicles i un cànon industrial, fet que ha creat estira-i-arronses amb les empreses, que demanaven suspendre'l durant la inflació.",
-        citizen: 2,
-        business: -12,
-        environmentalist: 8,
-        political: 0,
-        pros: "Recaptació recurrent de +200 M€/trimestre i millora de l'aprovació ecologista pel rebuig al carbó.",
-        cons: "Provoca una forta oposició de les indústries pel sobrecost energètic que comporta."
-      },
-      aeroport: {
-        title: "Ampliació de l'Aeroport del Prat",
-        text: "Habilitar la pista sobre la llacuna de La Ricarda per permetre vols de llarg radi a Barcelona. Gran reclam econòmic, però catàstrofe natural.",
-        context: "<strong>Vincle real:</strong> Aquest ha estat el major conflicte de la dècada a Catalunya. Foment i AENA defensen que sense l'ampliació Catalunya perdrà connexió mundial, mentre que la societat i Brussel·les recorden la protecció europea sobre l'espai protegit de la Ricarda (Xarxa Natura 2000).",
-        citizen: -5,
-        business: 12,
-        environmentalist: -15,
-        political: -4,
-        pros: "Aprovació màxima de l'empresariat, fomentant un 10% d'aprovació econòmica.",
-        cons: "Rebuig ecològic massiu de -15%, multes de la UE i destrucció d'aiguamolls."
-      },
-      nuclear_life: {
-        title: "Extensió de Vida de les Nuclears",
-        text: "Aprova allargar el funcionament de les centrals d'Ascó i Vandellòs més enllà del 2030 per mantenir l'estabilitat i preus de la llum.",
-        context: "<strong>Vincle real:</strong> Actualment les nuclears catalanes estan gestionades per ANAV (Endesa i Iberdrola). El lobby de la indústria demana retardar-ne el tancament per evitar dependre d'importacions i pujades de la llum.",
-        citizen: -5,
-        business: 10,
-        environmentalist: -15,
-        political: -2,
-        pros: "Seguretat garantida (3.000 MW estables), satisfacció de l'empresariat.",
-        cons: "Molt rebutjada pels ecologistes per la generació de residus radioactius i oposició parlamentària."
-      },
-      autoconsum: {
-        title: "Impuls de l'Autoconsum Solar",
-        text: "Finança un pla de subvencions ràpides per instal·lar plaques fotovoltaiques als teulats dels ciutadans, rebaixant la demanda global.",
-        context: "<strong>Vincle real:</strong> L'ICAEN (Institut Català d'Energia) ha liderat l'impuls de l'autoconsum a Catalunya, que va assolir un rècord de més de 100.000 instal·lacions domèstiques gràcies a ajudes de fons Next Generation.",
-        citizen: 8,
-        business: 2,
-        environmentalist: 6,
-        political: 4,
-        pros: "Redueix 100 MW de demanda permanentment. Puja l'aprovació del poble i els ecologistes.",
-        cons: "Despesa inicial de 500 M€ de les arques de la Generalitat."
-      },
-      aragmat: {
-        title: "Acord Bilateral d'Energia amb Aragó (MAT)",
-        text: "Autoritza les línies de Molt Alta Tensió (MAT) per importar l'energia renovable barata que es produeix als camps eòlics d'Aragó.",
-        context: "<strong>Vincle real:</strong> Aragó produeix molta més energia verda de la que consumeix i exporta l'excés. Hi ha fortes protestes veïnals pel fet de creuar Catalunya amb gegantines torres d'alta tensió per abastar l'àrea de Barcelona.",
-        citizen: -4,
-        business: 6,
-        environmentalist: -3,
-        political: 4,
-        pros: "Energia barata, preus d'importació rebaixats en un 15% i estalvi trimestral.",
-        cons: "Tensions territorials, impacte paisatgístic a les zones rurals afectades."
-      },
-      energetica_publica: {
-        title: "L'Energètica Pública de Catalunya",
-        text: "Constitueix una empresa elèctrica 100% pública per subministrar energia verda als edificis de la Generalitat i gestionar centrals hidroelèctriques locals.",
-        context: "<strong>Vincle real:</strong> El 2022 el Govern català va crear *L'Energètica*, entitat pública que pretén abastar serveis propis de la Generalitat, assumir concessions d'aigua caducades als rius catalans i instal·lar autoconsum a teulades d'edificis públics.",
-        citizen: 8,
-        business: -5,
-        environmentalist: 6,
-        political: 4,
-        pros: "Soberania energètica directe, reinversió verda pública i millora d'aprovació del poble.",
-        cons: "Inversió econòmica de llançament a càrrec del pressupost públic de la Generalitat."
-      }
+    // MINI-JOC D'ACTORS SOCIALS - BASE DE DADES I LÒGICA
+    const gameDb = {
+      citizen: [
+        {
+          title: "Onada de Turisme Rècord",
+          description: "Catalunya rep una arribada massiva de turistes a l'estiu, superant tots els rècords. Això suposa un gran impuls per a l'economia, però també posa al límit el consum d'aigua i electricitat. Com a governant, com ho gestiones?",
+          options: {
+            A: {
+              text: "Celebrar l'èxit i assumir el cost: no aplicar cap restricció i abastar tota la demanda elèctrica.",
+              impact: { citizen: 2, business: 4, environmentalist: 0, political: 0 },
+              explanation: "El poble celebra l'abundància d'ocupació, i l'empresariat obté màxims beneficis històrics. No obstant això, es disparen el consum elèctric i les emissions associades a la generació amb gas de cicle combinat.",
+              news: {
+                title: "Catalunya registra un estiu de rècord turístic amb un fort impacte en el sector serveis",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/ampliacio-de-laeroport-del-prat-les-claus-dun-debat-encallat-entre-economia-i-clima/noticia/3116921/"
+              }
+            },
+            B: {
+              text: "Llançar campanya de conscienciació per a l'estalvi d'aigua i energia per als turistes i hotelers.",
+              impact: { citizen: 0, business: -3, environmentalist: 3, political: 0 },
+              explanation: "Els ecologistes valoren positivament el focus en els límits de recursos de la transició ecològica, però el sector turístic i comercial es queixa per la possible pèrdua de competitivitat de la marca Barcelona.",
+              news: {
+                title: "L'estalvi de recursos es converteix en el repte principal dels hotels catalans de cara a la temporada turística",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/territori/la-ricarda-delta-llobregat-aeroport-el-prat-impacte-ambiental_1_4109402.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Rebuig Veïnal a un Parc Eòlic",
+          description: "Es proposa construir un nou parc eòlic terrestre a la comarca de la Terra Alta per produir electricitat neta. Tanmateix, una plataforma veïnal local es manifesta sota el lema 'Renovables sí, però no així', denunciant la massificació del territori. Què fas?",
+          options: {
+            A: {
+              text: "Negociar amb el territori i oferir fons de compensació social per als municipis afectats.",
+              impact: { citizen: 4, business: 0, environmentalist: 0, political: 2 },
+              explanation: "La mediació i compensació redueixen la tensió territorial i permeten tirar endavant el projecte de manera més lenta però pacífica. El consens parlamentari augmenta.",
+              news: {
+                title: "La Terra Alta diu prou a la massificació eòlica amb noves protestes de compromís territorial",
+                source: "Nació Digital",
+                url: "https://www.naciodigital.cat/noticia/222123/terra-alta-diu-prou-massificacio-eolica"
+              }
+            },
+            B: {
+              text: "Imposar el projecte de forma directa: la transició cap a les energies netes és un interès general urgent.",
+              impact: { citizen: -7, business: 0, environmentalist: 0, political: -3 },
+              explanation: "El parc eòlic s'instal·larà ràpidament, però la imposició unilateral genera un fort ressentiment social en la ciutadania rural, que es sent abandonada pel govern metropolità de Barcelona.",
+              news: {
+                title: "Fort rebuig veïnal a la construcció de nous parcs eòlics declarats de 'consens d'utilitat pública'",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/comarques/girona/rebuj-eolic-alt-emporda-projectes-com-salvem-emporda_1_3957210.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Queixes per les Olors d'una Planta de Biomassa",
+          description: "La nova planta de biomassa forestal, clau per a la transició verda i la neteja de boscos, genera queixes constants dels veïns dels barris propers a causa de les olors que es desprenen durant el tractament del combustible orgànic. Com reacciones?",
+          options: {
+            A: {
+              text: "Instal·lar nous filtres industrials d'olors d'última generació (amb un elevat cost públic).",
+              impact: { citizen: 4, business: 0, environmentalist: 0, political: 0 },
+              explanation: "La inversió en filtres soluciona les queixes veïnals, millorant la qualitat de vida de la ciutadania propera, malgrat representar una despesa imprevista.",
+              news: {
+                title: "El potencial de la biomassa forestal a Catalunya: una eina clau per gestionar els boscos i generar calor neta",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/la-biomassa-forestal-una-solucio-per-netejar-els-boscos-i-generar-energia/noticia/3043120/"
+              }
+            },
+            B: {
+              text: "Argumentar que la planta compleix estrictament totes les normatives mediambientals i continuar com fins ara.",
+              impact: { citizen: -5, business: 0, environmentalist: 0, political: 0 },
+              explanation: "S'estalvien despeses, però es manté el malestar de la població local, creant desconfiança cap a les iniciatives de bioenergia pública.",
+              news: {
+                title: "Oportunitats i debats del biogàs i la valorització de residus a Catalunya",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/economia/purins-oportunitat-biogas-catalunya-comencen-arrencar-projectes_1_4693210.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Crisi de Suport Social i Vaga General",
+          description: "La inflació i els alts costos de la llum provoquen una amenaça de vaga general organitzada per sindicats i plataformes de veïns exigint mesures de protecció social. Com ho resols?",
+          options: {
+            A: {
+              text: "Negociar un paquet de mesures socials i rebaixes a les factures per als col·lectius vulnerables.",
+              impact: { citizen: 15, business: 0, environmentalist: 0, political: 0 },
+              explanation: "S'evita la vaga i s'obté un suport massiu de la ciutadania per la ràpida resposta i la creació de l'escut social contra la pobresa energètica.",
+              news: {
+                title: "Els sindicats i col·lectius socials alerten del risc de pobresa energètica davant la inflació",
+                source: "Nació Digital",
+                url: "https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles"
+              }
+            },
+            B: {
+              text: "Aguantar el pols, defensant que rebaixar tarifes de forma artificial destruirà el pressupost públic.",
+              impact: { citizen: -10, business: 4, environmentalist: 0, political: 0 },
+              explanation: "Es protegeix la tresoreria de la Generalitat, fet que agrada als representants empresarials per evitar dèficits públics, però s'exacerba la irritació ciutadana.",
+              news: {
+                title: "El govern defensa la sostenibilitat pressupostària davant les exigències de rebaixes imposades",
+                source: "El Periódico",
+                url: "https://www.elperiodico.com/es/medio-ambiente/20211021/cierre-minas-uranio-espanya-salamanca-12340192"
+              }
+            }
+          }
+        },
+        {
+          title: "Boom de l'Autoconsum Solar",
+          description: "La ciutadania catalana està demanant massivament instal·lar plaques fotovoltaiques a les seves teulades per reduir la dependència de la xarxa elèctrica. Quina acció prens des del govern?",
+          options: {
+            A: {
+              text: "Accelerar el model amb fortes ajudes públiques i simplificació de tràmits administratius.",
+              impact: { citizen: 6, business: 0, environmentalist: 4, political: 0 },
+              explanation: "La solar a les teulades es dispara, reduint directament la demanda elèctrica màxima durant el dia. Els ciutadans i ecologistes estan encantats amb aquesta transició descentralitzada.",
+              news: {
+                title: "Catalunya lidera l'autoconsum fotovoltaic de l'Estat amb més de 100.000 teulades actives",
+                source: "ICAEN (Generalitat)",
+                url: "https://icaen.gencat.cat/ca/detalls/noticia/Nota-autoconsum-2023"
+              }
+            },
+            B: {
+              text: "Deixar que el mercat de plaques es reguli sol sense subvencions directes del pressupost.",
+              impact: { citizen: -3, business: -3, environmentalist: 0, political: 0 },
+              explanation: "El creixement s'estanca, fet que decep els ciutadans que no poden assumir el cost inicial, així com les empreses instal·ladores locals que veuen frenat el seu negoci.",
+              news: {
+                title: "Oposició social a l'abandonament d'ajuts a la instal·lació d'autoconsum per a habitatges",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/oposicio-als-macroparcs-solars-a-ponent-un-atac-al-sector-agrari/noticia/3112450/"
+              }
+            }
+          }
+        }
+      ],
+      business: [
+        {
+          title: "Volatilitat al Mercat Elèctric Europeu",
+          description: "Els preus del gas natural a Europa es disparen a causa de conflictes internacionals, posant en perill la viabilitat de la gran indústria electrointensiva a Catalunya. Quina decisió adoptes?",
+          options: {
+            A: {
+              text: "Negociar tarifes de preu fix temporal a llarg termini per protegir la indústria catalana.",
+              impact: { citizen: 0, business: 5, environmentalist: 0, political: 2 },
+              explanation: "L'empresariat respira alleujat amb preus estables que salven milers de llocs de treball industrial, alhora que es manté l'estabilitat parlamentària.",
+              news: {
+                title: "L'impacte de la crisi dels preus del gas en la competitivitat de la metal·lúrgia i química catalanes",
+                source: "Nació Digital",
+                url: "https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles"
+              }
+            },
+            B: {
+              text: "Mantenir l'exposició al mercat lliure per evitar endeutar les finances de la Generalitat.",
+              impact: { citizen: 0, business: -5, environmentalist: 0, political: -2 },
+              explanation: "Es protegeixen els fons públics, però les indústries pateixen pèrdues severes. Molts empresaris comencen a estudiar tancaments temporals o deslocalitzacions.",
+              news: {
+                title: "Les grans indústries demanen mecanismes d'estabilització elèctrica urgent davant l'augment del preu diari",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/internacional/crisis-petroli-guerra-ucraina-preu-barril_1_4303490.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Ampliació de l'Aeroport del Prat",
+          description: "La cambra de comerç i les patronals exigeixen ampliar la pista de l'Aeroport del Prat per atraure vols intercontinentals. El projecte, però, destruiria l'espai protegit de la llacuna de La Ricarda. Què aproves?",
+          options: {
+            A: {
+              text: "Donar suport total al projecte d'ampliació de l'aeroport per potenciar el PIB de Catalunya.",
+              impact: { citizen: -5, business: 10, environmentalist: -15, political: 0 },
+              explanation: "Màxima felicitat de l'empresariat pel potencial d'inversions, però esclata una mobilització social massiva en contra de la destrucció mediambiental dels aiguamolls.",
+              news: {
+                title: "El debat encallat sobre l'ampliació de l'aeroport: un pols permanent entre economia i clima",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/ampliacio-de-laeroport-del-prat-les-claus-dun-debat-encallat-entre-economia-i-clima/noticia/3116921/"
+              }
+            },
+            B: {
+              text: "Rebutjar l'ampliació per protegir La Ricarda en compliment de les directrius ambientals de la UE.",
+              impact: { citizen: 4, business: -12, environmentalist: 12, political: -4 },
+              explanation: "El sector empresarial ho considera una oportunitat històrica perduda. Ecologistes i ciutadans ho celebren com una gran victòria per a la biodiversitat del Delta del Llobregat.",
+              news: {
+                title: "L'impacte de l'ampliació del Prat: la biodiversitat de La Ricarda i el delta sota el focus europeu",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/territori/la-ricarda-delta-llobregat-aeroport-el-prat-impacte-ambiental_1_4109402.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Crisi: Amenaça de Fuga de Capitals",
+          description: "La inestabilitat dels costos elèctrics catalans provoca que diverses multinacionals automobilístiques i químiques amenacin amb traslladar les seves plantes de producció fora de Catalunya. Com reacciones?",
+          options: {
+            A: {
+              text: "Llançar un paquet d'incentius fiscals urgents i ajudes industrials per mantenir la producció.",
+              impact: { citizen: 0, business: 15, environmentalist: 0, political: 0 },
+              explanation: "L'empresariat recupera la confiança i es consoliden milers d'ocupacions, salvant el teixit industrial a canvi d'una pèrdua d'ingressos fiscals directes de la Generalitat.",
+              news: {
+                title: "El govern mobilitza ajuts extraordinaris per atreure i retenir inversions industrials estratègiques",
+                source: "El Periódico",
+                url: "https://www.elperiodico.com/es/medio-ambiente/20211021/cierre-minas-uranio-espanya-salamanca-12340192"
+              }
+            },
+            B: {
+              text: "No cedir al xantatge: mantenir les taxes ambientals sense oferir exempcions fiscals.",
+              impact: { citizen: 0, business: -10, environmentalist: 0, political: 5 },
+              explanation: "Es manté l'equitat fiscal i s'omple la caixa pública, però s'accelera la deslocalització de grans centres d'inversió estrangera.",
+              news: {
+                title: "Tensions pel manteniment del cànon ambiental a les indústries catalanes durant la inflació",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/placa-residus-nuclears-asco-tancament_1_4891201.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Subvencions del preu del Gas Natural",
+          description: "Les centrals de gas de cicle combinat, indispensables per cobrir la demanda elèctrica quan no fa sol o vent, operen amb preus de gas molt alts, encarint la llum per a totes les empreses catalanes. Què fas?",
+          options: {
+            A: {
+              text: "Subvencionar part del preu del gas per abaratir el cost de producció d'aquestes centrals.",
+              impact: { citizen: 0, business: 5, environmentalist: -3, political: -2 },
+              explanation: "Les indústries milloren la seva competitivitat elèctrica amb costos de llum un 15% més baixos, però el pressupost públic es ressent i els ecologistes ho rebutgen per ser un subsidi als fòssils.",
+              news: {
+                title: "Els sectors elèctrics debaten les fórmules per acotar el cost del gas destinat a la generació",
+                source: "Nació Digital",
+                url: "https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles"
+              }
+            },
+            B: {
+              text: "No intervenir i deixar que s'apliqui el preu de mercat internacional lliure.",
+              impact: { citizen: -5, business: -5, environmentalist: 3, political: 0 },
+              explanation: "S'estalvien recursos públics i s'incentiva indirectament la transició verda, però es produeix un encariment de la llum que colpeja fortament les pimes.",
+              news: {
+                title: "Els cicles combinats de gas actuen com a tecnologia de suport amb un alt cost en la factura de la llum",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/clima-i-medi-ambient/besos-totes-centrals-cicle-combinat-actives-debat_1_4875321.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Impost a les Emissions de CO₂",
+          description: "Es debat aplicar de forma estricta un cànon especial sobre les emissions de CO₂ per a les indústries i centrals que cremen gas. Com et posiciones?",
+          options: {
+            A: {
+              text: "Ajornar o suavitzar l'impost per evitar un sobrecost que amenaci la competitivitat.",
+              impact: { citizen: 0, business: 5, environmentalist: -5, political: -5 },
+              explanation: "L'empresariat rep la mesura com un alleujament en un moment d'inflació, però es trenca el consens parlamentari de transició verda i rep dures crítiques dels ecologistes.",
+              news: {
+                title: "El teixit econòmic català demana flexibilitzar la fiscalitat verda per no encarir la factura industrial",
+                source: "La Vanguardia",
+                url: "https://www.lavanguardia.com/vida/20181130/453255148011/espana-tanca-les-seves-mines-de-carbo-despres-de-dos-segles-dactivitat.html"
+              }
+            },
+            B: {
+              text: "Aprovar la taxa de CO₂ de manera estricta per penalitzar la generació elèctrica contaminant.",
+              impact: { citizen: 0, business: -12, environmentalist: 8, political: 3 },
+              explanation: "El govern recull fons importants per a polítiques ecològiques, però les patronals ho qualifiquen de llast fiscal per a les pimes industrials.",
+              news: {
+                title: "Catalunya aplica els cànons industrials de CO₂ per finançar polítiques d'acció climàtica",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/tanca-la-central-termica-de-cercs-lultima-que-cremava-carbo-a-catalunya/noticia/227546/"
+              }
+            }
+          }
+        }
+      ],
+      environmentalist: [
+        {
+          title: "Manifestació Massiva pel Clima",
+          description: "Milers d'estudiants i col·lectius ecologistes es manifesten pels carrers de Barcelona exigint el tancament urgent de les nuclears de Tarragona i una aposta radical per l'autoconsum solar. Com respon el govern?",
+          options: {
+            A: {
+              text: "Reunir-se amb els organitzadors i comprometre's a un pla accelerat de generació verda.",
+              impact: { citizen: 3, business: 0, environmentalist: 6, political: 2 },
+              explanation: "Els grups ecologistes veuen les seves demandes escoltades i augmenta el suport al carrer per la voluntat política de fer front al canvi climàtic.",
+              news: {
+                title: "La manifestació juvenil pel clima reclama un compromís real pel tancament nuclear del 2030",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/placa-residus-nuclears-asco-tancament_1_4891201.html"
+              }
+            },
+            B: {
+              text: "Ignorar la manifestació, argumentant que la transició requereix pragmatisme i temps.",
+              impact: { citizen: -5, business: 0, environmentalist: -8, political: -3 },
+              explanation: "Esclata la frustració social i els ecologistes acusen l'executiu de 'greenwashing' i de no tenir un compromís real amb el futur del planeta.",
+              news: {
+                title: "Fortes crítiques dels col·lectius verds al full de ruta governamental sobre les renovables",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/la-terra-alta-diu-prou-a-la-massificacio-eolica-amb-una-nova-protesta-a-batea/noticia/3012941/"
+              }
+            }
+          }
+        },
+        {
+          title: "Crisi: Ofensiva Legal Ecologista",
+          description: "La construcció d'un nou parc solar terrestre provoca la denúncia de plataformes de biodiversitat per la pèrdua d'hàbitats d'aus protegides a Lleida. Això pot paralitzar els teus projectes. Què decideixes?",
+          options: {
+            A: {
+              text: "Crear un fons especial de compensació i protecció de la biodiversitat del territori.",
+              impact: { citizen: 0, business: 0, environmentalist: 10, political: 0 },
+              explanation: "Màxim suport dels ecologistes. Els projectes es redefineixen amb criteris de conservació integrals per garantir que l'energia verda respecti la fauna autòctona.",
+              news: {
+                title: "Les entitats de Ponent reclamen ordenar els parcs solars per evitar danys a la fauna local",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/territori/renovables-si-pero-no-aixi-pagesia-ponenta-manifesta-contra-parcs-solars_1_3894102.html"
+              }
+            },
+            B: {
+              text: "Lluitar en els tribunals, defensant que l'emergència climàtica té prioritat jurídica absoluta.",
+              impact: { citizen: 0, business: 0, environmentalist: -8, political: 3 },
+              explanation: "Els projectes avancen legalment, però es produeix una ruptura total de la Generalitat amb les organitzacions ecologistes del país.",
+              news: {
+                title: "El govern demana accelerar els tràmits ambientals per no perdre els fons de desenvolupament verd",
+                source: "El Periódico",
+                url: "https://www.elperiodico.com/es/medio-ambiente/20211021/cierre-minas-uranio-espanya-salamanca-12340192"
+              }
+            }
+          }
+        },
+        {
+          title: "Parc Eòlic Marí Tramuntana",
+          description: "Es debat autoritzar el projecte del 'Parc Tramuntana', un parc eòlic marí flotant gegant al Golf de Roses. Ofereix una gran potència neta, peró rep un fort rebuig local per la por de l'impacte visual i la pesca. Què aproves?",
+          options: {
+            A: {
+              text: "Iniciar el projecte del parc d'eòlica marina flotant per aconseguir energia neta de gran potència.",
+              impact: { citizen: 3, business: 2, environmentalist: -3, political: 3 },
+              explanation: "S'asseguren molts megavats verds per a la Generalitat, però el teixit local i alguns ecologistes de l'Empordà es senten traïts pel dany paisatgístic del Golf.",
+              news: {
+                title: "El debat del Parc Tramuntana: els molins de vent flotants es projecten davant del Cap de Creus",
+                source: "La Vanguardia",
+                url: "https://www.lavanguardia.com/local/girona/20230415/8892140/parc-tramuntana-el-debat-de-leolica-marina-al-golf-de-roses.html"
+              }
+            },
+            B: {
+              text: "Aturar el projecte per protegir el fons marí i preservar el paisatge únic de l'Empordà.",
+              impact: { citizen: -2, business: -3, environmentalist: 8, political: -1 },
+              explanation: "Gran satisfacció de les plataformes conservacionistes locals. No obstant això, es perd la principal oportunitat de generar energia a gran escala per a la demarcació de Girona.",
+              news: {
+                title: "El sector pesquer de Roses i els ecologistes locals aplaudeixen el fre a macroprojectes marins",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/medi-ambient/roses-eolica-marina-creixement-i-oposicio-sector-pesquer_1_4578120.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Acord d'Importació de Residus per a Biomassa",
+          description: "Es planteja un acord per importar residus orgànics d'altres regions per ser cremats a les plantes de biomassa de Catalunya, aportant fons addicionals a la Generalitat però augmentant el trànsit de camions. Què respons?",
+          options: {
+            A: {
+              text: "Rebutjar l'acord per evitar la importació de deixalles i protegir el territori rural.",
+              impact: { citizen: 2, business: 0, environmentalist: 4, political: 0 },
+              explanation: "Els ecologistes ho valoren molt positivament, ja que evita que Catalunya es converteixi en un destí de residus aliens, prioritzant la sobirania local.",
+              news: {
+                title: "Entitats defensen prioritzar la biomassa forestal local abans de dependre d'acords de purins exteriors",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/la-biomassa-forestal-una-solucio-per-netejar-els-boscos-i-generar-energia/noticia/3043120/"
+              }
+            },
+            B: {
+              text: "Acceptar l'acord per obtenir ingressos directes i mantenir la producció elèctrica.",
+              impact: { citizen: -2, business: -2, environmentalist: -6, political: 0 },
+              explanation: "El projecte aporta ingressos a les indústries gestores, però els grups ecologistes organitzen protestes denunciant la contaminació dels fums de biomassa importada.",
+              news: {
+                title: "El debat sobre els purins d'Osona i el tractament energètic de residus agrícoles",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/economia/purins-oportunitat-biogas-catalunya-comencen-arrencar-projectes_1_4693210.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Oportunitat de Projecte d'Hidrogen Verd",
+          description: "La Unió Europea llança una línia de finançament massiu per a plantes d'hidrogen verd. Catalunya té el repte d'esdevenir un referent del sector mitjançant inversions públiques de suport. Com reacciones?",
+          options: {
+            A: {
+              text: "Apostar fortament pel projecte de l'hidrogen verd en col·laboració amb centres d'investigació.",
+              impact: { citizen: 0, business: 3, environmentalist: 5, political: 0 },
+              explanation: "Es rep el suport ecologista i de la indústria pel pas cap a una tecnologia lliure de carboni, reduint la dependència del gas natural.",
+              news: {
+                title: "L'aposta pel desenvolupament de l'hidrogen verd com a vector energètic de futur a Catalunya",
+                source: "El Periódico",
+                url: "https://www.elperiodico.com/es/medio-ambiente/20221015/espana-lider-mundial-energia-termosolar-almacenamiento-sales-14631240"
+              }
+            },
+            B: {
+              text: "Destinar els fons a millores tècniques en plantes de gas existents per motius d'eficiència.",
+              impact: { citizen: 0, business: -2, environmentalist: -2, political: 0 },
+              explanation: "Es perd l'ajuda europea i es manté l'aposta pels combustibles convencionals, provocant decepció en els sectors verds.",
+              news: {
+                title: "La transició termosolar i de bateries busca reduir el pes del gas de cicle combinat actiu",
+                source: "Energías Renovables",
+                url: "https://www.energias-renovables.com/solar-termica/el-futur-de-la-termosolar-com-a-bateria-20231120"
+              }
+            }
+          }
+        }
+      ],
+      political: [
+        {
+          title: "Advertència de la Unió Europea",
+          description: "La Comissió Europea envia una advertència a Catalunya per no assolir els nivells requerits d'energies renovables al mix elèctric i dependre massa de les nuclears i el gas importat. Com respon el Govern?",
+          options: {
+            A: {
+              text: "Aprovar un pla urgent de descarbonització de consens per evitar possibles multes.",
+              impact: { citizen: 0, business: -3, environmentalist: 4, political: 3 },
+              explanation: "Es guanya suport dels partits i d'Europa, que valoren la voluntat d'adaptar-se a la legalitat verda comuna, malgrat alguns sobrecostos industrials de transició.",
+              news: {
+                title: "Catalunya rep l'exigència de reduir les seves emissions de CO2 abans del tancament nuclear",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/tanca-la-central-termica-de-cercs-lultima-que-cremava-carbo-a-catalunya/noticia/227546/"
+              }
+            },
+            B: {
+              text: "Ignorar l'advertència temporalment, argumentant que la prioritat de Catalunya és el preu de l'energia de les fàbriques.",
+              impact: { citizen: 0, business: 5, environmentalist: -5, political: -5 },
+              explanation: "L'empresariat ho valora, però la decisió debilita el consens parlamentari i activa el risc d'una severa sanció econòmica de Brussel·les.",
+              news: {
+                title: "Crítiques de l'oposició parlamentària per la manca d'inversions en parcs eòlics de generació local",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/clima-i-medi-ambient/besos-totes-centrals-cicle-combinat-actives-debat_1_4875321.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Crisi: Moció de Censura al Parlament",
+          description: "L'oposició amenaça amb una moció de censura per tombar el govern a causa dels desacords sobre el model de finançament de les línies de molt alta tensió (MAT). Com actues?",
+          options: {
+            A: {
+              text: "Negociar amb els grups minoritaris, cedint en inversions per salvar el pressupost públic.",
+              impact: { citizen: 0, business: 0, environmentalist: 0, political: 15 },
+              explanation: "Es garanteix la governabilitat de la Generalitat amb un consens parlamentari sòlid a canvi de redefinir part de les obres elèctriques.",
+              news: {
+                title: "El govern de la Generalitat aconsegueix tancar un acord de pressupostos in extremis",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/el-govern-espanyol-i-les-electriques-acorden-el-tancament-de-les-nuclears-entre-2027-i-2035/noticia/2903539/"
+              }
+            },
+            B: {
+              text: "Sotmetre's a la votació al Parlament sense realitzar cap concessió política prèvia.",
+              impact: { citizen: -10, business: -10, environmentalist: 0, political: -5 },
+              explanation: "El govern cau en minoria. S'inicia un període d'inestabilitat política extrema que congela les inversions en noves centrals i allunya els inversors.",
+              news: {
+                title: "La inestabilitat parlamentària frena els plans de concessió de concessions elèctriques a Catalunya",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/catalunya-tindra-construir-propis-magatzems-residus-nuclears_1_4193630.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Acord de Desnuclearització d'Ascó I",
+          description: "S'apropa la data límit de la concessió d'explotació d'Ascó I. La Unió Europea i l'Estat exigeixen decidir si s'inicia el calendari de desmantellament pactat. Quina decisió prens?",
+          options: {
+            A: {
+              text: "Acceptar el tancament progressiu d'Ascó I com marca el calendari europeu.",
+              impact: { citizen: 5, business: -8, environmentalist: 10, political: 5 },
+              explanation: "Els grups parlamentaris d'esquerra i els ecologistes ho celebren com a inici de la fi de la radioactivitat catalana, demanant alternatives netes, mentre la indústria té por dels preus.",
+              news: {
+                title: "El govern espanyol i les elèctriques acorden el calendari de tancament de les nuclears catalanes",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/el-govern-espanyol-i-les-electriques-acorden-el-tancament-de-les-nuclears-entre-2027-i-2035/noticia/2903539/"
+              }
+            },
+            B: {
+              text: "Rebutjar l'acord i sol·licitar allargar la vida de la planta per raons de sobirania energètica.",
+              impact: { citizen: -5, business: 5, environmentalist: -8, political: -8 },
+              explanation: "S'assegura la producció estable de 1.000 MW per a les fàbriques, però s'activa un fort conflicte amb Europa i les organitzacions ecologistes, afeblint la teva posició legislativa.",
+              news: {
+                title: "La problemàtica acumulació de residus nuclears a Catalunya enfronta la Generalitat amb el territori",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/catalunya-tindra-construir-propis-magatzems-residus-nuclears_1_4193630.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Línia de Molt Alta Tensió (MAT)",
+          description: "Aragó disposa de molta energia renovable barata i demana creuar Catalunya amb una línia de Molt Alta Tensió (MAT) per portar electricitat cap a l'àrea metropolitana de Barcelona. Com gestiones la línia?",
+          options: {
+            A: {
+              text: "Autoritzar la MAT per seguretat de subministrament elèctric i obtenir preus barats.",
+              impact: { citizen: -4, business: 6, environmentalist: -3, political: 4 },
+              explanation: "Es garanteix energia barata per a la gran indústria catalana, augmentant el suport dels sectors parlamentaris, tot i l'oposició dels municipis afectats.",
+              news: {
+                title: "El debat de les línies MAT a Catalunya: el repte d'importar electricitat verda sense destruir l'entorn",
+                source: "Nació Digital",
+                url: "https://www.naciodigital.cat/noticia/222123/terra-alta-diu-prou-massificacio-eolica"
+              }
+            },
+            B: {
+              text: "Rebutjar la MAT, prioritzant la producció pròpia descentralitzada i evitant la dependència exterior.",
+              impact: { citizen: 4, business: -6, environmentalist: 3, political: -4 },
+              explanation: "Se satisfà la ciutadania veïnal que s'estalvia l'impacte visual, però la indústria es queixa per la manca d'energia barata importada i es perd el suport dels partits liberals.",
+              news: {
+                title: "Els sectors econòmics alerten del cost d'excloure Catalunya de les interconnexions de transport",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/comarques/girona/rebuj-eolic-alt-emporda-projectes-com-salvem-emporda_1_3957210.html"
+              }
+            }
+          }
+        },
+        {
+          title: "Revisió de Seguretat Nuclear Extensa",
+          description: "Els tècnics del Consell de Seguretat Nuclear proposen aturar durant un trimestre complet la central de Vandellòs II per revisar a fons un possible desgast a la contenció. Quina ordre dónes?",
+          options: {
+            A: {
+              text: "Decretar l'aturada completa de la central de Vandellòs II per garantir la seguretat civil.",
+              impact: { citizen: 5, business: 0, environmentalist: 0, political: 2 },
+              explanation: "La població i els col·lectius parlamentaris respiren tranquils davant la prudència, malgrat que s'ha d'importar electricitat de cicle combinat d'Aragó durant l'aturada.",
+              news: {
+                title: "Vandellòs II s'atura per realitzar les tasques ordinàries i extraordinàries de revisió tècnica",
+                source: "CCMA (3Cat)",
+                url: "https://www.ccma.cat/324/el-govern-espanyol-i-les-electriques-acorden-el-tancament-de-les-nuclears-entre-2027-i-2035/noticia/2903539/"
+              }
+            },
+            B: {
+              text: "Ordenar revisions parcials sense aturar la producció elèctrica per evitar pujades del preu de la llum.",
+              impact: { citizen: -8, business: -3, environmentalist: -5, political: -3 },
+              explanation: "Es manté la generació, però esclata una onada de queixes ecologistes per jugar amb la seguretat nuclear, rebent crítiques parlamentàries i augmentant el risc d'accident de seguretat.",
+              news: {
+                title: "Polèmica al Parlament pel nivell de seguretat requerit en les operacions de generació nuclear",
+                source: "Diari Ara",
+                url: "https://www.ara.cat/societat/catalunya-tindra-construir-propis-magatzems-residus-nuclears_1_4193630.html"
+              }
+            }
+          }
+        }
+      ]
     };
 
-    function updateDecisionWidget() {
-      const select = document.getElementById('select-decision');
-      const val = select.value;
-      const data = decisionsDb[val];
+    let gameState = {
+      role: null, // 'citizen', 'business', 'environmentalist', 'political'
+      step: 0,
+      ratings: {
+        citizen: 50,
+        business: 50,
+        environmentalist: 50,
+        political: 50
+      },
+      chosenOption: null
+    };
 
-      document.getElementById('dec-title').textContent = data.title;
-      document.getElementById('dec-text').textContent = data.text;
-      document.getElementById('dec-context').innerHTML = data.context;
-      document.getElementById('dec-pros').textContent = data.pros;
-      document.getElementById('dec-cons').textContent = data.cons;
+    function initActorsGame() {
+      document.getElementById('game-screen-setup').style.display = 'block';
+      document.getElementById('game-screen-play').style.display = 'none';
+      document.getElementById('game-screen-results').style.display = 'none';
+      
+      gameState.role = null;
+      gameState.step = 0;
+      gameState.ratings = { citizen: 50, business: 50, environmentalist: 50, political: 50 };
+      gameState.chosenOption = null;
 
-      // Update bars and changes indicators
-      updateRatingBar('citizen', data.citizen);
-      updateRatingBar('business', data.business);
-      updateRatingBar('environmentalist', data.environmentalist);
-      updateRatingBar('political', data.political);
+      // Force citizen bar color
+      document.getElementById('game-bar-citizen').style.backgroundColor = 'var(--secondary)';
+      
+      resetAllRatingBars();
     }
 
-    // SCRIPT CONT.
-    function updateRatingBar(actor, change) {
-      const bar = document.getElementById(`bar-${actor}`);
-      const indicator = document.getElementById(`chg-${actor}`);
+    function resetAllRatingBars() {
+      const actors = ['citizen', 'business', 'environmentalist', 'political'];
+      actors.forEach(actor => {
+        const bar = document.getElementById(`game-bar-${actor}`);
+        const valInd = document.getElementById(`game-val-${actor}`);
+        const chgInd = document.getElementById(`game-chg-${actor}`);
+        const row = document.getElementById(`row-bar-${actor}`);
+        
+        row.classList.remove('role-focus');
+        bar.style.width = "50%";
+        valInd.textContent = "50%";
+        chgInd.textContent = "";
+        chgInd.className = "rating-chg-indicator";
+      });
+    }
 
-      // Base bar value is 50%, show impact relative to it
-      const finalPct = 50 + (change * 2);
-      bar.style.width = Math.max(5, Math.min(100, finalPct)) + "%";
+    function selectGameRole(roleKey) {
+      gameState.role = roleKey;
+      gameState.step = 0;
+      gameState.ratings = { citizen: 50, business: 50, environmentalist: 50, political: 50 };
+      gameState.chosenOption = null;
 
-      if (change > 0) {
-        indicator.textContent = "+" + change + "%";
-        indicator.className = "rating-change-indicator positive";
-      } else if (change < 0) {
-        indicator.textContent = change + "%";
-        indicator.className = "rating-change-indicator negative";
+      const roleLabels = {
+        citizen: "Ciutadania (Poble)",
+        business: "Empresariat (PIMEC)",
+        environmentalist: "Ecologistes",
+        political: "Polítics (Consens)"
+      };
+
+      document.getElementById('game-active-role').textContent = "Rol: " + roleLabels[roleKey];
+
+      const actors = ['citizen', 'business', 'environmentalist', 'political'];
+      actors.forEach(actor => {
+        const row = document.getElementById(`row-bar-${actor}`);
+        if (actor === roleKey) {
+          row.classList.add('role-focus');
+        } else {
+          row.classList.remove('role-focus');
+        }
+      });
+
+      document.getElementById('game-screen-setup').style.display = 'none';
+      document.getElementById('game-screen-play').style.display = 'block';
+      document.getElementById('game-screen-results').style.display = 'none';
+
+      renderDecision();
+    }
+
+    function renderDecision() {
+      const decision = gameDb[gameState.role][gameState.step];
+      
+      document.getElementById('game-step-counter').textContent = `Decisió ${gameState.step + 1} de 5`;
+      document.getElementById('game-scenario-title').textContent = decision.title;
+      document.getElementById('game-scenario-desc').textContent = decision.description;
+      
+      document.getElementById('opt-a-text').textContent = decision.options.A.text;
+      document.getElementById('opt-b-text').textContent = decision.options.B.text;
+      
+      const optA = document.getElementById('opt-a-card');
+      const optB = document.getElementById('opt-b-card');
+      
+      optA.className = "option-card";
+      optB.className = "option-card";
+      
+      document.getElementById('game-feedback-panel').style.display = 'none';
+      
+      const actors = ['citizen', 'business', 'environmentalist', 'political'];
+      actors.forEach(actor => {
+        const chg = document.getElementById(`game-chg-${actor}`);
+        chg.textContent = "";
+        chg.className = "rating-chg-indicator";
+      });
+
+      updateRatingsUI();
+    }
+
+    function updateRatingsUI() {
+      const actors = ['citizen', 'business', 'environmentalist', 'political'];
+      actors.forEach(actor => {
+        const val = gameState.ratings[actor];
+        const bar = document.getElementById(`game-bar-${actor}`);
+        const valInd = document.getElementById(`game-val-${actor}`);
+        
+        bar.style.width = val + "%";
+        valInd.textContent = val + "%";
+      });
+    }
+
+    function chooseGameOption(optKey) {
+      if (gameState.chosenOption !== null) return;
+      
+      gameState.chosenOption = optKey;
+      
+      const decision = gameDb[gameState.role][gameState.step];
+      const choice = decision.options[optKey];
+      
+      const optA = document.getElementById('opt-a-card');
+      const optB = document.getElementById('opt-b-card');
+      
+      if (optKey === 'A') {
+        optA.classList.add('selected');
       } else {
-        indicator.textContent = "0%";
-        indicator.className = "rating-change-indicator neutral";
+        optB.classList.add('selected');
+      }
+      optA.classList.add('disabled');
+      optB.classList.add('disabled');
+      
+      const actors = ['citizen', 'business', 'environmentalist', 'political'];
+      actors.forEach(actor => {
+        const change = choice.impact[actor];
+        const chgInd = document.getElementById(`game-chg-${actor}`);
+        
+        if (change > 0) {
+          chgInd.textContent = `+${change}%`;
+          chgInd.className = "rating-chg-indicator pos";
+        } else if (change < 0) {
+          chgInd.textContent = `${change}%`;
+          chgInd.className = "rating-chg-indicator neg";
+        } else {
+          chgInd.textContent = "0%";
+          chgInd.className = "rating-chg-indicator neu";
+        }
+        
+        gameState.ratings[actor] = Math.max(0, Math.min(100, gameState.ratings[actor] + change));
+      });
+      
+      updateRatingsUI();
+      
+      document.getElementById('feedback-explanation').textContent = choice.explanation;
+      document.getElementById('news-title').textContent = choice.news.title;
+      document.getElementById('news-source').textContent = choice.news.source;
+      document.getElementById('news-link').href = choice.news.url;
+      
+      document.getElementById('game-feedback-panel').style.display = 'block';
+    }
+
+    function advanceGameStep() {
+      gameState.chosenOption = null;
+      gameState.step++;
+      
+      if (gameState.step < 5) {
+        renderDecision();
+      } else {
+        showGameResults();
       }
     }
 
-    // Trigger initial widget state
-    updateDecisionWidget();
+    function showGameResults() {
+      document.getElementById('game-screen-play').style.display = 'none';
+      document.getElementById('game-screen-results').style.display = 'block';
+      
+      const ownScore = gameState.ratings[gameState.role];
+      const avgScore = Math.round((gameState.ratings.citizen + gameState.ratings.business + gameState.ratings.environmentalist + gameState.ratings.political) / 4);
+      
+      document.getElementById('final-own-score').textContent = ownScore + "%";
+      document.getElementById('final-avg-score').textContent = avgScore + "%";
+      
+      let verdictTitle = "";
+      let verdictText = "";
+      let verdictBg = "";
+      let verdictBorder = "";
+      
+      if (ownScore >= 75 && avgScore >= 60) {
+        verdictTitle = "🏆 Excel·lent Consens i Sobirania Social";
+        verdictText = "Has aconseguit defensar amb èxit els interessos del teu col·lectiu i, alhora, has mantingut una mitjana de suport general molt elevada. Ets un autèntic referent de lideratge integrador!";
+        verdictBg = "#f0fdf4";
+        verdictBorder = "var(--primary)";
+      } else if (ownScore >= 65 && avgScore < 50) {
+        verdictTitle = "⚡ Polarització i Tensions Socials";
+        verdictText = "Has aconseguit un gran suport de la teva facció, però a costa de crear grans desacords i malestar en els altres sectors del país. La crispació social amenaça la sostenibilitat del govern.";
+        verdictBg = "#fffbeb";
+        verdictBorder = "var(--amber)";
+      } else if (ownScore < 50 && avgScore >= 60) {
+        verdictTitle = "⚖️ Sacrifici de Facció pel Bé Comú";
+        verdictText = "El teu col·lectiu està descontent perquè has cedit en les seves demandes, però has mantingut un nivell de consens general molt elevat. Un lideratge basat en el bé comú, malgrat el cost polític propi.";
+        verdictBg = "#eff6ff";
+        verdictBorder = "var(--secondary)";
+      } else {
+        verdictTitle = "🚨 Crisi de Govern i Inestabilitat";
+        verdictText = "El suport del teu col·lectiu és baix i el consens general del país està sota mínims. Les protestes veïnals, el malestar empresarial i les advertències de la UE fan urgent un replantejament de la teva estratègia.";
+        verdictBg = "#fff1f2";
+        verdictBorder = "var(--rose)";
+      }
+      
+      const verdictBox = document.getElementById('results-verdict-box');
+      document.getElementById('verdict-title').textContent = verdictTitle;
+      document.getElementById('verdict-text').textContent = verdictText;
+      verdictBox.style.backgroundColor = verdictBg;
+      verdictBox.style.borderColor = verdictBorder;
+      verdictBox.style.borderLeft = `5px solid ${verdictBorder}`;
+    }
+
+    function restartActorsGame() {
+      initActorsGame();
+    }
+
+    // Inicialitza el joc d'actors al carregar
+    initActorsGame();
 
 
     // POLICY SEARCH AND FILTER CODE
