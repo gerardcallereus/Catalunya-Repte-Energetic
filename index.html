@@ -2281,80 +2281,120 @@
           </table>
         </div>
 
-        <h3 style="color: var(--amber); margin-top: 2.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">El Paradoxa de la Potència: Capacitat Instal·lada vs. Producció Real</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Aquest gràfic mostra la gran diferència entre la <strong>potència nominal</strong> (megawatts de centrals connectades, és a dir, la capacitat de produir en el millor moment) i la <strong>producció anual efectiva</strong> a Catalunya.
+        <h3 style="color: var(--amber); margin-top: 2.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">La Paradoxa de la Potència: Capacitat Instal·lada vs. Producció Real</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+          Existeix una gran diferència entre la <strong>Potència Instal·lada</strong> — quants MW té una central connectats a la xarxa, és a dir, quant pot produir en el millor moment — i la <strong>Producció Real Anual</strong> — quanta electricitat ha generat realment durant tot l'any (en GWh).
+        </p>
+        <p style="font-size: 0.9rem; color: var(--secondary); font-weight: 600; margin-bottom: 1.25rem;">
+          💡 MW mesura la <em>velocitat màxima</em>. GWh mesura els <em>quilòmetres realment recorreguts</em>.
         </p>
 
         <div class="chart-container">
-          <!-- Nuclear -->
+
+          <!-- CAPÇALERA d'unitats -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+            <span>⬛ Potència Instal·lada (MW)</span>
+            <span>🟩 Producció Real Anual (GWh)</span>
+          </div>
+
+          <!-- Nuclear: 3.000 MW / ~24.000 GWh -->
           <div class="chart-bar-group">
             <div class="chart-bar-labels">
-              <span style="font-weight:600; color: var(--rose);">Nuclear (3 reactors)</span>
-              <span>Potència: 25% | Producció Real: 58%</span>
+              <span style="font-weight:600; color: var(--rose);">☢️ Nuclear (Ascó I+II, Vandellòs II)</span>
+              <span style="font-size: 0.78rem;">Funciona <strong>~8.000 h/any</strong> (91% del temps)</span>
             </div>
-            <div class="chart-bar-row">
-              <div class="chart-bar-fill-inst" style="width: 25%;"></div>
-              <div class="chart-bar-fill-prod" style="width: 58%;"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center; margin-top: 0.3rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--indigo); font-weight:700; margin-bottom:2px;">3.000 MW</div>
+                <div style="height:18px; background:var(--indigo); border-radius:4px; width:30%;"></div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-bottom:2px;">24.000 GWh</div>
+                <div style="height:18px; background:var(--primary); border-radius:4px; width:100%;"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Gas -->
+          <!-- Gas: 3.600 MW / ~9.000 GWh -->
           <div class="chart-bar-group">
             <div class="chart-bar-labels">
-              <span style="font-weight:600; color: var(--rose);">Cicle Combinat (Gas)</span>
-              <span>Potència: 30% | Producció Real: 22%</span>
+              <span style="font-weight:600; color: var(--rose);">🔥 Cicle Combinat (Gas)</span>
+              <span style="font-size: 0.78rem;">Funciona <strong>~2.500 h/any</strong> (28% del temps — reserva)</span>
             </div>
-            <div class="chart-bar-row">
-              <div class="chart-bar-fill-inst" style="width: 30%;"></div>
-              <div class="chart-bar-fill-prod" style="width: 22%;"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center; margin-top: 0.3rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--indigo); font-weight:700; margin-bottom:2px;">3.600 MW</div>
+                <div style="height:18px; background:var(--indigo); border-radius:4px; width:36%;"></div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--amber); font-weight:700; margin-bottom:2px;">9.000 GWh</div>
+                <div style="height:18px; background:var(--amber); border-radius:4px; width:37%;"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Hidraulica -->
+          <!-- Hidro: 2.050 MW / ~3.200 GWh -->
           <div class="chart-bar-group">
             <div class="chart-bar-labels">
-              <span style="font-weight:600; color: var(--primary);">Hidroelèctrica</span>
-              <span>Potència: 17% | Producció Real: 8% (dependent de sequera)</span>
+              <span style="font-weight:600; color: var(--primary);">💧 Hidroelèctrica (embassaments)</span>
+              <span style="font-size: 0.78rem;">Funciona <strong>~1.500 h/any</strong> (17% — depèn de la pluja)</span>
             </div>
-            <div class="chart-bar-row">
-              <div class="chart-bar-fill-inst" style="width: 17%;"></div>
-              <div class="chart-bar-fill-prod" style="width: 8%;"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center; margin-top: 0.3rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--indigo); font-weight:700; margin-bottom:2px;">2.050 MW</div>
+                <div style="height:18px; background:var(--indigo); border-radius:4px; width:21%;"></div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-bottom:2px;">3.200 GWh</div>
+                <div style="height:18px; background:var(--primary); border-radius:4px; width:13%;"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Eolica -->
+          <!-- Eolica: 1.350 MW / ~2.500 GWh -->
           <div class="chart-bar-group">
             <div class="chart-bar-labels">
-              <span style="font-weight:600; color: var(--primary);">Eòlica Terrestre</span>
-              <span>Potència: 11% | Producció Real: 6%</span>
+              <span style="font-weight:600; color: var(--primary);">💨 Eòlica Terrestre</span>
+              <span style="font-size: 0.78rem;">Funciona <strong>~2.000 h/any</strong> (23% — quan fa vent)</span>
             </div>
-            <div class="chart-bar-row">
-              <div class="chart-bar-fill-inst" style="width: 11%;"></div>
-              <div class="chart-bar-fill-prod" style="width: 6%;"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center; margin-top: 0.3rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--indigo); font-weight:700; margin-bottom:2px;">1.350 MW</div>
+                <div style="height:18px; background:var(--indigo); border-radius:4px; width:14%;"></div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:700; margin-bottom:2px;">2.500 GWh</div>
+                <div style="height:18px; background:var(--primary); border-radius:4px; width:10%;"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Solar -->
+          <!-- Solar: 1.800 MW / ~2.100 GWh -->
           <div class="chart-bar-group">
             <div class="chart-bar-labels">
-              <span style="font-weight:600; color: var(--primary);">Solar Fotovoltaica (Autoconsum + Parcs)</span>
-              <span>Potència: 15% | Producció Real: 5%</span>
+              <span style="font-weight:600; color: var(--primary);">☀️ Solar Fotovoltaica</span>
+              <span style="font-size: 0.78rem;">Funciona <strong>~1.500 h/any</strong> (17% — de dia i sense núvols)</span>
             </div>
-            <div class="chart-bar-row">
-              <div class="chart-bar-fill-inst" style="width: 15%;"></div>
-              <div class="chart-bar-fill-prod" style="width: 5%;"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center; margin-top: 0.3rem;">
+              <div>
+                <div style="font-size:0.8rem; color:var(--indigo); font-weight:700; margin-bottom:2px;">1.800 MW</div>
+                <div style="height:18px; background:var(--indigo); border-radius:4px; width:18%;"></div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--amber); font-weight:700; margin-bottom:2px;">2.100 GWh</div>
+                <div style="height:18px; background:var(--amber); border-radius:4px; width:8%;"></div>
+              </div>
             </div>
           </div>
 
-          <div class="chart-legend">
+          <div class="chart-legend" style="margin-top: 1rem;">
             <div class="legend-item">
               <div class="legend-color" style="background: var(--indigo);"></div>
-              <span>% Potència Instal·lada nominal (MW)</span>
+              <span>Potència Instal·lada (MW) — barra escalada sobre màx. 10.000 MW</span>
             </div>
             <div class="legend-item">
               <div class="legend-color" style="background: var(--primary);"></div>
-              <span>% Producció Real Anual (GWh)</span>
+              <span>Producció Real Anual (GWh) — barra escalada sobre màx. 24.000 GWh</span>
             </div>
           </div>
         </div>
@@ -2362,20 +2402,20 @@
         <div style="background: rgba(2, 132, 199, 0.04); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.25rem; margin-top: 1.5rem; line-height: 1.6;">
           <h4 style="color: var(--secondary); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;">
             <svg style="width:20px; height:20px; fill:var(--secondary)" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-            Com s'explica la Paradoxa de la Potència?
+            Com s'explica la Paradoxa?
           </h4>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-            La paradoxa és senzilla: <strong>la Potència instal·lada (% en color lila) no equival a la Producció Real (% en color verd)</strong>. Aquest fenomen s'explica pel <strong>Factor de Capacitat</strong> de cada tecnologia (reflectit a la taula anterior com a hores equivalents anuals):
+            La <strong>Potència (MW)</strong> és com la velocitat màxima d'un cotxe. La <strong>Producció (GWh)</strong> són els quilòmetres que ha recorregut realment al llarg de l'any. Una central pot tenir molts MW i generar pocs GWh si no funciona moltes hores:
           </p>
           <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
             <li>
-              <strong>El cas de la Nuclear (25% Potència vs. 58% Producció):</strong> Catalunya compta amb només 3 reactors nuclears actius (Ascó I i II, i Vandellòs II) que sumen uns 3.000 MW de potència. Com que són centrals de "base" dissenyades per funcionar les 24 hores del dia, els 365 dies de l'any de manera ininterrompuda (excepte per aturades tècniques de recàrrega de combustible), operen gairebé 8.000 hores a l'any (més del 90% del temps). Per això, amb només una quarta part de la potència instal·lada del país, aconsegueixen cobrir més de la meitat de la llum elèctrica real consumida a Catalunya.
+              <strong>☢️ Nuclear — 3.000 MW → 24.000 GWh:</strong> Té menys MW que el gas, però funciona les <strong>24 hores del dia, 365 dies</strong> (aturades mínimes per recàrrega). Resultat: genera 24.000 GWh, molt més que qualsevol altra tecnologia. Amb el 25% dels MW del país, produeix el 58% de l'electricitat anual.
             </li>
             <li>
-              <strong>La intermitència renovable (Solar i Eòlica):</strong> Encara que s'instal·lin molts megawatts de plaques solars (actualment representen el 15% de la potència), només generen electricitat quan hi ha radiació. Com que a la nit no produeixen i els dies ennuvolats o a l'hivern la seva eficiència cau, el seu factor d'utilització és d'unes 1.500 hores equivalents anuals (un 17% del temps total de l'any). És per això que la seva aportació real en GWh (5%) és proporcionalment molt menor que la seva capacitat nominal. L'eòlica terrestre té un comportament similar, funcionant unes 2.000-2.400 hores equivalents (~25% del temps).
+              <strong>☀️ Solar — 1.800 MW → 2.100 GWh:</strong> Té força MW instal·lats, però <strong>de nit no produeix res, a l'hivern gairebé tampoc</strong>. Funciona unes 1.500 hores efectives a l'any d'un total de 8.760 hores. Resultat: tot aquell MW instal·lat genera proporcionalment molt pocs GWh.
             </li>
             <li>
-              <strong>La flexibilitat del Gas (30% Potència vs. 22% Producció):</strong> Les centrals de cicle combinat actuen com a suport o reserva de garantia. Tenen molta capacitat instal·lada per si fa falta (30%), però només es posen en marxa quan la demanda és molt alta o quan les renovables fallen.
+              <strong>🔥 Gas — 3.600 MW → 9.000 GWh:</strong> Té molts MW disponibles com a <strong>reserva d'emergència</strong>, però s'encén principalment quan la demanda puja molt o les renovables fallen. No funciona contínuament: unes 2.500 h/any.
             </li>
           </ul>
         </div>
