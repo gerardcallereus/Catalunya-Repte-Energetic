@@ -1327,6 +1327,81 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
       z-index: 10;
     }
+
+    /* Estils per als detalls i notícies reals de polítiques públiques */
+    .policy-details {
+      margin-top: 0.75rem;
+      border-top: 1px dashed var(--card-border);
+      padding-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .policy-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--indigo);
+      outline: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+    }
+    .policy-details summary:hover {
+      text-decoration: underline;
+    }
+    .policy-details-content {
+      padding: 0.5rem 0;
+      line-height: 1.4;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .policy-news-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .policy-news-link:hover {
+      text-decoration: underline;
+      color: #047857;
+    }
+    
+    /* Estils per al sistema de notificacions toast */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 9999;
+    }
+    .toast {
+      background: white;
+      border-left: 4px solid var(--rose);
+      color: var(--text-main);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      animation: slideIn 0.3s ease forwards, fadeOut 0.3s ease 3s forwards;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; pointer-events: none; }
+    }
   </style>
 </head>
 <body>
@@ -3088,33 +3163,76 @@
             </div>
           </div>
 
+          <!-- Altres Impactes Sectorials -->
+          <div style="margin-bottom: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--card-border);">
+            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Efectes Sectorials de les Polítiques (Acumulat):</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+              
+              <!-- Impacte Fiscal Net -->
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <div style="background: rgba(5, 150, 105, 0.08); color: var(--primary); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg style="width:16px; height:16px; fill:currentColor" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 1.21-1.04 1.93-2.9 1.93-2 0-2.73-.97-2.83-2.3H6.3c.09 2.05 1.63 3.32 3.7 3.81V21h3v-2.19c2.1-.41 3.7-1.63 3.7-3.71 0-2.72-2.2-3.6-4.9-4.2z"/></svg>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Balanç Fiscal de Retorn</span>
+                  <strong id="policy-fiscal-impact" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">0 M€ / torn</strong>
+                </div>
+              </div>
+
+              <!-- Increments de Producció / R+D -->
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <div style="background: rgba(217, 119, 6, 0.08); color: var(--amber); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg style="width:16px; height:16px; fill:currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/></svg>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Eficiència Generació (R+D)</span>
+                  <strong id="policy-efficiency-boost" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Sense millores</strong>
+                </div>
+              </div>
+
+              <!-- Millores de Manteniment (Upkeep) -->
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <div style="background: rgba(2, 132, 199, 0.08); color: var(--secondary); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg style="width:16px; height:16px; fill:currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.3C.5 6.7.9 9.8 2.9 11.8c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.6z"/></svg>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Estalvi Operatiu i Millores</span>
+                  <strong id="policy-upkeep-saving" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Cap reducció</strong>
+                </div>
+              </div>
+
+              <!-- Tecnologies Desbloquejades -->
+              <div style="background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <div style="background: rgba(79, 70, 229, 0.08); color: var(--indigo); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg style="width:16px; height:16px; fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Tecnologies Habilitades</span>
+                  <strong id="policy-tech-unlocked" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Cap</strong>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <!-- Barra de progrés de pressupost -->
-          <div style="height: 10px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 0.5rem; position: relative;">
-            <div id="policy-budget-bar" style="height: 100%; width: 0%; background: var(--primary); transition: width 0.3s ease;"></div>
-          </div>
-          
-          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">
-            <span id="policy-budget-warning" style="color: var(--primary)">Dins del límit pressupostari</span>
-            <span id="policy-selected-count">0 polítiques seleccionades</span>
-          </div>
-        </div>
-
-        <input type="text" id="policy-search" class="policy-search-bar" placeholder="Cerca polítiques per títol o efecte (ex: autoconsum, MAT, impost)..." onkeyup="filterPolicies()">
-        
-        <div class="policy-filters">
-          <button class="policy-filter-btn active" id="pol-filter-all" onclick="filterPolicyCategory('all')">Totes les Polítiques</button>
-          <button class="policy-filter-btn" id="pol-filter-demanda" onclick="filterPolicyCategory('demanda')">Eficiència i Demanda</button>
-          <button class="policy-filter-btn" id="pol-filter-fiscal" onclick="filterPolicyCategory('fiscal')">Fiscalitat i Mercat</button>
-          <button class="policy-filter-btn" id="pol-filter-infra" onclick="filterPolicyCategory('infra')">Infraestructura i R+D</button>
-        </div>
-
-        <div class="grid-3" id="policies-grid">
+          <div         <div class="grid-3" id="policies-grid">
           <!-- 1. Rehabilitation -->
           <div class="policy-card" data-category="demanda" data-search="pla de rehabilitació energètica eficiència demanda reducció demanda aïllament habitatges">
             <div>
               <div class="policy-card-title">Rehabilitació Energètica</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
               <div class="policy-card-desc">Subvenciona l'aïllament tèrmic d'habitatges per reduir el consum de calefacció a l'hivern i aire condicionat a l'estiu. Afecta aprovació: Ciutadans +5%, Ecologistes +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Subvencions Next Generation de la Unió Europea destinades a millorar l'aïllament tèrmic de les façanes, finestres i teulades de les llars per reduir el consum en calefacció i refrigeració.</p>
+                  <a href="https://www.ccma.cat/324/ajuts-fons-next-generation-rehabilitacio-energetica-habitatges-edificis-catalunya/noticia/3160233/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Ajuts Next Generation per a la rehabilitació
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.200 M€</span>
@@ -3128,6 +3246,16 @@
               <div class="policy-card-title">Incentius a l'Electrificació</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
               <div class="policy-card-desc">Pla d'ajudes per a l'electrificació de llars i vehicles per optimitzar la demanda. Afecta aprovació: Ciutadans +5%, Empresaris +3%, Ecologistes +4%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Ajudes públiques del Pla MOVES III per a la instal·lació de bombes de calor eficients a les llars i per a la compra de vehicles elèctrics i punts de recàrrega.</p>
+                  <a href="https://www.ccma.cat/324/el-pla-moves-iii-dajuts-a-la-compra-de-vehicle-electric-samplia-amb-20-milions-mes/noticia/3218556/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Ampliació de fons del Pla MOVES III a Catalunya
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.500 M€</span>
@@ -3141,6 +3269,16 @@
               <div class="policy-card-title">Renovació d'Electrodomèstics</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
               <div class="policy-card-desc">Promou la substitució d'aparells antics per uns de major eficiència de classe A. Afecta aprovació: Ciutadans +4%, Ecologistes +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Pla Renove per a la substitució d'electrodomèstics de gran consum (nevera, rentadora, rentavaixelles) per aparells moderns amb etiqueta d'alta eficiència energètica de classe A.</p>
+                  <a href="https://www.ara.cat/economia/pla-renove-repartira-millors-d-ajuts-substituir-electrodomestics_1_1270271.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Ara.cat: El pla Renove d'ajuts a electrodomèstics
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 700 M€</span>
@@ -3154,6 +3292,16 @@
               <div class="policy-card-title">Impost al CO₂</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Aplica un gravamen als cicles combinats proporcional al gas cremat, millorant l'aprovació ecològica. Afecta aprovació: Empresaris -5%, Ecologistes +5%, Ciutadans +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Aplicació de taxes sobre l'emissió de gasos contaminants dels vehicles i la indústria tèrmica per incentivar alternatives de zero emissions.</p>
+                  <a href="https://govern.cat/salapremsa/notes-premsa/407022/gencat-comenca-cobrar-limpost-sobre-les-emissions-de-co2-dels-vehicles-de-traccio-mecanica" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Govern.cat: Inici de la recaptació de l'impost de CO₂
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 0 M€ (Llei)</span>
@@ -3167,6 +3315,16 @@
               <div class="policy-card-title">Reforma Fiscal Verda</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Modifica el sistema d'impostes per penalitzar les activitats contaminants i bonificar les netes. Afecta aprovació: Ciutadans -3%, Empresaris -2%, Ecologistes +3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Modificació estructural del sistema d'impostos per penalitzar el consum de combustibles fòssils i bonificar fiscalment les inversions en energies renovables.</p>
+                  <a href="https://www.ara.cat/economia/gencat-ultima-nova-taxa-verda-gravara-grans-vaixells-creuers_1_4541527.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Ara.cat: Impuls de noves taxes verdes a Catalunya
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 300 M€</span>
@@ -3180,6 +3338,16 @@
               <div class="policy-card-title">Reducció d'Impost de Societats</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Redueix l'impost de societats per estimular la inversió privada en transició. Afecta aprovació: Empresaris +10%, Ciutadans -3%, Ecologistes -2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Bonificacions fiscals i deduccions directes en l'impost de societats per a les empreses que inverteixin en instal·lacions d'autoconsum o eficiència als seus centres de treball.</p>
+                  <a href="https://www.lavanguardia.com/encatala/economia/20230605/9018449/incentius-fiscals-autoconsum-instal-lacions-solar.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    La Vanguardia: Deduccions fiscals per a l'autoconsum
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 150 M€</span>
@@ -3193,6 +3361,16 @@
               <div class="policy-card-title">Taxa Beneficis Extraordinaris</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Taxa directa als beneficis caiguts del cel (windfall profits) de les elèctriques. Afecta aprovació: Empresaris -12%, Ciutadans +10%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Impost especial de solidaritat que grava els guanys caiguts del cel (windfall profits) obtinguts per les grans de l'energia a causa del preu del gas.</p>
+                  <a href="https://www.ccma.cat/324/el-govern-espanyol-gravara-els-beneficis-extraordinaris-de-les-energetiques-i-la-banca/noticia/3175133/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Impost als beneficis extres de les elèctriques
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 0 M€ (Llei)</span>
@@ -3206,6 +3384,16 @@
               <div class="policy-card-title">Xec Energètic Directe</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Ajuda econòmica directa a la ciutadania vulnerable per fer front al preu del rebut elèctric. Afecta aprovació: Ciutadans +15%, Empresaris -3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Ajuts econòmics directes (Bo Social Tèrmic) de transferència de capital destinada a llars vulnerables per pagar les factures d'energia i pal·liar la pobresa energètica.</p>
+                  <a href="https://www.ccma.cat/324/ajuts-de-fins-a-150-euros-per-lluitar-contra-la-pobresa-energetica/noticia/2884144/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Ajudes contra la pobresa energètica
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 100 M€</span>
@@ -3219,6 +3407,16 @@
               <div class="policy-card-title">Taxa Turística Ecològica</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
               <div class="policy-card-desc">Grava les estades turístiques per finançar projectes locals de conservació i energia. Afecta aprovació: Empresaris -4%, Ecologistes +4%, Polítics +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Recàrrec finalista sobre la taxa d'estades turístiques per recaptar fons que es destinen exclusivament a finançar projectes de conservació ambiental i transició energètica local.</p>
+                  <a href="https://www.ccma.cat/324/barcelona-apuja-la-taxa-turistica-a-partir-de-lapril-de-2024/noticia/3257850/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Pujada de la taxa turística per a projectes locals
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 50 M€</span>
@@ -3232,6 +3430,16 @@
               <div class="policy-card-title">Manteniment Predictiu</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Utilitza sensors i intel·ligència de dades per reduir el cost de manteniment de TOTES les centrals en un 15% permanentment. Afecta aprovació: Empresaris +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Implementació de sensors IoT (Internet de les Coses) i algoritmes predictius d'intel·ligència artificial per avançar-se a les avaries de les línies i optimitzar el manteniment de les plantes.</p>
+                  <a href="https://www.ccma.cat/324/endesa-aplica-intel-ligencia-artificial-per-prevenir-avaries-a-la-xarxa-electrica/noticia/3103859/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Ús d'IA per prevenir talls de subministrament
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 800 M€</span>
@@ -3245,6 +3453,16 @@
               <div class="policy-card-title">R+D Hidroelèctric</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Investigació tècnica per millorar el rendiment de les turbines dels pantans. Augmenta la producció hidroelèctrica un 15% permanentment. Afecta aprovació: Empresaris +2%, Polítics +1%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Recerca i desenvolupament aplicats a la hidràulica per modernitzar les turbines tradicionals i maximitzar la seva producció fins i tot en situacions de cabals reduïts per sequera.</p>
+                  <a href="https://www.ara.cat/societat/medi-ambient/revolucio-turbines-salva-rius-pantans-catalunya_1_4728951.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Ara.cat: Modernització i optimització de turbines en pantans
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 650 M€</span>
@@ -3258,6 +3476,16 @@
               <div class="policy-card-title">Foment de l'R+D Eòlic</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Projecte per millorar el disseny aerodinàmic dels aerogeneradors terrestres i marins. Augmenta la producció eòlica un 10% permanentment. Afecta aprovació: Ciutadans +2%, Empresaris +1%, Ecologistes +3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Investigació en nous aerogeneradors terrestres i marins, millorant el disseny aerodinàmic de les pales i reduint la seva petjada ecològica i sonora.</p>
+                  <a href="https://govern.cat/salapremsa/notes-premsa/465132/irec-creara-plataforma-de-recerca-eolica-marina-primers-aerogeneradors-catalunya" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Govern.cat: Projectes de recerca eòlica marina
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 750 M€</span>
@@ -3271,6 +3499,16 @@
               <div class="policy-card-title">Modernització de la Xarxa</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Redueix les pèrdues de transport de llum. Millora el preu de venda d'excedent (+10%) i redueix el de compra per dèficit (-10%). Afecta aprovació: Empresaris +3%, Polítics +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Digitalització i automatització de la xarxa de transport i distribució d'electricitat, minimitzant les pèrdues d'energia elèctrica per efecte Joule durant el seu transport.</p>
+                  <a href="https://www.elpuntavui.cat/economia/article/18-economia/2354854-inversio-mil-lonaria-per-modernitzar-la-xarxa-electrica.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    El Punt Avui: Inversions de modernització de la xarxa elèctrica
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 900 M€</span>
@@ -3284,6 +3522,16 @@
               <div class="policy-card-title">Acord amb Aragó (MAT)</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Estableix línies de Molt Alta Tensió per importar energia verda aragonesa. Millora preus d'excedent (+15%) i compra (-15%) permanentment. Afecta aprovació: Polítics +4%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Planificació i tramitació de línies de Molt Alta Tensió (MAT) per permetre la importació de l'energia eòlica i solar generada a l'Aragó cap a la xarxa elèctrica catalana.</p>
+                  <a href="https://www.ccma.cat/324/la-generalitat-rebutja-el-projecte-de-la-linia-mat-de-valmuel-a-begues/noticia/3200923/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Debat i controvèrsia de les línies de transport MAT
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 400 M€</span>
@@ -3297,6 +3545,16 @@
               <div class="policy-card-title">Impuls a l'Autoconsum</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
               <div class="policy-card-desc">Simplifica la instal·lació de plaques solars en teulades privades. Redueix la demanda de la xarxa elèctrica de forma permanent en 100 MW. Afecta aprovació: Ciutadans +4%, Ecologistes +4%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Simplificació del codi d'edificació i línies d'ajut de la Generalitat per al desplegament massiu de plaques solars fotovoltaiques a les teulades d'habitatges, indústries i edificis públics.</p>
+                  <a href="https://govern.cat/salapremsa/notes-premsa/495812/catalunya-supera-les-100-000-instal-lacions-d-autoconsum-electric" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Govern.cat: Rècord de plaques solars en teulades catalanes
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 500 M€</span>
@@ -3310,6 +3568,16 @@
               <div class="policy-card-title">Emmagatzematge (Bateries)</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Finança parcs de bateries de gran escala. Incrementa l'efectivitat i aprofitament de solars i eòliques un 20% permanentment. Afecta aprovació: Polítics +3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Ajudes públiques per al desplegament de grans parcs de bateries d'ió liti de nivell industrial instal·lats directament a les subestacions elèctriques per acumular excedents renovables.</p>
+                  <a href="https://www.viaempresa.cat/economia/projecte-bateries-gegant-emmagatzemar-energia-renovable_2183204_102.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Via Empresa: Projecte de bateria gegant d'emmagatzematge
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 2.000 M€</span>
@@ -3323,6 +3591,16 @@
               <div class="policy-card-title">Projecte Hidrogen Verd</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Inverteix en hidrogen verd com a vector d'emmagatzematge tèrmic. Redueix el cost de manteniment de gas un 25% permanentment. Afecta aprovació: Ecologistes +5%, Empresaris +3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Subvenció pública a projectes pilot d'electròlisi de l'aigua utilitzant energia renovable per fabricar hidrogen verd com a vector d'emmagatzematge d'energia.</p>
+                  <a href="https://www.ccma.cat/324/la-vall-de-lhidrogen-verd-de-catalunya-comenca-a-caminar-amb-mes-de-cent-empreses/noticia/3097241/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Constitució de la Vall de l'Hidrogen Verd de Catalunya
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.300 M€</span>
@@ -3336,6 +3614,16 @@
               <div class="policy-card-title">Eficiència Solar (R+D)</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Ajudes a centres de recerca per a l'ús de materials avançats com la perovskita. Augmenta la producció solar un 15% permanentment. Afecta aprovació: Ecologistes +3%, Empresaris +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Subvencions a grups de recerca universitaris i centres tecnològics per al desenvolupament de cèl·lules solars d'última generació basades en perovskita per augmentar el seu rendiment.</p>
+                  <a href="https://www.elnacional.cat/ca/tecnologia/perovskita-material-canviara-plaques-solars-per-sempre_944111_102.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    El Nacional: Investigació de perovskita per a plaques solars
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 850 M€</span>
@@ -3349,6 +3637,16 @@
               <div class="policy-card-title">Educació Energètica</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
               <div class="policy-card-desc">Campanyes escolars i ciutadanes sobre estalvi energètic i climatització eficient. Redueix la demanda base en 50 MW permanentment. Afecta aprovació: Ciutadans +3%, Ecologistes +1%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Creació de guies didàctiques, tallers escolars i campanyes publicitàries institucionals per sensibilitzar la ciutadania i l'alumnat sobre la importància de l'estalvi i l'eficiència quotidiana.</p>
+                  <a href="https://govern.cat/salapremsa/notes-premsa/410123/educacio-i-accio-climatica-impulsen-un-programa-d-estalvi-energetic-a-les-escoles" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Govern.cat: Programa d'estalvi energètic a centres educatius
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 200 M€</span>
@@ -3362,6 +3660,16 @@
               <div class="policy-card-title">Extensió de Vida Nuclear</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Allarga el funcionament de les centrals d'Ascó i Vandellòs un 10% addicional per evitar fallades de base. Afecta aprovació: Empresaris +5%, Ecologistes -10%, Ciutadans -5%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Allargament del permís de funcionament d'Ascó i Vandellòs més enllà dels 40 anys planificats, garantint energia base de zero emissions mentre maduren les renovables.</p>
+                  <a href="https://www.ccma.cat/324/tancament-o-prorroga-de-les-nuclears-el-debat-obert-per-la-transicio-energetica/noticia/3142998/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Debat de tancament o pròrroga de les centrals nuclears
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.800 M€</span>
@@ -3375,6 +3683,16 @@
               <div class="policy-card-title">Simplificació Burocràtica</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Retalla els tràmits per obrir projectes verds. Redueix en 1 trimestre el temps de construcció de solars i eòliques. Afecta aprovació: Empresaris +4%, Ecologistes -3%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Agilització dels tràmits i reducció de terminis per a l'avaluació d'impacte ambiental i l'aprovació d'instal·lacions d'energies renovables.</p>
+                  <a href="https://www.naciodigital.cat/noticia/226105/decret-llei-gencat-accelerar-renovables-retallar-tramits" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    NacióDigital: Decret llei per accelerar tràmits renovables
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 150 M€</span>
@@ -3388,6 +3706,16 @@
               <div class="policy-card-title">Desbloqueig Eòlica Marina</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Reforma de la planificació d'usos de la costa per obrir el mercat marí (ex: Golf de Roses). Permet construir Eòlica Marina. Afecta aprovació: Ciutadans +3%, Polítics +3%, Empresaris +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Aprovació dels Plans d'Ordenació de l'Espai Marítim per obrir la possibilitat d'instal·lar parcs eòlics flotants a les costes de Catalunya, sent el Golf de Roses la zona principal.</p>
+                  <a href="https://www.ccma.cat/324/l-eolica-marina-al-golf-de-roses-tindra-el-primer-aerogenerador-de-recerca-el-2025/noticia/3229871/" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    CCMA: Primers projectes d'eòlica marina al Golf de Roses
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.000 M€</span>
@@ -3401,6 +3729,16 @@
               <div class="policy-card-title">Desenvolupament Termosolar</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
               <div class="policy-card-desc">Planificació territorial per habilitar zones de captació termosolar amb emmagatzematge de sals foses. Permet construir Termosolar. Afecta aprovació: Ecologistes +4%, Polítics +2%.</div>
+              <details class="policy-details">
+                <summary>Veure detalls i notícia real</summary>
+                <div class="policy-details-content">
+                  <p>Habilitació de zones de planificació especial per a instal·lacions termosolar de concentració mitjançant miralls heliòstats i emmagatzematge de sals foses.</p>
+                  <a href="https://www.ara.cat/economia/estat-impulsa-termosolar-per-garantir-subministrament-sense-sol_1_4218935.html" target="_blank" class="policy-news-link">
+                    <svg style="width:14px; height:14px; fill:currentColor; margin-right:4px;" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59L8.03 14.59 9.41 16 19 6.41V10h2V3h-7z"/></svg>
+                    Ara.cat: Impuls a les plantes termosolars amb emmagatzematge
+                  </a>
+                </div>
+              </details>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.200 M€</span>
@@ -4488,12 +4826,73 @@
     function initPolicyActivity() {
       const cards = document.querySelectorAll('.policy-card');
       cards.forEach(card => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', (e) => {
+          // If clicked element or any of its parents is a details, summary or anchor tag, don't toggle
+          if (e.target.closest('details') || e.target.closest('a')) {
+            return;
+          }
+          
+          const isSelected = card.classList.contains('selected');
+          
+          if (!isSelected) {
+            // Tentative cost calculation
+            const limitSelect = document.getElementById('budget-limit-select');
+            const budgetLimit = parseInt(limitSelect.value, 10);
+            
+            // Calculate current cost
+            const selectedCards = document.querySelectorAll('.policy-card.selected');
+            let currentCost = 0;
+            selectedCards.forEach(c => {
+              const metaSpans = c.querySelectorAll('.policy-card-meta span');
+              if (metaSpans.length > 0) {
+                const costText = metaSpans[0].textContent;
+                const costVal = parseInt(costText.replace(/[^\d]/g, ''), 10) || 0;
+                currentCost += costVal;
+              }
+            });
+            
+            // Cost of this card
+            const metaSpans = card.querySelectorAll('.policy-card-meta span');
+            let cardCost = 0;
+            if (metaSpans.length > 0) {
+              const costText = metaSpans[0].textContent;
+              cardCost = parseInt(costText.replace(/[^\d]/g, ''), 10) || 0;
+            }
+            
+            if (currentCost + cardCost > budgetLimit) {
+              showToast(`No pots aprovar aquesta política: s'ha superat el pressupost disponible de ${budgetLimit.toLocaleString('ca-ES')} M€!`);
+              return;
+            }
+          }
+          
           card.classList.toggle('selected');
           recalculatePolicies();
         });
       });
       recalculatePolicies();
+    }
+
+    function showToast(msg) {
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+      }
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <svg style="width:18px; height:18px; fill:var(--rose); flex-shrink:0;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2v-6h2v6z"/></svg>
+        <span>${msg}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+        if (container.children.length === 0) {
+          container.remove();
+        }
+      }, 3300);
     }
 
     function recalculatePolicies() {
@@ -4503,6 +4902,15 @@
       const selectedCards = document.querySelectorAll('.policy-card.selected');
       let totalCost = 0;
       let totalDemand = 0;
+      let totalFiscal = 0;
+      let upkeepReduction = 0;
+      let gasUpkeepReduction = 0;
+      let constructionTimeSaving = 0;
+      let gridPriceImprovement = 0;
+      let batterySuccess = 0;
+      
+      let techBoosts = [];
+      let unlockedTechs = [];
       
       let citizenChg = 0;
       let businessChg = 0;
@@ -4518,13 +4926,60 @@
         }
         
         if (metaSpans.length > 1) {
-          const demandText = metaSpans[1].textContent;
-          if (demandText.includes('Demanda')) {
-            const match = demandText.match(/-?([\d.]+)\s*MW/);
+          const text = metaSpans[1].textContent.trim();
+          
+          // 1. Demand Savings
+          if (text.includes('Demanda:')) {
+            const match = text.match(/-?([\d.]+)\s*MW/);
             if (match) {
               const demandVal = parseInt(match[1].replace(/[^\d]/g, ''), 10) || 0;
               totalDemand += demandVal;
             }
+          }
+          
+          // 2. Fiscal (Recaptació, Ingressos, Despesa)
+          const matchFiscal = text.match(/(Recaptació|Ingressos|Despesa):\s*([+-]\d+)\s*M€/);
+          if (matchFiscal) {
+            totalFiscal += parseInt(matchFiscal[2], 10);
+          }
+          
+          // 3. R+D Boosts (Hidro, Eòlica, Solar, Nuclear)
+          const matchBoost = text.match(/(Hidro|Eòlica|Solar|Nuclear):\s*\+(\d+)%\s*MW/);
+          if (matchBoost) {
+            techBoosts.push(`${matchBoost[1]} +${matchBoost[2]}%`);
+          }
+          
+          // 4. Upkeep reduction
+          if (text.includes('Upkeep Gas:')) {
+            const match = text.match(/Upkeep Gas:\s*-(\d+)%/);
+            if (match) gasUpkeepReduction += parseInt(match[1], 10);
+          } else if (text.includes('Upkeep:')) {
+            const match = text.match(/Upkeep:\s*-(\d+)%/);
+            if (match) upkeepReduction += parseInt(match[1], 10);
+          }
+          
+          // 5. Unlocked Techs
+          if (text.includes('Desbloqueja')) {
+            const title = card.querySelector('.policy-card-title').textContent;
+            if (title.includes('Marina')) unlockedTechs.push('Eòlica Marina');
+            if (title.includes('Termosolar')) unlockedTechs.push('Termosolar');
+          }
+          
+          // 6. Construction speedup
+          if (text.includes('Construcció:')) {
+            const match = text.match(/Construcció:\s*-(\d+)\s*tr\./);
+            if (match) constructionTimeSaving += parseInt(match[1], 10);
+          }
+          
+          // 7. Grid price improvement
+          if (text.includes('Preus:')) {
+            gridPriceImprovement = 10;
+          }
+          
+          // 8. Battery Storage success
+          if (text.includes('Èxit base:')) {
+            const match = text.match(/Èxit base:\s*(\d+)%/);
+            if (match) batterySuccess = parseInt(match[1], 10);
           }
         }
         
@@ -4555,6 +5010,63 @@
       document.getElementById('policy-total-demand').textContent = `-${totalDemand.toLocaleString('ca-ES')} MW`;
       document.getElementById('policy-selected-count').textContent = `${selectedCards.length} ${selectedCards.length === 1 ? 'política seleccionada' : 'polítiques seleccionades'}`;
       
+      // Update fiscal UI
+      const fiscalSign = totalFiscal >= 0 ? '+' : '';
+      const fiscalEl = document.getElementById('policy-fiscal-impact');
+      if (fiscalEl) {
+        fiscalEl.textContent = `${fiscalSign}${totalFiscal} M€ / torn`;
+        if (totalFiscal > 0) {
+          fiscalEl.style.color = 'var(--primary)';
+        } else if (totalFiscal < 0) {
+          fiscalEl.style.color = 'var(--rose)';
+        } else {
+          fiscalEl.style.color = 'var(--text-muted)';
+        }
+      }
+      
+      // Update green efficiency UI
+      const effEl = document.getElementById('policy-efficiency-boost');
+      if (effEl) {
+        if (techBoosts.length > 0) {
+          effEl.textContent = techBoosts.join(', ');
+          effEl.style.color = 'var(--amber)';
+        } else {
+          effEl.textContent = 'Sense millores';
+          effEl.style.color = 'var(--text-muted)';
+        }
+      }
+      
+      // Update upkeep/operations UI
+      let upkeepParts = [];
+      if (upkeepReduction > 0) upkeepParts.push(`Manteniment -${upkeepReduction}%`);
+      if (gasUpkeepReduction > 0) upkeepParts.push(`Manteniment Gas -${gasUpkeepReduction}%`);
+      if (constructionTimeSaving > 0) upkeepParts.push(`Construcció -${constructionTimeSaving} tr.`);
+      if (gridPriceImprovement > 0) upkeepParts.push(`Preus xarxa +/-10%`);
+      if (batterySuccess > 0) upkeepParts.push(`Bateries (Èxit ${batterySuccess}%)`);
+      
+      const upkeepEl = document.getElementById('policy-upkeep-saving');
+      if (upkeepEl) {
+        if (upkeepParts.length > 0) {
+          upkeepEl.textContent = upkeepParts.join(', ');
+          upkeepEl.style.color = 'var(--secondary)';
+        } else {
+          upkeepEl.textContent = 'Cap reducció';
+          upkeepEl.style.color = 'var(--text-muted)';
+        }
+      }
+      
+      // Update unlocked technologies UI
+      const techEl = document.getElementById('policy-tech-unlocked');
+      if (techEl) {
+        if (unlockedTechs.length > 0) {
+          techEl.textContent = unlockedTechs.join(', ');
+          techEl.style.color = 'var(--indigo)';
+        } else {
+          techEl.textContent = 'Cap';
+          techEl.style.color = 'var(--text-muted)';
+        }
+      }
+      
       // Update approvals UI
       updatePolicyApprovalUI('citizen', citizenChg);
       updatePolicyApprovalUI('business', businessChg);
@@ -4563,17 +5075,21 @@
       
       const pct = Math.min(100, (totalCost / budgetLimit) * 100);
       const budgetBar = document.getElementById('policy-budget-bar');
-      budgetBar.style.width = pct + "%";
-      
       const warningEl = document.getElementById('policy-budget-warning');
+      if (budgetBar) budgetBar.style.width = pct + "%";
+      
       if (totalCost > budgetLimit) {
-        budgetBar.style.backgroundColor = 'var(--rose)';
-        warningEl.textContent = "Pressupost superat!";
-        warningEl.style.color = 'var(--rose)';
+        if (budgetBar) budgetBar.style.backgroundColor = 'var(--rose)';
+        if (warningEl) {
+          warningEl.textContent = "Pressupost superat!";
+          warningEl.style.color = 'var(--rose)';
+        }
       } else {
-        budgetBar.style.backgroundColor = 'var(--primary)';
-        warningEl.textContent = "Dins del límit pressupostari";
-        warningEl.style.color = 'var(--primary)';
+        if (budgetBar) budgetBar.style.backgroundColor = 'var(--primary)';
+        if (warningEl) {
+          warningEl.textContent = "Dins del límit pressupostari";
+          warningEl.style.color = 'var(--primary)';
+        }
       }
     }
 
