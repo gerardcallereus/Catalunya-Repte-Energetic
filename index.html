@@ -1312,6 +1312,7 @@
             <option value="nuclear_life">Aprovar l'extensió de vida de les Nuclears a Catalunya</option>
             <option value="autoconsum">Subvencionar el model d'Autoconsum Solar a les teulades</option>
             <option value="aragmat">Acord Bilateral d'Energia amb Aragó (Línies MAT)</option>
+            <option value="energetica_publica">Creació de l'empresa pública L'Energètica de Catalunya</option>
           </select>
 
           <div class="decision-panel">
@@ -1414,12 +1415,12 @@
         </div>
 
         <div class="grid-3" id="policies-grid">
-          <!-- Rehabilitation -->
-          <div class="policy-card" data-category="demanda" data-search="pla de rehabilitació energètica eficiència demanda reducció demanda">
+          <!-- 1. Rehabilitation -->
+          <div class="policy-card" data-category="demanda" data-search="pla de rehabilitació energètica eficiència demanda reducció demanda aïllament habitatges">
             <div>
               <div class="policy-card-title">Rehabilitació Energètica</div>
               <div class="policy-card-cat">Eficiència i Demanda</div>
-              <div class="policy-card-desc">Subvenciona l'aïllament tèrmic d'habitatges per reduir el consum de calefacció a l'hivern i aire condicionat a l'estiu.</div>
+              <div class="policy-card-desc">Subvenciona l'aïllament tèrmic d'habitatges per reduir el consum de calefacció a l'hivern i aire condicionat a l'estiu. Afecta aprovació: Ciutadans +5%, Ecologistes +2%.</div>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.200 M€</span>
@@ -1427,77 +1428,168 @@
             </div>
           </div>
 
-          <!-- Carbon Tax -->
-          <div class="policy-card" data-category="fiscal" data-search="impost a les emissions de co2 fiscalitat mercat ingressos recaptació">
+          <!-- 2. Electrification Incentives -->
+          <div class="policy-card" data-category="demanda" data-search="pla d'incentius a l'electrificació eficiència demanda vehicles llars">
+            <div>
+              <div class="policy-card-title">Incentius a l'Electrificació</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Pla d'ajudes per a l'electrificació de llars i vehicles per optimitzar la demanda. Afecta aprovació: Ciutadans +5%, Empresaris +3%, Ecologistes +4%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.500 M€</span>
+              <span>Demanda: -120 MW</span>
+            </div>
+          </div>
+
+          <!-- 3. Appliance Renewal -->
+          <div class="policy-card" data-category="demanda" data-search="pla de renovació d'electrodomèstics eficiència demanda classe a aparells">
+            <div>
+              <div class="policy-card-title">Renovació d'Electrodomèstics</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Promou la substitució d'aparells antics per uns de major eficiència de classe A. Afecta aprovació: Ciutadans +4%, Ecologistes +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 700 M€</span>
+              <span>Demanda: -80 MW</span>
+            </div>
+          </div>
+
+          <!-- 4. Carbon Tax -->
+          <div class="policy-card" data-category="fiscal" data-search="impost a les emissions de co2 fiscalitat mercat ingressos recaptació gas">
             <div>
               <div class="policy-card-title">Impost al CO₂</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
-              <div class="policy-card-desc">Aplica un gravamen als cicles combinats proporcional al gas cremat, millorant l'aprovació ecològica.</div>
+              <div class="policy-card-desc">Aplica un gravamen als cicles combinats proporcional al gas cremat, millorant l'aprovació ecològica. Afecta aprovació: Empresaris -5%, Ecologistes +5%, Ciutadans +2%.</div>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 0 M€ (Llei)</span>
-              <span>Ingressos: +200 M€/t</span>
+              <span>Recaptació: +200 M€/t</span>
             </div>
           </div>
 
-          <!-- Grid Modernization -->
-          <div class="policy-card" data-category="infra" data-search="llei de modernització de la xarxa infraestructura preu venda excedent compra dèficit">
+          <!-- 5. Green Fiscal Reform -->
+          <div class="policy-card" data-category="fiscal" data-search="reforma fiscal verda fiscalitat mercat impostos penalització contaminació">
             <div>
-              <div class="policy-card-title">Modernització de la Xarxa</div>
-              <div class="policy-card-cat">Infraestructura i R+D</div>
-              <div class="policy-card-desc">Redueix les pèrdues de transport de llum. Millora el preu de venda d'excedent (+10%) i redueix el de compra (-10%).</div>
+              <div class="policy-card-title">Reforma Fiscal Verda</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Modifica el sistema d'impostes per penalitzar les activitats contaminants i bonificar les netes. Afecta aprovació: Ciutadans -3%, Empresaris -2%, Ecologistes +3%.</div>
             </div>
             <div class="policy-card-meta">
-              <span>Cost: 900 M€</span>
-              <span>Èxit base: 80%</span>
+              <span>Cost: 300 M€</span>
+              <span>Ingressos: +100 M€/t</span>
             </div>
           </div>
 
-          <!-- Windfall Tax -->
-          <div class="policy-card" data-category="fiscal" data-search="taxa als beneficis extraordinaris de les elèctriques windfall tax fiscalitat">
+          <!-- 6. Corporate Tax Cut -->
+          <div class="policy-card" data-category="fiscal" data-search="llei de reducció de l'impost de societats fiscalitat mercat empresariat inversió">
+            <div>
+              <div class="policy-card-title">Reducció d'Impost de Societats</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Redueix l'impost de societats per estimular la inversió privada en transició. Afecta aprovació: Empresaris +10%, Ciutadans -3%, Ecologistes -2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 150 M€</span>
+              <span>Ingressos: -150 M€/t</span>
+            </div>
+          </div>
+
+          <!-- 7. Windfall Tax -->
+          <div class="policy-card" data-category="fiscal" data-search="taxa als beneficis extraordinaris de les elèctriques windfall tax fiscalitat mercat">
             <div>
               <div class="policy-card-title">Taxa Beneficis Extraordinaris</div>
               <div class="policy-card-cat">Fiscalitat i Mercat</div>
-              <div class="policy-card-desc">Taxa directa als beneficis caiguts del cel de les elèctriques. Augmenta els ingressos en 250 M€/torn. Ciutadania +10%, Empresariat -12%.</div>
+              <div class="policy-card-desc">Taxa directa als beneficis caiguts del cel (windfall profits) de les elèctriques. Afecta aprovació: Empresaris -12%, Ciutadans +10%.</div>
             </div>
             <div class="policy-card-meta">
-              <span>Cost: 0 M€</span>
-              <span>Ingressos: +250 M€/t</span>
+              <span>Cost: 0 M€ (Llei)</span>
+              <span>Recaptació: +250 M€/t</span>
             </div>
           </div>
 
-          <!-- Autoconsum -->
-          <div class="policy-card" data-category="demanda" data-search="llei d'impuls a l'autoconsum solar teulades eficiència demanda">
+          <!-- 8. Energy Check -->
+          <div class="policy-card" data-category="fiscal" data-search="xec energètic directe a la ciutadania fiscalitat mercat rebut elèctric pobresa">
             <div>
-              <div class="policy-card-title">Impuls a l'Autoconsum</div>
-              <div class="policy-card-cat">Eficiència i Demanda</div>
-              <div class="policy-card-desc">Simplifica la instal·lació de plaques solars en teulades privades. Redueix la demanda de la xarxa elèctrica de forma permanent en 100 MW.</div>
+              <div class="policy-card-title">Xec Energètic Directe</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Ajuda econòmica directa a la ciutadania vulnerable per fer front al preu del rebut elèctric. Afecta aprovació: Ciutadans +15%, Empresaris -3%.</div>
             </div>
             <div class="policy-card-meta">
-              <span>Cost: 500 M€</span>
-              <span>Demanda: -100 MW</span>
+              <span>Cost: 100 M€</span>
+              <span>Despesa: -300 M€/t</span>
             </div>
           </div>
 
-          <!-- Bateries -->
-          <div class="policy-card" data-category="infra" data-search="pla d'emmagatzematge bateries infraestructura tecnologia r+d solar eòlica">
+          <!-- 9. Eco Tourist Tax -->
+          <div class="policy-card" data-category="fiscal" data-search="taxa turística ecològica fiscalitat mercat conservació turisme">
             <div>
-              <div class="policy-card-title">Emmagatzematge (Bateries)</div>
+              <div class="policy-card-title">Taxa Turística Ecològica</div>
+              <div class="policy-card-cat">Fiscalitat i Mercat</div>
+              <div class="policy-card-desc">Grava les estades turístiques per finançar projectes locals de conservació i energia. Afecta aprovació: Empresaris -4%, Ecologistes +4%, Polítics +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 50 M€</span>
+              <span>Ingressos: +80 M€/t</span>
+            </div>
+          </div>
+
+          <!-- 10. Predictive Maintenance -->
+          <div class="policy-card" data-category="infra" data-search="pla de manteniment predictiu infraestructura estratègica cost manteniment estalvi">
+            <div>
+              <div class="policy-card-title">Manteniment Predictiu</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
-              <div class="policy-card-desc">Finança parcs de bateries d'ió liti de gran escala. Incrementa l'efectivitat i aprofitament de solars i eòliques un 20% permanentment.</div>
+              <div class="policy-card-desc">Utilitza sensors i intel·ligència de dades per reduir el cost de manteniment de TOTES les centrals en un 15% permanentment. Afecta aprovació: Empresaris +2%.</div>
             </div>
             <div class="policy-card-meta">
-              <span>Cost: 2.000 M€</span>
-              <span>Èxit base: 70%</span>
+              <span>Cost: 800 M€</span>
+              <span>Upkeep: -15%</span>
             </div>
           </div>
 
-          <!-- Aragó Pact -->
-          <div class="policy-card" data-category="infra" data-search="acord bilateral d'energia amb aragó línies mat transport infraestructura">
+          <!-- 11. Hydro RD -->
+          <div class="policy-card" data-category="infra" data-search="projecte d'r+d hidroelèctric recerca tecnologia producció pantans">
+            <div>
+              <div class="policy-card-title">R+D Hidroelèctric</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Investigació tècnica per millorar el rendiment de les turbines dels pantans. Augmenta la producció hidroelèctrica un 15% permanentment. Afecta aprovació: Empresaris +2%, Polítics +1%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 650 M€</span>
+              <span>Hidro: +15% MW</span>
+            </div>
+          </div>
+
+          <!-- 12. Wind RD -->
+          <div class="policy-card" data-category="infra" data-search="decret de foment a l'r+d eòlic recerca aerogeneradors pales vent">
+            <div>
+              <div class="policy-card-title">Foment de l'R+D Eòlic</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Projecte per millorar el disseny aerodinàmic dels aerogeneradors terrestres i marins. Augmenta la producció eòlica un 10% permanentment. Afecta aprovació: Ciutadans +2%, Empresaris +1%, Ecologistes +3%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 750 M€</span>
+              <span>Eòlica: +10% MW</span>
+            </div>
+          </div>
+
+          <!-- 13. Grid Modernization -->
+          <div class="policy-card" data-category="infra" data-search="llei de modernització de la xarxa infraestructura estratègica pèrdues transport excedent">
+            <div>
+              <div class="policy-card-title">Modernització de la Xarxa</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Redueix les pèrdues de transport de llum. Millora el preu de venda d'excedent (+10%) i redueix el de compra per dèficit (-10%). Afecta aprovació: Empresaris +3%, Polítics +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 900 M€</span>
+              <span>Preus: +/- 10%</span>
+            </div>
+          </div>
+
+          <!-- 14. Aragon Energy Pact (MAT) -->
+          <div class="policy-card" data-category="infra" data-search="acord bilateral d'energia amb aragó línies mat transport infraestructura importació">
             <div>
               <div class="policy-card-title">Acord amb Aragó (MAT)</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
-              <div class="policy-card-desc">Estableix acords per a la importació de llum aragonesa barata mitjançant línies de Molt Alta Tensió. Millora un 15% els costos i exportacions.</div>
+              <div class="policy-card-desc">Estableix línies de Molt Alta Tensió per importar energia verda aragonesa. Millora preus d'excedent (+15%) i compra (-15%) permanentment. Afecta aprovació: Polítics +4%.</div>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 400 M€</span>
@@ -1505,29 +1597,120 @@
             </div>
           </div>
 
-          <!-- Bureaucracy -->
-          <div class="policy-card" data-category="infra" data-search="simplificació burocràtica per a renovables infraestructura temps construcció">
+          <!-- 15. Self Consumption -->
+          <div class="policy-card" data-category="demanda" data-search="llei d'impuls a l'autoconsum solar teulades plaques eficiència demanda">
             <div>
-              <div class="policy-card-title">Simplificació Burocràtica</div>
-              <div class="policy-card-cat">Infraestructura i R+D</div>
-              <div class="policy-card-desc">Retalla els tràmits per obrir projectes verds. Redueix en 1 trimestre el temps de construcció de solars i eòliques. Empresariat +4%, Ecologistes -3%.</div>
+              <div class="policy-card-title">Impuls a l'Autoconsum</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Simplifica la instal·lació de plaques solars en teulades privades. Redueix la demanda de la xarxa elèctrica de forma permanent en 100 MW. Afecta aprovació: Ciutadans +4%, Ecologistes +4%.</div>
             </div>
             <div class="policy-card-meta">
-              <span>Cost: 150 M€</span>
-              <span>Èxit base: 75%</span>
+              <span>Cost: 500 M€</span>
+              <span>Demanda: -100 MW</span>
             </div>
           </div>
 
-          <!-- Green Hydrogen -->
-          <div class="policy-card" data-category="infra" data-search="projecte pilot d'hidrogen verd r+d tecnologia manteniment gas">
+          <!-- 16. Battery Storage -->
+          <div class="policy-card" data-category="infra" data-search="pla estratègic d'emmagatzematge bateries liti infraestructura regulació">
+            <div>
+              <div class="policy-card-title">Emmagatzematge (Bateries)</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Finança parcs de bateries de gran escala. Incrementa l'efectivitat i aprofitament de solars i eòliques un 20% permanentment. Afecta aprovació: Polítics +3%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 2.000 M€</span>
+              <span>Èxit base: 70%</span>
+            </div>
+          </div>
+
+          <!-- 17. Green Hydrogen -->
+          <div class="policy-card" data-category="infra" data-search="projecte pilot d'hidrogen verd r+d tecnologia manteniment gas vector">
             <div>
               <div class="policy-card-title">Projecte Hidrogen Verd</div>
               <div class="policy-card-cat">Infraestructura i R+D</div>
-              <div class="policy-card-desc">Inverteix en la creació d'hidrogen verd per a suport tèrmic. Redueix un 25% permanentment el cost de manteniment de les centrals de gas.</div>
+              <div class="policy-card-desc">Inverteix en hidrogen verd com a vector d'emmagatzematge tèrmic. Redueix el cost de manteniment de gas un 25% permanentment. Afecta aprovació: Ecologistes +5%, Empresaris +3%.</div>
             </div>
             <div class="policy-card-meta">
               <span>Cost: 1.300 M€</span>
-              <span>Ecologistes: +5%</span>
+              <span>Upkeep Gas: -25%</span>
+            </div>
+          </div>
+
+          <!-- 18. Solar Efficiency (R+D) -->
+          <div class="policy-card" data-category="infra" data-search="programa d'r+d en eficiència solar recerca perovskita plaques materials">
+            <div>
+              <div class="policy-card-title">Eficiència Solar (R+D)</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Ajudes a centres de recerca per a l'ús de materials avançats com la perovskita. Augmenta la producció solar un 15% permanentment. Afecta aprovació: Ecologistes +3%, Empresaris +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 850 M€</span>
+              <span>Solar: +15% MW</span>
+            </div>
+          </div>
+
+          <!-- 19. Energy Education -->
+          <div class="policy-card" data-category="demanda" data-search="programa d'educació energètica campanyes escolars estalvi demanda">
+            <div>
+              <div class="policy-card-title">Educació Energètica</div>
+              <div class="policy-card-cat">Eficiència i Demanda</div>
+              <div class="policy-card-desc">Campanyes escolars i ciutadanes sobre estalvi energètic i climatització eficient. Redueix la demanda base en 50 MW permanentment. Afecta aprovació: Ciutadans +3%, Ecologistes +1%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 200 M€</span>
+              <span>Demanda: -50 MW</span>
+            </div>
+          </div>
+
+          <!-- 20. Nuclear Life Extension -->
+          <div class="policy-card" data-category="infra" data-search="extensió de vida de centrals nuclears ascó vandellòs seguretat base">
+            <div>
+              <div class="policy-card-title">Extensió de Vida Nuclear</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Allarga el funcionament de les centrals d'Ascó i Vandellòs un 10% addicional per evitar fallades de base. Afecta aprovació: Empresaris +5%, Ecologistes -10%, Ciutadans -5%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.800 M€</span>
+              <span>Nuclear: +10% MW</span>
+            </div>
+          </div>
+
+          <!-- 21. Simplify Bureaucracy -->
+          <div class="policy-card" data-category="infra" data-search="simplificació burocràtica per a renovables tràmits temps construcció">
+            <div>
+              <div class="policy-card-title">Simplificació Burocràtica</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Retalla els tràmits per obrir projectes verds. Redueix en 1 trimestre el temps de construcció de solars i eòliques. Afecta aprovació: Empresaris +4%, Ecologistes -3%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 150 M€</span>
+              <span>Construcció: -1 tr.</span>
+            </div>
+          </div>
+
+          <!-- 22. Offshore Wind Unlock -->
+          <div class="policy-card" data-category="infra" data-search="desbloqueig de l'eòlica marina parc tramuntana golf de roses mar">
+            <div>
+              <div class="policy-card-title">Desbloqueig Eòlica Marina</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Reforma de la planificació d'usos de la costa per obrir el mercat marí (ex: Golf de Roses). Permet construir Eòlica Marina. Afecta aprovació: Ciutadans +3%, Polítics +3%, Empresaris +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.000 M€</span>
+              <span>Estat: Desbloqueja</span>
+            </div>
+          </div>
+
+          <!-- 23. Solar Thermal Unlock -->
+          <div class="policy-card" data-category="infra" data-search="pla de desenvolupament termosolar sals foses torre miralls">
+            <div>
+              <div class="policy-card-title">Desenvolupament Termosolar</div>
+              <div class="policy-card-cat">Infraestructura i R+D</div>
+              <div class="policy-card-desc">Planificació territorial per habilitar zones de captació termosolar amb emmagatzematge de sals foses. Permet construir Termosolar. Afecta aprovació: Ecologistes +4%, Polítics +2%.</div>
+            </div>
+            <div class="policy-card-meta">
+              <span>Cost: 1.200 M€</span>
+              <span>Estat: Desbloqueja</span>
             </div>
           </div>
         </div>
@@ -1917,6 +2100,17 @@ El govern ha d'aprovar el desbloqueig de l'Eòlica Marina per tirar endavant el 
         political: 4,
         pros: "Energia barata, preus d'importació rebaixats en un 15% i estalvi trimestral.",
         cons: "Tensions territorials, impacte paisatgístic a les zones rurals afectades."
+      },
+      energetica_publica: {
+        title: "L'Energètica Pública de Catalunya",
+        text: "Constitueix una empresa elèctrica 100% pública per subministrar energia verda als edificis de la Generalitat i gestionar centrals hidroelèctriques locals.",
+        context: "<strong>Vincle real:</strong> El 2022 el Govern català va crear *L'Energètica*, entitat pública que pretén abastar serveis propis de la Generalitat, assumir concessions d'aigua caducades als rius catalans i instal·lar autoconsum a teulades d'edificis públics.",
+        citizen: 8,
+        business: -5,
+        environmentalist: 6,
+        political: 4,
+        pros: "Soberania energètica directe, reinversió verda pública i millora d'aprovació del poble.",
+        cons: "Inversió econòmica de llançament a càrrec del pressupost públic de la Generalitat."
       }
     };
 
