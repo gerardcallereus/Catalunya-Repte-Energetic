@@ -1000,6 +1000,7 @@
     <!-- TABS NAVIGATION -->
     <nav class="tabs-nav" aria-label="Navegació principal">
       <button class="tab-btn active" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-fonts')">Fonts d'Energia</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
@@ -1076,7 +1077,468 @@
       </div>
     </section>
 
-    <!-- TAB 2: SIMULADOR DE LA BALANÇA -->
+    <!-- TAB 2: FONTS D'ENERGIA (RENOVABLES I NO RENOVABLES) -->
+    <section id="tab-fonts" class="tab-content">
+      <!-- 1. INTRODUCCIÓ PEDAGÒGICA -->
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          Comprendre l'Energia: Fonts Primàries vs. Vector Elèctric
+        </h2>
+        <p style="font-size: 1.05rem; margin-bottom: 1.5rem; color: var(--text-main);">
+          Per poder debatre el model de Catalunya, primer hem d'entendre que l'<strong>electricitat no és una font d'energia que es pugui collir directament de la natura</strong>. L'electricitat és un <strong>vector energètic secundari</strong>, el que significa que l'hem de produir transformant altres fonts d'energia primària.
+        </p>
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.2rem; border-radius: 12px; border: 1px solid var(--card-border);">
+            <h3 style="color: var(--secondary); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span>⚡</span> Energia Primària
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">
+              Són els recursos energètics tal com es troben a la natura. Poden ser <strong>estocs finits</strong> que s'esgoten en consumir-los (el carbó mineral, el gas fòssil, el petroli o l'urani) o <strong>fluxos continus</strong> captats en temps real (la radiació del sol, la força del vent o la gravetat del cicle de l'aigua).
+            </p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.2rem; border-radius: 12px; border: 1px solid var(--card-border);">
+            <h3 style="color: var(--primary); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span>🔌</span> Vector Secundari (Electricitat)
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">
+              L'electricitat consisteix en el moviment d'electrons a través d'un conductor. És fàcil de transportar i molt versàtil, però **gairebé totes les transformacions** per fabricar-la des de l'energia primària (excepte la solar fotovoltaica) utilitzen el moviment mecànic per fer girar un <strong>alternador</strong> acoblat a una turbina.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. FONTS NO RENOVABLES -->
+      <div class="glass-card" style="border-left: 4px solid var(--rose);">
+        <h2 style="color: var(--rose);">
+          <svg style="width:24px; height:24px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          Fonts d'Energia No Renovables
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Són reserves naturals d'energia acumulades durant milions d'anys per processos geològics. El seu ritme de consum és infinitament superior al de regeneració, per la qual cosa estan abocades a la seva desaparició a escala humana.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          
+          <!-- Carbó -->
+          <div style="background: rgba(244, 63, 94, 0.03); border: 1px solid rgba(244, 63, 94, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">🪨</span> Carbó (L'or negre de la industrialització)
+              </h3>
+              <span class="tech-pill non-renewable">Fòssil Sòlid</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              Roca sedimentària orgànica d'elevat contingut en carboni. Va ser el motor mecànic de la Revolució Industrial mundial i a Catalunya va alimentar les colònies tèxtils i fàbriques (vapor) i posteriorment grans centrals tèrmiques de producció elèctrica com la de **Cercs (Berguedà)** o la de **Cubelles**, ja desmantellades.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Abundant i molt distribuït geogràficament al món.</li>
+                  <li>Tecnologia molt senzilla, segura de transportar i emmagatzemar.</li>
+                  <li>Generació de base molt barata sense dependre de la meteorologia.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>La font de major emissió de CO₂ per unitat d'energia produïda.</li>
+                  <li>Emet òxids de sofre i nitrogen causants de la <strong>pluja àcida</strong>.</li>
+                  <li>Allibera micropartícules cancerígenes a l'atmosfera que danyen la salut de les fosses i pobles propers.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies i Història Real del Carbó:</div>
+              <a href="https://www.ccma.cat/324/tanca-la-central-termica-de-cercs-lultima-que-cremava-carbo-a-catalunya/noticia/227546/" target="_blank" rel="noopener" class="news-link">🏭 El tancament històric de la tèrmica de Cercs (CCMA)</a>
+              <a href="https://www.lavanguardia.com/vida/20181130/453255148011/espana-tanca-les-seves-mines-de-carbo-despres-de-dos-segles-dactivitat.html" target="_blank" rel="noopener" class="news-link">⛏️ Espanya tanca les seves mines de carbó (La Vanguardia)</a>
+            </div>
+          </div>
+
+          <!-- Petroli -->
+          <div style="background: rgba(244, 63, 94, 0.03); border: 1px solid rgba(244, 63, 94, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">🛢️</span> Petroli (El recurs clau de la geopolítica mundial)
+              </h3>
+              <span class="tech-pill non-renewable">Fòssil Líquid</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              Mescla complexa de compostos orgànics (hidrocarburs) obtinguts de pous sota la superfície terrestre o marina. Encara que es destina principalment a la producció de combustibles per al transport de mercaderies i passatgers, el petroli s'utilitza en el sector elèctric (mitjançant fueloil i gasoil en motors tèrmics) en sistemes aïllats (com les Illes Balears o Canàries) o com a reserves d'emergència.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Densitat energètica extremadament elevada i fàcil emmagatzematge.</li>
+                  <li>Molt fàcil de transportar a través de vaixells (petroliers) o oleoductes.</li>
+                  <li>Base fonamental per a la indústria dels plàstics, fertilitzants i química.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Causa greus catàstrofes ecològiques en cas de fuites o abocaments al mar.</li>
+                  <li>Concentrat en pocs països, generant inestabilitat geopolítica i dependència externa.</li>
+                  <li>Allibera grans quantitats de CO₂, gasos àcids i sutge en ser cremat.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies i Història Real del Petroli:</div>
+              <a href="https://www.ccma.cat/324/vint-i-un-anys-del-prestige-el-dia-que-les-costes-de-galicia-es-van-tenyir-de-negre/noticia/3260855/" target="_blank" rel="noopener" class="news-link">🐧 20 anys del desastre ecològic del Prestige (CCMA)</a>
+              <a href="https://www.ara.cat/internacional/crisis-petroli-guerra-ucraina-preu-barril_1_4303490.html" target="_blank" rel="noopener" class="news-link">📉 Crisis de preus i dependència de l'OPEP (Ara)</a>
+            </div>
+          </div>
+
+          <!-- Gas Natural -->
+          <div style="background: rgba(244, 63, 94, 0.03); border: 1px solid rgba(244, 63, 94, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">🔥</span> Gas Natural (L'actiu de transició i el debat del fracking)
+              </h3>
+              <span class="tech-pill non-renewable">Fòssil Gasós</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              Barreja de gasos lleugers, composta principalment per metà (CH₄). S'utilitza en centrals de **Cicle Combinat** per generar electricitat amb molta rapidesa quan les renovables flaquegen. Tot i que emet en la combustió menys CO₂ per unitat de calor que el petroli o el carbó, el metà té un poder d'escalfament global 28 vegades superior al CO₂ si s'escapa directament a l'atmosfera sense cremar durant l'extracció o el transport.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>El combustible fòssil més "net" en la seva combustió (sense partícules fines ni sofre).</li>
+                  <li>Permet encendre i apagar les centrals en pocs minuts, recolzant les renovables intermitents.</li>
+                  <li>Altament eficient termodinàmicament quan s'aplica el cicle combinat (fins al 60%).</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Seguint sent un combustible fòssil que allibera quantitats significatives de gasos d'efecte hivernacle.</li>
+                  <li>L'extracció no convencional per fracturació hidràulica (**fracking**) contamina aqüífers i pot provocar sismes.</li>
+                  <li>Dependència geopolítica externa extrema, especialment amb el mercat de gasoductes i metaners.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies i Història Real del Gas Natural:</div>
+              <a href="https://www.ccma.cat/324/el-suprem-confirma-la-indemnitzacio-de-1-350-milions-pel-cas-castor-que-pagara-l-estat/noticia/2832943/" target="_blank" rel="noopener" class="news-link">🏗️ Els terratrèmols del Projecte Castor pel magatzem de gas (CCMA)</a>
+              <a href="https://www.ara.cat/internacional/fracking-estats-units-fracturacio-hidraulica-impacte-mediambient_1_1170940.html" target="_blank" rel="noopener" class="news-link">🚜 L'impacte ecològic del fracking als EUA (Ara)</a>
+            </div>
+          </div>
+
+          <!-- Urani (Nuclear) -->
+          <div style="background: rgba(244, 63, 94, 0.03); border: 1px solid rgba(244, 63, 94, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">⚛️</span> Urani i Energia Nuclear (La potència de la fissió)
+              </h3>
+              <span class="tech-pill non-renewable">Fissió Mineral</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              L'Urani-235 és un isòtop radioactiu present a l'escorça terrestre que s'extreu en mines de cel obert o subterrànies. Dins dels reactors nuclears (a Catalunya tenim Ascó I, Ascó II i Vandellòs II), la fissió controlada dels nuclis d'urani allibera una quantitat massiva d'escalfor que fa bullir aigua per moure turbines. A diferència dels fòssils, la reacció nuclear no genera combustió directa i, per tant, no emet gasos d'efecte hivernacle per la xemeneia.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Densitat de potència increïble: una pastilla d'urani produeix el mateix que una tona de carbó.</li>
+                  <li>Zero emissions directes de CO₂ durant l'operació del reactor.</li>
+                  <li>Subministrament de base molt estable i continu (funciona més del 90% de les hores de l'any).</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Genera residus d'alta activitat radioactiva que es mantenen perillosos durant milers d'anys.</li>
+                  <li>Risc de fuites o d'accidents greus amb alliberament de contaminació radioactiva.</li>
+                  <li>La mineria i el processament inicial de l'urani requereixen grans quantitats d'energia i tractaments químics.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies i Debats de l'Urani:</div>
+              <a href="https://www.ara.cat/societat/placa-residus-nuclears-asco-tancament_1_4891201.html" target="_blank" rel="noopener" class="news-link">☢️ El magatzem temporal de residus a Ascó (Ara)</a>
+              <a href="https://www.elperiodico.com/es/medio-ambiente/20211021/cierre-minas-uranio-espanya-salamanca-12340192" target="_blank" rel="noopener" class="news-link">🛑 Tancament dels projectes de mineria d'urani a Salamanca (El Periódico)</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 3. FONTS RENOVABLES -->
+      <div class="glass-card" style="border-left: 4px solid var(--primary);">
+        <h2 style="color: var(--primary);">
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          Fonts d'Energia Renovables
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Són aquelles que s'obtenen de sources naturals virtualment inesgotables, ja sigui per la immensa quantitat d'energia que contenen o perquè són capaces de regenerar-se de manera natural més ràpid del que es consumeixen.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+          <!-- Solar -->
+          <div style="background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">☀️</span> Energia Solar (La força de la radiació)
+              </h3>
+              <span class="tech-pill renewable">Flux Electromagnètic</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              Aprofita la radiació electromagnètica del Sol. La solar fotovoltaica converteix els fotons en electricitat a través de cel·les de Silici dopat. La termosolar concentra els raigs mitjançant miralls orientables per escalfar fluids i moure turbines de vapor clàssiques.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Recurs gratuït, universal i completament inesgotable.</li>
+                  <li>Zero emissions de gasos nocius o de CO₂ durant el seu ús directe.</li>
+                  <li>Instal·lació senzilla i modular (des de teulades de cases a macroparcs).</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Intermitència total (no hi ha generació a la nit o amb boira).</li>
+                  <li>Baixa densitat de potència (requereix una gran quantitat de terreny).</li>
+                  <li>La fabricació de panells requereix purificació de silici molt exigent en energia.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies de l'Energia Solar:</div>
+              <a href="https://www.ara.cat/territori/renovables-si-pero-no-aixi-pagesia-ponenta-manifesta-contra-parcs-solars_1_3894102.html" target="_blank" rel="noopener" class="news-link">🚜 "Renovables sí, però no així" - Protestes a Ponent (Ara)</a>
+              <a href="https://www.ccma.cat/324/lautoconsum-solar-es-multiplica-a-catalunya-prop-de-100000-teulades-ja-produeixen-energia/noticia/3254921/" target="_blank" rel="noopener" class="news-link">🏠 L'autoconsum solar es multiplica a Catalunya (CCMA)</a>
+            </div>
+          </div>
+
+          <!-- Eòlica -->
+          <div style="background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">💨</span> Energia Eòlica (Aprofitar la força del vent)
+              </h3>
+              <span class="tech-pill renewable">Flux Cinètic de l'Aire</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              La força mecànica del vent fa girar les pales de grans aerogeneradors instal·lats en zones muntanyoses (Terra Alta, l'Empordà, la Segarra) o mar endins en plataformes flotants. Aquest moviment fa girar un rotor central de coure i imants permanents generant corrent elèctric de forma neta.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Una de les tecnologies renovables més econòmiques i madures del mercat.</li>
+                  <li>L'ocupació física directa és petita, permetent altres usos com la ramaderia o conreu.</li>
+                  <li>L'eòlica marina flotant rep corrents molt constants i forts sense ocupar sòl terrestre.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>El vent és impredictible i variable (pot no bufar quan fa més falta).</li>
+                  <li>Impacte estètic i visual important en paisatges naturals d'alt valor turístic o biològic.</li>
+                  <li>Risc per a la fauna voladora (aus rapinyaires i ratpenats) per impactes amb les pales.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies de l'Energia Eòlica:</div>
+              <a href="https://www.ccma.cat/324/la-terra-alta-diu-prou-a-la-massificacio-eolica-amb-una-nova-protesta-a-batea/noticia/3012941/" target="_blank" rel="noopener" class="news-link">⛰️ La Terra Alta diu prou a la massificació (CCMA)</a>
+              <a href="https://www.lavanguardia.com/local/girona/20230415/8892140/parc-tramuntana-el-debat-de-leolica-marina-al-golf-de-roses.html" target="_blank" rel="noopener" class="news-link">🌊 El debat sobre el Parc Tramuntana (La Vanguardia)</a>
+            </div>
+          </div>
+
+          <!-- Hidràulica -->
+          <div style="background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">💧</span> Energia Hidroelèctrica (El cicle de l'aigua i els salts)
+              </h3>
+              <span class="tech-pill renewable">Flux de Gravetat de l'Aigua</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              La caiguda de l'aigua des dels pantans de les muntanyes (recollint la pluja i el desglaç dels Pirineus) mou grans turbines hidràuliques acoblades a alternadors. Les centrals de bomball reversible actuen com a bateries massives: compren l'excedent elèctric solar del migdia per bombar aigua a un pantà superior i la deixen caure a la nit per produir energia.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>L'única font renovable que es pot activar de forma instantània (regulabilitat).</li>
+                  <li>Rendiment mecànic i elèctric excel·lent (més del 85% d'eficiència).</li>
+                  <li>Les centrals de bomball actuen com a magatzem per estabilitzar la xarxa elèctrica.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>La construcció de grans preses inunda valls fluvials i desplaça ecosistemes i pobles sencers.</li>
+                  <li>Molt exposada al canvi climàtic i a sequeres (els embassaments es buiden).</li>
+                  <li>Interromp el cabal ecològic natural del riu i el trànsit de sediments.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies de l'Energia Hidroelèctrica:</div>
+              <a href="https://www.ara.cat/economia/sequera-apaga-motors-hidroelectrics-pantans-sau-susqueda_1_4789101.html" target="_blank" rel="noopener" class="news-link">🍂 La sequera apaga els motors de Sau i Susqueda (Ara)</a>
+              <a href="https://www.ccma.cat/324/les-centrals-de-bombament-la-gran-bateria-necessaria-per-a-la-transicio-energetica/noticia/3142981/" target="_blank" rel="noopener" class="news-link">🔋 Les centrals de bombament, la bateria necessària (CCMA)</a>
+            </div>
+          </div>
+
+          <!-- Biomassa i Biogàs -->
+          <div style="background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">🪵</span> Biomassa i Biogàs (L'energia circular dels residus)
+              </h3>
+              <span class="tech-pill renewable">Cicle Biològic</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              Aprofita la fracció biodegradable dels residus forestals (estelles de fusta), agrícoles (esporgues d'olivera i vinya) o purins ramaders. Els residus sòlids es cremen per generar vapor, mentre que els purins es fermenten en digestors tancats per extreure metà (biogàs) i cremar-lo en motors de cogeneració.
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Redueix els incendis forestals en netejar el sotabosc per a biomassa.</li>
+                  <li>Soluciona la greu contaminació de nitrats de purins en aqüífers catalans (Osona/Lleida).</li>
+                  <li>Genera potència de base constant sense dependre del sol o del vent.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>La combustió directa allibera fums, cendres i olors a nivell local.</li>
+                  <li>Recurs limitat: no hi ha prou restes forestals per cobrir tota la demanda del país.</li>
+                  <li>Logística complexa per transportar tones de biomassa fins a les calderes.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies de Biomassa i Biogàs:</div>
+              <a href="https://www.ara.cat/economia/purins-oportunitat-biogas-catalunya-comencen-arrencar-projectes_1_4693210.html" target="_blank" rel="noopener" class="news-link">🐷 Oportunitats del biogàs en granges catalanes (Ara)</a>
+              <a href="https://www.ccma.cat/324/la-biomassa-forestal-una-solucio-per-netejar-els-boscos-i-generar-energia/noticia/3043120/" target="_blank" rel="noopener" class="news-link">🌲 Biomassa forestal per a la neteja de boscos (CCMA)</a>
+            </div>
+          </div>
+
+          <!-- Geotèrmica i altres -->
+          <div style="background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; gap: 0.5rem;">
+              <h3 style="color: #fff; margin-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.5rem;">🌋</span> Geotèrmica i Altres Renovables
+              </h3>
+              <span class="tech-pill renewable">Gradient Tèrmic / Flux Gravitatori</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+              La calor interna de la Terra (energia geotèrmica) pot aprofitar-se perforant a gran profunditat per fer bullir aigua o per a climatització mitjançant bombes de calor. Altres fonts inclouen la mareomotriu (força de les marees mogudes per la Lluna) i l'undimotriu (força de les onades).
+            </p>
+            <div class="grid-2" style="gap: 1.2rem; margin-bottom: 1.2rem;">
+              <div style="background: rgba(16, 185, 129, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.05);">
+                <div style="color: var(--primary); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>✔️</span> Avantatges
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>La geotèrmica de profunditat és una font de base 24/7 de gran estabilitat.</li>
+                  <li>Molt baix impacte visual sobre la superfície del terreny.</li>
+                  <li>Les onades i marees són regulars i altament predictibles.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(244, 63, 94, 0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.05);">
+                <div style="color: var(--rose); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <span>❌</span> Inconvenients i Impacte
+                </div>
+                <ul style="font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; line-height: 1.4;">
+                  <li>Alt cost inicial de perforació profunda i risc geològic de sismes de baixa intensitat.</li>
+                  <li>Limitació geogràfica: només és viable a zones de vulcanisme actiu o fractures tectòniques.</li>
+                  <li>L'energia del mar és molt corrosiva per a les màquines metàl·liques submergides.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="news-box" style="margin-top: 1rem;">
+              <div class="news-title">Notícies sobre Geotèrmica:</div>
+              <a href="https://www.ccma.cat/324/lenergia-del-subsol-creix-a-catalunya-com-funciona-la-geotermia/noticia/3023910/" target="_blank" rel="noopener" class="news-link">🌋 Com funciona la geotèrmia de subsol a Catalunya (CCMA)</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 4. L'IMPACTE DE LES EXTRACTIVES I LA TRANSIÓ -->
+      <div class="glass-card" style="border-left: 4px solid var(--indigo);">
+        <h2 style="color: var(--indigo);">
+          <svg style="width:24px; height:24px; fill:var(--indigo)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          La Indústria Extractiva: Problemes Clàssics i Nous Reptes
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6;">
+          Qualsevol decisió energètica requereix l'extracció de recursos de l'escorça de la Terra. La indústria extractiva té un gran impacte ambiental i social, i aquest impacte està mutant de forma radical amb la transició cap a un model descarbonitzat.
+        </p>
+
+        <div class="grid-2" style="gap: 2rem;">
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--card-border);">
+            <h3 style="color: var(--rose); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>⛏️</span> L'Extractivisme Fòssil Tradicional
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Durant més de 150 anys, hem perforat la terra per extreure carbó, petroli i gas natural. Això ha permès el creixement industrial de la humanitat, de vegades a costa d'enormes desastres de degradació local com les sorres bituminoses de Canadà o el vessament del golf de Mèxic de BP, i la contaminació d'aqüífers subterranis per abocaments químics.
+            </p>
+            <div class="news-box" style="margin-top: 1.5rem;">
+              <div class="news-title">Impactes a Catalunya:</div>
+              <a href="https://www.ara.cat/territori/centenars-de-persones-protesten-contra-les-mines-de-potassa-del-bages_1_1204901.html" target="_blank" rel="noopener" class="news-link">💧 La salinització pel runam miner de potassa al Bages (Ara)</a>
+            </div>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--card-border);">
+            <h3 style="color: var(--primary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>🔋</span> El Nou Extractivisme de la Transició
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              Les tecnologies renovables (panells, aerogeneradors, bateries) no necessiten combustible durant la seva vida útil, però sí grans quantitats de **minerals crítics** per a la seva construcció. Això activa una nova mineria global de Liti i Cobalt per a bateries, Terres Rares (Neodimi) per a imants, i tones de Coure i Silici, generant nous conflictes socials i ambientals pel consum d'aigua.
+            </p>
+            <div class="news-box" style="margin-top: 1.5rem;">
+              <div class="news-title">Notícies Internacionals de Minerals:</div>
+              <a href="https://www.ara.cat/economia/les-mines-de-liti-del-con-sud-la-nova-febre-de-l-or-del-segle-xxi_1_4859102.html" target="_blank" rel="noopener" class="news-link">🔋 El Triangle del Liti a Sud-amèrica i la manca d'aigua (Ara)</a>
+              <a href="https://www.elperiodico.com/es/medio-ambiente/20230222/minas-cobalto-congo-cara-oculta-coche-electrico-83391021" target="_blank" rel="noopener" class="news-link">🇨🇩 La cara oculta del Cobalt al Congo (El Periódico)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SIMULADOR DE LA BALANÇA -->
     <section id="tab-balanca" class="tab-content">
       <div class="glass-card">
         <h2>
