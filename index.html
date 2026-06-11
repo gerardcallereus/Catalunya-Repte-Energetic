@@ -359,28 +359,29 @@
       box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1);
     }
 
-    /* Plant Toggles */
+    /* Plant Toggles & Redesigned Sliders */
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .plant-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .plant-toggle-card {
       background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 0.75rem;
-      cursor: pointer;
+      padding: 0.85rem;
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.4rem;
       user-select: none;
       transition: all 0.2s ease;
-    }
-
-    .plant-toggle-card:hover {
-      background: #f1f5f9;
     }
 
     .plant-toggle-card.active {
@@ -389,15 +390,159 @@
       box-shadow: 0 2px 8px rgba(5, 150, 105, 0.08);
     }
 
-    .plant-toggle-name {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .plant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.4rem;
     }
 
-    .plant-toggle-stat {
-      font-size: 0.75rem;
+    .plant-toggle-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .plant-status-btn {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .plant-status-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .plant-status-btn.inactive {
+      background: #e2e8f0;
       color: var(--text-muted);
-      font-family: monospace;
+      border-color: #cbd5e1;
+    }
+
+    .plant-status-btn:hover {
+      opacity: 0.9;
+    }
+
+    .plant-status-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: rgba(5, 150, 105, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+
+    .plant-slider-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .plant-slider-container label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .plant-slider {
+      width: 100%;
+      height: 4px;
+      background: #cbd5e1;
+      border-radius: 9999px;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      margin: 0.3rem 0;
+    }
+
+    .plant-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .plant-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+
+    .plant-slider:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .plant-slider:disabled::-webkit-slider-thumb {
+      background: #94a3b8;
+    }
+
+    .plant-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Explanation Grid Styling */
+    .explanation-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .explanation-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .explanation-card {
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .explanation-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .explanation-card h4 {
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .explanation-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
     }
 
     /* Simulation Output Panel */
@@ -1423,7 +1568,7 @@
       <button class="tab-btn active" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-fonts')">Fonts d'Energia</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Demanda i consum d'energia</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
     </nav>
@@ -2760,16 +2905,63 @@
       </div>
     </section>
 
-    <!-- TAB 3: SIMULADOR DE LA BALANÇA -->
+    <!-- TAB 3: DEMANDA I CONSUM D'ENERGIA -->
     <section id="tab-balanca" class="tab-content">
       <div class="glass-card">
         <h2>
           <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-          Simulador de la Balança de MW
+          Demanda i consum d'energia
         </h2>
         <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-          Juga amb la producció i la demanda en aquesta simulació. Activa o desactiva diferents tipus de centrals energètiques reals de Catalunya, canvia el trimestre i observa l'efecte del clima o d'una sequera sobre el balanç final.
+          Explora com es comporta el sistema elèctric de Catalunya. La producció física real ha de cobrir sempre la demanda per garantir l'estabilitat i evitar talls de llum.
         </p>
+
+        <!-- DETAILED EXPLANATION PANEL -->
+        <div class="explanation-grid">
+          <!-- Card 1: Demanda i Consum -->
+          <div class="explanation-card">
+            <h4>
+              <svg style="width:18px; height:18px; fill:currentColor" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg>
+              📈 Demanda i Consum d'Energia
+            </h4>
+            <p>
+              El consum elèctric de Catalunya té una base constant d'uns <strong>7.000 MW</strong>. Aquesta base varia al llarg de l'any a causa del clima: a l'estiu (Q2), l'ús de l'aire condicionat incrementa la demanda un <strong>15% (1.15x)</strong>; a l'hivern (Q4), l'encesa de calefaccions i radiadors elèctrics la fa augmentar un <strong>10% (1.10x)</strong>. En canvi, a la primavera (Q1) i a la tardor (Q3), el clima suau manté el consum estable (1.00x).
+            </p>
+          </div>
+
+          <!-- Card 2: Compra i Venda d'Energia -->
+          <div class="explanation-card">
+            <h4>
+              <svg style="width:18px; height:18px; fill:currentColor" viewBox="0 0 24 24"><path d="M21 7.28V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-2.28c.59-.35 1-.98 1-1.72V9c0-.74-.41-1.37-1-1.72zM20 9v6h-7V9h7zM5 19V5h14v2h-6c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h6v2H5z"/></svg>
+              💸 Compra, Venda i Balanç Financer
+            </h4>
+            <p>
+              La xarxa ha de mantenir un equilibri físic constant. Si la generació local és menor que la demanda, es produeix un <strong>dèficit</strong> i Catalunya ha d'importar electricitat d'Aragó o França a través de les línies d'alta tensió (MAT). Això és altament ineficient i costós, amb un preu d'importació penalitzador de <strong>0.15 M€ per cada MW importat</strong>. Si es produeix un <strong>superàvit</strong> (generació major que demanda), l'excedent es ven al mercat internacional, però a un preu molt més baix de <strong>0.04 M€ per MW</strong>.
+            </p>
+          </div>
+
+          <!-- Card 3: Estat Climatològic Especial -->
+          <div class="explanation-card">
+            <h4>
+              <svg style="width:18px; height:18px; fill:currentColor" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zM4 10.5H1v2h3v-2zm9-9.5h-2v3h2V1zM11 22.48V19h2v3.48h-2zm10.24-9.98h3v-2h-3v2zm-2.48-7.66l1.79-1.8-1.41-1.41-1.8 1.79 1.42 1.42zM20.24 19.16l1.8 1.79 1.41-1.41-1.79-1.8-1.42 1.42zM5.66 17.54l-1.8 1.8 1.41 1.41 1.8-1.79-1.41-1.42zM12 5.5c-3.58 0-6.5 2.92-6.5 6.5s2.92 6.5 6.5 6.5 6.5-2.92 6.5-6.5-2.92-6.5-6.5-6.5z"/></svg>
+              🌦️ Estat Climatològic Especial i Estacions
+            </h4>
+            <p>
+              Segons l'estació de l'any (trimestre), es poden donar diferents condicions meteorològiques extremes. Aquests fenòmens afecten directament la generació de les fonts renovables. Per exemple, una <strong>Sequera Històrica a l'estiu</strong> pot enfonsar el rendiment hidràulic al 10%, obligant a cremar combustibles fòssils per evitar apagades. Una <strong>DANA/Gota freda a la tardor</strong> provoca intenses nuvolositats que redueixen el rendiment solar a nivells mínims, mentre que un <strong>Temporal de Vent a l'hivern</strong> pot forçar l'aturada tècnica d'aerogeneradors terrestres per seguretat.
+            </p>
+          </div>
+
+          <!-- Card 4: Capacitat Nominal vs. Rendiment Real -->
+          <div class="explanation-card">
+            <h4>
+              <svg style="width:18px; height:18px; fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              ⚙️ Capacitat Nominal vs. Rendiment Real
+            </h4>
+            <p>
+              La <strong>Capacitat</strong> (MW) de cada central és la seva potència teòrica màxima. El <strong>Rendiment Base</strong> és l'eficiència real en condicions normals de la seva tecnologia: Nuclear (90%), Cicle Combinat (55%), Hidràulica (40%), Eòlica (35%) i Solar (22%). La generació real s'obté multiplicant la capacitat pel rendiment base, el percentatge de funcionament i el multiplicador estacional/climatològic. Això simula de forma realista com una planta solar o eòlica mai produeix al 100% de la seva capacitat física nominal de forma contínua.
+            </p>
+          </div>
+        </div>
 
         <div class="sim-grid">
           <!-- Controls Panel -->
@@ -2779,9 +2971,9 @@
             <div class="control-group">
               <div class="control-label">
                 <span>Demanda Base del País:</span>
-                <span><span id="val-demanda" class="control-val">7.200</span> MW</span>
+                <span><span id="val-demanda" class="control-val">7.000</span> MW</span>
               </div>
-              <input type="range" id="input-demanda" min="4000" max="9500" value="7200" step="100" class="slider" oninput="updateSimulation()">
+              <input type="range" id="input-demanda" min="4000" max="9500" value="7000" step="100" class="slider" oninput="updateSimulation()">
             </div>
 
             <div class="control-group">
@@ -2796,51 +2988,124 @@
 
             <div class="control-group">
               <span class="control-label">Estat Climatològic Especial:</span>
-              <div class="btn-toggle-group">
-                <button class="btn-toggle active" id="btn-clim-normal" onclick="setSimClimate('normal')">Clima Normal</button>
-                <button class="btn-toggle" id="btn-clim-sequera" onclick="setSimClimate('sequera')">Sequera Històrica (10% Hidro)</button>
-                <button class="btn-toggle" id="btn-clim-temporal" onclick="setSimClimate('temporal')">Temporal Marítim (50% Eòlica)</button>
+              <div class="btn-toggle-group" id="climate-buttons-container">
+                <!-- S'omplirà dinàmicament per JS -->
               </div>
             </div>
 
             <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary);">2. Activa/desactiva les Centrals disponibles</h3>
             <div class="plant-grid">
+              
               <!-- Nuclear -->
-              <div class="plant-toggle-card active" id="card-nuc" onclick="toggleSimPlant('nuc')">
-                <span class="plant-toggle-name">Central Nuclear (Ascó/Vandellòs)</span>
-                <span class="plant-toggle-stat">3.000 MW · 0 CO₂</span>
+              <div class="plant-toggle-card active" id="card-nuc">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Central Nuclear (Ascó/Vandellòs)</span>
+                  <button class="plant-status-btn active" id="btn-status-nuc" onclick="toggleSimPlant('nuc', event)">Activa</button>
+                </div>
+                <div class="plant-details">
+                  <span>Cap.: <strong>3.146 MW</strong></span>
+                  <span>Rend. base: <strong>90%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-nuc" class="control-val">2.831 MW</strong>
+                  </span>
+                </div>
               </div>
+
               <!-- Gas -->
-              <div class="plant-toggle-card active" id="card-gas" onclick="toggleSimPlant('gas')">
-                <span class="plant-toggle-name">Cicle Combinat (Gas Besòs)</span>
-                <span class="plant-toggle-stat">2.400 MW · 960t CO₂</span>
+              <div class="plant-toggle-card active" id="card-gas">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Cicle Combinat (Gas Besòs/Tarragona)</span>
+                  <button class="plant-status-btn active" id="btn-status-gas" onclick="toggleSimPlant('gas', event)">Activa</button>
+                </div>
+                <div class="plant-slider-container">
+                  <label>Funcionament: <span id="lbl-slider-gas" class="control-val">100%</span></label>
+                  <input type="range" id="slider-gas" min="30" max="100" value="100" class="plant-slider" oninput="updateSimulation()">
+                </div>
+                <div class="plant-details">
+                  <span>Cap.: <strong>1.600 MW</strong></span>
+                  <span>Rend. base: <strong>55%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-gas" class="control-val">880 MW</strong>
+                  </span>
+                </div>
               </div>
+
               <!-- Solar -->
-              <div class="plant-toggle-card active" id="card-sol" onclick="toggleSimPlant('sol')">
-                <span class="plant-toggle-name">Parcs Solars Fotovoltaics</span>
-                <span class="plant-toggle-stat">1.200 MW · 0 CO₂</span>
+              <div class="plant-toggle-card active" id="card-sol">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Parcs Solars Fotovoltaics</span>
+                  <span class="plant-status-badge">Operativa</span>
+                </div>
+                <div class="plant-details" style="margin-top: 0.8rem;">
+                  <span>Cap.: <strong>1.000 MW</strong></span>
+                  <span>Rend. base: <strong>22%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-sol" class="control-val">220 MW</strong>
+                  </span>
+                </div>
               </div>
+
               <!-- Eòlica -->
-              <div class="plant-toggle-card active" id="card-eol" onclick="toggleSimPlant('eol')">
-                <span class="plant-toggle-name">Parcs Eòlics Terrestres</span>
-                <span class="plant-toggle-stat">1.500 MW · 0 CO₂</span>
+              <div class="plant-toggle-card active" id="card-eol">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Parcs Eòlics Terrestres</span>
+                  <span class="plant-status-badge">Operativa</span>
+                </div>
+                <div class="plant-details" style="margin-top: 0.8rem;">
+                  <span>Cap.: <strong>1.200 MW</strong></span>
+                  <span>Rend. base: <strong>35%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-eol" class="control-val">420 MW</strong>
+                  </span>
+                </div>
               </div>
+
               <!-- Hidràulica -->
-              <div class="plant-toggle-card active" id="card-hid" onclick="toggleSimPlant('hid')">
-                <span class="plant-toggle-name">Embassaments (Hidroelèctrica)</span>
-                <span class="plant-toggle-stat">1.000 MW · 0 CO₂</span>
+              <div class="plant-toggle-card active" id="card-hid">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Embassaments (Hidroelèctrica)</span>
+                  <button class="plant-status-btn active" id="btn-status-hid" onclick="toggleSimPlant('hid', event)">Activa</button>
+                </div>
+                <div class="plant-details">
+                  <span>Cap.: <strong>2.500 MW</strong></span>
+                  <span>Rend. base: <strong>40%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-hid" class="control-val">1.000 MW</strong>
+                  </span>
+                </div>
               </div>
+
               <!-- Biomassa -->
-              <div class="plant-toggle-card" id="card-bio" onclick="toggleSimPlant('bio')">
-                <span class="plant-toggle-name">Planta de Biomassa Comarcal</span>
-                <span class="plant-toggle-stat">200 MW · 20t CO₂</span>
+              <div class="plant-toggle-card" id="card-bio">
+                <div class="plant-header">
+                  <span class="plant-toggle-name">Planta de Biomassa Comarcal</span>
+                  <button class="plant-status-btn inactive" id="btn-status-bio" onclick="toggleSimPlant('bio', event)">Inactiva</button>
+                </div>
+                <div class="plant-slider-container">
+                  <label>Funcionament: <span id="lbl-slider-bio" class="control-val">100%</span></label>
+                  <input type="range" id="slider-bio" min="30" max="100" value="100" class="plant-slider" oninput="updateSimulation()" disabled>
+                </div>
+                <div class="plant-details">
+                  <span>Cap.: <strong>200 MW</strong></span>
+                  <span>Rend. base: <strong>80%</strong></span>
+                  <span style="grid-column: span 2; display: flex; justify-content: space-between; margin-top: 4px; border-top: 1px dashed var(--card-border); padding-top: 4px;">
+                    <span>Generació Real:</span>
+                    <strong id="gen-val-bio" class="control-val">0 MW</strong>
+                  </span>
+                </div>
               </div>
+
             </div>
           </div>
 
           <!-- Simulation Outputs -->
           <div class="sim-output">
-            <h3 style="text-align: center; color: var(--text-main); margin-bottom: 0;">Resolució de la Balança</h3>
+            <h3 style="text-align: center; color: var(--text-main); margin-bottom: 0;">Resolució de la Xarxa</h3>
             
             <div id="sim-status-banner" class="sim-status-box ok">
               SISTEMA ESTABLE (SUPERÀVIT DE 1.100 MW)
@@ -2849,7 +3114,7 @@
             <div class="sim-bar-container">
               <div class="sim-bar-label">
                 <span>Demanda del País</span>
-                <span><span id="sim-lbl-demand">8.280</span> MW</span>
+                <span><span id="sim-lbl-demand">8.050</span> MW</span>
               </div>
               <div class="sim-bar-outer">
                 <div id="sim-bar-demand" class="sim-bar-inner" style="background-color: var(--amber); width: 80%;">DEMANDA</div>
@@ -2858,8 +3123,8 @@
 
             <div class="sim-bar-container">
               <div class="sim-bar-label">
-                <span>Producció Efectiva</span>
-                <span><span id="sim-lbl-prod">9.100</span> MW</span>
+                <span>Producció Efectiva Local</span>
+                <span><span id="sim-lbl-prod">9.150</span> MW</span>
               </div>
               <div class="sim-bar-outer">
                 <div id="sim-bar-prod" class="sim-bar-inner" style="background-color: var(--primary); width: 90%;">PRODUCCIÓ</div>
@@ -2869,10 +3134,10 @@
             <div class="sim-metrics-grid">
               <div class="sim-metric-card">
                 <div class="sim-metric-lbl">Emissions CO₂</div>
-                <div class="sim-metric-val" id="sim-val-co2" style="color: var(--rose);">960 t</div>
+                <div class="sim-metric-val" id="sim-val-co2" style="color: var(--rose);">352 t</div>
               </div>
               <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Importació de Llum</div>
+                <div class="sim-metric-lbl">Balanç Import/Export</div>
                 <div class="sim-metric-val" id="sim-val-import" style="color: var(--text-main);">0 MW</div>
               </div>
               <div class="sim-metric-card">
@@ -2880,19 +3145,18 @@
                 <div class="sim-metric-val" id="sim-val-mix" style="color: var(--primary);">40.7%</div>
               </div>
               <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Impacte Financer</div>
+                <div class="sim-metric-lbl">Impacte Financer Balança</div>
                 <div class="sim-metric-val" id="sim-val-impact" style="color: var(--primary);">+41.0 M€</div>
               </div>
             </div>
 
-            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;">
-              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW.
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;" id="sim-notes-text">
+              <!-- S'actualitzarà dinàmicament per JS -->
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- TAB 4: GUIA D'ACTORS SOCIALS -->
     <!-- TAB 4: GUIA D'ACTORS SOCIALS (MINI-JOC) -->
     <section id="tab-actors" class="tab-content">
@@ -3820,55 +4084,127 @@
     }
 
     // SIMULADOR DE MW CODE
+    const climateEvents = {
+      Q1: [
+        { id: 'spring_normal', label: 'Primavera Normal', modifiers: { solar: 0, wind: 0, hydro: 0 } },
+        { id: 'spring_rainy', label: 'Plujosa i ennuvolada', modifiers: { solar: -0.15, wind: 0, hydro: 0.1 } },
+        { id: 'spring_dry', label: 'Seca i assolellada', modifiers: { solar: 0.1, wind: 0, hydro: -0.1 } }
+      ],
+      Q2: [
+        { id: 'summer_normal', label: 'Estiu Normal', modifiers: { solar: 0, wind: 0, hydro: 0 } },
+        { id: 'summer_torrid', label: 'Tòrrid i calmat (Calor)', modifiers: { solar: 0.15, wind: -0.1, hydro: -0.15 } },
+        { id: 'summer_mild', label: 'Suau i amb tempestes', modifiers: { solar: -0.1, wind: 0.05, hydro: 0.05 } }
+      ],
+      Q3: [
+        { id: 'autumn_normal', label: 'Tardor Normal', modifiers: { solar: 0, wind: 0, hydro: 0 } },
+        { id: 'autumn_rainy', label: 'Tardor molt plujosa (DANA)', modifiers: { solar: -0.1, wind: 0.05, hydro: 0.15 } },
+        { id: 'autumn_dry', label: 'Tardor seca (Estiuet)', modifiers: { solar: 0.1, wind: 0, hydro: -0.1 } }
+      ],
+      Q4: [
+        { id: 'winter_normal', label: 'Hivern Normal', modifiers: { solar: 0, wind: 0, hydro: 0 } },
+        { id: 'winter_windy', label: 'Ventós i fred (Nord)', modifiers: { solar: 0, wind: 0.15, hydro: 0 } },
+        { id: 'winter_mild', label: 'Suau i calmat (Anticicló)', modifiers: { solar: 0.05, wind: -0.1, hydro: 0 } }
+      ]
+    };
+
     let simState = {
-      demandaBase: 7200,
-      quarter: 'Q2', // Estiu
-      climate: 'normal',
+      demandaBase: 7000,
+      quarter: 'Q2',
+      climateEventId: 'summer_normal',
       plants: {
-        nuc: true,
-        gas: true,
-        sol: true,
-        eol: true,
-        hid: true,
-        bio: false
+        nuc: { active: true },
+        gas: { active: true },
+        sol: { active: true },
+        eol: { active: true },
+        hid: { active: true },
+        bio: { active: false }
       }
     };
 
     const plantCapacities = {
-      nuc: 3000,
-      gas: 2400,
-      sol: 1200,
-      eol: 1500,
-      hid: 1000,
+      nuc: 3146,
+      gas: 1600,
+      sol: 1000,
+      eol: 1200,
+      hid: 2500,
       bio: 200
     };
 
-    const plantCO2Factors = {
-      nuc: 0,
-      gas: 0.4, // t per MW
-      sol: 0,
-      eol: 0,
-      hid: 0,
-      bio: 0.1
+    const baseYields = {
+      nuc: 0.90,
+      gas: 0.55,
+      sol: 0.22,
+      eol: 0.35,
+      hid: 0.40,
+      bio: 0.80
     };
 
     function setSimQuarter(q) {
       simState.quarter = q;
       document.querySelectorAll('[id^="btn-q"]').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${q.toLowerCase()}`).classList.add('active');
+      
+      const defaultEvent = climateEvents[q][0];
+      simState.climateEventId = defaultEvent.id;
+      
+      renderClimateButtons();
       updateSimulation();
     }
 
-    function setSimClimate(c) {
-      simState.climate = c;
-      document.querySelectorAll('[id^="btn-clim-"]').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`btn-clim-${c}`).classList.add('active');
+    function setSimClimate(eventId) {
+      simState.climateEventId = eventId;
+      document.querySelectorAll('#climate-buttons-container .btn-toggle').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeBtn = document.getElementById(`btn-clim-${eventId}`);
+      if (activeBtn) activeBtn.classList.add('active');
       updateSimulation();
     }
 
-    function toggleSimPlant(p) {
-      simState.plants[p] = !simState.plants[p];
-      document.getElementById(`card-${p}`).classList.toggle('active');
+    function renderClimateButtons() {
+      const container = document.getElementById('climate-buttons-container');
+      const events = climateEvents[simState.quarter];
+      container.innerHTML = '';
+      
+      events.forEach(e => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-toggle' + (simState.climateEventId === e.id ? ' active' : '');
+        btn.id = `btn-clim-${e.id}`;
+        
+        let modText = '';
+        if (e.modifiers.solar !== 0) modText += ` Sol: ${e.modifiers.solar > 0 ? '+' : ''}${Math.round(e.modifiers.solar*100)}%`;
+        if (e.modifiers.wind !== 0) modText += ` Vent: ${e.modifiers.wind > 0 ? '+' : ''}${Math.round(e.modifiers.wind*100)}%`;
+        if (e.modifiers.hydro !== 0) modText += ` Hidro: ${e.modifiers.hydro > 0 ? '+' : ''}${Math.round(e.modifiers.hydro*100)}%`;
+        
+        btn.textContent = e.label + (modText ? ` (${modText.trim()})` : '');
+        btn.onclick = () => setSimClimate(e.id);
+        container.appendChild(btn);
+      });
+    }
+
+    function toggleSimPlant(p, event) {
+      if (event) event.stopPropagation();
+      simState.plants[p].active = !simState.plants[p].active;
+      
+      const card = document.getElementById(`card-${p}`);
+      const btn = document.getElementById(`btn-status-${p}`);
+      const slider = document.getElementById(`slider-${p}`);
+      
+      if (simState.plants[p].active) {
+        card.classList.add('active');
+        if (btn) {
+          btn.textContent = 'Activa';
+          btn.className = 'plant-status-btn active';
+        }
+        if (slider) slider.disabled = false;
+      } else {
+        card.classList.remove('active');
+        if (btn) {
+          btn.textContent = 'Inactiva';
+          btn.className = 'plant-status-btn inactive';
+        }
+        if (slider) slider.disabled = true;
+      }
       updateSimulation();
     }
 
@@ -3879,73 +4215,83 @@
 
       // 1. Calculate Demand multipliers
       let demandMultiplier = 1.0;
-      let notesText = "";
       if (simState.quarter === 'Q2') {
         demandMultiplier = 1.15; // Estiu (AC)
-        notesText = "<strong>Nota d'Estiu</strong>: Un increment de demanda base a " + inputVal + " MW genera una demanda total de " + Math.round(inputVal * 1.15) + " MW pels aires condicionats. Les solars multipliquen la seva eficàcia (1.5x) aportant energia verda abundant de dia.";
       } else if (simState.quarter === 'Q4') {
         demandMultiplier = 1.10; // Hivern (Calefacció)
-        notesText = "<strong>Nota d'Hivern</strong>: La demanda puja un 10% pels radiadors. Les solars redueixen el rendiment al 60% per la manca de llum, però el vent (1.2x) i les eòliques salven el sistema d'apagades.";
-      } else if (simState.quarter === 'Q1') {
-        notesText = "<strong>Nota de Primavera</strong>: El desglaç de les muntanyes augmenta el rendiment hidroelèctric (1.2x), fent d'aquesta bateria natural una eina imprescindible.";
-      } else {
-        notesText = "<strong>Nota de Tardor</strong>: Demanda estable. El clima és moderat, permetent fer reparacions programades a les centrals fòssils.";
       }
 
       const totalDemand = Math.round(simState.demandaBase * demandMultiplier);
       document.getElementById('sim-lbl-demand').textContent = totalDemand.toLocaleString();
 
-      // 2. Calculate seasonal & climate multipliers for production
+      // 2. Get climate modifiers
+      const quarterEvents = climateEvents[simState.quarter];
+      const activeEvent = quarterEvents.find(e => e.id === simState.climateEventId) || quarterEvents[0];
+      const modifiers = activeEvent.modifiers;
+
+      // Base seasonal multipliers
       let solarMult = 1.0;
       let windMult = 1.0;
       let hydroMult = 1.0;
 
-      // Seasonal base multipliers
       if (simState.quarter === 'Q2') { solarMult = 1.5; }
       else if (simState.quarter === 'Q4') { solarMult = 0.6; windMult = 1.2; }
       else if (simState.quarter === 'Q1') { hydroMult = 1.2; windMult = 1.1; }
       else if (simState.quarter === 'Q3') { hydroMult = 1.1; }
 
-      // Climate condition modifiers
-      if (simState.climate === 'sequera') {
-        hydroMult *= 0.10; // Sequera destrueix la hidràulica
-        notesText += " <span style='color: var(--rose)'><strong>ALERTA DE SEQUERA</strong>: La hidràulica cau un 90% per la manca d'aigua en els pantans de Sau i Susqueda.</span>";
-      } else if (simState.climate === 'temporal') {
-        windMult *= 0.50; // Temporal apaga eòliques terrestres per protecció
-        notesText += " <span style='color: var(--amber)'><strong>ALERTA DE TEMPORAL</strong>: El vent és massa fort i es desconnecten parcialment aerogeneradors de la Terra Alta per motius de seguretat.</span>";
-      }
+      // Apply climate events
+      solarMult *= (1 + modifiers.solar);
+      windMult *= (1 + modifiers.wind);
+      hydroMult *= (1 + modifiers.hydro);
 
-      // 3. Compute active production
-      let totalProd = 0;
+      // 3. Compute productions
+      let genVal = { nuc: 0, gas: 0, sol: 0, eol: 0, hid: 0, bio: 0 };
       let co2Emissions = 0;
 
-      if (simState.plants.nuc) {
-        totalProd += plantCapacities.nuc;
+      // Nuclear
+      if (simState.plants.nuc.active) {
+        genVal.nuc = Math.round(plantCapacities.nuc * baseYields.nuc);
       }
-      if (simState.plants.gas) {
-        const gasProd = plantCapacities.gas;
-        totalProd += gasProd;
-        co2Emissions += gasProd * plantCO2Factors.gas;
+      // Gas
+      if (simState.plants.gas.active) {
+        const sliderVal = parseInt(document.getElementById('slider-gas').value);
+        document.getElementById('lbl-slider-gas').textContent = sliderVal + '%';
+        genVal.gas = Math.round(plantCapacities.gas * baseYields.gas * (sliderVal / 100));
+        co2Emissions += genVal.gas * 0.4;
+      } else {
+        document.getElementById('lbl-slider-gas').textContent = '---';
       }
-      if (simState.plants.sol) {
-        totalProd += Math.round(plantCapacities.sol * solarMult);
+      // Solar (always active)
+      genVal.sol = Math.round(plantCapacities.sol * baseYields.sol * solarMult);
+      // Wind (always active)
+      genVal.eol = Math.round(plantCapacities.eol * baseYields.eol * windMult);
+      // Hydro
+      if (simState.plants.hid.active) {
+        genVal.hid = Math.round(plantCapacities.hid * baseYields.hid * hydroMult);
       }
-      if (simState.plants.eol) {
-        totalProd += Math.round(plantCapacities.eol * windMult);
-      }
-      if (simState.plants.hid) {
-        totalProd += Math.round(plantCapacities.hid * hydroMult);
-      }
-      if (simState.plants.bio) {
-        const bioProd = plantCapacities.bio;
-        totalProd += bioProd;
-        co2Emissions += bioProd * plantCO2Factors.bio;
+      // Biomassa
+      if (simState.plants.bio.active) {
+        const sliderVal = parseInt(document.getElementById('slider-bio').value);
+        document.getElementById('lbl-slider-bio').textContent = sliderVal + '%';
+        genVal.bio = Math.round(plantCapacities.bio * baseYields.bio * (sliderVal / 100));
+        co2Emissions += genVal.bio * 0.1;
+      } else {
+        document.getElementById('lbl-slider-bio').textContent = '---';
       }
 
+      // Update UI MW labels
+      document.getElementById('gen-val-nuc').textContent = genVal.nuc.toLocaleString() + ' MW';
+      document.getElementById('gen-val-gas').textContent = genVal.gas.toLocaleString() + ' MW';
+      document.getElementById('gen-val-sol').textContent = genVal.sol.toLocaleString() + ' MW';
+      document.getElementById('gen-val-eol').textContent = genVal.eol.toLocaleString() + ' MW';
+      document.getElementById('gen-val-hid').textContent = genVal.hid.toLocaleString() + ' MW';
+      document.getElementById('gen-val-bio').textContent = genVal.bio.toLocaleString() + ' MW';
+
+      const totalProd = genVal.nuc + genVal.gas + genVal.sol + genVal.eol + genVal.hid + genVal.bio;
       document.getElementById('sim-lbl-prod').textContent = totalProd.toLocaleString();
       document.getElementById('sim-val-co2').textContent = Math.round(co2Emissions) + " t";
 
-      // 4. Calculate deficit / surplus
+      // 4. Deficit / Surplus
       const diff = totalProd - totalDemand;
       const banner = document.getElementById('sim-status-banner');
       let deficitMW = 0;
@@ -3962,28 +4308,24 @@
       }
 
       // 5. Renewable Mix
-      let renewProd = 0;
-      if (simState.plants.sol) renewProd += Math.round(plantCapacities.sol * solarMult);
-      if (simState.plants.eol) renewProd += Math.round(plantCapacities.eol * windMult);
-      if (simState.plants.hid) renewProd += Math.round(plantCapacities.hid * hydroMult);
+      let renewProd = genVal.sol + genVal.eol + genVal.hid + genVal.bio;
       const mixPercent = totalProd > 0 ? ((renewProd / totalProd) * 100).toFixed(1) : "0.0";
       document.getElementById('sim-val-mix').textContent = mixPercent + "%";
 
       // 6. Financial Impact
-      // Cost of deficit is 0.15 M€ per MW, surplus sale is 0.04 M€ per MW (base values)
-      let financeImpact = 600; // base taxes revenue per turn
+      let taxRevenue = 600; // Ingressos de base
       let upkeepCost = 0;
-      if (simState.plants.nuc) upkeepCost += 120;
-      if (simState.plants.gas) upkeepCost += 30;
-      if (simState.plants.sol) upkeepCost += 8;
-      if (simState.plants.eol) upkeepCost += 18;
-      if (simState.plants.hid) upkeepCost += 20;
-      if (simState.plants.bio) upkeepCost += 15;
+      if (simState.plants.nuc.active) upkeepCost += 310;
+      if (simState.plants.gas.active) upkeepCost += 60;
+      upkeepCost += 10; // solar always active
+      upkeepCost += 36; // wind always active
+      if (simState.plants.hid.active) upkeepCost += 50;
+      if (simState.plants.bio.active) upkeepCost += 15;
 
-      let deficitCost = deficitMW * 0.15; // molt car
-      let surplusRev = diff > 0 ? diff * 0.04 : 0;
+      let deficitCost = deficitMW * 0.15; // Importació molt cara (0.15 M€/MW)
+      let surplusRev = diff > 0 ? diff * 0.04 : 0; // Venda d'energia (0.04 M€/MW)
 
-      let finalFinance = financeImpact - upkeepCost - deficitCost + surplusRev;
+      let finalFinance = taxRevenue - upkeepCost - deficitCost + surplusRev;
       const financeVal = document.getElementById('sim-val-impact');
       if (finalFinance >= 0) {
         financeVal.textContent = "+" + finalFinance.toFixed(1) + " M€";
@@ -4001,13 +4343,36 @@
       document.getElementById('sim-bar-demand').style.width = demandPct + "%";
       document.getElementById('sim-bar-prod').style.width = prodPct + "%";
 
-      // 8. Update text
-      document.querySelector('.sim-output div[style*="font-size: 0.8rem"]').innerHTML = notesText;
+      // 8. Build detailed notes
+      let notesText = `<strong>Nota d'Estacionalitat (${simState.quarter})</strong>: `;
+      if (simState.quarter === 'Q2') {
+        notesText += `La demanda base de ${inputVal} MW augmenta un 15% (multiplicador de 1.15x) fins a <strong>${totalDemand.toLocaleString()} MW</strong> a causa de l'aire condicionat. Les solars aprofiten la bona radiació d'estiu (rendiment base de 22% multiplicat per 1.5x) aportant energia verda. `;
+      } else if (simState.quarter === 'Q4') {
+        notesText += `La demanda base de ${inputVal} MW puja un 10% (multiplicador de 1.10x) fins a <strong>${totalDemand.toLocaleString()} MW</strong> per la calefacció. Les solars baixen la seva eficàcia al 60% per manca de llum, peró el vent és més favorable (1.2x). `;
+      } else if (simState.quarter === 'Q1') {
+        notesText += `La demanda és estable (1.00x) a <strong>${totalDemand.toLocaleString()} MW</strong>. La hidràulica es beneficia del desglaç de primavera (rendiment base de 40% multiplicat per 1.2x). `;
+      } else {
+        notesText += `La demanda és estable (1.00x) a <strong>${totalDemand.toLocaleString()} MW</strong>. La producció hidràulica es beneficia ligeiramente del final d'any humit (1.1x). `;
+      }
+
+      notesText += `<br><strong style="color: var(--secondary)">Climatologia Especial: ${activeEvent.label}</strong>. `;
+      if (activeEvent.id !== 'spring_normal' && activeEvent.id !== 'summer_normal' && activeEvent.id !== 'autumn_normal' && activeEvent.id !== 'winter_normal') {
+        notesText += `Aquest fenomen meteorològic aplica els següents ajustos en el rendiment: `;
+        let adjustments = [];
+        if (modifiers.solar !== 0) adjustments.push(`Solar/Termosolar ${modifiers.solar > 0 ? '+' : ''}${Math.round(modifiers.solar*100)}%`);
+        if (modifiers.wind !== 0) adjustments.push(`Eòlica ${modifiers.wind > 0 ? '+' : ''}${Math.round(modifiers.wind*100)}%`);
+        if (modifiers.hydro !== 0) adjustments.push(`Hidràulica ${modifiers.hydro > 0 ? '+' : ''}${Math.round(modifiers.hydro*100)}%`);
+        notesText += `<span style="color: var(--rose); font-weight: 600;">${adjustments.join(', ')}</span>.`;
+      } else {
+        notesText += `No s'apliquen modificadors meteorològics extrems addicionals.`;
+      }
+
+      document.getElementById('sim-notes-text').innerHTML = notesText;
     }
 
     // INITIAL TRIGGER
+    renderClimateButtons();
     updateSimulation();
-
 
     // MINI-JOC D'ACTORS SOCIALS - BASE DE DADES I LÒGICA
     const gameDb = {
