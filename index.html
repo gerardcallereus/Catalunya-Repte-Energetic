@@ -1003,8 +1003,8 @@
     <nav class="tabs-nav" aria-label="Navegació principal">
       <button class="tab-btn active" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-fonts')">Fonts d'Energia</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Simulador de MW</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-didactica')">Recursos per a l'Aula</button>
@@ -1559,139 +1559,6 @@
       </div>
     </section>
 
-    <!-- TAB 3: SIMULADOR DE LA BALANÇA -->
-    <section id="tab-balanca" class="tab-content">
-      <div class="glass-card">
-        <h2>
-          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-          Simulador de la Balança de MW
-        </h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-          Juga amb la producció i la demanda en aquesta simulació. Activa o desactiva diferents tipus de centrals energètiques reals de Catalunya, canvia el trimestre i observa l'efecte del clima o d'una sequera sobre el balanç final.
-        </p>
-
-        <div class="sim-grid">
-          <!-- Controls Panel -->
-          <div>
-            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--secondary);">1. Ajusta la demanda i l'entorn</h3>
-            
-            <div class="control-group">
-              <div class="control-label">
-                <span>Demanda Base del País:</span>
-                <span><span id="val-demanda" class="control-val">7.200</span> MW</span>
-              </div>
-              <input type="range" id="input-demanda" min="4000" max="9500" value="7200" step="100" class="slider" oninput="updateSimulation()">
-            </div>
-
-            <div class="control-group">
-              <span class="control-label">Estació de l'Any (Trimestre):</span>
-              <div class="btn-toggle-group">
-                <button class="btn-toggle" id="btn-q1" onclick="setSimQuarter('Q1')">Q1 - Primavera</button>
-                <button class="btn-toggle active" id="btn-q2" onclick="setSimQuarter('Q2')">Q2 - Estiu</button>
-                <button class="btn-toggle" id="btn-q3" onclick="setSimQuarter('Q3')">Q3 - Tardor</button>
-                <button class="btn-toggle" id="btn-q4" onclick="setSimQuarter('Q4')">Q4 - Hivern</button>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <span class="control-label">Estat Climatològic Especial:</span>
-              <div class="btn-toggle-group">
-                <button class="btn-toggle active" id="btn-clim-normal" onclick="setSimClimate('normal')">Clima Normal</button>
-                <button class="btn-toggle" id="btn-clim-sequera" onclick="setSimClimate('sequera')">Sequera Històrica (10% Hidro)</button>
-                <button class="btn-toggle" id="btn-clim-temporal" onclick="setSimClimate('temporal')">Temporal Marítim (50% Eòlica)</button>
-              </div>
-            </div>
-
-            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary);">2. Activa/desactiva les Centrals disponibles</h3>
-            <div class="plant-grid">
-              <!-- Nuclear -->
-              <div class="plant-toggle-card active" id="card-nuc" onclick="toggleSimPlant('nuc')">
-                <span class="plant-toggle-name">Central Nuclear (Ascó/Vandellòs)</span>
-                <span class="plant-toggle-stat">3.000 MW · 0 CO₂</span>
-              </div>
-              <!-- Gas -->
-              <div class="plant-toggle-card active" id="card-gas" onclick="toggleSimPlant('gas')">
-                <span class="plant-toggle-name">Cicle Combinat (Gas Besòs)</span>
-                <span class="plant-toggle-stat">2.400 MW · 960t CO₂</span>
-              </div>
-              <!-- Solar -->
-              <div class="plant-toggle-card active" id="card-sol" onclick="toggleSimPlant('sol')">
-                <span class="plant-toggle-name">Parcs Solars Fotovoltaics</span>
-                <span class="plant-toggle-stat">1.200 MW · 0 CO₂</span>
-              </div>
-              <!-- Eòlica -->
-              <div class="plant-toggle-card active" id="card-eol" onclick="toggleSimPlant('eol')">
-                <span class="plant-toggle-name">Parcs Eòlics Terrestres</span>
-                <span class="plant-toggle-stat">1.500 MW · 0 CO₂</span>
-              </div>
-              <!-- Hidràulica -->
-              <div class="plant-toggle-card active" id="card-hid" onclick="toggleSimPlant('hid')">
-                <span class="plant-toggle-name">Embassaments (Hidroelèctrica)</span>
-                <span class="plant-toggle-stat">1.000 MW · 0 CO₂</span>
-              </div>
-              <!-- Biomassa -->
-              <div class="plant-toggle-card" id="card-bio" onclick="toggleSimPlant('bio')">
-                <span class="plant-toggle-name">Planta de Biomassa Comarcal</span>
-                <span class="plant-toggle-stat">200 MW · 20t CO₂</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Simulation Outputs -->
-          <div class="sim-output">
-            <h3 style="text-align: center; color: #fff; margin-bottom: 0;">Resolució de la Balança</h3>
-            
-            <div id="sim-status-banner" class="sim-status-box ok">
-              SISTEMA ESTABLE (SUPERÀVIT DE 1.100 MW)
-            </div>
-
-            <div class="sim-bar-container">
-              <div class="sim-bar-label">
-                <span>Demanda del País</span>
-                <span><span id="sim-lbl-demand">8.280</span> MW</span>
-              </div>
-              <div class="sim-bar-outer">
-                <div id="sim-bar-demand" class="sim-bar-inner" style="background-color: var(--amber); width: 80%;">DEMANDA</div>
-              </div>
-            </div>
-
-            <div class="sim-bar-container">
-              <div class="sim-bar-label">
-                <span>Producció Efectiva</span>
-                <span><span id="sim-lbl-prod">9.100</span> MW</span>
-              </div>
-              <div class="sim-bar-outer">
-                <div id="sim-bar-prod" class="sim-bar-inner" style="background-color: var(--primary); width: 90%;">PRODUCCIÓ</div>
-              </div>
-            </div>
-
-            <div class="sim-metrics-grid">
-              <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Emissions CO₂</div>
-                <div class="sim-metric-val" id="sim-val-co2" style="color: var(--rose);">960 t</div>
-              </div>
-              <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Importació de Llum</div>
-                <div class="sim-metric-val" id="sim-val-import" style="color: var(--text-main);">0 MW</div>
-              </div>
-              <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Mix Renovables</div>
-                <div class="sim-metric-val" id="sim-val-mix" style="color: var(--primary);">40.7%</div>
-              </div>
-              <div class="sim-metric-card">
-                <div class="sim-metric-lbl">Impacte Financer</div>
-                <div class="sim-metric-val" id="sim-val-impact" style="color: var(--primary);">+41.0 M€</div>
-              </div>
-            </div>
-
-            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;">
-              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- TAB 3: CATÀLEG DE CENTRALS -->
     <section id="tab-centrals" class="tab-content">
       <!-- 1. INTRODUCCIÓ CIENTÍFICA A LES FONTS D'ENERGIA -->
@@ -1726,6 +1593,19 @@
         </div>
 
         <h3 style="color: var(--indigo); margin-top: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">Taula Comparativa de Dades Elèctriques Reals</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.75rem; margin-bottom: 1.25rem; line-height: 1.5;">
+          Aquesta taula recull els paràmetres tècnics, econòmics i ambientals reals que defineixen el comportament de cada font d'energia al mercat català:
+          <br><br>
+          • <strong>Gestionabilitat:</strong> Classifica les centrals segons la seva capacitat d'adaptar-se a la demanda de la xarxa. Les centrals de <strong>Base</strong> funcionen constantment (com la nuclear), les de <strong>Punta</strong> s'activen immediatament quan hi ha pics (com la hidroelèctrica de presa), i les <strong>Intermitents</strong> depenen del recurs natural momentani (solar i eòlica).
+          <br>
+          • <strong>Eficiència Física (%):</strong> El percentatge de l'energia primària que es transforma en electricitat elèctrica útil. Les centrals tèrmiques (gas, nuclear, biomassa) estan limitades pel <strong>Cicle de Carnot</strong> i perden molta energia en forma de calor residual (per exemple, les xemeneies de vapor d'Ascó). La hidroelèctrica de presa, en canvi, converteix directament l'energia mecànica amb un rendiment superior al 85%.
+          <br>
+          • <strong>Emissions de Cicle de Vida (gCO₂eq/kWh):</strong> La quantitat de gasos contaminants emesos des de la mineria d'Urani o la fabricació de panells de silici fins al desmantellament final de les instal·lacions. Això ajuda els alumnes a veure que cap energia és 100% lliure d'emissions.
+          <br>
+          • <strong>Cost LCOE (€/MWh):</strong> El cost anivellat de l'electricitat (LCOE) reflecteix el cost total amortitzat de la tecnologia (construcció, explotació, combustible i desmantellament) per cada megawatt-hora útil produït.
+          <br>
+          • <strong>Hores Equivalents de funcionament a l'any:</strong> De les 8.760 hores totals que té un any, és el nombre teòric d'hores que la planta hauria de funcionar al 100% de potència per igualar la seva producció real. És la clau per entendre per què algunes centrals generen molt més que altres amb la mateixa capacitat.
+        </p>
         <div class="source-table-wrapper">
           <table class="source-table">
             <thead>
@@ -1893,6 +1773,27 @@
             </div>
           </div>
         </div>
+
+        <div style="background: rgba(2, 132, 199, 0.04); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.25rem; margin-top: 1.5rem; line-height: 1.6;">
+          <h4 style="color: var(--secondary); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;">
+            <svg style="width:20px; height:20px; fill:var(--secondary)" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+            Com s'explica la Paradoxa de la Potència?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            La paradoxa és senzilla: <strong>la Potència instal·lada (% en color lila) no equival a la Producció Real (% en color verd)</strong>. Aquest fenomen s'explica pel <strong>Factor de Capacitat</strong> de cada tecnologia (reflectit a la taula anterior com a hores equivalents anuals):
+          </p>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li>
+              <strong>El cas de la Nuclear (25% Potència vs. 58% Producció):</strong> Catalunya compta amb només 3 reactors nuclears actius (Ascó I i II, i Vandellòs II) que sumen uns 3.000 MW de potència. Com que són centrals de "base" dissenyades per funcionar les 24 hores del dia, els 365 dies de l'any de manera ininterrompuda (excepte per aturades tècniques de recàrrega de combustible), operen gairebé 8.000 hores a l'any (més del 90% del temps). Per això, amb només una quarta part de la potència instal·lada del país, aconsegueixen cobrir més de la meitat de la llum elèctrica real consumida a Catalunya.
+            </li>
+            <li>
+              <strong>La intermitència renovable (Solar i Eòlica):</strong> Encara que s'instal·lin molts megawatts de plaques solars (actualment representen el 15% de la potència), només generen electricitat quan hi ha radiació. Com que a la nit no produeixen i els dies ennuvolats o a l'hivern la seva eficiència cau, el seu factor d'utilització és d'unes 1.500 hores equivalents anuals (un 17% del temps total de l'any). És per això que la seva aportació real en GWh (5%) és proporcionalment molt menor que la seva capacitat nominal. L'eòlica terrestre té un comportament similar, funcionant unes 2.000-2.400 hores equivalents (~25% del temps).
+            </li>
+            <li>
+              <strong>La flexibilitat del Gas (30% Potència vs. 22% Producció):</strong> Les centrals de cicle combinat actuen com a suport o reserva de garantia. Tenen molta capacitat instal·lada per si fa falta (30%), però només es posen en marxa quan la demanda és molt alta o quan les renovables fallen.
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- 2. CATÀLEG DE CENTRALS AMB ACORDIONS -->
@@ -1933,6 +1834,24 @@
                   <div class="real-world-link">
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     Catalunya depèn molt d'aquesta tecnologia: compta amb els reactors actius d'<strong>Ascó I i II</strong> (a la Ribera d'Ebre) i <strong>Vandellòs II</strong> (al Baix Camp), gestionats per l'Associació Nuclear Ascó-Vandellòs (ANAV). Aquestes plantes generen gairebé el 60% de tota la llum elèctrica consumida al país, fet que converteix el seu tancament previst pel govern espanyol de forma esglaonada entre 2030 i 2035 en un dels majors reptes de sobirania energètica de Catalunya.
+                  </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Producció massiva i 100% constant de base (funciona les 24 hores del dia, independentment del clima).</li>
+                        <li>Pràcticament zero emissions de gasos amb efecte d'hivernacle durant l'operació directa de fissió.</li>
+                        <li>Molt alta densitat de potència, ocupant un espai físic reduït respecte als parcs renovables equivalents.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Generació de residus nuclears d'alta activitat que cal emmagatzemar durant milers d'anys en dipòsits especials (MTC).</li>
+                        <li>Risc teòric d'accidents greus i dependència absoluta de la importació de mineral d'Urani exterior.</li>
+                        <li>Temps de construcció molt llargs i costos de desmantellament futurs extremadament elevats.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
@@ -1975,6 +1894,24 @@
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     A Catalunya hi ha grans centrals de cicle combinat als polígons industrials del <strong>Besòs</strong> (al costat de Barcelona) i al complex petroquímic de <strong>Tarragona</strong> (plana de la Canonja). Són imprescindibles com a "reserva de garantia" quan falla el vent o les reserves d'aigua, però les seves emissions són el principal obstacle per assolir els objectius de descarbonització.
                   </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Extremadament flexible: s'encén i modula la potència en pocs minuts per respondre a les urgències de la xarxa.</li>
+                        <li>Rendiment de cicle combinat molt elevat (fins al 60% d'eficiència termodinàmica, el doble que el carbó vell).</li>
+                        <li>Baixa inversió de capital inicial i terminis de construcció molt curts (2-4 trimestres).</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Emissió de grans volums de CO₂ directe, sent incompatible amb l'objectiu de neutralitat climàtica del 2050.</li>
+                        <li>Dependència geopolítica total del subministrament i fluctuació dels preus internacionals del gas fòssil.</li>
+                        <li>Problema afegit d'emissions fugitives de metà (gas com a alt impacte d'efecte hivernacle) en el seu transport.</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="tech-img-wrapper">
                   <div class="news-box">
@@ -2014,6 +1951,24 @@
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     Catalunya té un volum altíssim d'autoconsum solar de petita escala a les teulades, amb més de 100.000 instal·lacions domèstiques i industrials. Tanmateix, s'enfronta a problemes per aprovar grans macroparcs a terra en zones com Ponent o l'Alt Empordà pel rebuig del sector agrari i de plataformes veïnals per l'ocupació de sòl rural d'alt interès de conreu.
                   </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Energia 100% neta, renovable i amb la tecnologia comercialitzada més barata de mantenir.</li>
+                        <li>Permet una gran descentralització (autoconsum a teulades particulars i cobertes industrials).</li>
+                        <li>Producció excel·lent a l'estiu, cobrint perfectament la demanda dels aparells de refrigeració.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Intermitència total: producció nul·la de nit i descens brusc del 60% del rendiment els mesos d'hivern.</li>
+                        <li>Molt baixa densitat de potència (necessita 10-15 vegades més terreny que altres fonts per MW equivalent).</li>
+                        <li>Rebuig social a macroparcs a causa del seu fort impacte estètic i la pèrdua de sòl agrari productiu.</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="tech-img-wrapper">
                   <div class="news-box">
@@ -2052,6 +2007,24 @@
                   <div class="real-world-link">
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     La producció eòlica a Catalunya està molt concentrada a comarques com la <strong>Terra Alta</strong>, el Baix Ebre i l'Anoia, el que ha provocat protestes històriques de les entitats veïnals denunciant la "massificació eòlica" i exigint que la producció es reparteixi de forma justa pel territori, sobretot prop dels grans centres de consum (Barcelona i la seva àrea).
+                  </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Tecnologia renovable madura i molt rentible amb unes 2.200 hores equivalents anuals de funcionament.</li>
+                        <li>Perfecta complementarietat estacional amb la solar gràcies a una major producció a la tardor/hivern.</li>
+                        <li>Compatibilitat mecànica: els aerogeneradors permeten mantenir l'activitat de ramaderia i pastures a sota.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Depèn de la inconstància del vent i del risc de situacions de calma anticiclònica total sense vent.</li>
+                        <li>Gran conflicte d'equilibri territorial a Catalunya a causa de la forta concentració a la Terra Alta.</li>
+                        <li>Impacte paisatgístic molt visible i risc d'accidents/morts de fauna d'aus i ratpenats locals.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
@@ -2096,6 +2069,24 @@
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     Catalunya té grans centrals hidroelèctriques als rius del Pirineu (conques de la Noguera Pallaresa i Ribagorçana com la presa de **Talarn**) i embassaments a les conques internes com el sistema **Sau-Susqueda** (riu Ter). Durant la sequera històrica recent, les reserves de Sau van caure per sota del 10%, obligant a suspendre completament la generació elèctrica per protegir la qualitat de l'aigua, demostrant com el canvi climàtic afecta aquesta bateria natural.
                   </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>La millor "bateria natural" d'arrencada immediata per cobrir pics de consum elèctric de sobte.</li>
+                        <li>Eficiència de conversió física excepcionalment alta (més del 85-90% de rendiment mecànic).</li>
+                        <li>Permet un ús múltiple dels embassaments (aigua potable, regadiu agrícola i prevenció de riuades).</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Vulnerabilitat total davant el canvi climàtic i les greus sequeres prolongades a les conques catalanes.</li>
+                        <li>Molt alt impacte ecològic històric per la inundació de valls senceres i tall del corrent dels rius.</li>
+                        <li>Impossibilitat pràctica d'ampliació de la xarxa: gairebé tots els salts d'aigua viables ja estan explotats.</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="tech-img-wrapper">
                   <div class="news-box">
@@ -2135,6 +2126,24 @@
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     A Catalunya s'ha projectat el parc eòlic marí flotant **Parc Tramuntana** al **Golf de Roses** (Alt Empordà). El projecte s'ha enfrontat a una forta oposició d'entitats ecologistes locals i del sector turístic i pesquer de la Costa Brava, a causa de l'impacte visual que pot comportar sobre el paisatge del Cap de Creus i els possibles efectes en la biodiversitat marina del golf.
                   </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Vents marins un 30% més intensos i constants (fins a 4.000 hores equivalents anuals de funcionament).</li>
+                        <li>No consumeix territori a terra ferma, alliberant espai per a altres usos en zones altament poblades.</li>
+                        <li>Macroprojectes de gran escala que poden substituir fàcilment centrals tèrmiques convencionals de base.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Elevat cost d'inversió per la necessitat de plataformes flotants i estesa de cables submarins a gran profunditat.</li>
+                        <li>Conflicte d'aprovació social i forta oposició del sector pesquer i hostaler (impacte visual a la Costa Brava).</li>
+                        <li>Complexitat tècnica alta de manteniment i conservació per l'agressió marina (corrosió de la sal i temporals).</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="tech-img-wrapper">
                   <div class="news-box">
@@ -2173,6 +2182,24 @@
                   <div class="real-world-link">
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     Espanya és pionera i líder mundial en tecnologia termosolar (sobretot a Andalusia i Extremadura amb projectes com Gemasolar). A Catalunya gairebé no s'ha instal·lat a causa dels alts costos de llançament inicials i als grans requeriments de superfícies planes amb alta radiació directa. Tanmateix, l'Agència Internacional de l'Energia (AIE) la destaca com una tecnologia clau per eliminar els cicles de gas a les hores sense sol.
+                  </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Renovable gestionable: els dipòsits de sals foses permeten emmagatzemar calor per generar llum fins i tot de nit.</li>
+                        <li>Excel·lent capacitat de cobrir la demanda de tarda/nit (pics de sopar a les llars), reduint l'ús de gas.</li>
+                        <li>Vida útil molt llarga sense la degradació química que pateixen les bateries de liti convencionals.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Cost de construcció inicial (CAPEX) molt superior al dels parcs solars fotovoltaics simples.</li>
+                        <li>Necessitat estricta de terrenys planes de gran escala i amb nivells de radiació solar directa molt alts.</li>
+                        <li>Baix rendiment termodinàmic global de conversió tèrmica comparat amb el rendiment d'altres renovables.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
@@ -2216,6 +2243,24 @@
                     <div class="real-world-title">Vincle amb la Catalunya real:</div>
                     Catalunya té un potencial molt elevat de biogàs a zones ramaderes com la comarca d'<strong>Osona</strong> o de Lleida, on es fan servir per resoldre la contaminació dels aqüífers provocada pels purins. La biomassa forestal s'aprofita principalment en comarques amb molta densitat boscosa (com la Selva o la Garrotxa), ajudant a mantenir els boscos nets contra grans incendis forestals.
                   </div>
+                  <div class="pros-cons-box" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                    <div style="background: rgba(5, 150, 105, 0.05); border-left: 3px solid var(--primary); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--primary); font-size: 0.85rem; text-transform: uppercase;">Avantatges reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Energia de base no depenent de factors atmosfèrics, actuant com a suport segur al mix de producció.</li>
+                        <li>Conversió de contaminants (com els purins a Osona) en energia útil, reduint gasos nocius i nitrats a l'aigua.</li>
+                        <li>Foment de la neteja i manteniment del sotabosc català, reduint el perill de grans incendis forestals.</li>
+                      </ul>
+                    </div>
+                    <div style="background: rgba(225, 29, 72, 0.05); border-left: 3px solid var(--rose); padding: 0.75rem; border-radius: 4px;">
+                      <strong style="color: var(--rose); font-size: 0.85rem; text-transform: uppercase;">Inconvenients reals:</strong>
+                      <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1.2rem; margin-top: 0.25rem;">
+                        <li>Genera emissions locals de partícules i fums en la combustió directa, podent causar queixes veïnals.</li>
+                        <li>Logística de transport molt complexa i de baix rendiment en haver de moure biomassa per carreteres rurals.</li>
+                        <li>Risc ecològic d'explotació no sostenible o descontrolada dels recursos forestals locals del país.</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="tech-img-wrapper">
                   <div class="news-box">
@@ -2228,6 +2273,139 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SIMULADOR DE LA BALANÇA -->
+    <section id="tab-balanca" class="tab-content">
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Simulador de la Balança de MW
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Juga amb la producció i la demanda en aquesta simulació. Activa o desactiva diferents tipus de centrals energètiques reals de Catalunya, canvia el trimestre i observa l'efecte del clima o d'una sequera sobre el balanç final.
+        </p>
+
+        <div class="sim-grid">
+          <!-- Controls Panel -->
+          <div>
+            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-bottom: 1rem; color: var(--secondary);">1. Ajusta la demanda i l'entorn</h3>
+            
+            <div class="control-group">
+              <div class="control-label">
+                <span>Demanda Base del País:</span>
+                <span><span id="val-demanda" class="control-val">7.200</span> MW</span>
+              </div>
+              <input type="range" id="input-demanda" min="4000" max="9500" value="7200" step="100" class="slider" oninput="updateSimulation()">
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Estació de l'Any (Trimestre):</span>
+              <div class="btn-toggle-group">
+                <button class="btn-toggle" id="btn-q1" onclick="setSimQuarter('Q1')">Q1 - Primavera</button>
+                <button class="btn-toggle active" id="btn-q2" onclick="setSimQuarter('Q2')">Q2 - Estiu</button>
+                <button class="btn-toggle" id="btn-q3" onclick="setSimQuarter('Q3')">Q3 - Tardor</button>
+                <button class="btn-toggle" id="btn-q4" onclick="setSimQuarter('Q4')">Q4 - Hivern</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <span class="control-label">Estat Climatològic Especial:</span>
+              <div class="btn-toggle-group">
+                <button class="btn-toggle active" id="btn-clim-normal" onclick="setSimClimate('normal')">Clima Normal</button>
+                <button class="btn-toggle" id="btn-clim-sequera" onclick="setSimClimate('sequera')">Sequera Històrica (10% Hidro)</button>
+                <button class="btn-toggle" id="btn-clim-temporal" onclick="setSimClimate('temporal')">Temporal Marítim (50% Eòlica)</button>
+              </div>
+            </div>
+
+            <h3 style="border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--primary);">2. Activa/desactiva les Centrals disponibles</h3>
+            <div class="plant-grid">
+              <!-- Nuclear -->
+              <div class="plant-toggle-card active" id="card-nuc" onclick="toggleSimPlant('nuc')">
+                <span class="plant-toggle-name">Central Nuclear (Ascó/Vandellòs)</span>
+                <span class="plant-toggle-stat">3.000 MW · 0 CO₂</span>
+              </div>
+              <!-- Gas -->
+              <div class="plant-toggle-card active" id="card-gas" onclick="toggleSimPlant('gas')">
+                <span class="plant-toggle-name">Cicle Combinat (Gas Besòs)</span>
+                <span class="plant-toggle-stat">2.400 MW · 960t CO₂</span>
+              </div>
+              <!-- Solar -->
+              <div class="plant-toggle-card active" id="card-sol" onclick="toggleSimPlant('sol')">
+                <span class="plant-toggle-name">Parcs Solars Fotovoltaics</span>
+                <span class="plant-toggle-stat">1.200 MW · 0 CO₂</span>
+              </div>
+              <!-- Eòlica -->
+              <div class="plant-toggle-card active" id="card-eol" onclick="toggleSimPlant('eol')">
+                <span class="plant-toggle-name">Parcs Eòlics Terrestres</span>
+                <span class="plant-toggle-stat">1.500 MW · 0 CO₂</span>
+              </div>
+              <!-- Hidràulica -->
+              <div class="plant-toggle-card active" id="card-hid" onclick="toggleSimPlant('hid')">
+                <span class="plant-toggle-name">Embassaments (Hidroelèctrica)</span>
+                <span class="plant-toggle-stat">1.000 MW · 0 CO₂</span>
+              </div>
+              <!-- Biomassa -->
+              <div class="plant-toggle-card" id="card-bio" onclick="toggleSimPlant('bio')">
+                <span class="plant-toggle-name">Planta de Biomassa Comarcal</span>
+                <span class="plant-toggle-stat">200 MW · 20t CO₂</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation Outputs -->
+          <div class="sim-output">
+            <h3 style="text-align: center; color: #fff; margin-bottom: 0;">Resolució de la Balança</h3>
+            
+            <div id="sim-status-banner" class="sim-status-box ok">
+              SISTEMA ESTABLE (SUPERÀVIT DE 1.100 MW)
+            </div>
+
+            <div class="sim-bar-container">
+              <div class="sim-bar-label">
+                <span>Demanda del País</span>
+                <span><span id="sim-lbl-demand">8.280</span> MW</span>
+              </div>
+              <div class="sim-bar-outer">
+                <div id="sim-bar-demand" class="sim-bar-inner" style="background-color: var(--amber); width: 80%;">DEMANDA</div>
+              </div>
+            </div>
+
+            <div class="sim-bar-container">
+              <div class="sim-bar-label">
+                <span>Producció Efectiva</span>
+                <span><span id="sim-lbl-prod">9.100</span> MW</span>
+              </div>
+              <div class="sim-bar-outer">
+                <div id="sim-bar-prod" class="sim-bar-inner" style="background-color: var(--primary); width: 90%;">PRODUCCIÓ</div>
+              </div>
+            </div>
+
+            <div class="sim-metrics-grid">
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Emissions CO₂</div>
+                <div class="sim-metric-val" id="sim-val-co2" style="color: var(--rose);">960 t</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Importació de Llum</div>
+                <div class="sim-metric-val" id="sim-val-import" style="color: var(--text-main);">0 MW</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Mix Renovables</div>
+                <div class="sim-metric-val" id="sim-val-mix" style="color: var(--primary);">40.7%</div>
+              </div>
+              <div class="sim-metric-card">
+                <div class="sim-metric-lbl">Impacte Financer</div>
+                <div class="sim-metric-val" id="sim-val-impact" style="color: var(--primary);">+41.0 M€</div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;">
+              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW.
+            </div>
+          </div>
         </div>
       </div>
     </section>
