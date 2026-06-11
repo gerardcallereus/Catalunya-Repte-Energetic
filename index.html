@@ -843,6 +843,143 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Ampliació: Centrals i Gràfics */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 900px) {
+      .tech-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+    .tech-img-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .tech-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .tech-img:hover {
+      transform: scale(1.02);
+    }
+    .news-box {
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .news-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.82rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 6px;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .news-link:hover {
+      background: rgba(6, 182, 212, 0.2);
+      border-color: var(--secondary);
+      transform: translateY(-1px);
+    }
+    .source-table-wrapper {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .source-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .source-table th, .source-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .source-table th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .source-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .chart-container {
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .chart-bar-group {
+      margin-bottom: 1rem;
+    }
+    .chart-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    .chart-bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .chart-bar-fill-inst {
+      height: 8px;
+      background: var(--indigo);
+      border-radius: 9999px;
+    }
+    .chart-bar-fill-prod {
+      height: 8px;
+      background: var(--primary);
+      border-radius: 9999px;
+    }
+    .chart-legend {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -1065,79 +1202,304 @@
             </div>
 
             <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 0.8rem;">
-              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW en lloc del seu valor nominal.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: CATÀLEG DE CENTRALS -->
+              <strong>Nota didàctica</strong>: A l'estiu, un increment de demanda base a 7.200 MW genera una demanda total de 8.280 MW a causa dels aires condicionats (multiplicador de 1.15x). Les plaques solars aprofiten la radiació addicional d'estiu (1.5x) produint 1.800 MW en     <!-- TAB 3: CATÀLEG DE CENTRALS -->
     <section id="tab-centrals" class="tab-content">
+      <!-- 1. INTRODUCCIÓ CIENTÍFICA A LES FONTS D'ENERGIA -->
       <div class="glass-card">
         <h2>
-          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-          El Catàleg de Tecnologies de Generació
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+          Fonaments Científics de la Generació Elèctrica
         </h2>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">
-          Explora com funcionen físicament les diferents centrals que pots construir, els seus avantatges i inconvenients en el simulador, i on es troben localitzades a la Catalunya real.
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+          Per governar correctament la transició elèctrica catalana, primer cal comprendre com es comporta l'energia a nivell físic, termodinàmic i operatiu.
         </p>
 
-        <div style="display: flex; flex-direction: column; gap: 1rem;" id="catalog-accordion">
-          
+        <div class="grid-2">
+          <div>
+            <h3 style="color: var(--secondary); margin-top: 1rem;">Energia Primària vs. Secundària</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+              L'<strong>electricitat no és una font d'energia primària</strong>. És un vector energètic secundari, el que significa que l'hem de fabricar a partir de recursos presents a la natura (forces mecàniques, calor de reaccions o radiació). Cada vegada que convertim energia primària en electricitat, la termodinàmica ens imposa pèrdues de calor inevitables (governada per la segona llei i el cicle de Carnot).
+            </p>
+
+            <h3 style="color: var(--primary); margin-top: 1rem;">Renovables vs. No Renovables</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+              Les fonts <strong>no renovables</strong> (Urani, Gas fòssil) depenen d'estocs geològics finits que es consumeixen a una velocitat milions de vegades superior a la de la seva formació. Les <strong>renovables</strong> aprofiten fluxos constants de la biosfera (radiació solar, energia cinètica del vent, cicle de l'aigua). Tanmateix, les renovables solen tenir menor <em>densitat energètica</em>, requerint més extensió territorial per generar la mateixa quantitat de megawatts.
+            </p>
+          </div>
+
+          <div>
+            <h3 style="color: var(--amber); margin-top: 1rem;">Gestionabilitat i Estabilitat de la Xarxa</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+              La xarxa elèctrica necessita mantenir una freqüència exacta de <strong>50 Hz</strong> per no col·lapsar. Això requereix que la producció s'ajusti dinàmicament a la demanda en cada fracció de segon. Les fonts <strong>gestionables</strong> (Gas, Hidràulica amb embassaments, Biomassa o Nuclear) es poden encendre, tancar o regular a voluntat. Les fonts <strong>variables o intermitents</strong> (Solar Fotovoltaica, Eòlica) generen només quan bufa el vent o brilla el sol, requerint sistemes de suport d'emmagatzematge o xarxes de transport complexes.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="color: var(--indigo); margin-top: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">Taula Comparativa de Dades Elèctriques Reals</h3>
+        <div class="source-table-wrapper">
+          <table class="source-table">
+            <thead>
+              <tr>
+                <th>Tecnologia</th>
+                <th>Tipus de Font</th>
+                <th>Gestionable</th>
+                <th>Eficiència Física (%)</th>
+                <th>Emissions Cicle Vida</th>
+                <th>Cost LCOE (€/MWh)</th>
+                <th>Hores Equivalents / any</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600; color:var(--rose);">Nuclear (Ascó/Vandellòs)</td>
+                <td>No Renovable</td>
+                <td>Base (Constant)</td>
+                <td>33% - 35%</td>
+                <td>12 gCO₂eq / kWh</td>
+                <td>45 - 80 €</td>
+                <td>7.800 - 8.200 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--rose);">Cicle Combinat (Gas)</td>
+                <td>No Renovable</td>
+                <td>Molt Gestionable</td>
+                <td>55% - 60%</td>
+                <td>420 - 490 gCO₂eq / kWh</td>
+                <td>90 - 130 €</td>
+                <td>2.000 - 4.500 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Solar Fotovoltaica</td>
+                <td>Renovable</td>
+                <td>Intermitent</td>
+                <td>18% - 22%</td>
+                <td>40 - 48 gCO₂eq / kWh</td>
+                <td>30 - 50 €</td>
+                <td>1.400 - 1.600 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Termosolar (Sals Foses)</td>
+                <td>Renovable</td>
+                <td>Gestionable (Amb tancs)</td>
+                <td>28% - 35%</td>
+                <td>20 - 30 gCO₂eq / kWh</td>
+                <td>80 - 140 €</td>
+                <td>2.500 - 3.200 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Eòlica Terrestre</td>
+                <td>Renovable</td>
+                <td>Intermitent</td>
+                <td>35% - 45%</td>
+                <td>11 - 15 gCO₂eq / kWh</td>
+                <td>35 - 55 €</td>
+                <td>2.000 - 2.400 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Eòlica Marina</td>
+                <td>Renovable</td>
+                <td>Intermitent (Més regular)</td>
+                <td>42% - 50%</td>
+                <td>12 - 16 gCO₂eq / kWh</td>
+                <td>70 - 110 €</td>
+                <td>3.400 - 4.000 h</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Hidroelèctrica Presa</td>
+                <td>Renovable</td>
+                <td>Immediata / Punta</td>
+                <td>85% - 92%</td>
+                <td>4 - 24 gCO₂eq / kWh</td>
+                <td>40 - 70 €</td>
+                <td>1.000 - 2.000 h (Sequera dep.)</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">Biomassa / Biogàs</td>
+                <td>Renovable</td>
+                <td>Gestionable / Base</td>
+                <td>25% - 30%</td>
+                <td>23 - 45 gCO₂eq / kWh</td>
+                <td>75 - 110 €</td>
+                <td>6.000 - 7.000 h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color: var(--amber); margin-top: 2.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">El Paradoxa de la Potència: Capacitat Instal·lada vs. Producció Real</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Aquest gràfic mostra la gran diferència entre la <strong>potència nominal</strong> (megawatts de centrals connectades, és a dir, la capacitat de produir en el millor moment) i la <strong>producció anual efectiva</strong> a Catalunya.
+        </p>
+
+        <div class="chart-container">
           <!-- Nuclear -->
-          <div class="catalog-card">
-            <div class="catalog-header" onclick="toggleAccordion(this)">
-              <span class="catalog-icon">
-                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                Central Nuclear (Energia de Base)
-              </span>
-              <span class="tech-pill non-renewable">No Renovable</span>
+          <div class="chart-bar-group">
+            <div class="chart-bar-labels">
+              <span style="font-weight:600; color: var(--rose);">Nuclear (3 reactors)</span>
+              <span>Potència: 25% | Producció Real: 58%</span>
             </div>
-            <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Es basa en la fissió (divisió) de nuclis d'àtoms d'Urani dins d'un reactor. Aquesta reacció allibera una quantitat ingent d'energia tèrmica (calor), que s'utilitza per bullir aigua. El vapor d'aigua a alta pressió mou una turbina gegant acoblada a un generador elèctric, creant electricitat. Tot seguit, el vapor es refreda en torres de refrigeració amb l'aigua d'un riu o del mar.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stats">
-                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">3.500 a 9.000 M€</span></div>
-                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
-                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Molt Alt (40 a 180 M€)</span></div>
-                  <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-                </div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És la central de major capacitat de base. És ideal per evitar dèficits, però és caríssima de mantenir, tarda molt a construir-se, enfada la facció ecologista i activa esdeveniments de residus nuclears o avaries que posen en risc l'estabilitat política.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Catalunya depèn molt d'aquesta tecnologia: compta amb els reactors actius d'<strong>Ascó I i II</strong> (a la Ribera d'Ebre) i <strong>Vandellòs II</strong> (al Baix Camp). Generen més del 50% de l'electricitat catalana. El seu tancament està previst pel govern espanyol de forma esglaonada entre 2030 i 2035, creant un intens debat social sobre com substituir-les sense disparar els cicles de gas.
-              </div>
+            <div class="chart-bar-row">
+              <div class="chart-bar-fill-inst" style="width: 25%;"></div>
+              <div class="chart-bar-fill-prod" style="width: 58%;"></div>
             </div>
           </div>
 
-          <!-- Fossil Gas -->
-          <div class="catalog-card">
-            <div class="catalog-header" onclick="toggleAccordion(this)">
-              <span class="catalog-icon">
-                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                Cicle Combinat de Gas (Reserva de Base)
-              </span>
-              <span class="tech-pill non-renewable">No Renovable</span>
+          <!-- Gas -->
+          <div class="chart-bar-group">
+            <div class="chart-bar-labels">
+              <span style="font-weight:600; color: var(--rose);">Cicle Combinat (Gas)</span>
+              <span>Potència: 30% | Producció Real: 22%</span>
             </div>
-            <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Es crema gas natural per accionar una turbina de gas (similar a la d'un avió). Els gasos d'escapament, encara molt calents, s'aprofiten en una caldera de recuperació per generar vapor que fa moure una segona turbina (de vapor) connectada al mateix eix. D'aquí prové el nom de "cicle combinat", que assoleix rendiments molt més alts que les tèrmiques clàssiques.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">500 a 1.200 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (15 a 45 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Elevades (0.4t/MW)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És ràpida de construir i barata en inversió inicial. Serveix per tapar un dèficit ràpidament. Per contra, les seves emissions de CO₂ t'exposen a sancions de la UE i causen un greu desgast en l'aprovació ecologista, a més de patir per l'encariment del preu del combustible fòssil.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                A Catalunya hi ha grans centrals de cicle combinat als polígons industrials del <strong>Besòs</strong> (Barcelona) i de <strong>Tarragona</strong> (plana de la Canonja). Són les encarregades d'assegurar el sistema quan les renovables no produeixen o s'aturen les nuclears, però són molt criticades per impedir el conformitat dels objectius de reducció de gasos d'efecte hivernacle.
-              </div>
+            <div class="chart-bar-row">
+              <div class="chart-bar-fill-inst" style="width: 30%;"></div>
+              <div class="chart-bar-fill-prod" style="width: 22%;"></div>
+            </div>
+          </div>
+
+          <!-- Hidraulica -->
+          <div class="chart-bar-group">
+            <div class="chart-bar-labels">
+              <span style="font-weight:600; color: var(--primary);">Hidroelèctrica</span>
+              <span>Potència: 17% | Producció Real: 8% (dependent de sequera)</span>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-bar-fill-inst" style="width: 17%;"></div>
+              <div class="chart-bar-fill-prod" style="width: 8%;"></div>
+            </div>
+          </div>
+
+          <!-- Eolica -->
+          <div class="chart-bar-group">
+            <div class="chart-bar-labels">
+              <span style="font-weight:600; color: var(--primary);">Eòlica Terrestre</span>
+              <span>Potència: 11% | Producció Real: 6%</span>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-bar-fill-inst" style="width: 11%;"></div>
+              <div class="chart-bar-fill-prod" style="width: 6%;"></div>
             </div>
           </div>
 
           <!-- Solar -->
+          <div class="chart-bar-group">
+            <div class="chart-bar-labels">
+              <span style="font-weight:600; color: var(--primary);">Solar Fotovoltaica (Autoconsum + Parcs)</span>
+              <span>Potència: 15% | Producció Real: 5%</span>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-bar-fill-inst" style="width: 15%;"></div>
+              <div class="chart-bar-fill-prod" style="width: 5%;"></div>
+            </div>
+          </div>
+
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background: var(--indigo);"></div>
+              <span>% Potència Instal·lada nominal (MW)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: var(--primary);"></div>
+              <span>% Producció Real Anual (GWh)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. CATÀLEG DE CENTRALS AMB ACORDIONS -->
+      <div class="glass-card">
+        <h2>
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          Catàleg Detallat de Tecnologies de Generació
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          Explora la termodinàmica, l'esquema visual, os costos del simulador i les notícies reals dels debats a Catalunya per a cadascuna de les 8 centrals.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;" id="catalog-accordion">
+          
+          <!-- Central Nuclear -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Central Nuclear (Fissió de Base)
+              </span>
+              <span class="tech-pill non-renewable">No Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic i Termodinàmic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Es basa en la <strong>fissió nuclear</strong>: es bombardeja amb neutrons el nucli d'àtoms d'Urani-235 pesat, que es divideixen alliberant una gran quantitat de calor i més neutrons, generant una reacció en cadena controlada per barres de control (de bor o cadmi). Aquesta calor bull aigua a alta pressió en un circuit tancat (cicle termodinàmic de <strong>Rankine</strong>). El vapor d'aigua generat acciona turbines que fan girar alternadors per inducció electromagnètica de <strong>Faraday</strong>, creant corrent elèctric altern. Finalment, el vapor es condensa mitjançant l'aigua freda del riu o del mar i es refreda a les xemeneies hiperbòliques.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">3.500 a 9.000 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Molt Alt (40-180 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (vapor d'aigua)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Proporciona la major potència constant de base, essent la clau per evitar dèficits elèctrics. Tot i això, requereix inversions inicials ingents, temps molt llargs i provoca el rebuig dels ecologistes, activant crisis per avaries o residus.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    Catalunya depèn molt d'aquesta tecnologia: compta amb els reactors actius d'<strong>Ascó I i II</strong> (a la Ribera d'Ebre) i <strong>Vandellòs II</strong> (al Baix Camp), gestionats per l'Associació Nuclear Ascó-Vandellòs (ANAV). Aquestes plantes generen gairebé el 60% de tota la llum elèctrica consumida al país, fet que converteix el seu tancament previst pel govern espanyol de forma esglaonada entre 2030 i 2035 en un dels majors reptes de sobirania energètica de Catalunya.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/nuclear_plant.png" alt="Esquema d'una central nuclear" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.ccma.cat/324/el-govern-espanyol-i-les-electriques-acorden-el-tancament-de-les-nuclears-entre-2027-i-2035/noticia/2903539/" target="_blank" rel="noopener" class="news-link">📅 Pacte de tancament (CCMA)</a>
+                    <a href="https://www.ara.cat/societat/catalunya-tindra-construir-propis-magatzems-residus-nuclears_1_4193630.html" target="_blank" rel="noopener" class="news-link">⚠️ El problema dels residus (Ara)</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cicle Combinat -->
+          <div class="catalog-card">
+            <div class="catalog-header" onclick="toggleAccordion(this)">
+              <span class="catalog-icon">
+                <svg style="width:20px; height:20px; fill:var(--rose)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Cicle Combinat de Gas (Base i Punta Ràpida)
+              </span>
+              <span class="tech-pill non-renewable">No Renovable</span>
+            </div>
+            <div class="catalog-body">
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic i Termodinàmic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Aquesta tecnologia acobla dos cicles termodinàmics consecutius per optimitzar el rendiment global fins a gairebé un 60%:
+                    1. <strong>Cicle de Joule-Brayton (Turbina de Gas):</strong> Es comprimeix l'aire atmosfèric i es barreja amb gas natural a la cambra de combustió. La inflamació fa expandir els gasos a gran velocitat per moure una turbina de gas.
+                    2. <strong>Cicle de Rankine (Turbina de Vapor):</strong> Els gasos d'escapament de la primera turbina, encara extremadament calents, passen per una caldera de recuperació de calor (HRSG) per bullir aigua i produir vapor d'aigua a alta pressió, que mou una segona turbina (de vapor) acoblada al mateix alternador.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">500 a 1.200 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (15-45 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Elevades (0.4t de CO₂ / MW)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És ideal com a sortida d'emergència en cas de dèficit a curt termini perquè es construeix molt ràpid. El gran inconvenient és l'emissió de gasos contaminants que ens poden exposar a greus sancions de la UE i al rebuig ecologista, a més de la dependència del cost de gas internacional.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    A Catalunya hi ha grans centrals de cicle combinat als polígons industrials del <strong>Besòs</strong> (al costat de Barcelona) i al complex petroquímic de <strong>Tarragona</strong> (plana de la Canonja). Són imprescindibles com a "reserva de garantia" quan falla el vent o les reserves d'aigua, però les seves emissions són el principal obstacle per assolir els objectius de descarbonització.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/gas_plant.png" alt="Esquema d'una central de cicle combinat" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.ara.cat/clima-i-medi-ambient/besos-totes-centrals-cicle-combinat-actives-debat_1_4875321.html" target="_blank" rel="noopener" class="news-link">🏭 El Besòs i les tèrmiques (Ara)</a>
+                    <a href="https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles" target="_blank" rel="noopener" class="news-link">💰 Cost de combustibles (Nació)</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solar Fotovoltaica -->
           <div class="catalog-card">
             <div class="catalog-header" onclick="toggleAccordion(this)">
               <span class="catalog-icon">
@@ -1147,22 +1509,37 @@
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Les plaques solars contenen cel·les fetes de materials semiconductors (com el silici). Quan els fotons de la llum solar colpegen les plaques, alliberen electrons del silici, generant un corrent elèctric directe (DC). Un dispositiu anomenat *inversor* el converteix en corrent altern (AC), compatible amb les cases i les línies de transport.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">400 a 1.300 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (4 a 15 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És neta i no emet gasos. A l'estiu rep un gran impuls (1.5x de rendiment), però té una forta intermitència (a l'hivern baixa a 0.6x). Si es construeixen grans parcs, es poden disparar protestes d'agricultors o veïns per l'ocupació de sòl rural.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Catalunya té un desplegament molt alt d'autoconsum a teulades particulars i naus industrials, però va molt endarrerida en la creació de grans parcs solars fotovoltaics a causa de les complexes normatives d'aprovació mediambiental, la protecció del sòl agrari a zones com Ponent o les comarques de Girona, i el rebuig d'entitats de defensa del territori.
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Aprofita l'<strong>efecte fotoelèctric/fotovoltaic</strong> en materials semiconductors (generalment Silici dopat amb Fòsfor i Bor per crear una unió P-N). Quan els fotons de la llum solar impacten contra la cel·la, cedeixen la seva energia aos electrons, que salten la banda prohibida (bandgap) i s'alliberen. Això genera una diferència de potencial i un flux de corrent continu (DC). Un equip inversor el converteix a corrent altern (AC) a 50 Hz per injectar-lo a la xarxa elèctrica.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">400 a 1.300 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">2 a 4 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (4-15 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (emissions en fabricació)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És verda, neta i barata de mantenir. Produeix una gran quantitat de MW adicionals a l'estiu (1.5x), però a l'hivern s'enfonsa la seva eficàcia (0.6x) i genera dependència si no es complementa amb altres fonts.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    Catalunya té un volum altíssim d'autoconsum solar de petita escala a les teulades, amb més de 100.000 instal·lacions domèstiques i industrials. Tanmateix, s'enfronta a problemes per aprovar grans macroparcs a terra en zones com Ponent o l'Alt Empordà pel rebuig del sector agrari i de plataformes veïnals per l'ocupació de sòl rural d'alt interès de conreu.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/solar_pv.png" alt="Esquema d'energia solar fotovoltaica" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://icaen.gencat.cat/ca/detalls/noticia/Nota-autoconsum-2023" target="_blank" rel="noopener" class="news-link">📊 Dades autoconsum (ICAEN)</a>
+                    <a href="https://www.ccma.cat/324/oposicio-als-macroparcs-solars-a-ponent-un-atac-al-sector-agrari/noticia/3112450/" target="_blank" rel="noopener" class="news-link">🚜 Oposició a macroparcs (CCMA)</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Eolica -->
+          <!-- Eòlica Terrestre -->
           <div class="catalog-card">
             <div class="catalog-header" onclick="toggleAccordion(this)">
               <span class="catalog-icon">
@@ -1172,22 +1549,37 @@
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Les masses d'aire en moviment mouen les pales dels aerogeneradors, transformant l'energia cinètica del vent en energia mecànica de rotació. Dins de la góndola de la turbina, una caixa multiplicadora augmenta la velocitat del rotor per accionar un alternador, que és la màquina elèctrica que genera l'electricitat.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">600 a 2.000 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Sota (9 a 32 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Rendeix molt millor a la tardor i sobretot a l'hivern (1.2x), complementant perfectament la solar. Construir grans parcs eòlics redueix greument l'aprovació ciutadana dels municipis on s'instal·len pel rebuig visual i acústic.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                La producció de vent a Catalunya està molt concentrada a comarques ventoses com la <strong>Terra Alta</strong>, el Baix Ebre i l'Anoia. Això ha provocat denúncies històriques de "massificació eòlica", amb plataformes com *Salvem lo Territori* que s'oposen a la saturació paisatgística, mentre que altres zones de Catalunya amb molt de vent (com l'Empordà) tenen una instal·lació eòlica gairebé nul·la pel gran rebuig social local.
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Transforma l'<strong>energia cinètica del vent</strong> en energia elèctrica. La força de l'aire mou les pales dissenyades aerodinàmicament, fent girar un eix a baixes revolucions. Dins de la carcassa (góndola), una caixa multiplicadora d'engranatges incrementa la velocitat de gir fins a més de 1.500 rpm per accionar un alternador elèctric trifàsic. L'eficiència aerodinàmica màxima d'un aerogenerador està limitada teòricament pel <strong>Límit de Betz</strong> al 59.3%.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">600 a 2.000 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (9-32 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (emissions en el cicle de materials)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Proporciona un excel·lent suport a la tardor i sobretot a l'hivern (1.2x d'eficàcia), complementant la baixada de la solar. L'inconvenient principal és el gran desgast polític i l'oposició ciutadana a les comarques rurals escollides.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    La producció eòlica a Catalunya està molt concentrada a comarques com la <strong>Terra Alta</strong>, el Baix Ebre i l'Anoia, el que ha provocat protestes històriques de les entitats veïnals denunciant la "massificació eòlica" i exigint que la producció es reparteixi de forma justa pel territori, sobretot prop dels grans centres de consum (Barcelona i la seva àrea).
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/wind_onshore.png" alt="Esquema d'aerogeneradors terrestres" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.naciodigital.cat/noticia/222123/terra-alta-diu-prou-massificacio-eolica" target="_blank" rel="noopener" class="news-link">💨 Massificació a Terra Alta (Nació)</a>
+                    <a href="https://www.ara.cat/comarques/girona/rebuj-eolic-alt-emporda-projectes-com-salvem-emporda_1_3957210.html" target="_blank" rel="noopener" class="news-link">🚩 Oposició a Girona (Ara)</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Hidraulica -->
+          <!-- Hidroelèctrica -->
           <div class="catalog-card">
             <div class="catalog-header" onclick="toggleAccordion(this)">
               <span class="catalog-icon">
@@ -1197,22 +1589,41 @@
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Aprofita l'energia potencial de l'aigua emmagatzemada en un embassament a gran alçada. Quan s'obre la resclosa, l'aigua es canalitza a pressió per canonades forçades fins a la base de la presa, on xoca contra els àleps d'una turbina (Francis, Pelton o Kaplan) fent-la girar. Aquest moviment fa girar un alternador que produeix electricitat de forma instantània.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.500 a 4.000 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">5 a 8 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Sota-Mitjà (12 a 30 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És l'única font renovable convencional completament gestionable (la pots obrir quan vulguis). Però té una debilitat mortal: depèn de la pluja. Si s'activa l'esdeveniment de sequera, el seu rendiment cau en picat.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Catalunya té preses històriques a la conca dels rius Noguera Pallaresa i Ribagorçana al Pirineu (com **Talarn** o Tremp), i embassaments clau a la xarxa Ter-Llobregat (**Sau i Susqueda**). La sequera dels anys 2021-2024 va reduir les reserves de Sau a mínims històrics del 10%, demostrant que l'energia hidroelèctrica ja no pot ser un suport estable durant èpoques de canvi climàtic sever.
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Aprofita l'<strong>energia potencial gravitatòria</strong> de l'aigua recollida a gran alçada en un embassament. Quan es requereix electricitat, s'obren les vàlvules i l'aigua baixa amb gran pressió per canonades forçades. El corrent d'aigua impacta i fa girar els àleps de la turbina:
+                    - **Turbina Pelton**: Per a grans alçades de caiguda i cabals petits.
+                    - **Turbina Francis**: Per a alçades mitjanes i cabals mitjans/grans.
+                    - **Turbina Kaplan**: Per a caigudes petites de rius molt cabalosos.
+                    L'eix de la turbina acciona l'alternador per induir el corrent elèctric, amb un rendiment excepcionalment alt, superior al 85%.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.500 a 4.000 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-val">Temps construcció:</span><span class="catalog-stat-val">5 a 8 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-val">Manteniment / torn:</span><span class="catalog-stat-val">Sota-Mitjà (12-30 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (petita emissió de metà pel fang)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> És l'única renovable convencional 100% gestionable de manera immediata (es triga pocs minuts a encendre-la). Tot i això, té la debilitat de dependre completament de les precipitacions: una sequera redueix la seva eficàcia al 10%.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    Catalunya té grans centrals hidroelèctriques als rius del Pirineu (conques de la Noguera Pallaresa i Ribagorçana com la presa de **Talarn**) i embassaments a les conques internes com el sistema **Sau-Susqueda** (riu Ter). Durant la sequera històrica recent, les reserves de Sau van caure per sota del 10%, obligant a suspendre completament la generació elèctrica per protegir la qualitat de l'aigua, demostrant com el canvi climàtic afecta aquesta bateria natural.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/hydroelectric.png" alt="Esquema d'una central hidroelèctrica" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.la-vanguardia.com/local/girona/20230325/8851410/sequera-redueix-minim-historic-produccio-hidroelectrica-catalunya.html" target="_blank" rel="noopener" class="news-link">💧 Mínims històrics (La Vanguardia)</a>
+                    <a href="https://www.naciodigital.cat/noticia/255621/sau-i-susqueda-en-alerta-les-preses-perden-la-capacitat-de-turbinar" target="_blank" rel="noopener" class="news-link">⚠️ Incapacitat de turbinar (Nació)</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Eolica Marina -->
+          <!-- Eòlica Marina -->
           <div class="catalog-card">
             <div class="catalog-header" onclick="toggleAccordion(this)">
               <span class="catalog-icon">
@@ -1222,17 +1633,32 @@
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Funciona amb el mateix principi que l'eòlica terrestre, peró les turbines es col·loquen en el mar, sovint sobre plataformes flotants ancorades al fons marí a causa de la gran profunditat de la costa mediterrània. En el mar, el vent és molt més constant i fort, permetent la utilització d'aerogeneradors gegants amb el doble de capacitat de producció.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">2.500 a 7.000 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Alt (40 a 120 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Abans de poder-la fabricar, has de gastar diners en la política "Desbloqueig de l'Eòlica Marina". Produeix una gran quantitat de MW verds de forma constant, peró té una inversió inicial gegantina i requereix temps per acabar les obres.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Aquesta és una de les principals apostes del govern català a mitjà termini, amb el projecte del **Parc Tramuntana** dissenyat al **Golf de Roses** (Alt Empordà). El projecte preveu aerogeneradors flotants a uns 20 km de la costa, generant polèmica social a causa de l'impacte visual en una zona de gran valor turístic i els efectes sobre els ecosistemes marins del Cap de Creus.
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Funciona de forma similar a l'eòlica terrestre, però utilitza turbines molt més grans instal·lades en el mar, recolzades sobre fonaments fixos (a pocs metres de fondària) o sobre **plataformes flotants semisubmergibles** ancorades al fons marí amb cadenes de fondeig d'alta resistència (necessari al Mediterrani per les grans profunditats de la costa). Com que el mar és pla i no té obstacles topogràfics, el vent és un 30% més fort i molt més constant, el que dobla la producció elèctrica per molí. L'energia es transporta per cables submarins a alta tensió fins a subestacions terrestres.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">2.500 a 7.000 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">6 a 10 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Alt (40-120 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (emissions en la logística marítima)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Està bloquejada d'inici (requereix aprovar la política corresponent). Ofereix una gran quantitat de megawatts verds constants, però exigeix pressupostos inicials gegantins, temps molt llargs i pot provocar tensions amb el turisme i la pesca.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    A Catalunya s'ha projectat el parc eòlic marí flotant **Parc Tramuntana** al **Golf de Roses** (Alt Empordà). El projecte s'ha enfrontat a una forta oposició d'entitats ecologistes locals i del sector turístic i pesquer de la Costa Brava, a causa de l'impacte visual que pot comportar sobre el paisatge del Cap de Creus i els possibles efectes en la biodiversitat marina del golf.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/wind_offshore.png" alt="Esquema d'aerogeneradors flotants marins" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.ccma.cat/324/el-parc-tramuntana-projecta-els-primers-molins-de-vent-marins-al-golf-de-roses/noticia/3151410/" target="_blank" rel="noopener" class="news-link">🌊 Parc Tramuntana (CCMA)</a>
+                    <a href="https://www.ara.cat/societat/medi-ambient/roses-eolica-marina-creixement-i-oposicio-sector-pesquer_1_4578120.html" target="_blank" rel="noopener" class="news-link">🐟 Conflicte pesquer (Ara)</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1247,17 +1673,32 @@
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Utilitza un camp de miralls orientables (heliòstats) que segueixen el sol per reflectir i concentrar els raigs solars a la punta d'una torre central. En aquesta torre circula un fluid (generalment sals foses) que s'escalfa fins a més de 550°C. Les sals calentes es guarden en tancs aïllats térmicament i es fan servir per bullir aigua i moure una turbina de vapor convencional quan es necessita.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.800 a 5.000 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">5 a 9 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (25 a 70 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 (Nula)</span></div>
-              </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> També està bloquejada d'inici (requereix la política "Pla de Desenvolupament Termosolar"). Rendeix molt a l'estiu (1.5x) i, a diferència de la solar fotovoltaica, permet conservar part de la producció a la nit gràcies a l'emmagatzematge de sals, fent-la gestionable.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Espanya és líder mundial en potència termosolar instal·lada, sobretot a Andalusia i Extremadura. A Catalunya gairebé no s'ha desenvolupat a causa dels seus grans requeriments de terreny pla molt assolellat i l'alt cost dels projectes inicials, tot i ser considerada clau per l'Agència Internacional de l'Energia (AIE) per a la transició verda.
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    A diferència de la solar fotovoltaica, la termosolar concentra la calor del sol per accionar un cicle tèrmic clàssic. Utilitza un camp de miralls orientables amb motors (<strong>heliòstats</strong>) que segueixen el sol i reflecteixen la radiació concentrant-la en un receptor a la punta d'una torre. Per dins del receptor circula un fluid de sals foses (nitrats) que s'escalfa fins a més de 550°C. Aquestes sals s'emmagatzemen en tancs aïllats tèrmicament per produir vapor i moure una turbina de vapor convencional fins i tot a la nit, actuant com una bateria de calor.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">1.800 a 5.000 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps construcció:</span><span class="catalog-stat-val">5 a 9 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Mitjà-Alt (25-70 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">0 directes (emissions en la seva fabricació)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Està bloquejada d'inici. Aporta una gran quantitat de megawatts a l'estiu (1.5x) i, com que compta amb emmagatzematge tèrmic, permet continuar donant potència a la nit per cobrir els cims de demanda de sopar.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    Espanya és pionera i líder mundial en tecnologia termosolar (sobretot a Andalusia i Extremadura amb projectes com Gemasolar). A Catalunya gairebé no s'ha instal·lat a causa dels alts costos de llançament inicials i als grans requeriments de superfícies planes amb alta radiació directa. Tanmateix, l'Agència Internacional de l'Energia (AIE) la destaca com una tecnologia clau per eliminar els cicles de gas a les hores sense sol.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/solar_thermal.png" alt="Esquema d'una central termosolar" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.elperiodico.com/es/medio-ambiente/20221015/espana-lider-mundial-energia-termosolar-almacenamiento-sales-14631240" target="_blank" rel="noopener" class="news-link">☀️ Espanya líder mundial (El Periódico)</a>
+                    <a href="https://www.energias-renovables.com/solar-termica/el-futur-de-la-termosolar-com-a-bateria-20231120" target="_blank" rel="noopener" class="news-link">🔋 Rol com a bateria (Energías Ren.)</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1267,22 +1708,47 @@
             <div class="catalog-header" onclick="toggleAccordion(this)">
               <span class="catalog-icon">
                 <svg style="width:20px; height:20px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                Biomassa i Biogàs (Renovable de Base)
+                Biomassa i Biogàs (Renovable de Base Constant)
               </span>
               <span class="tech-pill renewable">Renovable</span>
             </div>
             <div class="catalog-body">
-              <p><strong>Funcionament Físic:</strong> Consisteix a cremar biomassa sòlida (com estelles de fusta forestal, pinyols d'oliva o biomassa residual agrícola) o cremar el biogàs obtingut de la fermentació de fems de les granges de porcs i vaques. Aquesta combustió genera escalfor per bullir aigua i moure una turbina de vapor elèctrica. Es considera renovable perquè el carboni cremat s'ha absorbit prèviament per les plantes de l'entorn durant el seu creixement.</p>
-              <div class="catalog-stats">
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">300 a 900 M€</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Temps de construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (8 a 25 M€)</span></div>
-                <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Molt Baixes (0.1t/MW)</span></div>
+              <div class="tech-grid">
+                <div>
+                  <p><strong>Funcionament Físic:</strong></p>
+                  <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Consisteix a aprofitar els residus orgànics mitjançant dues vies:
+                    1. **Combustió directa**: Es crema matèria forestal (estelles de fusta per netejar sotabosc, residus d'esporga agrícola) per escalfar aigua en una caldera, produint vapor que mou una turbina de vapor elèctrica.
+                    2. **Biogàs**: Es recullen purins de granges o fems de vaques en digestors tancats sense oxigen (**digestió anaeròbia**). Els bacteris fermenten els residus i produeixen biogàs (ric en metà), que es purifica i es crema en motors de cogeneració.
+                    Es considera neutre en emissions de carboni perquè el CO₂ expulsat ja havia estat absorbit per la matèria orgànica durant el seu creixement recent.
+                  </p>
+                  <div class="catalog-stats">
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Cost d'inversió:</span><span class="catalog-stat-val">300 a 900 M€</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-val">Temps construcció:</span><span class="catalog-stat-val">3 a 5 trimestres</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Manteniment / torn:</span><span class="catalog-stat-val">Baix (8-25 M€)</span></div>
+                    <div class="catalog-stat-item"><span class="catalog-stat-lbl">Emissions CO₂:</span><span class="catalog-stat-val">Molt Baixes (0.1t de CO₂ / MW)</span></div>
+                  </div>
+                  <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Funciona com una central de base constant, independent de la meteorologia. Emet molt poques emissions reals comparat amb el gas natural. Tanmateix, sol provocar l'oposició de veïns pels fums i possibles males olors.</p>
+                  <div class="real-world-link">
+                    <div class="real-world-title">Vincle amb la Catalunya real:</div>
+                    Catalunya té un potencial molt elevat de biogàs a zones ramaderes com la comarca d'<strong>Osona</strong> o de Lleida, on es fan servir per resoldre la contaminació dels aqüífers provocada pels purins. La biomassa forestal s'aprofita principalment en comarques amb molta densitat boscosa (com la Selva o la Garrotxa), ajudant a mantenir els boscos nets contra grans incendis forestals.
+                  </div>
+                </div>
+                <div class="tech-img-wrapper">
+                  <img src="assets/biomass.png" alt="Esquema d'una planta de biomassa i biogàs" class="tech-img">
+                  <div class="news-box">
+                    <div class="news-title">Notícies i Actualitat Real</div>
+                    <a href="https://www.ara.cat/economia/purins-oportunitat-biogas-catalunya-comencen-arrencar-projectes_1_4693210.html" target="_blank" rel="noopener" class="news-link">🐷 Oportunitat de biogàs (Ara)</a>
+                    <a href="https://www.ccma.cat/324/la-biomassa-forestal-una-solucio-per-netejar-els-boscos-i-generar-energia/noticia/3043120/" target="_blank" rel="noopener" class="news-link">🌲 Biomassa forestal (CCMA)</a>
+                  </div>
+                </div>
               </div>
-              <p style="margin-bottom: 0.5rem;"><strong>Al Joc:</strong> Funciona com una central de base barata i constant. Emet una quantitat molt reduïda de CO₂ en comparació amb el gas natural. La seva construcció sol rebre oposició local a causa de les queixes per males olors o contaminació per fum local.</p>
-              <div class="real-world-link">
-                <div class="real-world-title">Vincle amb la Catalunya real:</div>
-                Catalunya té un potencial immens en biogàs a les zones de gran concentració ramadera de la comarca d'<strong>Osona</strong> o de Lleida, servint com a solució per tractar el greu problema ecològic dels purins porcins. La biomassa forestal s'aprofita especialment a comarques amb molta superfície de bosc (com la Garrotxa o la Selva) per a calderes i petites centrals industrials de base.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section> servint com a solució per tractar el greu problema ecològic dels purins porcins. La biomassa forestal s'aprofita especialment a comarques amb molta superfície de bosc (com la Garrotxa o la Selva) per a calderes i petites centrals industrials de base.
               </div>
             </div>
           </div>
