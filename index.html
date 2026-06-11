@@ -5342,7 +5342,7 @@
             }
           }
           
-          // 2. Fiscal (Recaptació, Ingressos, Despesa)
+          // 2. Fiscal (Recaptació, Ingressos, Despesa) — el text pot tenir sufix com '/t'
           const matchFiscal = text.match(/(Recaptació|Ingressos|Despesa):\s*([+-]\d+)\s*M€/);
           if (matchFiscal) {
             totalFiscal += parseInt(matchFiscal[2], 10);
@@ -5412,8 +5412,9 @@
       });
       
       document.getElementById('policy-total-cost').textContent = `${totalCost.toLocaleString('ca-ES')} M€ / ${budgetLimit.toLocaleString('ca-ES')} M€`;
-      document.getElementById('policy-total-demand').textContent = `-${totalDemand.toLocaleString('ca-ES')} MW`;
-      document.getElementById('policy-selected-count').textContent = `${selectedCards.length} ${selectedCards.length === 1 ? 'política seleccionada' : 'polítiques seleccionades'}`;
+      document.getElementById('policy-total-demand').textContent = `${totalDemand > 0 ? '-' : ''}${totalDemand.toLocaleString('ca-ES')} MW`;
+      const countEl = document.getElementById('policy-selected-count');
+      if (countEl) countEl.textContent = `${selectedCards.length} ${selectedCards.length === 1 ? 'política seleccionada' : 'polítiques seleccionades'}`;
       
       // Update fiscal UI
       const fiscalSign = totalFiscal >= 0 ? '+' : '';
