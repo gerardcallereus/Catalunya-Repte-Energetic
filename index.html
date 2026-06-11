@@ -4983,6 +4983,8 @@
         const row = document.getElementById(`row-bar-${actor}`);
         
         row.classList.remove('role-focus');
+        row.style.opacity = '1';
+        row.style.pointerEvents = 'auto';
         bar.style.width = "50%";
         valInd.textContent = "50%";
         chgInd.textContent = "";
@@ -5040,11 +5042,21 @@
       
       document.getElementById('game-feedback-panel').style.display = 'none';
       
+      // Mostra NOMÉS les barres dels actors que es veuen afectats per alguna opció
       const actors = ['citizen', 'business', 'environmentalist', 'political'];
       actors.forEach(actor => {
         const chg = document.getElementById(`game-chg-${actor}`);
+        const row = document.getElementById(`row-bar-${actor}`);
         chg.textContent = "";
         chg.className = "rating-chg-indicator";
+        
+        const impactA = decision.options.A.impact[actor];
+        const impactB = decision.options.B.impact[actor];
+        const isAffected = impactA !== 0 || impactB !== 0;
+        
+        // Amaga les files dels actors que cap opció no afecta
+        if (row) row.style.opacity = isAffected ? '1' : '0.25';
+        if (row) row.style.pointerEvents = isAffected ? 'auto' : 'none';
       });
 
       updateRatingsUI();
@@ -5085,16 +5097,21 @@
       actors.forEach(actor => {
         const change = choice.impact[actor];
         const chgInd = document.getElementById(`game-chg-${actor}`);
+        const row = document.getElementById(`row-bar-${actor}`);
         
         if (change > 0) {
           chgInd.textContent = `+${change}%`;
           chgInd.className = "rating-chg-indicator pos";
+          if (row) row.style.opacity = '1';
         } else if (change < 0) {
           chgInd.textContent = `${change}%`;
           chgInd.className = "rating-chg-indicator neg";
+          if (row) row.style.opacity = '1';
         } else {
-          chgInd.textContent = "0%";
-          chgInd.className = "rating-chg-indicator neu";
+          // No afectat per aquesta opció concreta: amaga la fila
+          chgInd.textContent = "";
+          chgInd.className = "rating-chg-indicator";
+          if (row) row.style.opacity = '0.2';
         }
         
         gameState.ratings[actor] = Math.max(0, Math.min(100, gameState.ratings[actor] + change));
