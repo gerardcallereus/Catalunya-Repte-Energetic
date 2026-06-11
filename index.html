@@ -1291,6 +1291,42 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Estils per a la selecció de targetes de polítiques */
+    .policy-card {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .policy-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--indigo);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+    }
+    .policy-card.selected {
+      border-color: var(--indigo);
+      background: rgba(79, 70, 229, 0.02);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
+      position: relative;
+    }
+    .policy-card.selected::before {
+      content: "✓";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--indigo);
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -2998,6 +3034,48 @@
           Com a governant, el teu pressupost no només es destina a aixecar formigó i turbines. Pots aprovar lleis que redueixen el consum, milloren el preu de l'energia o fomenten el desenvolupament tecnològic de la xarxa.
         </p>
 
+        <!-- Simbologia del pressupost per a l'activitat/joc -->
+        <div class="glass-card" style="border: 2px solid var(--indigo); background: rgba(79, 70, 229, 0.02); margin-bottom: 1.5rem; padding: 1.5rem;">
+          <h3 style="color: var(--indigo); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+            <svg style="width:22px; height:22px; fill:currentColor" viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            Activitat Interactiva: Planificador de Pressupostos
+          </h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Fes clic sobre les targetes de les polítiques públiques de sota per \"aprovar-les\" i dissenyar el teu propi pla de transició. Comprova si aconsegueixes assolir els objectius d'estalvi de potència sense passar-te del pressupost assignat.
+          </p>
+          
+          <div class="grid-3" style="margin-bottom: 1rem; gap: 1rem;">
+            <div>
+              <label for="budget-limit-select" style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 0.25rem;">Límit de Pressupost:</label>
+              <select id="budget-limit-select" onchange="recalculatePolicies()" style="width: 100%; padding: 0.5rem; border: 1px solid var(--card-border); border-radius: 8px; font-family: inherit; font-size: 0.85rem;">
+                <option value="1500">Pressupost Estricte (1.500 M€)</option>
+                <option value="3000" selected>Pressupost Moderat (3.000 M€)</option>
+                <option value="5000">Pressupost Expansiu (5.000 M€)</option>
+              </select>
+            </div>
+            
+            <div style="background: white; border: 1px solid var(--card-border); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; justify-content: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Pressupost Consumit:</span>
+              <span id="policy-total-cost" style="font-size: 1.2rem; font-weight: 800; color: var(--indigo);">0 M€ / 3.000 M€</span>
+            </div>
+
+            <div style="background: white; border: 1px solid var(--card-border); border-radius: 10px; padding: 0.5rem 1rem; display: flex; flex-direction: column; justify-content: center;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Estalvi de Demanda Assolit:</span>
+              <span id="policy-total-demand" style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">0 MW</span>
+            </div>
+          </div>
+
+          <!-- Barra de progrés de pressupost -->
+          <div style="height: 10px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-bottom: 0.5rem; position: relative;">
+            <div id="policy-budget-bar" style="height: 100%; width: 0%; background: var(--primary); transition: width 0.3s ease;"></div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">
+            <span id="policy-budget-warning" style="color: var(--primary)">Dins del límit pressupostari</span>
+            <span id="policy-selected-count">0 polítiques seleccionades</span>
+          </div>
+        </div>
+
         <input type="text" id="policy-search" class="policy-search-bar" placeholder="Cerca polítiques per títol o efecte (ex: autoconsum, MAT, impost)..." onkeyup="filterPolicies()">
         
         <div class="policy-filters">
@@ -4382,6 +4460,69 @@
         btn.textContent = originalText;
       }, 2000);
     }
+
+    // ACTIVITAT INTERACTIVA - PLANIFICADOR DE PRESSUPOSTOS
+    function initPolicyActivity() {
+      const cards = document.querySelectorAll('.policy-card');
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('selected');
+          recalculatePolicies();
+        });
+      });
+      recalculatePolicies();
+    }
+
+    function recalculatePolicies() {
+      const limitSelect = document.getElementById('budget-limit-select');
+      const budgetLimit = parseInt(limitSelect.value, 10);
+      
+      const selectedCards = document.querySelectorAll('.policy-card.selected');
+      let totalCost = 0;
+      let totalDemand = 0;
+      
+      selectedCards.forEach(card => {
+        const metaSpans = card.querySelectorAll('.policy-card-meta span');
+        if (metaSpans.length > 0) {
+          const costText = metaSpans[0].textContent;
+          const costVal = parseInt(costText.replace(/[^\d]/g, ''), 10) || 0;
+          totalCost += costVal;
+        }
+        
+        if (metaSpans.length > 1) {
+          const demandText = metaSpans[1].textContent;
+          if (demandText.includes('Demanda')) {
+            const match = demandText.match(/-?([\d.]+)\s*MW/);
+            if (match) {
+              const demandVal = parseInt(match[1].replace(/[^\d]/g, ''), 10) || 0;
+              totalDemand += demandVal;
+            }
+          }
+        }
+      });
+      
+      document.getElementById('policy-total-cost').textContent = `${totalCost.toLocaleString('ca-ES')} M€ / ${budgetLimit.toLocaleString('ca-ES')} M€`;
+      document.getElementById('policy-total-demand').textContent = `-${totalDemand.toLocaleString('ca-ES')} MW`;
+      document.getElementById('policy-selected-count').textContent = `${selectedCards.length} ${selectedCards.length === 1 ? 'política seleccionada' : 'polítiques seleccionades'}`;
+      
+      const pct = Math.min(100, (totalCost / budgetLimit) * 100);
+      const budgetBar = document.getElementById('policy-budget-bar');
+      budgetBar.style.width = pct + "%";
+      
+      const warningEl = document.getElementById('policy-budget-warning');
+      if (totalCost > budgetLimit) {
+        budgetBar.style.backgroundColor = 'var(--rose)';
+        warningEl.textContent = "Pressupost superat!";
+        warningEl.style.color = 'var(--rose)';
+      } else {
+        budgetBar.style.backgroundColor = 'var(--primary)';
+        warningEl.textContent = "Dins del límit pressupostari";
+        warningEl.style.color = 'var(--primary)';
+      }
+    }
+
+    // Inicialitza l'activitat al carregar la pàgina
+    initPolicyActivity();
   </script>
 </body>
 </html>
