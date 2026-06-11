@@ -12,19 +12,19 @@
 
   <style>
     :root {
-      --bg-dark: #030712;
-      --bg-card: rgba(17, 24, 39, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --card-border: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #475569;
       
       /* Accents */
-      --primary: #10b981; /* Verd esmeralda (Renovables) */
-      --primary-glow: rgba(16, 185, 129, 0.15);
-      --secondary: #06b6d4; /* Blau cian (Xarxa/Tecnologia) */
-      --amber: #f59e0b; /* Groc ambre (Demanda/Alertes) */
-      --rose: #f43f5e; /* Vermell rosa (Dèficit/Contaminació) */
-      --indigo: #6366f1; /* Blau/lila (Polítiques/Diners) */
+      --primary: #059669; /* Verd esmeralda (Renovables) */
+      --primary-glow: rgba(5, 150, 105, 0.08);
+      --secondary: #0284c7; /* Blau cian (Xarxa/Tecnologia) */
+      --amber: #d97706; /* Groc ambre (Demanda/Alertes) */
+      --rose: #e11d48; /* Vermell rosa (Dèficit/Contaminació) */
+      --indigo: #4f46e5; /* Blau/lila (Polítiques/Diners) */
     }
 
     * {
@@ -37,9 +37,8 @@
       font-family: 'Outfit', sans-serif;
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 60%);
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.03) 0%, transparent 40%);
       background-attachment: fixed;
       color: var(--text-main);
       line-height: 1.6;
@@ -54,21 +53,19 @@
       padding: 0 1.5rem;
     }
 
-    /* Glassmorphism card */
+    /* Solid light card with subtle shadows */
     .glass-card {
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
       padding: 2rem;
       margin-bottom: 2rem;
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .glass-card:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: #94a3b8;
     }
 
     /* Header styling */
@@ -80,8 +77,8 @@
 
     .badge {
       display: inline-block;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      background: rgba(5, 150, 105, 0.08);
+      border: 1px solid rgba(5, 150, 105, 0.2);
       color: var(--primary);
       padding: 0.4rem 1.2rem;
       border-radius: 9999px;
@@ -97,7 +94,7 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.1;
-      background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
+      background: linear-gradient(135deg, #0f172a 40%, #059669 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -161,33 +158,33 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
-      color: #020617;
+      background: linear-gradient(135deg, var(--primary) 0%, #047857 100%);
+      color: #ffffff;
       font-weight: 600;
       font-size: 1rem;
       padding: 0.8rem 1.8rem;
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
       transition: all 0.2s ease;
       text-decoration: none;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       color: var(--text-main);
       box-shadow: none;
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: #f1f5f9;
       box-shadow: none;
     }
 
@@ -217,13 +214,13 @@
 
     .tab-btn:hover {
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.05);
     }
 
     .tab-btn.active {
       color: var(--primary);
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.15);
+      background: rgba(5, 150, 105, 0.08);
+      border: 1px solid rgba(5, 150, 105, 0.15);
     }
 
     .tab-content {
@@ -252,7 +249,7 @@
     .trilemma-svg {
       width: 280px;
       height: 250px;
-      filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.2));
+      filter: drop-shadow(0 4px 10px rgba(79, 70, 229, 0.1));
     }
 
     .trilemma-node {
@@ -273,7 +270,7 @@
     }
 
     .trilemma-details {
-      background: rgba(255, 255, 255, 0.03);
+      background: #f8fafc;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       padding: 1.2rem;
@@ -314,7 +311,7 @@
     .slider {
       width: 100%;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
+      background: #cbd5e1;
       border-radius: 9999px;
       outline: none;
       -webkit-appearance: none;
@@ -327,7 +324,7 @@
       height: 18px;
       border-radius: 50%;
       background: var(--primary);
-      box-shadow: 0 0 10px var(--primary);
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
       cursor: pointer;
       transition: transform 0.1s;
     }
@@ -344,7 +341,7 @@
     }
 
     .btn-toggle {
-      background: rgba(255, 255, 255, 0.04);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       padding: 0.5rem 1rem;
@@ -358,14 +355,14 @@
 
     .btn-toggle:hover {
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.08);
+      background: #f1f5f9;
     }
 
     .btn-toggle.active {
-      background: rgba(6, 182, 212, 0.15);
+      background: rgba(2, 132, 199, 0.08);
       border-color: var(--secondary);
-      color: var(--text-main);
-      box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
+      color: var(--secondary);
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1);
     }
 
     /* Plant Toggles */
@@ -376,7 +373,7 @@
     }
 
     .plant-toggle-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 0.75rem;
@@ -389,13 +386,13 @@
     }
 
     .plant-toggle-card:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: #f1f5f9;
     }
 
     .plant-toggle-card.active {
       border-color: var(--primary);
-      background: rgba(16, 185, 129, 0.08);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+      background: var(--primary-glow);
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.08);
     }
 
     .plant-toggle-name {
@@ -411,7 +408,7 @@
 
     /* Simulation Output Panel */
     .sim-output {
-      background: rgba(0, 0, 0, 0.2);
+      background: #f1f5f9;
       border-radius: 16px;
       border: 1px solid var(--card-border);
       padding: 1.5rem;
@@ -436,7 +433,7 @@
     }
 
     .sim-bar-outer {
-      background: rgba(255, 255, 255, 0.05);
+      background: #e2e8f0;
       border-radius: 9999px;
       height: 24px;
       overflow: hidden;
@@ -452,7 +449,7 @@
       padding-right: 0.75rem;
       font-size: 0.75rem;
       font-weight: 700;
-      color: #030712;
+      color: #ffffff;
       font-family: monospace;
     }
 
@@ -465,14 +462,14 @@
     }
 
     .sim-status-box.ok {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      background: rgba(5, 150, 105, 0.1);
+      border: 1px solid rgba(5, 150, 105, 0.2);
       color: var(--primary);
     }
 
     .sim-status-box.deficit {
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.2);
+      background: rgba(225, 29, 72, 0.1);
+      border: 1px solid rgba(225, 29, 72, 0.2);
       color: var(--rose);
     }
 
@@ -483,7 +480,7 @@
     }
 
     .sim-metric-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 0.75rem;
@@ -506,11 +503,12 @@
 
     /* Accordions & Catalogue Cards */
     .catalog-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 16px;
       overflow: hidden;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
     .catalog-header {
@@ -521,12 +519,12 @@
       align-items: center;
       user-select: none;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.01);
+      background: #ffffff;
       transition: background-color 0.2s ease;
     }
 
     .catalog-header:hover {
-      background: rgba(255, 255, 255, 0.03);
+      background: #f8fafc;
     }
 
     .catalog-icon {
@@ -539,7 +537,7 @@
       display: none;
       padding: 1.5rem;
       border-top: 1px solid var(--card-border);
-      background: rgba(0, 0, 0, 0.1);
+      background: #f8fafc;
       animation: slideDown 0.3s ease;
     }
 
@@ -554,8 +552,8 @@
       border-radius: 9999px;
       text-transform: uppercase;
     }
-    .tech-pill.renewable { background: rgba(16, 185, 129, 0.15); color: var(--primary); border: 1px solid rgba(16, 185, 129, 0.2); }
-    .tech-pill.non-renewable { background: rgba(244, 63, 94, 0.15); color: var(--rose); border: 1px solid rgba(244, 63, 94, 0.2); }
+    .tech-pill.renewable { background: rgba(5, 150, 105, 0.1); color: var(--primary); border: 1px solid rgba(5, 150, 105, 0.2); }
+    .tech-pill.non-renewable { background: rgba(225, 29, 72, 0.1); color: var(--rose); border: 1px solid rgba(225, 29, 72, 0.2); }
 
     .catalog-stats {
       display: grid;
@@ -568,7 +566,7 @@
     .catalog-stat-item {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+      border-bottom: 1px dotted var(--card-border);
       padding-bottom: 0.25rem;
     }
 
@@ -582,13 +580,13 @@
     }
 
     .real-world-link {
-      background: rgba(6, 182, 212, 0.05);
+      background: rgba(2, 132, 199, 0.04);
       border-left: 3px solid var(--secondary);
       padding: 0.8rem 1rem;
       border-radius: 0 8px 8px 0;
       font-size: 0.85rem;
       margin-top: 1rem;
-      color: #e5e7eb;
+      color: var(--text-main);
     }
 
     .real-world-title {
@@ -600,15 +598,16 @@
 
     /* Decision Maker Widget */
     .decision-widget {
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
 
     .decision-selector {
       width: 100%;
-      background: #111827;
+      background: #ffffff;
       color: var(--text-main);
       border: 1px solid var(--card-border);
       border-radius: 10px;
@@ -654,7 +653,7 @@
 
     .rating-bar-outer {
       height: 8px;
-      background: rgba(255, 255, 255, 0.05);
+      background: #e2e8f0;
       border-radius: 9999px;
       overflow: hidden;
     }
@@ -677,7 +676,7 @@
     .rating-change-indicator.neutral { color: var(--text-muted); }
 
     .decision-explanation-box {
-      background: rgba(0, 0, 0, 0.15);
+      background: #f1f5f9;
       border-radius: 12px;
       padding: 1.2rem;
       border: 1px solid var(--card-border);
@@ -690,7 +689,7 @@
       gap: 1rem;
       margin-top: 1rem;
       padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--card-border);
     }
 
     .decision-pro-col h5 { color: var(--primary); font-weight: 600; margin-bottom: 0.25rem; }
@@ -699,7 +698,7 @@
     /* Policy list */
     .policy-search-bar {
       width: 100%;
-      background: rgba(255, 255, 255, 0.03);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       color: var(--text-main);
       padding: 0.8rem 1.2rem;
@@ -722,7 +721,7 @@
     }
 
     .policy-filter-btn {
-      background: rgba(255, 255, 255, 0.03);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       padding: 0.4rem 0.8rem;
@@ -736,17 +735,17 @@
 
     .policy-filter-btn:hover {
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.06);
+      background: #f1f5f9;
     }
 
     .policy-filter-btn.active {
-      background: rgba(99, 102, 241, 0.15);
+      background: rgba(79, 70, 229, 0.08);
       border-color: var(--indigo);
-      color: var(--text-main);
+      color: var(--indigo);
     }
 
     .policy-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 1.2rem;
@@ -754,6 +753,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
     .policy-card-title {
@@ -782,9 +782,9 @@
       justify-content: space-between;
       font-size: 0.8rem;
       font-family: monospace;
-      color: #9ca3af;
+      color: var(--text-muted);
       padding-top: 0.75rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--card-border);
     }
 
     /* Copiable Textbox */
@@ -796,10 +796,10 @@
     .copy-box-code {
       width: 100%;
       height: 250px;
-      background: #090d16;
+      background: #f8fafc;
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      color: #cbd5e1;
+      color: #0f172a;
       padding: 1rem;
       font-family: monospace;
       font-size: 0.85rem;
@@ -811,7 +811,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: rgba(255, 255, 255, 0.08);
+      background: #ffffff;
       border: 1px solid var(--card-border);
       color: var(--text-main);
       padding: 0.4rem 0.8rem;
@@ -820,10 +820,11 @@
       cursor: pointer;
       font-weight: 600;
       transition: background-color 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .btn-copy:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: #f1f5f9;
     }
 
     /* Footer styling */
@@ -872,11 +873,12 @@
       transform: scale(1.02);
     }
     .news-box {
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.03);
+      margin-top: 0;
+      background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
     .news-title {
       font-size: 0.85rem;
@@ -894,15 +896,15 @@
       text-decoration: none;
       font-size: 0.82rem;
       padding: 0.4rem 0.8rem;
-      background: rgba(6, 182, 212, 0.08);
-      border: 1px solid rgba(6, 182, 212, 0.2);
+      background: rgba(2, 132, 199, 0.05);
+      border: 1px solid rgba(2, 132, 199, 0.15);
       border-radius: 6px;
       margin-right: 0.5rem;
       margin-bottom: 0.5rem;
       transition: all 0.2s ease;
     }
     .news-link:hover {
-      background: rgba(6, 182, 212, 0.2);
+      background: rgba(2, 132, 199, 0.15);
       border-color: var(--secondary);
       transform: translateY(-1px);
     }
@@ -921,7 +923,7 @@
       border-bottom: 1px solid var(--card-border);
     }
     .source-table th {
-      background: rgba(255, 255, 255, 0.04);
+      background: #f1f5f9;
       color: var(--secondary);
       font-weight: 600;
       text-transform: uppercase;
@@ -929,14 +931,15 @@
       letter-spacing: 0.05em;
     }
     .source-table tr:hover {
-      background: rgba(255, 255, 255, 0.02);
+      background: #f8fafc;
     }
     .chart-container {
-      background: rgba(0,0,0,0.2);
+      background: #ffffff;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       padding: 1.5rem;
       margin: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
     .chart-bar-group {
       margin-bottom: 1rem;
@@ -1934,7 +1937,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/nuclear_plant.png" alt="Esquema d'una central nuclear" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.ccma.cat/324/el-govern-espanyol-i-les-electriques-acorden-el-tancament-de-les-nuclears-entre-2027-i-2035/noticia/2903539/" target="_blank" rel="noopener" class="news-link">📅 Pacte de tancament (CCMA)</a>
@@ -1976,7 +1978,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/gas_plant.png" alt="Esquema d'una central de cicle combinat" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.ara.cat/clima-i-medi-ambient/besos-totes-centrals-cicle-combinat-actives-debat_1_4875321.html" target="_blank" rel="noopener" class="news-link">🏭 El Besòs i les tèrmiques (Ara)</a>
@@ -2016,7 +2017,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/solar_pv.png" alt="Esquema d'energia solar fotovoltaica" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://icaen.gencat.cat/ca/detalls/noticia/Nota-autoconsum-2023" target="_blank" rel="noopener" class="news-link">📊 Dades autoconsum (ICAEN)</a>
@@ -2056,7 +2056,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/wind_onshore.png" alt="Esquema d'aerogeneradors terrestres" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.naciodigital.cat/noticia/222123/terra-alta-diu-prou-massificacio-eolica" target="_blank" rel="noopener" class="news-link">💨 Massificació a Terra Alta (Nació)</a>
@@ -2100,7 +2099,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/hydroelectric.png" alt="Esquema d'una central hidroelèctrica" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.la-vanguardia.com/local/girona/20230325/8851410/sequera-redueix-minim-historic-produccio-hidroelectrica-catalunya.html" target="_blank" rel="noopener" class="news-link">💧 Mínims històrics (La Vanguardia)</a>
@@ -2140,7 +2138,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/wind_offshore.png" alt="Esquema d'aerogeneradors flotants marins" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.ccma.cat/324/el-parc-tramuntana-projecta-els-primers-molins-de-vent-marins-al-golf-de-roses/noticia/3151410/" target="_blank" rel="noopener" class="news-link">🌊 Parc Tramuntana (CCMA)</a>
@@ -2180,7 +2177,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/solar_thermal.png" alt="Esquema d'una central termosolar" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.elperiodico.com/es/medio-ambiente/20221015/espana-lider-mundial-energia-termosolar-almacenamiento-sales-14631240" target="_blank" rel="noopener" class="news-link">☀️ Espanya líder mundial (El Periódico)</a>
@@ -2223,7 +2219,6 @@
                   </div>
                 </div>
                 <div class="tech-img-wrapper">
-                  <img src="assets/biomass.png" alt="Esquema d'una planta de biomassa i biogàs" class="tech-img">
                   <div class="news-box">
                     <div class="news-title">Notícies i Actualitat Real</div>
                     <a href="https://www.ara.cat/economia/purins-oportunitat-biogas-catalunya-comencen-arrencar-projectes_1_4693210.html" target="_blank" rel="noopener" class="news-link">🐷 Oportunitat de biogàs (Ara)</a>
