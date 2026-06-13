@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier de Respostes Model — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --rose: #e11d48;
+      --amber: #d97706;
+      --indigo: #4f46e5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --answer-bg: #f0fdf4;
+      --answer-border: #059669;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5pt;
+      color: var(--text-main);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+    }
+
+    @media print {
+      @page { size: A4 portrait; margin: 14mm 15mm 18mm 15mm; }
+      body { font-size: 10pt; }
+      .page-wrapper { max-width: 100%; padding: 0; margin: 0; }
+      .no-break { page-break-inside: avoid; }
+      .page-break { page-break-before: always; }
+      .print-btn { display: none !important; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    .print-btn {
+      position: fixed; top: 16px; right: 16px;
+      background: var(--primary); color: white;
+      border: none; border-radius: 10px;
+      padding: 10px 20px; font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(5,150,105,0.3); z-index: 999;
+    }
+    .print-btn:hover { background: #047857; }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 200mm;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px; margin-bottom: 24px;
+    }
+    .cover-logo {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 32px;
+    }
+    .cover h1 { font-size: 24pt; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+    .cover h1 span { color: var(--primary); }
+    .cover .subtitle { font-size: 13pt; color: var(--text-muted); margin-bottom: 8px; }
+    .cover .doc-type {
+      display: inline-block;
+      background: #fef3c7; border: 2px solid var(--amber);
+      color: #92400e; border-radius: 8px;
+      padding: 6px 18px; font-weight: 700; font-size: 11pt;
+      margin-bottom: 20px;
+    }
+    .cover-notice {
+      max-width: 480px;
+      background: #fff7ed; border: 1px solid #fed7aa;
+      border-radius: 12px; padding: 14px 18px;
+      font-size: 9.5pt; color: #92400e; text-align: left;
+      line-height: 1.55;
+    }
+
+    /* ─── ESTRUCTURA ─── */
+    .activity { margin-bottom: 32px; }
+
+    .act-header {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--primary); padding-bottom: 8px;
+    }
+    .act-number {
+      min-width: 38px; height: 38px;
+      background: var(--primary); color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15pt; font-weight: 800; flex-shrink: 0;
+    }
+    .act-number.blue { background: var(--secondary); }
+    .act-number.rose { background: var(--rose); }
+    .act-number.amber { background: var(--amber); }
+    .act-number.indigo { background: var(--indigo); }
+
+    .act-title-block { flex: 1; }
+    .act-label { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 2px; }
+    .act-title { font-size: 14pt; font-weight: 800; color: var(--text-main); line-height: 1.2; }
+
+    /* ─── RESPOSTA MODEL ─── */
+    .q-block { margin-bottom: 14px; }
+    .q-label {
+      font-size: 9pt; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .q-text {
+      font-size: 9.5pt; color: var(--text-muted);
+      font-style: italic; margin-bottom: 6px;
+      border-left: 3px solid #e2e8f0; padding-left: 8px;
+    }
+    .answer {
+      background: var(--answer-bg);
+      border-left: 4px solid var(--answer-border);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+    .answer p { margin-bottom: 6px; }
+    .answer p:last-child { margin-bottom: 0; }
+    .answer ul, .answer ol { padding-left: 1.4em; margin-top: 4px; }
+    .answer li { margin-bottom: 3px; }
+
+    /* ─── TAULES ─── */
+    table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-bottom: 12px; }
+    th { background: var(--text-main); color: white; padding: 6px 8px; text-align: left; font-weight: 600; }
+    td { padding: 5px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: #f8fafc; }
+    td.ans-cell { background: var(--answer-bg) !important; font-weight: 500; color: #065f46; }
+
+    /* ─── SEPARADOR ─── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .section-label {
+      font-size: 8pt; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--text-muted); margin: 12px 0 5px;
+    }
+    p { margin-bottom: 8px; }
+
+    .info-box {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 10px; font-size: 9.5pt;
+    }
+    .info-box.amber { background: #fffbeb; border-color: #fde68a; }
+    .info-box .box-head { font-weight: 700; margin-bottom: 4px; }
+
+    .nota-doc {
+      background: #eff6ff; border: 1px solid #bfdbfe;
+      border-radius: 8px; padding: 8px 12px;
+      font-size: 8.5pt; color: #1e40af; margin-bottom: 10px;
+    }
+    .nota-doc strong { color: #1e3a8a; }
+
+    /* Rúbrica */
+    .rubric th { background: var(--indigo); }
+    .rubric th:first-child { background: #374151; }
+  </style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button>
+
+<div class="page-wrapper">
+
+  <!-- PORTADA -->
+  <div class="cover no-break">
+    <div class="cover-logo">📋</div>
+    <h1>Catalunya:<br><span>Repte Energètic</span></h1>
+    <p class="subtitle">Dossier d'Activitats — Respostes Model</p>
+    <div class="doc-type">🔐 Document per al professorat</div>
+    <div class="cover-notice">
+      <strong>⚠️ Avís important:</strong> Aquest document conté les respostes model per a l'assoliment excel·lent de totes les activitats del projecte. Està pensat per orientar la correcció i el feedback del professorat. Les respostes de l'alumnat poden variar si estan ben argumentades i fonamentades en evidències — la rúbrica final és la referència d'avaluació, no la literalitat de les respostes.<br><br>
+      <strong>Ús recomanat:</strong> Correcció formativa, guia de debat, suport per a la retroalimentació individualitzada.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A1 — POBRESA ENERGÈTICA                                       -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number rose">A1</div>
+      <div class="act-title-block">
+        <div class="act-label">Activació inicial · Fase 1 · Sessió 1</div>
+        <div class="act-title">Pobresa Energètica: Un Problema Real — Respostes Model</div>
+      </div>
+    </div>
+
+    <div class="nota-doc no-break">
+      <strong>📌 Nota pedagògica:</strong> L'objectiu d'aquesta activitat és que l'alumnat connecti emocionalment i racionalment amb la dimensió social de l'energia <em>abans</em> d'entrar al simulador. Les respostes excel·lents han de mostrar consciència de la injustícia estructural i capacitat d'identificar actors i poder.
+    </div>
+
+    <div class="section-label">Preguntes de diagnosi inicial (individual)</div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 1</div>
+      <div class="q-text">Amb les teves pròpies paraules, Què és la pobresa energètica?</div>
+      <div class="answer">
+        <p>La pobresa energètica és la situació en la qual una persona o família no pot pagar o accedir de manera adequada als serveis energètics bàsics —electricitat, calefacció i refrigeració— necessaris per tenir una qualitat de vida digna. No és únicament no tenir diners: moltes vegades és conseqüència d'habitatges amb molt mal aïllament tèrmic que consumeixen molta energia, de preus de la llum que pugen per factors internacionals (com el preu del gas rus), i de barreres burocràtiques que impedeixen accedir a ajudes com el Bo Social. A Catalunya, afecta especialment les persones grans que viuen soles, les famílies monoparentals i els habitatges antics dels barris obrers.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 2</div>
+      <div class="q-text">Qui creus que són les persones més afectades per la pobresa energètica a Catalunya?</div>
+      <div class="answer">
+        <p>Els col·lectius més vulnerables a la pobresa energètica a Catalunya són:</p>
+        <ul>
+          <li><strong>Persones grans que viuen soles</strong>, especialment dones vídues amb pensions baixes.</li>
+          <li><strong>Famílies monoparentals</strong>, majoritàriament encapçalades per dones, amb fills menors a càrrec.</li>
+          <li><strong>Famílies en atur o amb feines precàries</strong> (temporal, part-time no voluntari).</li>
+          <li><strong>Immigrants en situació irregular</strong>, que no poden accedir a ajudes oficials.</li>
+          <li><strong>Persones amb malalties cròniques</strong> que necessiten equips mèdics elèctrics (oxigen, diàlisi domiciliària).</li>
+          <li><strong>Llars en edificis vells sense aïllament</strong>, habituals als centres urbans i barris perifèrics de Barcelona, l'Hospitalet, Badalona o Lleida.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 3</div>
+      <div class="q-text">Creus que els moviments socials poden canviar lleis energètiques? Argumenta-ho.</div>
+      <div class="answer">
+        <p>Sí, i hi ha evidències concretes que ho demostren. La plataforma APE (Afectats per la Pobresa Energètica) va aconseguir, mitjançant mobilitzacions al carrer, ocupació de despatxos d'elèctriques i pressió mediàtica, que el Parlament de Catalunya aprovés el <strong>Decret llei de mesures urgents per fer front a l'emergència en matèria d'habitatge i pobresa energètica (2015)</strong>. Aquesta norma va prohibir el tall de subministrament elèctric i de gas a famílies vulnerables sense avís previ i sense alternativa habitacional.</p>
+        <p>Els moviments socials actuen com a <em>contrapoder</em>: visibilitzen situacions invisibles per als representants polítics, creen pressió mediàtica i electoral, i obliguen els governs a incorporar demandes que d'altra manera no estarien a l'agenda. Tanmateix, el seu poder té límits: els preus de la llum els fixa el mercat europeu i l'Estat, no la Generalitat, la qual cosa limita l'impacte de les reformes catalanes.</p>
+      </div>
+    </div>
+
+    <hr>
+    <div class="section-label">Mapa d'Actors — Taula (respostes model)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Actor</th>
+          <th>Qui és concretament?</th>
+          <th>Quin interès té?</th>
+          <th>Quina eina/poder té?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>👨‍👩‍👧 Família vulnerable</strong></td>
+          <td>Persona amb ingressos inferiors al 60% de la mediana; aturada; pensionista sola; malalta crònica</td>
+          <td class="ans-cell">Poder pagar la factura; no ser tallada del subministrament; tenir una llar a temperatura digna</td>
+          <td>Vot, protesta, associació, denúncia als serveis socials, accés a ajudes (Bo Social)</td>
+        </tr>
+        <tr>
+          <td><strong>⚡ Empresa elèctrica</strong></td>
+          <td class="ans-cell">Endesa, Naturgy, Iberdrola: grans corporacions propietàries de les xarxes de distribució i d'algunes centrals</td>
+          <td>Benefici econòmic dels accionistes; mantenir els drets de concessió de les xarxes</td>
+          <td class="ans-cell">Lobby polític, inversions, tarificació, tall de subministrament com a mecanisme de cobrament</td>
+        </tr>
+        <tr>
+          <td><strong>🏛️ Conseller/a de Territori</strong></td>
+          <td class="ans-cell">Membre del Govern de la Generalitat; responsable del Departament de Territori, Habitatge i Transició Ecològica</td>
+          <td class="ans-cell">Implementar polítiques de transició; mantenir aprovació social; complir objectius europeus</td>
+          <td>Legislació autonòmica, subvencions (Next Generation EU), regulació de la distribució, supervisió d'empreses</td>
+        </tr>
+        <tr>
+          <td><strong>✊ APE / Moviments socials</strong></td>
+          <td class="ans-cell">Associació civil sense ànim de lucre; activistes comunitaris; advocats voluntaris; tècnics d'habitatge social</td>
+          <td>Protegir les persones vulnerables; canviar les lleis; sensibilitzar la ciutadania</td>
+          <td class="ans-cell">Mobilització, pressió mediàtica, litigació estratègica (demandes als tribunals), formació i acompanyament</td>
+        </tr>
+        <tr>
+          <td><strong>🏙️ Ajuntament</strong></td>
+          <td class="ans-cell">Govern local (alcaldia, àrea de serveis socials, habitatge); Xarxa de Punts d'Assessorament Energètic</td>
+          <td class="ans-cell">Pal·liar la pobresa energètica localment; atendre els serveis socials de proximitat</td>
+          <td>Serveis socials, ajudes d'urgència, intermediació amb les elèctriques, punts d'assessorament</td>
+        </tr>
+        <tr>
+          <td><strong>🇪🇺 Unió Europea</strong></td>
+          <td class="ans-cell">Comissió Europea, Directiva d'Eficiència Energètica, fons REPowerEU i Next Generation</td>
+          <td class="ans-cell">Accelerar la transició verda; garantir accés universal a l'energia; reduir la dependència del gas rus</td>
+          <td>Directives vinculants, fons de finançament, multes per incompliment, objectius 2030/2050</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+    <div class="section-label">Dilema del Conseller/a — Argumentació (Opció C recomanada com a excel·lent)</div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Justificació de la política elegida</div>
+      <div class="answer">
+        <p><strong>Opció C — Fons de rehabilitació energètica:</strong> Aquesta és l'opció més ambiciosa i estructural. Les opcions A i B (Bo Social i moratòria de talls) actuen sobre els símptomes però no sobre la causa: un parc d'habitatges extremadament ineficient energèticament. Un habitatge mal aïllat pot consumir fins a 4 vegades més energia que un de rehabilitat, de manera que qualsevol ajuda econòmica s'esgota ràpidament sense resoldre el problema de fons.</p>
+        <p>La rehabilitació tèrmica crea un triple benefici: <strong>estalvi permanent</strong> en la factura (fins al 60% de reducció), <strong>millora de la qualitat de vida</strong> (temperatura interior estable, menys malalties respiratòries) i <strong>generació d'ocupació local</strong> en el sector de la construcció sostenible. A més, Catalunya té accés als fons Next Generation de la UE específicament per a rehabilitació energètica, la qual cosa redueix el cost net per a la Generalitat.</p>
+        <p><strong>Limitació a reconèixer:</strong> Tarda més a tenir efecte i és complex de gestionar administrativament, per la qual cosa cal combinar-la amb una mesura transitòria (moratòria de talls) que protegeixi les famílies mentre duren les obres.</p>
+      </div>
+    </div>
+
+    <div class="nota-doc">
+      <strong>📌 Nota:</strong> Les opcions A i B també poden ser excel·lents si l'alumnat argumenta bé per qué prioritza la solució a curt termini (emergència immediata) sobre la solució estructural. El criteri d'excel·lència és la qualitat de l'argumentació i la consciència de les limitacions de la pròpia opció, no la tria en si.
+    </div>
+
+  </div><!-- /A1 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A2 — TRILEMA                                                   -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number blue">A2</div>
+      <div class="act-title-block">
+        <div class="act-label">Activació · Fase 1 · Sessió 1</div>
+        <div class="act-title">El Trilema Energètic: Qui Mana? — Respostes Model</div>
+      </div>
+    </div>
+
+    <div class="section-label">Exercici 1 — On hauria d'anar Catalunya?</div>
+
+    <table class="no-break">
+      <thead>
+        <tr><th>Objectiu</th><th>On és ara Catalunya?</th><th>On hauria d'anar? (Excel·lent)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>⚡ <strong>Seguretat</strong></td>
+          <td>Alta: nuclear + gas garanteixen subministrament constant 24/7</td>
+          <td class="ans-cell">Mantenir alta però diversificant-la cap a renovables amb emmagatzematge i xarxes intel·ligents, reduint la dependència d'Ascó i Vandellòs</td>
+        </tr>
+        <tr>
+          <td>🌿 <strong>Sostenibilitat</strong></td>
+          <td>Feble: 58% nuclear + 22% gas = 80% energia no renovable en hores nocturnes</td>
+          <td class="ans-cell">Molt millorable: objectiu del 74% renovable al mix per al 2030, substituint gas i acoblant la sortida nuclear amb eòlica i solar massiva</td>
+        </tr>
+        <tr>
+          <td>💰 <strong>Accessibilitat</strong></td>
+          <td>Moderada: preus molt dependents del gas al mercat europeu; pobresa energètica en 164.000 llars</td>
+          <td class="ans-cell">Prioritat alta: l'expansió de renovables pròpies redueix el preu marginal; calen polítiques socials per garantir l'accessibilitat mentre dura la transició</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="q-block no-break">
+      <div class="q-label">Exercici 2 — Objectiu sacrificable i argument de company/a</div>
+      <div class="q-text">"Si haguessis de sacrificar un dels tres objectius, quin sacrificaries?"</div>
+      <div class="answer">
+        <p><strong>Resposta model (sacrificar seguretat parcialment):</strong> Si hagués de prioritzar un canvi a curt termini, reduiria temporalment el nivell de <em>seguretat</em> (acceptant un cert risc de necessitar importar electricitat en moments de pic) per guanyar rapidesa en la transició cap a la <em>sostenibilitat</em>. El raonament és que la dependència nuclear és pitjor a llarg termini perquè els residus nuclears no desapareixen i el tancament de les centrals és inevitable. Mentrestant, les renovables necessiten temps per madurar.</p>
+        <p>Tanmateix, és clau reconèixer que aquesta opció augmenta el risc de talls de llum i d'encariment puntual de la factura, la qual cosa perjudica especialment els col·lectius vulnerables (contradicció amb l'accessibilitat). Per tant, cal un pla social paral·lel.</p>
+      </div>
+    </div>
+
+    <div class="nota-doc">
+      <strong>📌 Nota:</strong> No hi ha una resposta "correcta" al debat del trilema. L'excel·lència es mesura per: (1) capacitat d'argumentar amb raons concretes, (2) reconèixer les conseqüències negatives de la pròpia elecció, i (3) demostrar que s'ha escoltat i reflexionat sobre l'argument d'un company/a.
+    </div>
+
+  </div><!-- /A2 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A3 — CENTRALS                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A3</div>
+      <div class="act-title-block">
+        <div class="act-label">Recerca i Anàlisi · Fase 2 · Sessió 2</div>
+        <div class="act-title">Les Centrals de Catalunya — Respostes Model</div>
+      </div>
+    </div>
+
+    <div class="section-label">Taula comparativa (dades model)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Tecnologia</th>
+          <th>MW instal·lats</th>
+          <th>GWh/any reals</th>
+          <th>Hores equiv./any</th>
+          <th>CO₂ (g/kWh)</th>
+          <th>Principal inconvenient</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>☢️ Nuclear</td>
+          <td>3.000</td>
+          <td>24.000</td>
+          <td>~8.000</td>
+          <td>~12</td>
+          <td class="ans-cell">Residus radioactius; cost i temps de desmantelament; perill d'accident; impossible construir-ne de noves en 10 anys</td>
+        </tr>
+        <tr>
+          <td>🔥 Cicle Combinat (Gas)</td>
+          <td class="ans-cell">3.600</td>
+          <td class="ans-cell">9.000</td>
+          <td class="ans-cell">~2.500</td>
+          <td>~490</td>
+          <td class="ans-cell">Depèn del preu internacional del gas; elevades emissions de CO₂; contribueix a l'efecte hivernacle</td>
+        </tr>
+        <tr>
+          <td>💧 Hidroelèctrica</td>
+          <td class="ans-cell">2.050</td>
+          <td class="ans-cell">3.200</td>
+          <td class="ans-cell">~1.560</td>
+          <td>~24</td>
+          <td class="ans-cell">Molt dependent de la pluviometria (sequeres catalanes); impacte sobre ecosistemes fluvials; difícilment ampliable</td>
+        </tr>
+        <tr>
+          <td>💨 Eòlica Terrestre</td>
+          <td class="ans-cell">1.350</td>
+          <td class="ans-cell">2.500</td>
+          <td class="ans-cell">~1.850</td>
+          <td>~11</td>
+          <td class="ans-cell">Rebuig veïnal (soroll, impacte visual); intermitència (no sempre fa vent); necessita emmagatzematge o backup</td>
+        </tr>
+        <tr>
+          <td>☀️ Solar FV</td>
+          <td class="ans-cell">1.800</td>
+          <td class="ans-cell">2.100</td>
+          <td class="ans-cell">~1.167</td>
+          <td>~45</td>
+          <td class="ans-cell">Intermitència (nit i dies ennuvolats); necessita grans superfícies de terreny o cobertes; bateries cares</td>
+        </tr>
+        <tr>
+          <td>🌿 Biomassa</td>
+          <td class="ans-cell">330</td>
+          <td class="ans-cell">2.000</td>
+          <td class="ans-cell">~6.000</td>
+          <td>~230</td>
+          <td class="ans-cell">Emissió de partícules fines; debat sobre la sostenibilitat de l'origen de la biomassa; olors en zones properes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 1</div>
+      <div class="q-text">Per quin motiu la nuclear té menys MW que el gas però genera molts més GWh? Explica-ho amb l'analogia del cotxe.</div>
+      <div class="answer">
+        <p>Els <strong>MW (megawatts)</strong> mesuren la <em>velocitat màxima</em> d'una central: quanta electricitat pot produir en un instant concret si funciona al 100%. Els <strong>GWh (gigawatts·hora)</strong> mesuren els <em>quilòmetres recorreguts</em>: quanta electricitat ha produït al llarg d'un any sencer.</p>
+        <p>La central nuclear és com un cotxe que pot anar fins a 200 km/h però que circula <strong>8.000 hores a l'any</strong> (gairebé sense parar). El gas és com un cotxe que pot anar a 220 km/h però que s'atura molt sovint i només circula unes <strong>2.500 hores a l'any</strong>. El resultat final és que el cotxe que "va menys de pressa" fa molts més quilòmetres (GWh) perquè quasi mai s'atura.</p>
+        <p>Numèricament: Nuclear (3.000 MW × 8.000 h = 24.000 GWh) vs. Gas (3.600 MW × 2.500 h = 9.000 GWh). Malgrat tenir 600 MW menys de potència màxima, la nuclear genera gairebé el triple d'energia anual.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 2</div>
+      <div class="q-text">La solar té el rendiment base més baix (22%). Significa que és una mala tecnologia?</div>
+      <div class="answer">
+        <p>No, en absolut. El <strong>22% de rendiment base</strong> significa que la solar FV funciona de mitjana al 22% de la seva capacitat màxima durant l'any (perquè de nit no produeix res i de dia produeix en funció de la irradiació solar). Però això no la fa ineficient en termes econòmics ni mediambientals.</p>
+        <p>La solar té avantatges únics: el seu <strong>cost d'instal·lació ha baixat un 90% des del 2010</strong>, no emet CO₂ durant el funcionament, es pot desplegar de forma molt distribuïda (teulades, pàrquings, cobertes d'edificis industrials), i coincideix amb les hores de màxima demanda diürna a l'estiu (quan funcionen els aires condicionats).</p>
+        <p>El seu punt feble no és el rendiment: és la <strong>intermitència</strong>. Per aprofitar al màxim la solar cal combinar-la amb bateries d'emmagatzematge o amb fonts de base com la hidràulica o la biomassa. Catalunya, per la seva latitud i irradiació solar, és un dels millors llocs d'Europa per a la solar FV.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 3</div>
+      <div class="q-text">Si tanques les centrals nuclears el 2035, quina/quines tecnologies podrien substituir els 24.000 GWh anuals?</div>
+      <div class="answer">
+        <p>Per substituir 24.000 GWh anuals caldria una combinació de tecnologies. Exemple de càlcul il·lustratiu:</p>
+        <ul>
+          <li><strong>Eòlica terrestre:</strong> Si es tripliqués la capacitat actual (de 1.350 a 4.050 MW) i es mantingués el factor d'utilització (~1.850 h/any), es generarien ~7.500 GWh addicionals.</li>
+          <li><strong>Solar FV:</strong> Si es quadrupliqués la capacitat (de 1.800 a 7.200 MW amb teulades, sòl i autoconsum) es generarien ~8.400 GWh addicionals.</li>
+          <li><strong>Eòlica marina (nova):</strong> 1.000 MW al Golf de Roses × 3.500 h/any = ~3.500 GWh addicionals.</li>
+          <li><strong>Biomassa i termosolar:</strong> Uns 2.000 GWh addicionals.</li>
+          <li><strong>Importació neta des de França i Aragó:</strong> 2.600 GWh de balanç positiu.</li>
+        </ul>
+        <p><strong>Total aproximat:</strong> ~24.000 GWh. La conclusió és que tècnicament és possible, però requereix una inversió enorme i coordinar moltes tecnologies. El principal repte no és la producció sinó l'<strong>emmagatzematge</strong> per garantir el subministrament quan no fa sol ni vent.</p>
+      </div>
+    </div>
+
+  </div><!-- /A3 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A4 — SIMULADOR                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number amber">A4</div>
+      <div class="act-title-block">
+        <div class="act-label">Experimentació guiada · Fase 2 · Sessió 3</div>
+        <div class="act-title">Simulador de Demanda i Consum — Respostes Model</div>
+      </div>
+    </div>
+
+    <div class="section-label">Taula d'experiments (resultats orientatius del simulador)</div>
+    <div class="nota-doc no-break">
+      <strong>📌 Nota:</strong> Els valors exactos del simulador poden variar lleugerament. El que es valora és que l'alumnat interpreti correctament el signe del balanç (excedent = exportem, dèficit = importem) i la relació entre estació/clima i producció renovable.
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>#</th><th>Configuració</th><th>Producció (MW)</th><th>Demanda (MW)</th><th>Balanç</th><th>Impacte financer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>Q2 Normal, totes actives, 7.000 MW</td>
+          <td class="ans-cell">~8.200</td><td class="ans-cell">7.000</td>
+          <td class="ans-cell">+1.200 MW (excedent)</td>
+          <td class="ans-cell">Ingressos d'exportació</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Q2 Tòrrid, totes actives, 7.000 MW</td>
+          <td class="ans-cell">~7.900 (solar+però hidro↓)</td><td class="ans-cell">8.400 (calor↑)</td>
+          <td class="ans-cell">-500 MW (dèficit)</td>
+          <td class="ans-cell">Cost d'importació elevat</td>
+        </tr>
+        <tr>
+          <td>3</td><td>Q2 Normal, nuclear inactiva, 7.000 MW</td>
+          <td class="ans-cell">~5.200</td><td class="ans-cell">7.000</td>
+          <td class="ans-cell">-1.800 MW (dèficit crític)</td>
+          <td class="ans-cell">Cost d'importació molt alt</td>
+        </tr>
+        <tr>
+          <td>4</td><td>Q3 DANA, totes actives, 6.500 MW</td>
+          <td class="ans-cell">~7.100 (hidro↑, solar↓)</td><td class="ans-cell">6.500</td>
+          <td class="ans-cell">+600 MW (excedent)</td>
+          <td class="ans-cell">Ingressos; però risc d'inundació</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="q-block no-break">
+      <div class="q-label">Reflexió 1</div>
+      <div class="q-text">Quin experiment t'ha sorprès més i per qué?</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong> L'experiment 3 (sense nuclear) és el que ha de generar més impacte en l'alumnat. Amb la nuclear inactiva, el sistema passa d'un excedent confortable a un dèficit de quasi 2.000 MW, equivalent a haver d'importar electricitat cara de França o Aragó. Això demostra de manera molt clara que la nuclear és, ara mateix, el pilar insustituïble del mix elèctric català. Si demà tancaran, sense haver construït prou renovables, Catalunya tindria un problema energètic gravíssim. Aquest experiment connecta directament amb el debat sobre el calendari de tancament nuclear.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Reflexió 2</div>
+      <div class="q-text">En quin escenari el cost d'importació d'electricitat és màxim? Com s'evita?</div>
+      <div class="answer">
+        <p>El cost d'importació és màxim quan es combinen tres factors alhora: <strong>demanda alta</strong> (estiu tòrrid o hivern fred), <strong>producció renovable baixa</strong> (sequera + nuvolositat) i <strong>central de base apagada</strong> (parada tècnica nuclear o de biomassa). És el pitjor escenari del "triple dèficit".</p>
+        <p>Per evitar-ho, les estratègies clau son: (1) <strong>diversificar el mix</strong> per no dependre d'una sola font; (2) <strong>invertir en emmagatzematge</strong> (bateries o bombeig hidràulic) per guardar l'excedent de dies bons; (3) <strong>reduir la demanda punta</strong> amb mesures d'eficiència (rehabilitació d'edificis, bombes de calor, tarifes de discriminació horària que incentivin consumir de nit o al migdia solar). El simulador ens ensenya que no és el cost absolut de l'energia sinó el cost dels <em>pics</em> el que encareix les factures.</p>
+      </div>
+    </div>
+
+  </div><!-- /A4 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A5 — AEROPORT                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number indigo">A5</div>
+      <div class="act-title-block">
+        <div class="act-label">Debat amb rols · Fase 3 · Sessió 4</div>
+        <div class="act-title">L'Aeroport del Prat: Qui té raó? — Respostes Model</div>
+      </div>
+    </div>
+
+    <div class="nota-doc no-break">
+      <strong>📌 Nota:</strong> En aquesta activitat no hi ha una "resposta correcta" única. L'excel·lència s'avalua per la qualitat dels arguments, l'ús de dades reals, la capacitat d'escoltar i rebatir l'altre grup, i la coherència de la proposta de consens del Conseller/a.
+    </div>
+
+    <div class="section-label">Arguments model per a cada grup de rol</div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Grup A — AENA / Patronals (arguments excel·lents)</div>
+      <div class="answer">
+        <ul>
+          <li>L'aeroport del Prat és el <strong>2n aeroport d'Espanya i el 10è d'Europa</strong> però té una sola pista operativa durant certes hores, a diferència de Madrid-Barajas que en té 4. Sense capacitat de creixement, les rutes intercontinentals marxen cap a Madrid.</li>
+          <li>Les estudis d'impacte econòmic d'Aena i la Cambra de Comerç de Barcelona estimen que l'ampliació generaria <strong>10.000 llocs de treball directes</strong> i 34.000 d'indirectes, millorant el PIB català en 2.000 M€ anuals.</li>
+          <li>L'aeroport ja és el major focus de contaminació acústica de Catalunya, però les noves tecnologies de motors redueixen el soroll per vol en un 20% respecte als avions de fa 10 anys.</li>
+          <li><strong>Punt feble a reconèixer:</strong> L'aviació representa el 3,5% de l'escalfament global (sumant CO₂ i esteles de condensació). No hi ha cap tecnologia disponible per a vols llargs de zero emissions a curt termini.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Grup B — Ecologistes (arguments excel·lents)</div>
+      <div class="answer">
+        <ul>
+          <li>La llacuna de <strong>La Ricarda</strong> i el Delta del Llobregat formen part de la Xarxa Natura 2000 europea. La seva destrucció violarà la Directiva d'Hàbitats i comportarà sancions de Brussel·les, a més de ser irrecuperable com a ecosistema.</li>
+          <li>El Delta és l'únic lloc on crien algunes espècies d'aus protegides a tota la Mediterrània occidental. La biodiversitat no té preu de mercat però sí un valor ecològic i científic enorme.</li>
+          <li>El Govern de l'Estat ja va <strong>renunciar als fons europeus</strong> de modernització aeroportuària a causa del bloqueig del projecte. Ampliar l'aeroport significaria perdre credibilitat europea en matèria climàtica.</li>
+          <li><strong>Punt feble a reconèixer:</strong> Rebutjar l'ampliació no crea alternative d'ocupació per als 10.000 treballadors potencials. Cal una proposta alternativa de reindustrialització verda de la zona del Baix Llobregat.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Grup D — Proposta de consens del Conseller/a (resposta excel·lent)</div>
+      <div class="answer">
+        <p>Una proposta de consens excel·lent hauria d'equilibrar els interessos dels quatre grups. Un exemple de proposta integradora:</p>
+        <p><strong>"Modernització sense ampliació física:"</strong> Invertir en la digitalització i optimització del flux de passatgers i aeronaus de l'aeroport actual per augmentar la capacitat operativa sense augmentar la petjada física. Alhora, crear un fons de compensació territorial per als municipis afectats pel soroll (Gavà, Castelldefels, Viladecans) finançat per la taxa d'aeroport. Finalment, condicionar qualsevol futura ampliació a la disponibilitat de tecnologia d'aviació d'emissions zero o hidrogen verd per als vols de llarg radi.</p>
+        <p>Aquesta proposta: preserva La Ricarda (satisfà ecologistes), millora la capacitat actual (satisfà parcialment les patronals), no augmenta el soroll immediat (satisfà els veïns), i manté la coherència amb els objectius climàtics europeus (satisfà els Polítics).</p>
+      </div>
+    </div>
+
+  </div><!-- /A5 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A6 — MINI-JOC                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number rose">A6</div>
+      <div class="act-title-block">
+        <div class="act-label">Simulació de decisió · Fase 3 · Sessió 4–5</div>
+        <div class="act-title">Mini-Joc de Consens Social — Guia de Reflexió Model</div>
+      </div>
+    </div>
+
+    <div class="nota-doc no-break">
+      <strong>📌 Nota:</strong> El registre de partida variarà per a cada alumne/a segons les decisions preses. El que s'avalua és la reflexió post-joc, no el marcador obtingut. L'excel·lència requereix analitzar <em>per qué</em> les decisions van tenir els efectes que van tenir.
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Reflexió 1</div>
+      <div class="q-text">Quin veredicte has obtingut? T'ha semblat just?</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong> Si s'ha obtingut el veredicte "Polarització i Tensions Socials" (suport propi alt però consens baix), la reflexió excel·lent reconeixeria que defensar els interessos exclusius d'un col·lectiu sense tenir en compte els altres és insostenible en una democràcia. Un govern que fa molt feliç a un sol grup però molt infeliç als altres acaba generant inestabilitat social i política que paralitza qualsevol projecte. En la vida real, els partits que maximitzen el seu electorat sense consensos acaben sent bloquejats o desbancats.</p>
+        <p>Si s'ha obtingut "Sacrifici de Facció pel Bé Comú", la reflexió excel·lent reconeixeria el cost personal de governar pensant en el bé general: moltes vegades es perd suport del propi col·lectiu perquè es prenen decisions que semblen impopulars però que, a llarg termini, beneficien tothom.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Reflexió 2</div>
+      <div class="q-text">Decisió on defensar el teu col·lectiu perjudicava molt els altres.</div>
+      <div class="answer">
+        <p><strong>Exemple per al rol Empresariat (decisió "Ampliació de l'Aeroport del Prat"):</strong> Si s'escull l'opció A (donar suport total a l'ampliació), l'empresariat rep +10 punts però els ecologistes perden -15 i la ciutadania perd -5. Aquesta asimetria reflecteix una realitat: els beneficis econòmics de l'ampliació anirien principalment a les empreses del sector turístic i logístic, però els costos ambientals (destrucció de La Ricarda, increment de CO₂, soroll) els pateix tota la societat, especialment els veïns i el medi ambient. El joc reflecteix fidelment aquesta asimetria d'interessos.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Reflexió 3</div>
+      <div class="q-text">Les decisions del joc reflecteixen situacions reals?</div>
+      <div class="answer">
+        <p>Sí, en gran mesura. Per exemple, la decisió "Crisi: Amenaça de Fuga de Capitals" reflecteix el dilema real que va viure el govern català el 2022 quan empreses com Volkswagen (SEAT) van amenaçar de traslladar la producció fora de Catalunya si no tenien assegurats preus estables de l'electricitat. La decisió "Moció de Censura al Parlament" reflecteix la fragilitat parlamentària dels governs catalans en minoria, on l'energia i l'habitatge han sigut causa de múltiples crispacions. La "Manifestació Massiva pel Clima" recorda les marxes juvenils de la plataforma "Fridays for Future" de 2019 davant del Parlament de Catalunya.</p>
+      </div>
+    </div>
+
+  </div><!-- /A6 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A7 — POLÍTIQUES PÚBLIQUES                                      -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A7</div>
+      <div class="act-title-block">
+        <div class="act-label">Disseny de polítiques · Fase 4 · Sessió 5–6</div>
+        <div class="act-title">Planificador de Polítiques Públiques — Pla Model (3.000 M€)</div>
+      </div>
+    </div>
+
+    <div class="nota-doc no-break">
+      <strong>📌 Nota:</strong> El pla model presentat és un exemple d'excel·lència; hi ha moltes combinacions vàlides. Es valora la coherència interna del pla (que les polítiques triades responguin a un objectiu clar i complementari) i la consciència de les renúncies.
+    </div>
+
+    <div class="section-label">Pla model: "Eficiència + Desbloqueig Renovable" (2.950 M€ de 3.000)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Política Pública</th>
+          <th>Categoria</th>
+          <th>Cost (M€)</th>
+          <th>Efecte principal</th>
+          <th>Per qué la triem?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rehabilitació Energètica</td>
+          <td>Eficiència</td>
+          <td>1.200</td>
+          <td class="ans-cell">-150 MW demanda</td>
+          <td class="ans-cell">Reducció estructural de la demanda; combatre la pobresa energètica; fons EU disponibles</td>
+        </tr>
+        <tr>
+          <td>Impuls a l'Autoconsum</td>
+          <td>Eficiència</td>
+          <td>500</td>
+          <td class="ans-cell">-100 MW demanda</td>
+          <td class="ans-cell">Descentralitza la generació; molt popular; baixa resistència veïnal</td>
+        </tr>
+        <tr>
+          <td>Desbloqueig Eòlica Marina</td>
+          <td>Infraestructura</td>
+          <td>1.000</td>
+          <td class="ans-cell">Desbloqueja tecnologia</td>
+          <td class="ans-cell">Permet construir eòlica marina al joc; gran potencial sense conflicte de sòl terrestre</td>
+        </tr>
+        <tr>
+          <td>Simplificació Burocràtica</td>
+          <td>Infraestructura</td>
+          <td>150</td>
+          <td class="ans-cell">-1 trimestre construcció</td>
+          <td class="ans-cell">Redueix el temps per construir noves centrals; alt impacte per baix cost</td>
+        </tr>
+        <tr>
+          <td>Educació Energètica</td>
+          <td>Eficiència</td>
+          <td>200</td>
+          <td class="ans-cell">-50 MW demanda</td>
+          <td class="ans-cell">Conscienciació a llarg termini; impacte sobre generació futura; cost molt baix</td>
+        </tr>
+        <tr style="background:#f0fdf4; font-weight:700;">
+          <td colspan="2"><strong>TOTAL</strong></td>
+          <td><strong>2.950 M€</strong></td>
+          <td colspan="2"><strong>Estalvi demanda: -300 MW</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="q-block no-break">
+      <div class="q-label">Justificació del pla</div>
+      <div class="answer">
+        <p>El nostre pla prioritza la <strong>reducció de la demanda</strong> per davant de la inversió en nova generació, perquè l'energia més barata i neta és la que no es gasta. Amb 300 MW menys de demanda, el sistema pot gestionar millor els pics estacionals sense dependre de centrals de gas caríssimes. Alhora, la simplificació burocràtica i el desbloqueig de l'eòlica marina preparen el terreny per a la <strong>fase de construcció</strong> que vindrà en els trimestres posteriors del joc.</p>
+        <p>L'equilibri entre els tres objectius del trilema: la rehabilitació millora l'<em>accessibilitat</em> (factures més baixes), l'autoconsum i l'eòlica marina milloren la <em>sostenibilitat</em> (menys emissions), i la simplificació burocràtica millora la <em>seguretat</em> a mig termini (noves centrals disponibles més ràpidament). Cap política del nostre pla perjudica seriosament cap dels quatre col·lectius.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Política deixada fora</div>
+      <div class="answer">
+        <p>Hem hagut de renunciar a l'<strong>Emmagatzematge (Bateries)</strong> (2.000 M€) perquè superaria el pressupost. És la política que, estratègicament, més ens hauria agradat aprovar, ja que incrementa l'aprofitament de les renovables intermitents (solar i eòlica) en un 20% permanent, reduint dràsticament la necessitat d'importar en moments de dèficit. L'hauríem inclòs en un pressupost de 5.000 M€. La recomanació per al Parlament és buscar finançament europeu específic per a emmagatzematge (Fons d'Innovació de la UE) que complementi el pressupost autonòmic.</p>
+      </div>
+    </div>
+
+  </div><!-- /A7 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A8 — EL GRAN JOC                                               -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number blue">A8</div>
+      <div class="act-title-block">
+        <div class="act-label">Simulació completa · Fase 4 · Sessió 6–7</div>
+        <div class="act-title">El Gran Joc: 4 anys com a Conseller/a — Guia d'Anàlisi Model</div>
+      </div>
+    </div>
+
+    <div class="nota-doc no-break">
+      <strong>📌 Nota:</strong> El registre de partida és personal i no té respostes "correctes". La guia d'anàlisi model ofereix exemples de reflexió d'excel·lència per orientar la correcció del professorat.
+    </div>
+
+    <div class="section-label">Estratègia model per a una partida amb victòria</div>
+
+    <div class="info-box amber no-break">
+      <div class="box-head">🗺️ Estratègia recomanada any a any</div>
+      <ul>
+        <li><strong>Any 1 (T1-T4):</strong> No construeixis centrals cares el primer any. Consolida les finances: ven l'excedent elèctric quan el temps acompanyi. Aprova polítiques d'eficiència barates (educació energètica, simplificació burocràtica) per no gastar tot el pressupost. Observa quin estat climatològic et penalitza més.</li>
+        <li><strong>Any 2 (T5-T8):</strong> Construeix la primera central eòlica terrestre o solar (baix cost, ràpides de construir). Si tens pressupost, inicia el desbloqueig de l'eòlica marina. Vigila l'aprovació dels ecologistes si gastes molt en gas.</li>
+        <li><strong>Any 3 (T9-T12):</strong> Ja tens renovables noves en producció. Redueix la dependència del gas (baixa el percentatge de funcionament al mínim). Aprova el pla de rehabilitació per reduir la demanda base permanentment.</li>
+        <li><strong>Any 4 (T13-T16):</strong> Gestiona la crisi política si arriba (aprovació baixa). Assegura't que el mix renovable supera el 40% per evitar la sanció d'emissions de la UE. Acaba el mandat amb saldo positiu.</li>
+      </ul>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Anàlisi 1</div>
+      <div class="q-text">Quin ha estat el moment de més crisi durant la partida? Com l'has resolt?</div>
+      <div class="answer">
+        <p><strong>Resposta excel·lent:</strong> La crisi més habitual al joc és una <strong>onada de calor tòrrida a l'estiu del Trimestre 6 o 7</strong>, que dispara la demanda fins a 9.500 MW mentre la hidràulica produeix poc per la sequera. Si en aquell moment el pressupost és baix i no hi ha prou gas actiu, el dèficit i el cost d'importació poden desestabilitzar les finances.</p>
+        <p>La resolució excel·lent és preventiva, no reactiva: tenir sempre un 30% del gas com a "reserva calenta" per activar en emergències, sense tenir-lo actiu tota l'estona (per estalviar costos de manteniment). A posteriori, si la crisi ja és present, la prioritat és augmentar ràpidament la producció del gas al 100% i acceptar el cost d'importació durant 1-2 trimestres, sacrificant eficiència econòmica per mantenir el subministrament i l'aprovació social.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Anàlisi 2</div>
+      <div class="q-text">Quin tipus de centrals has construït majoritàriament? Mix final?</div>
+      <div class="answer">
+        <p><strong>Mix final d'una partida guanyadora típica:</strong> Nuclear (existent, ~36% de la producció), Gas (existent en backup, ~12%), Solar nova (~15%), Eòlica nova (~20%), Hidràulica (existent, ~10%), Biomassa (~7%). Total renovable nou: ~35%. La clau és que el <em>mix nou construït</em> sigui majoritàriament renovable per complir les condicions anti-emissions de la UE.</p>
+        <p>La temptació és construir molt gas (barat i ràpid), però augmenta les emissions acumulades i el risc de sanció final. Les centrals eòliques i solars tardes 2 trimestres en construir-se, per la qual cosa s'han d'iniciar el més aviat possible.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Anàlisi 3</div>
+      <div class="q-text">Si poguessis tornar a jugar, qué canviaries en l'estratègia del primer any?</div>
+      <div class="answer">
+        <p><strong>Resposta excel·lent:</strong> La lliçó principal dels primers anys és que <strong>no s'ha d'esperar a estar en crisi per invertir</strong>. Molts jugadors inicials esperen al Trimestre 4 o 5 per construir la primera central renovable, però com que tarden 2 trimestres en entrar en producció, en realitat no disposen d'ella fins al Trimestre 6 o 7, just quan comencen els problemes de l'estiu. La millora clau seria iniciar la construcció eòlica o solar el Trimestre 1 o 2, tot i que el pressupost inicial sigui just, perquè el benefici a llarg termini supera el cost inicial.</p>
+      </div>
+    </div>
+
+  </div><!-- /A8 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A9 — REFLEXIÓ FINAL                                            -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A9</div>
+      <div class="act-title-block">
+        <div class="act-label">Síntesi i avaluació · Fase 5 · Sessió 8</div>
+        <div class="act-title">Reflexió Final — Respostes Model d'Excel·lència</div>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Síntesi en 3 frases</div>
+      <div class="answer">
+        <p><strong>Exemple de síntesi excel·lent (3 frases):</strong></p>
+        <ol>
+          <li>He après que la transició energètica no és un problema tècnic sinó un problema de <em>consens social</em>: hi ha actors amb interessos molt diferents i qualsevol política pública genera guanyadors i perdedors que cal gestionar políticament.</li>
+          <li>La diferència entre MW (potència instal·lada) i GWh (energia generada) m'ha fet entendre per qué tenim tantes plaques solars però seguim necessitant centrals de gas: les renovables no funcionen sempre i l'emmagatzematge és el gran repte no resolt.</li>
+          <li>La pobresa energètica m'ha sorprès: no sabia que 164.000 famílies a Catalunya passin fred o calor per no poder pagar la llum, i ara entenc que l'energia és un dret social i no només un bé de mercat.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 3</div>
+      <div class="q-text">Si tu fossis realment el/la Conseller/a, quina seria la primera mesura?</div>
+      <div class="answer">
+        <p><strong>Resposta excel·lent:</strong> La primera mesura seria un <strong>Pla d'Urgència de Pobresa Energètica</strong> combinat amb la <strong>simplificació dels tràmits per a l'autoconsum solar a les teulades</strong>. El primer ataca l'injustícia social immediata (que ningú passi fred ni calor per no poder pagar la llum), i el segon prepara el terreny per a una reducció estructural de la factura a llarg termini.</p>
+        <p>Triaria aquestes dues perquè compleixen els tres criteris del bon govern: <em>eficàcia</em> (resolució del problema), <em>equitat</em> (beneficien primer els més vulnerables) i <em>eficiència</em> (l'autoconsum és la política amb millor relació cost-benefici a llarg termini per als fons públics). A més, generarien consens ampli: la ciutadania, els ecologistes i els polítics hi estarien a favor, i l'empresariat de les instal·ladores solars també.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 4</div>
+      <div class="q-text">Creus que com a ciutadà/ana tens poder per influir en la transició energètica?</div>
+      <div class="answer">
+        <p>Sí, i de diverses maneres concretes que sovint s'infravaloren:</p>
+        <ul>
+          <li><strong>Consum conscient:</strong> Canviar la tarifa elèctrica a una de discriminació horària i consumir l'energia quan és més barata i verda (al migdia solar, que és quan hi ha excedent de solar i el preu és mínim).</li>
+          <li><strong>Autoconsum:</strong> Si s'accedeix a un habitatge propi, instal·lar plaques solars redueix la dependència de la xarxa i genera un retorn econòmic en 6-8 anys.</li>
+          <li><strong>Participació política:</strong> Associar-se a plataformes com l'APE, votar tenint en compte el programa energètic dels partits, participar en processos de consulta pública d'infrastructures renovables.</li>
+          <li><strong>Pressió com a consumidor:</strong> Triar comercialitzadors d'energia verda certificada obliga les grans elèctriques a augmentar la seva proporció de renovables per no perdre clients.</li>
+        </ul>
+        <p>La transició energètica no la faran els governs sols: necessita la implicació activa de tota la societat, i cada decisió individual de consum o d'inversió suma en la mateixa direcció.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="section-label">Rúbrica de Correcció Final — Guia per al Professorat</div>
+    <table class="rubric no-break">
+      <thead>
+        <tr>
+          <th style="width:22%;">Criteri</th>
+          <th>Excel·lent (4)</th>
+          <th>Satisfactori (3)</th>
+          <th>En progrés (2)</th>
+          <th>Insuficient (1)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Comprensió conceptual</strong><br><small>MW/GWh, trilema, actors, pobresa energètica</small></td>
+          <td>Explica tots els conceptes amb precisió, connecta'ls entre si i aporta exemples propis elaborats</td>
+          <td>Explica correctament la majoria dels conceptes amb petits errors o omissions</td>
+          <td>Entén els conceptes bàsics però comet errors conceptuals significatius</td>
+          <td>No demostra comprensió dels conceptes clau del projecte</td>
+        </tr>
+        <tr>
+          <td><strong>Pensament crític</strong><br><small>Arguments, evidències, contradicions</small></td>
+          <td>Argumenta amb dades concretes, reconeix la complexitat i les contradiccions de les seves pròpies posicions</td>
+          <td>Argumenta amb raons sòlides però sense reconèixer les limitacions de la pròpia posició</td>
+          <td>Presenta arguments superficials o sense suport en fets</td>
+          <td>No argumenta ni justifica les opinions</td>
+        </tr>
+        <tr>
+          <td><strong>Participació al debat</strong><br><small>A5: Aeroport. A6: Mini-joc</small></td>
+          <td>Defensa el rol amb dades específiques; escolta i rebat els arguments contraris; fa propostes de consens creatives</td>
+          <td>Participa activament al debat i escolta els altres</td>
+          <td>Participa poc, no rebat arguments o no escolta els altres</td>
+          <td>No participa o dificulta el debat</td>
+        </tr>
+        <tr>
+          <td><strong>Coherència del pla</strong><br><small>A7: Planificador. A8: Gran Joc</small></td>
+          <td>El pla de polítiques té un objectiu clar, les polítiques es complementen i la justificació és argumentada i coherent amb el trilema</td>
+          <td>El pla és coherent però la justificació és parcial o li manquen connexions entre polítiques</td>
+          <td>El pla és arbitrari o no justificat; les polítiques no es complementen</td>
+          <td>No hi ha pla o és incoherent</td>
+        </tr>
+        <tr>
+          <td><strong>Dossier complet</strong><br><small>Qualitat i extensió de les respostes</small></td>
+          <td>Totes les activitats completades amb respostes elaborades, clares i que van més enllà del mínim esperable</td>
+          <td>La majoria d'activitats completades amb respostes adequades</td>
+          <td>Algunes activitats incompletes o amb respostes molt breus i poc elaborades</td>
+          <td>Dossier molt incomplet o amb respostes d'una línia sense contingut</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+    <p style="font-size:9pt; color: var(--text-muted);">
+      <strong>Puntuació màxima:</strong> 20 punts (5 criteris × 4 punts) &nbsp;|&nbsp;
+      <strong>Excel·lent:</strong> 18–20 pts &nbsp;|&nbsp;
+      <strong>Notable:</strong> 15–17 pts &nbsp;|&nbsp;
+      <strong>Bé:</strong> 12–14 pts &nbsp;|&nbsp;
+      <strong>Suficient:</strong> 10–11 pts &nbsp;|&nbsp;
+      <strong>Insuficient:</strong> &lt;10 pts
+    </p>
+
+  </div><!-- /A9 -->
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
