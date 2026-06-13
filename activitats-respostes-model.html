@@ -172,6 +172,292 @@
     /* Rúbrica */
     .rubric th { background: var(--indigo); }
     .rubric th:first-child { background: #374151; }
+
+    /* ─── NOTÍCIES / FONTS ─── */
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .news-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+    }
+    .news-card .news-source {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2px;
+      font-size: 8pt;
+    }
+    .news-card a { color: var(--text-main); word-break: break-all; }
+
+    /* ─── RETALLS DE PREMSA INCRUSTATS (CLIPPING) ─── */
+    .news-clipping {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--rose);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 9.5pt;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      page-break-inside: avoid;
+    }
+    .news-clipping.blue { border-left-color: var(--secondary); }
+    .news-clipping.amber { border-left-color: var(--amber); }
+    .news-clipping.indigo { border-left-color: var(--indigo); }
+    
+    .news-clipping-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-clipping-source {
+      color: var(--rose);
+      font-weight: 800;
+    }
+    .news-clipping.blue .news-clipping-source { color: var(--secondary); }
+    .news-clipping.amber .news-clipping-source { color: var(--amber); }
+    .news-clipping.indigo .news-clipping-source { color: var(--indigo); }
+
+    .news-clipping-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .news-clipping-quote {
+      font-style: italic;
+      color: #334155;
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 3px double #cbd5e1;
+      margin: 8px 0;
+      font-size: 9pt;
+      text-align: justify;
+    }
+    .news-clipping-ref {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 6px;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 4px;
+      text-align: right;
+    }
+    .news-clipping-ref a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .news-clipping-ref a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── CUSTOM PRINT-FRIENDLY CHARTS FOR DOSSIERS ─── */
+    .chart-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .chart-box-title {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chart-box-source {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+    }
+    .bar-chart-vertical {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 140px;
+      padding-top: 15px;
+      border-bottom: 1.5px solid var(--text-main);
+      margin: 10px 0;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15%;
+    }
+    .bar-val-top {
+      font-size: 7.5pt;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .bar-fill {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--primary);
+    }
+    .bar-fill.rose { background: var(--rose); }
+    .bar-fill.indigo { background: var(--indigo); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.secondary { background: var(--secondary); }
+    .bar-label {
+      font-size: 7.5pt;
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    
+    .bar-chart-horizontal {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-row-label {
+      width: 120px;
+      font-size: 8pt;
+      font-weight: 600;
+      text-align: right;
+      color: var(--text-main);
+    }
+    .bar-row-track {
+      flex: 1;
+      height: 18px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-row-fill {
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      color: white;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 4px 0 0 4px;
+    }
+    .bar-row-fill.rose { background: var(--rose); }
+    .bar-row-fill.indigo { background: var(--indigo); }
+    .bar-row-fill.amber { background: var(--amber); }
+    .bar-row-fill.secondary { background: var(--secondary); }
+    .bar-row-fill.gray { background: #64748b; }
+    
+    /* Line chart table rendering (highly readable and reliable for print) */
+    .line-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      height: 120px;
+      border-bottom: 1.5px solid var(--text-main);
+      border-left: 1.5px solid var(--text-main);
+      margin: 15px 0 5px 25px;
+      position: relative;
+    }
+    .grid-y-axis {
+      position: absolute;
+      left: -25px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: var(--text-muted);
+      text-align: right;
+      width: 20px;
+    }
+    .grid-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      position: relative;
+    }
+    .grid-col::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-s);
+      background: var(--rose);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-w);
+      background: var(--secondary);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col .col-dot-s {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-s);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-col .col-dot-w {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-w);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-x-labels {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      margin-left: 25px;
+      margin-bottom: 12px;
+    }
+    .grid-x-label {
+      font-size: 7pt;
+      text-align: center;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -206,6 +492,68 @@
 
     <div class="nota-doc no-break">
       <strong>📌 Nota pedagògica:</strong> L'objectiu d'aquesta activitat és que l'alumnat connecti emocionalment i racionalment amb la dimensió social de l'energia <em>abans</em> d'entrar al simulador. Les respostes excel·lents han de mostrar consciència de la injustícia estructural i capacitat d'identificar actors i poder.
+    </div>
+
+    <div class="news-grid">
+      <!-- Notícia 1: CCMA -->
+      <div class="news-clipping">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">CCMA / 324</span>
+          <span>27/04/2018</span>
+        </div>
+        <div class="news-clipping-title">La pobresa energètica afecta a més de 164.000 llars catalanes</div>
+        <div class="news-clipping-quote">
+          "Segons les dades de l'Enquesta de Condicions de Vida de l'Institut d'Estadística de Catalunya (Idescat), un 10% de les llars catalanes tenen dificultats per mantenir casa seva a una temperatura adequada durant els mesos freds o han patit retards en el pagament de les factures d'energia. Això representa més de 164.000 llars a tot el territori on viuen persones en situació de vulnerabilitat. L'Aliança contra la Pobresa Energètica (APE) ha alertat que malgrat la Llei 24/2015, algunes companyies segueixen aplicant talls o coaccions sense sol·licitar l'informe de vulnerabilitat previ als serveis socials."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.ccma.cat/324/la-pobresa-energetica-afecta-a-mes-de-164000-llars-catalanes/noticia/2852434/" target="_blank">CCMA Notícies (ID: 2852434)</a>
+        </div>
+      </div>
+
+      <!-- Notícia 2: Ajuntament de Barcelona -->
+      <div class="news-clipping blue">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Ajuntament de Barcelona</span>
+          <span>Servei Actiu</span>
+        </div>
+        <div class="news-clipping-title">Punts d'Assessorament Energètic (PAE) i Drets Energètics</div>
+        <div class="news-clipping-quote">
+          "Els Punts d'Assessorament Energètic (PAE) són un servei de l'Ajuntament de Barcelona que ofereix la informació, l'atenció i la intervenció necessàries perquè les persones puguin exercir els seus drets energètics i les companyies no els tallin els subministraments. El servei assessora sobre com reduir el cost de les factures optimitzant la potència contractada, sol·licitant el Bo Social o demanant les tarifes que millor s'ajustin al consum real de la llar, a més de tramitar l'informe de risc d'exclusió residencial."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.barcelona.cat/habitatge/ca/assessorament/pobresa-energetica" target="_blank">Habitatge Barcelona: Assessorament Energètic</a>
+        </div>
+      </div>
+
+      <!-- Notícia 3: Diari Ara -->
+      <div class="news-clipping amber">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Diari Ara</span>
+          <span>16/10/2021</span>
+        </div>
+        <div class="news-clipping-title">Què és el bo social elèctric i qui hi té dret?</div>
+        <div class="news-clipping-quote">
+          "El bo social elèctric és un descompte d'entre el 25% i el 65% de la factura elèctrica per als consumidors que compleixen una sèrie de requisits econòmics o familiars. Per poder-lo sol·licitar és obligatori tenir contractada la tarifa regulada (PVPC) i una potència igual o inferior a 10 kW. Poden demanar-lo les famílies nombroses de manera directa, els pensionistes amb la pensió mínima i les llars que no superin els llindars d'ingressos vinculats a l'IPREM. No obstant això, entitats socials adverteixen de la 'bretxa digital' i la 'burocràcia feixuga' que impedeixen que milers de famílies vulnerables se'n beneficiïn."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.ara.cat/economia/que-es-el-bo-social-electric-qui-te-dret_1_3810142.html" target="_blank">Ara.cat Economia</a>
+        </div>
+      </div>
+
+      <!-- Notícia 4: Nació Digital -->
+      <div class="news-clipping indigo">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Nació Digital</span>
+          <span>12/03/2022</span>
+        </div>
+        <div class="news-clipping-title">La crisi del gas rus dispara la factura de la llum i el sobrecost de combustibles</div>
+        <div class="news-clipping-quote">
+          "L'escalada dels preus de l'energia a tot Europa, agreujada pel tall del subministrament de gas rus durant el 2022, ha disparat el preu del megawatt hora (MWh) al mercat majorista de l'electricitat fins a màxims de 300 i 400 euros. Aquesta crisi ha tingut un impacte immediat en les factures domèstiques i industrials de Catalunya. Els col·lectius en risc d'exclusió pateixen directament l'impacte d'aquesta inflació en el rebut elèctric, mentre que el teixit productiu demana ajudes públiques urgents per evitar tancaments d'empreses metal·lúrgiques i químiques."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles" target="_blank">NacióDigital: Transició i Crisi</a>
+        </div>
+      </div>
     </div>
 
     <div class="section-label">Preguntes de diagnosi inicial (individual)</div>
@@ -364,6 +712,50 @@
       <strong>📌 Nota:</strong> No hi ha una resposta "correcta" al debat del trilema. L'excel·lència es mesura per: (1) capacitat d'argumentar amb raons concretes, (2) reconèixer les conseqüències negatives de la pròpia elecció, i (3) demostrar que s'ha escoltat i reflexionat sobre l'argument d'un company/a.
     </div>
 
+    <div class="section-label">Exercici 3 — Anàlisi de la dependència energètica exterior (Competencial)</div>
+    
+    <div class="chart-box">
+      <div class="chart-box-title">📊 Dependència Energètica Exterior (2023)</div>
+      <div class="bar-chart-horizontal">
+        <div class="bar-row">
+          <div class="bar-row-label">Catalunya</div>
+          <div class="bar-row-track">
+            <div class="bar-row-fill rose" style="width: 84.2%;">84,2%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Unió Europea (UE-27)</div>
+          <div class="bar-row-track">
+            <div class="bar-row-fill gray" style="width: 55.5%;">55,5%</div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Institut Català d'Energia (ICAEN) i Eurostat.</div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-text">1. Analitza les dades de la gràfica. Explica quins factors estructurals fan que la dependència energètica exterior de Catalunya sigui un 28,7% superior a la de la Unió Europea.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong> La dependència exterior catalana (84,2% vs 55,5% de la UE-27) s'explica per tres factors estructurals:</p>
+        <ul>
+          <li><strong>Absència de fòssils:</strong> Catalunya importa el 100% del petroli i del gas natural que consumeix, en no tenir jaciments d'aquests recursos.</li>
+          <li><strong>El pes de l'urani:</strong> El 59,6% de la generació elèctrica catalana és nuclear, la qual cosa requereix importar el 100% del combustible d'urani (comptabilitzat com a importació neta).</li>
+          <li><strong>Debilitat de renovables nacionals:</strong> A diferència d'Europa, on les renovables autòctones tenen un gran pes, a Catalunya l'eòlica i solar només aporten l'11,1% de la llum. Per tant, gairebé tota la font autòctona real és la hidroelèctrica històrica, molt vulnerable al clima.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-text">2. Des del punt de vista de la Seguretat de Subministrament del Trilema Energètic, descriu quines conseqüències podria tenir per a Catalunya una crisi de preus o un conflicte internacional en els països d'on prové el gas natural.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong> Una crisi geopolítica en els subministradors de gas natural (com els talls de gas rus a Europa el 2022 o tensions amb Algèria) té dues greus conseqüències per a la seguretat energètica:</p>
+        <ol>
+          <li><strong>Vulnerabilitat financera (Accessibilitat):</strong> Com que el preu del gas determina el preu de l'electricitat en el sistema marginalista, qualsevol increment de preu a l'estranger encareix immediatament la factura elèctrica de les famílies i indústries catalanes.</li>
+          <li><strong>Risc de talls de subministrament (Seguretat):</strong> Si es talla el subministrament físic de gas, Catalunya es veuria incapaç de fer funcionar les seves centrals de cicle combinat, les quals són l'únic suport de la xarxa davant d'atures nuclears o moments sense sol ni vent. Això provocaria talls controlats de subministrament ("blackouts") o dependència de línies de molt alta tensió amb França.</li>
+        </ol>
+      </div>
+    </div>
+
   </div><!-- /A2 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->
@@ -480,6 +872,125 @@
       </div>
     </div>
 
+    <div class="section-label">📊 Dades reals — Mix de Generació Elèctrica a Catalunya (2023)</div>
+    
+    <div class="chart-box">
+      <div class="chart-box-title">📊 Mix Elèctric Català 2023 (Generació Total: 40.298 GWh)</div>
+      
+      <table style="margin-bottom: 12px; font-size: 8.5pt;">
+        <thead>
+          <tr>
+            <th>Tecnologia</th>
+            <th>Generació (GWh)</th>
+            <th>Percentatge (%)</th>
+            <th>Tipus d'emissions directes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>☢️ Nuclear</td>
+            <td>24.019</td>
+            <td>59,6%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>🔥 Cicle Combinat (Gas)</td>
+            <td>7.979</td>
+            <td>19,8%</td>
+            <td>Emissions altes (~400-500 gCO₂/kWh)</td>
+          </tr>
+          <tr>
+            <td>💨 Eòlica</td>
+            <td>2.982</td>
+            <td>7,4%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>💧 Hidroelèctrica</td>
+            <td>2.498</td>
+            <td>6,2%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>☀️ Solar Fotovoltaica</td>
+            <td>1.492</td>
+            <td>3,7%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>🔄 Altres (Biomassa, residus, cogeneració)</td>
+            <td>1.328</td>
+            <td>3,3%</td>
+            <td>Variables segons combustible</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="bar-chart-horizontal">
+        <div class="bar-row">
+          <div class="bar-row-label">Nuclear (59,6%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill secondary" style="width: 59.6%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Gas (19,8%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill rose" style="width: 19.8%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Eòlica (7,4%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill indigo" style="width: 7.4%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Hidroelèctrica (6,2%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill amber" style="width: 6.2%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Solar FV (3,7%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill" style="width: 3.7%;"></div></div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Institut Català d'Energia (ICAEN).</div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 4 (Competencial)</div>
+      <div class="q-text">Fent servir les dades de la taula anterior, calcula el percentatge total de la producció elèctrica catalana del 2023 que va estar lliure d'emissions directes de CO₂ (suma de Nuclear + Eòlica + Hidroelèctrica + Solar FV). Mostra el procediment matemàtic.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong></p>
+        <p>Suma de la producció neta de fonts sense emissions de CO₂ directes a la central:</p>
+        <ul>
+          <li>Nuclear: 24.019 GWh</li>
+          <li>Eòlica: 2.982 GWh</li>
+          <li>Hidroelèctrica: 2.498 GWh</li>
+          <li>Solar FV: 1.492 GWh</li>
+        </ul>
+        <p><strong>Càlculs:</strong><br>
+        <code>Generació sense emissions directes = 24.019 + 2.982 + 2.498 + 1.492 = 30.991 GWh</code><br>
+        <code>Percentatge = (30.991 GWh / 40.298 GWh) * 100 = 76,90%</code></p>
+        <p>Això vol dir que <strong>un 76,9% de la producció elèctrica de Catalunya no genera emissions de CO₂ directes</strong>. Malgrat aquest alt nivell de descarbonització aparent, s'ha de remarcar que el gruix principal prové de la font nuclear (59,6%), que no és renovable, genera residus radioactius complexos i té prevista la seva aturada gradual durant la propera dècada.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 5 (Competencial)</div>
+      <div class="q-text">En un any de pluges normals a Catalunya, la producció hidroelèctrica mitjana se situa al voltant dels 4.500 GWh. L'any 2023 va estar marcat per una greu sequera estructural. Calcula la caiguda percentual de la generació hidroelèctrica de l'any 2023 respecte a un any normal. Explica quina font d'energia s'ha d'activar a la xarxa elèctrica catalana per compensar immediatament aquesta pèrdua de producció neta i com afecta això al Trilema Energètic.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong></p>
+        <p><strong>Càlcul de la caiguda de producció:</strong><br>
+        <code>Producció normal = 4.500 GWh</code><br>
+        <code>Producció 2023 = 2.498 GWh</code><br>
+        <code>Diferència absoluta = 4.500 - 2.498 = 2.002 GWh d'estalvi perdut</code><br>
+        <code>Caiguda percentual = (2.002 GWh / 4.500 GWh) * 100 = 44,49% (caiguda del 44,5%)</code></p>
+        <p><strong>Font de compensació:</strong><br>
+        L'energia eòlica i solar fotovoltaica són intermitents i no es poden engegar artificialment per substituir l'aigua que no ha plogut. Per tant, per cobrir la manca d'aquests 2.002 GWh i evitar caigudes de tensió a la xarxa, s'han d'activar les <strong>centrals tèrmiques de cicle combinat cremant gas natural importat</strong>.</p>
+        <p><strong>Impacte en el Trilema:</strong><br>
+        Aquesta reacció altera negativament el trilema:</p>
+        <ul>
+          <li><strong>🌿 Sostenibilitat:</strong> Augmenta dràsticament l'emissió de gasos d'efecte hivernacle en haver de cremar combustibles fòssils per substituir una energia neta.</li>
+          <li><strong>💰 Accessibilitat:</strong> Com que el gas natural és importat i car, i a més fixa el preu marginal diari de la llum a Espanya, s'encareixen les factures per a tota la societat.</li>
+        </ul>
+      </div>
+    </div>
+
   </div><!-- /A3 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->
@@ -497,7 +1008,7 @@
 
     <div class="section-label">Taula d'experiments (resultats orientatius del simulador)</div>
     <div class="nota-doc no-break">
-      <strong>📌 Nota:</strong> Els valors exactos del simulador poden variar lleugerament. El que es valora és que l'alumnat interpreti correctament el signe del balanç (excedent = exportem, dèficit = importem) i la relació entre estació/clima i producció renovable.
+      <strong>📌 Nota:</strong> Els valors exactes del simulador poden variar lleugerament. El que es valora és que l'alumnat interpreti correctament el signe del balanç (excedent = exportem, dèficit = importem) i la relació entre estació/clima i producció renovable.
     </div>
 
     <table class="no-break">
@@ -515,7 +1026,7 @@
         </tr>
         <tr>
           <td>2</td><td>Q2 Tòrrid, totes actives, 7.000 MW</td>
-          <td class="ans-cell">~7.900 (solar+però hidro↓)</td><td class="ans-cell">8.400 (calor↑)</td>
+          <td class="ans-cell">~7.900 (solar↑ però hidro↓)</td><td class="ans-cell">8.400 (calor↑)</td>
           <td class="ans-cell">-500 MW (dèficit)</td>
           <td class="ans-cell">Cost d'importació elevat</td>
         </tr>
@@ -536,9 +1047,9 @@
 
     <div class="q-block no-break">
       <div class="q-label">Reflexió 1</div>
-      <div class="q-text">Quin experiment t'ha sorprès més i per qué?</div>
+      <div class="q-text">Quin experiment t'ha sorprès més i per què?</div>
       <div class="answer">
-        <p><strong>Resposta model:</strong> L'experiment 3 (sense nuclear) és el que ha de generar més impacte en l'alumnat. Amb la nuclear inactiva, el sistema passa d'un excedent confortable a un dèficit de quasi 2.000 MW, equivalent a haver d'importar electricitat cara de França o Aragó. Això demostra de manera molt clara que la nuclear és, ara mateix, el pilar insustituïble del mix elèctric català. Si demà tancaran, sense haver construït prou renovables, Catalunya tindria un problema energètic gravíssim. Aquest experiment connecta directament amb el debat sobre el calendari de tancament nuclear.</p>
+        <p><strong>Resposta model:</strong> L'experiment 3 (sense nuclear) és el que ha de generar més impacte en l'alumnat. Amb la nuclear inactiva, el sistema passa d'un excedent confortable a un dèficit de quasi 2.000 MW, equivalent a haver d'importar electricitat cara de França o Aragó. Això demostra de manera molt clara que la nuclear és, ara mateix, el pilar insustituïble del mix elèctric català. Si demà tancara, sense haver construït prou renovables, Catalunya tindria un problema energètic gravíssim. Aquest experiment connecta directament amb el debat sobre el calendari de tancament nuclear.</p>
       </div>
     </div>
 
@@ -548,6 +1059,81 @@
       <div class="answer">
         <p>El cost d'importació és màxim quan es combinen tres factors alhora: <strong>demanda alta</strong> (estiu tòrrid o hivern fred), <strong>producció renovable baixa</strong> (sequera + nuvolositat) i <strong>central de base apagada</strong> (parada tècnica nuclear o de biomassa). És el pitjor escenari del "triple dèficit".</p>
         <p>Per evitar-ho, les estratègies clau son: (1) <strong>diversificar el mix</strong> per no dependre d'una sola font; (2) <strong>invertir en emmagatzematge</strong> (bateries o bombeig hidràulic) per guardar l'excedent de dies bons; (3) <strong>reduir la demanda punta</strong> amb mesures d'eficiència (rehabilitació d'edificis, bombes de calor, tarifes de discriminació horària que incentivin consumir de nit o al migdia solar). El simulador ens ensenya que no és el cost absolut de l'energia sinó el cost dels <em>pics</em> el que encareix les factures.</p>
+      </div>
+    </div>
+
+    <div class="section-label">📊 Dades reals — Corba de Càrrega Diària a Catalunya</div>
+    <p>Aquesta gràfica representa la demanda elèctrica real (en MW) al llarg de les 24 hores d'un dia típic d'estiu (vermell) i un dia típic d'hivern (blau):</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📈 Corba de Càrrega Diària a Catalunya (Demanda en MW)</div>
+      
+      <div class="line-chart-grid" style="--val-s: 50%; --val-w: 50%;">
+        <div class="grid-y-axis">
+          <span>8.000 MW</span>
+          <span>6.000 MW</span>
+          <span>4.000 MW</span>
+          <span>2.000 MW</span>
+        </div>
+        <div class="grid-col" style="--val-s: 48%; --val-w: 43%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 46%; --val-w: 40%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 48%; --val-w: 48%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 68%; --val-w: 68%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 82%; --val-w: 80%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 88%; --val-w: 82%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 98%; --val-w: 75%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 95%; --val-w: 72%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 88%; --val-w: 78%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 85%; --val-w: 94%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 80%; --val-w: 92%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 60%; --val-w: 58%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+      </div>
+      <div class="grid-x-labels">
+        <div class="grid-x-label">02h</div>
+        <div class="grid-x-label">04h</div>
+        <div class="grid-x-label">06h</div>
+        <div class="grid-x-label">08h</div>
+        <div class="grid-x-label">10h</div>
+        <div class="grid-x-label">12h</div>
+        <div class="grid-x-label">14h</div>
+        <div class="grid-x-label">16h</div>
+        <div class="grid-x-label">18h</div>
+        <div class="grid-x-label">20h</div>
+        <div class="grid-x-label">22h</div>
+        <div class="grid-x-label">24h</div>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 16px; font-size: 8pt; font-weight: bold; margin-top: 5px;">
+        <span style="color: var(--rose);">● Estiu (Pic a les 14h-15h)</span>
+        <span style="color: var(--secondary);">● Hivern (Pic a les 20h-21h)</span>
+      </div>
+      <div class="chart-box-source">Font: Red Eléctrica de España (REE) i ICAEN.</div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 3 (Competencial)</div>
+      <div class="q-text">Explica quina diferència social i física justifica que a l'estiu el pic de demanda màxim es produeixi al migdia (14:00h - 16:00h) i a l'hivern es desplaci a la nit (20:00h - 22:00h).</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong></p>
+        <ul>
+          <li><strong>☀️ Estiu (Pic de dia):</strong> Està impulsat pel component tèrmic climàtic. Les temperatures més altes del dia es registren a les primeres hores de la tarda. Això fa que les oficines, indústries, grans establiments i llars activin simultàniament els sistemes de climatització (aires condicionats), afegint-se a la demanda d'energia de l'activitat econòmica laboral diürna.</li>
+          <li><strong>❄️ Hivern (Pic de nit):</strong> En hivern la calefacció i la foscor desplacen el pic cap a les 20:00h - 22:00h. Socialment, és l'hora en què s'acaba la jornada laboral i escolar; la gent arriba a casa i activa la calefacció elèctrica, les cuines, les rentadores i els aparells d'oci. Físicament coincideix amb la manca de llum natural (necessitat de tota la il·luminació interior i exterior) i el brusc descens de la temperatura nocturna.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 4 (Competencial)</div>
+      <div class="q-text">A partir d'aquesta corba, analitza el repte de la intermitència de l'energia solar fotovoltaica. Si instal·les molta solar a Catalunya per cobrir la transició energètica, podràs cobrir de forma directa el pic de demanda d'un dia fred de gener a les 20:30h? Quines alternatives té el model energètic per solucionar aquest desacoblament?</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong></p>
+        <p><strong>Desacoblament directe:</strong><br>
+        No, de cap manera directa. A les 20:30h d'un dia de gener la radiació solar a Catalunya és nul·la (irradiació solar = 0 W/m²). Encara que es multipliqués per cent la potència fotovoltaica nominal del país, la producció real seria exactament de 0 MW. Hi ha un desacoblament perfecte entre el pic de generació solar (12h-15h) i el pic de demanda d'hivern (20h-21h).</p>
+        <p><strong>Alternatives tecnològiques reguladores:</strong></p>
+        <ol>
+          <li><strong>Emmagatzematge a gran escala:</strong> Guardar l'electricitat solar sobrant del migdia mitjançant <em>embassaments de bombeig hidràulic</em> (pujar aigua a l'embassament superior de dia i deixar-la caure per moure turbines a la nit) o instal·lant parcs de <em>bateries estacionals de gran capacitat</em> (ió liti, sodi o flux).</li>
+          <li><strong>Gestió intel·ligent de la demanda:</strong> Incentivar, mitjançant diferenciació tarifària (preu molt més barat de dia que de nit), que determinats consums s'autogestionin de forma programada durant les hores de producció solar (recàrrega de cotxes, climatització prèvia de llars, processos industrials pesats).</li>
+          <li><strong>Fonts de base gestionables no intermitents:</strong> Mantenir una potència de backup ferma (biomassa controlable, biogàs, hidràulica de cabal variable o cicles combinats de transició alimentats amb hidrogen verd o gas) per activar instantàniament quan cau el sol.</li>
+        </ol>
       </div>
     </div>
 
@@ -568,6 +1154,69 @@
 
     <div class="nota-doc no-break">
       <strong>📌 Nota:</strong> En aquesta activitat no hi ha una "resposta correcta" única. L'excel·lència s'avalua per la qualitat dels arguments, l'ús de dades reals, la capacitat d'escoltar i rebatir l'altre grup, i la coherència de la proposta de consens del Conseller/a.
+    </div>
+
+    <div class="section-label">📖 Fase 1 — Lectura i documentació (15 min)</div>
+    <div class="news-grid">
+      <!-- Notícia 5: CCMA -->
+      <div class="news-clipping">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">CCMA / 3Cat</span>
+          <span>10/09/2021</span>
+        </div>
+        <div class="news-clipping-title">Ampliació de l'aeroport del Prat: les claus d'un debat encallat entre economia i clima</div>
+        <div class="news-clipping-quote">
+          "L'ampliació de l'Aeroport de Barcelona-El Prat manté enfrontats el Govern de l'Estat, que a través d'Aena proposa allargar la tercera pista 500 metres per atreure més vols intercontinentals, i sectors mediambientals i ajuntaments veïns que s'hi oposen per l'impacte en la biodiversitat. Foment del Treball i les principals patronals adverteixen que el Prat pot quedar-se com un aeroport secundari, mentre que la Comissió Europea recorda que l'Estat espanyol té un expedient obert de sanció pel mal estat de conservació del Delta del Llobregat."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.ccma.cat/324/ampliacio-de-laeroport-del-prat-les-claus-dun-debat-encallat-entre-economia-i-clima/noticia/3116921/" target="_blank">CCMA Notícies (ID: 3116921)</a>
+        </div>
+      </div>
+
+      <!-- Notícia 6: Diari Ara -->
+      <div class="news-clipping blue">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Diari Ara</span>
+          <span>04/09/2021</span>
+        </div>
+        <div class="news-clipping-title">La Ricarda i el Delta del Llobregat: l'impacte ambiental de l'ampliació</div>
+        <div class="news-clipping-quote">
+          "La llacuna de La Ricarda, situada al Delta del Llobregat, és una zona humida catalogada com a espai protegit sota la Xarxa Natura 2000 europea. El projecte d'allargament de la pista de mar proposat per Aena afectaria directament aquest espai d'especial valor per a la nidificació de les aus i la conservació d'un dels pocs aiguamolls verges de la costa catalana. Biòlegs i experts adverteixen que els ecosistemes naturals d'aquesta antiguitat no es poden 'compensar' artificialment en altres zones."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.ara.cat/territori/la-ricarda-delta-llobregat-aeroport-el-prat-impacte-ambiental_1_4109402.html" target="_blank">Ara.cat Territori</a>
+        </div>
+      </div>
+
+      <!-- Notícia 7: La Vanguardia -->
+      <div class="news-clipping amber">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">La Vanguardia</span>
+          <span>15/10/2021</span>
+        </div>
+        <div class="news-clipping-title">L'impacte econòmic de l'ampliació de l'aeroport del Prat en el PIB i l'ocupació</div>
+        <div class="news-clipping-quote">
+          "Les patronals de Catalunya, la Cambra de Comerç i l'operador aeroportuari Aena defensen que l'ampliació de l'aeroport del Prat és un projecte d'infraestructura estratègic per al futur econòmic del país. Segons les estimacions del sector, el creixement de l'aeroport per atreure rutes de llarg radi suposaria una injecció que faria augmentar la contribució de l'aeroport al PIB català del 6,2% actual fins al 8,9%, creant fins a 10.000 llocs de treball directes i consolidant el hub internacional."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.lavanguardia.com/economia/20211015/7780617/aeroport-del-prat-impacte-economic-pib.html" target="_blank">La Vanguardia Economía</a>
+        </div>
+      </div>
+
+      <!-- Notícia 8: El Periódico -->
+      <div class="news-clipping indigo">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">El Periódico</span>
+          <span>11/10/2021</span>
+        </div>
+        <div class="news-clipping-title">Soroll de l'aeroport: el rebuig i les queixes dels veïns de Gavà i Castelldefels</div>
+        <div class="news-clipping-quote">
+          "Veïns de Gavà Mar, Castelldefels i Viladecans es mobilitzen contra l'ampliació de l'aeroport del Prat pel temor que el canvi en el rumb dels avions de sortida i d'arribada incrementi la contaminació acústica a les seves llars. L'ús de la configuració de pistes independents podria obligar les aeronaus a sobrevolar zones altament poblades a baixa alçada, superant els decibels de soroll recomanats per l'Organització Mundial de la Salut (OMS) i danyant la salut dels residents."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: <a href="https://www.elperiodico.com/es/barcelona/20211011/prat-ampliacion-ruido-vecinos-12115233.html" target="_blank">El Periódico Barcelona</a>
+        </div>
+      </div>
     </div>
 
     <div class="section-label">Arguments model per a cada grup de rol</div>
@@ -641,11 +1290,53 @@
       </div>
     </div>
 
+    <div class="section-label">📊 Dades reals — Suport Social a les Fonts d'Energia a Catalunya</div>
+    <p>El Centre d'Estudis d'Opinió (CEO) de la Generalitat de Catalunya demana periòdicament la valoració de la ciutadania sobre el nivell d'acord amb diferents instal·lacions energètiques:</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📊 % d'Acord Social amb les Fonts de Transició a Catalunya</div>
+      <div class="bar-chart-horizontal">
+        <div class="bar-row">
+          <div class="bar-row-label">Solar a Teulades</div>
+          <div class="bar-row-track"><div class="bar-row-fill primary" style="width: 92%;">92%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Eòlica Terrestre</div>
+          <div class="bar-row-track"><div class="bar-row-fill indigo" style="width: 68%;">68%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Eòlica Marina</div>
+          <div class="bar-row-track"><div class="bar-row-fill amber" style="width: 48%;">48%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Pròrroga Nuclear</div>
+          <div class="bar-row-track"><div class="bar-row-fill rose" style="width: 24%;">24%</div></div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Enquesta de transició energètica, Centre d'Estudis d'Opinió (CEO).</div>
+    </div>
+
     <div class="q-block no-break">
-      <div class="q-label">Reflexió 3</div>
-      <div class="q-text">Les decisions del joc reflecteixen situacions reals?</div>
+      <div class="q-label">Reflexió 3 (Competencial)</div>
+      <div class="q-text">A partir de les dades del CEO, explica per què l'autoconsum solar de teulades compta amb un consens pràcticament absolut (92%) mentre que l'eòlica marina no arriba a la meitat de suport (48%). Quins conflictes territorials, ambientals o econòmics (com la pesca o el turisme) justifiquen aquesta oposició local?</div>
       <div class="answer">
-        <p>Sí, en gran mesura. Per exemple, la decisió "Crisi: Amenaça de Fuga de Capitals" reflecteix el dilema real que va viure el govern català el 2022 quan empreses com Volkswagen (SEAT) van amenaçar de traslladar la producció fora de Catalunya si no tenien assegurats preus estables de l'electricitat. La decisió "Moció de Censura al Parlament" reflecteix la fragilitat parlamentària dels governs catalans en minoria, on l'energia i l'habitatge han sigut causa de múltiples crispacions. La "Manifestació Massiva pel Clima" recorda les marxes juvenils de la plataforma "Fridays for Future" de 2019 davant del Parlament de Catalunya.</p>
+        <p><strong>Resposta model:</strong> La gran discrepància en el suport social es deu als diferents impactes associats a cadascun dels dos models territorials d'implantació:</p>
+        <ul>
+          <li><strong>☀️ Solar a Teulades (92% de suport):</strong> Representa un model d'<strong>autoconsum distribuït i participatiu</strong>. Té gairebé un consens unànime perquè:
+            <ol>
+              <li>No té impacte en el territori ni genera ocupació de sòl natural/agrícola, ja que s'instal·la sobre superfícies ja construïdes.</li>
+              <li>Genera beneficis econòmics directes per als propietaris que redueixen el consum facturat.</li>
+              <li>Té un impacte paisatgístic molt feble, i no requereix construir noves autopistes elèctriques de transport.</li>
+            </ol>
+          </li>
+          <li><strong>💨 Eòlica Marina (48% de suport):</strong> Representa un model de <strong>gran macroprojecte de generació industrialitzada</strong>. Menys de la meitat dels enquestats hi està d'acord a causa dels següents conflictes reals (p. ex. el projecte <em>Parc Tramuntana</em> a Roses):
+            <ol>
+              <li><strong>Conflicte pesquer i econòmic:</strong> Els pescadors de les confraries de l'Alt Empordà consideren que les estructures marines i els cables submarins restringeixen la pesca d'arrossegament i fan malbé els ecosistemes de l'escamarlà i el peix blau.</li>
+              <li><strong>Conflicte paisatgístic i turístic:</strong> L'oposició local d'hotelers i veïns tem que un gran camp de molins (de fins a 250m d'alçada) a 14-24 km de la costa malmeti l'entorn visual d'una zona icònica i alteri negativament la marca de turisme de qualitat del Cap de Creus i el Golf de Roses.</li>
+              <li><strong>Conflicte ecològic:</strong> Científics i entitats ecologistes alerten que aquestes estructures gegants posen en perill aus marines protegides en zones d'alta biodiversitat que limiten amb tres parcs naturals catalogats.</li>
+            </ol>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -736,6 +1427,71 @@
       <div class="q-label">Política deixada fora</div>
       <div class="answer">
         <p>Hem hagut de renunciar a l'<strong>Emmagatzematge (Bateries)</strong> (2.000 M€) perquè superaria el pressupost. És la política que, estratègicament, més ens hauria agradat aprovar, ja que incrementa l'aprofitament de les renovables intermitents (solar i eòlica) en un 20% permanent, reduint dràsticament la necessitat d'importar en moments de dèficit. L'hauríem inclòs en un pressupost de 5.000 M€. La recomanació per al Parlament és buscar finançament europeu específic per a emmagatzematge (Fons d'Innovació de la UE) que complementi el pressupost autonòmic.</p>
+      </div>
+    </div>
+
+    <div class="section-label">📊 Dades reals — Evolució de l'Autoconsum Solar Fotovoltaic a Catalunya</div>
+    <p>Aquesta gràfica mostra l'evolució acumulada del nombre total de teulades solars (autoconsum) en servei a Catalunya des de 2019 fins a 2023:</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📊 Nombre Acumulat de Teulades amb Autoconsum Solar Fotovoltaic</div>
+      <div class="bar-chart-vertical">
+        <div class="bar-col">
+          <div class="bar-val-top">1.500</div>
+          <div class="bar-fill" style="height: 1.5%;"></div>
+          <div class="bar-label">2019</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">6.000</div>
+          <div class="bar-fill" style="height: 6%;"></div>
+          <div class="bar-label">2020</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">17.000</div>
+          <div class="bar-fill" style="height: 17%;"></div>
+          <div class="bar-label">2021</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">60.000</div>
+          <div class="bar-fill" style="height: 60%;"></div>
+          <div class="bar-label">2022</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">102.000</div>
+          <div class="bar-fill" style="height: 100%;"></div>
+          <div class="bar-label">2023</div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Registre de l'Autoconsum de Catalunya, Institut Català d'Energia (ICAEN).</div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 3 (Competencial)</div>
+      <div class="q-text">Fent servir les dades acumulades de la gràfica, calcula el factor de creixement multiplicatiu del nombre d'instal·lacions solars a Catalunya entre l'any 2020 i el 2023. Mostra el procediment del càlcul.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong></p>
+        <p><strong>Dades de partida:</strong><br>
+        - Nombre d'instal·lacions el 2020 = 6.000 teulades solars.<br>
+        - Nombre d'instal·lacions el 2023 = 102.000 teulades solars.</p>
+        <p><strong>Càlculs:</strong><br>
+        <code>Factor multiplicatiu = Nombre de teulades (2023) / Nombre de teulades (2020)</code><br>
+        <code>Factor = 102.000 / 6.000 = 17</code></p>
+        <p>El nombre de teulades amb autoconsum solar s'ha multiplicat per <strong>17 vegades</strong> en només tres anys (del 2020 al 2023). Aquesta dinàmica representa un ritme de creixement molt intens impulsat per l'eliminació del "tribut al sol" (RD 244/2019), les ajudes econòmiques Next Generation i la major consciència social sobre l'estalvi i la sobirania energètica.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 4 (Competencial)</div>
+      <div class="q-text">Malgrat tenir més de 100.000 teulades solars l'any 2023, la solar fotovoltaica només va representar el 3,7% del total de l'energia elèctrica neta generada a Catalunya. Justifica científicament aquesta aparent contradicció, argumentant sobre la diferència física entre la potència nominal instal·lada (MW) d'un panell de teulada i la seva generació real acumulada (GWh) al llarg de l'any.</div>
+      <div class="answer">
+        <p><strong>Resposta model:</strong> Aquesta aparent contradicció respon a principis físics i mecànics del sistema elèctric i s'explica mitjançant dos arguments:</p>
+        <ol>
+          <li><strong>Diferència entre Potència (MW) i Energia (GWh) - Factor de Capacitat:</strong><br>
+          La potència instal·lada de pic (mesurada en MW) és la capacitat de produir en el millor instant (migdia assolellat d'estiu). L'energia (GWh) és l'acumulació de treball realitzat en el temps (hores). L'autoconsum solar de teulada té un <strong>factor de capacitat baix (~15-17%)</strong> a causa de la intermitència diària (la meitat de l'any és de nit) i les variacions del temps (núvols). Genera electricitat unes 1.500 hores equivalents a l'any a Catalunya.<br>
+          En comparació, una central de base (com la nuclear) té un factor de capacitat del 90-95% i funciona unes 8.000 hores a l'any. Així, 1.000 MW de potència nuclear generen 8.000 GWh, mentre que 1.000 MW de potència solar només produeixen uns 1.500 GWh (gairebé 5 vegades menys energia per al mateix MW nominal).</li>
+          <li><strong>Autoconsum directe no abocat a la xarxa:</strong><br>
+          Una part important de l'energia que generen aquestes 102.000 teulades és autoconsumida a la mateixa llar o empresa en l'instant exacte de producció. Aquesta electricitat auto-consumida redueix la demanda de la xarxa, però <strong>no es comptabilitza com a producció neta general</strong> en les gràfiques de transport (ICAEN), les quals només mesuren l'electricitat neta generada que s'aboca a les línies de transport. Això fa que el percentatge real d'ús d'energia solar a les llars sigui una mica superior al 3,7% oficial de generació injectada a la xarxa.</li>
+        </ol>
       </div>
     </div>
 
