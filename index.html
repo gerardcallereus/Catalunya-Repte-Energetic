@@ -1594,7 +1594,7 @@
       flex-direction: column;
       gap: 0.75rem;
     }
-    .mix-bar-item {
+    .mix-bar-item, .poverty-bar-item {
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -1602,7 +1602,7 @@
       border-radius: 8px;
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    .mix-bar-item:hover {
+    .mix-bar-item:hover, .poverty-bar-item:hover {
       background: rgba(255, 255, 255, 0.05);
       transform: translateX(4px);
     }
@@ -1876,7 +1876,7 @@
     <!-- HEADER -->
     <header>
       <h1>Catalunya: Repte Energètic</h1>
-      <p class="lead">Comprèn les bases científiques, ambientals i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
+      <p class="lead">Comprèn les bases tecnològiques, ambientals, socials i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
     </header>
 
     <!-- TABS NAVIGATION -->
@@ -1907,14 +1907,9 @@
           A la vida real, Catalunya es troba en una cruïlla històrica: més del 50% de l'electricitat prové de tres reactors nuclears que tancaran en la propera dècada, tenim un dèficit històric d'instal·lacions renovables en comparació amb altres regions i patim sequeres intenses que ens deixen gairebé sense producció hidroelèctrica.
         </p>
 
-        <div style="background: rgba(225, 29, 72, 0.03); border: 1px solid rgba(225, 29, 72, 0.15); padding: 1.2rem; border-radius: 12px; margin-top: 1rem;">
-          <h4 style="color: var(--rose); font-weight:600; margin-bottom:0.5rem;">Com es perd la partida? (Game Over)</h4>
-          <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.9rem; color: var(--text-main); display: flex; flex-direction: column; gap: 0.4rem;">
-            <li><strong>Bancarrota Econòmica</strong>: Si el pressupost cau per sota de 0 M€.</li>
-            <li><strong>Revolta Social</strong>: Si l'aprovació mitjana de la societat baixa del 15%.</li>
-            <li><strong>Incompliment Climàtic</strong>: Si al final de la legislatura has superat els nivells màxims d'emissions de CO₂ permesos per Europa.</li>
-          </ul>
-        </div>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+          Com a conseller/a, el repte del teu mandat consistirà a governar de forma equilibrada per evitar que la teva legislatura finalitzi de manera anticipada. Això exigeix evitar la bancarrota econòmica (mantenint un pressupost públic superior a 0 M€), impedir que l'aprovació mitjana dels diferents actors de la societat davalli per sota del 15%, i complir estrictament amb els compromisos ambientals regulats per les directives europees en matèria d'emissions de CO₂.
+        </p>
       </div>
 
       <!-- Recursos Pedagògics i Repte Final (Joc) -->
@@ -1959,33 +1954,27 @@
         </div>
       </div>
 
-      <!-- 2. APRENENTATGE I TRILEMA (Grid 2 de 50-50) -->
-      <div class="grid-2">
-        
-        <!-- Objectius d'Aprenentatge -->
-        <div class="glass-card">
-          <h2>
-            <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2v-6h2v6z"/></svg>
-            Objectius d'Aprenentatge
-          </h2>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-            Aquest projecte interactiu té com a fita formar ciutadans capaços d'analitzar de manera crítica el debat energètic de Catalunya a partir dels següents objectius pedagògics:
-          </p>
-          <ul style="font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.75rem; list-style-position: inside; line-height: 1.5;">
-            <li style="text-indent: -1.2rem; padding-left: 1.2rem;"><strong>📊 Entendre la Paradoxa de la Potència:</strong> Comprendre el factor de capacitat i per què disposar de capacitat nominal no equival a produir el mateix volum d'energia.</li>
-            <li style="text-indent: -1.2rem; padding-left: 1.2rem;"><strong>⚖️ Dominar el Trilema Energètic:</strong> Avaluar com es balancegen la seguretat del subministrament, la sostenibilitat climàtica i l'impacte en el pressupost públic.</li>
-            <li style="text-indent: -1.2rem; padding-left: 1.2rem;"><strong>🔬 Conèixer les Bases Físiques:</strong> Conèixer la termodinàmica que regeix les turbines de vapor, gas, preses d'aigua o l'efecte fotoelèctric.</li>
-            <li style="text-indent: -1.2rem; padding-left: 1.2rem;"><strong>🚜 Analitzar els Conflictes Territorials:</strong> Aprendre a avaluar l'impacte local de la instal·lació d'infraestructures energètiques al nostre territori.</li>
-            <li style="text-indent: -1.2rem; padding-left: 1.2rem;"><strong>🤝 Desenvolupar el Consens Social:</strong> Aprendre a pactar decisions públiques buscant l'equilibri entre diferents sectors i opinions socials.</li>
-          </ul>
-        </div>
+      <!-- Objectius d'Aprenentatge -->
+      <div class="glass-card" style="margin-top: 1.5rem;">
+        <h2>Objectius d'Aprenentatge</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Aquest projecte interactiu té com a fita formar ciutadans capaços d'analitzar de manera crítica el debat energètic de Catalunya a partir dels següents objectius:
+        </p>
+        <ul style="font-size: 0.95rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.75rem; list-style-type: disc; padding-left: 1.5rem; line-height: 1.5;">
+          <li>Aprendre què és una font d'energia i com es transforma per produir electricitat.</li>
+          <li>Comprendre el funcionament de les diferents centrals elèctriques.</li>
+          <li>Identificar els diversos actors socials, així com la relació entre demanda, consum i producció d'energia.</li>
+          <li>Analitzar les polítiques públiques per guiar la transició energètica.</li>
+        </ul>
+      </div>
 
-        <!-- El Trilema Energètic -->
-        <div class="glass-card" style="text-align: center;">
-          <h2>El Trilema Energètic</h2>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Selecciona una de les tres potes del trilema per veure'n la descripció i la seva relació amb la realitat.</p>
-          
-          <div class="trilemma-container">
+      <!-- El Trilema Energètic -->
+      <div class="glass-card" style="margin-top: 1.5rem;">
+        <h2 style="text-align: center; margin-bottom: 0.5rem;">El Trilema Energètic</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; text-align: center;">Selecciona una de les tres potes del trilema per veure'n la descripció i la seva relació amb la realitat.</p>
+        
+        <div class="mix-chart-layout" style="align-items: center;">
+          <div style="display: flex; justify-content: center;">
             <svg class="trilemma-svg" viewBox="0 0 100 90">
               <!-- Grid line lines connecting vertices -->
               <polygon points="50,15 15,75 85,75" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
@@ -2011,86 +2000,123 @@
               <!-- Center label -->
               <text x="50" y="52" text-anchor="middle" fill="var(--text-muted)" style="font-size:4px; font-weight:bold; letter-spacing:0.05em; text-transform:uppercase;">Equilibri</text>
             </svg>
+          </div>
 
-            <div class="trilemma-details" id="trilemma-details-box">
-              <h4 id="trilemma-title" style="color: var(--secondary); margin-bottom: 0.5rem;">Seguretat del Subministrament</h4>
-              <p id="trilemma-desc" style="font-size: 0.85rem; color: var(--text-muted);">
-                Has d'assegurar-te que la producció (en Megawatts, MW) cobreixi sempre la demanda del territori. Si la producció és insuficient, es produeix un dèficit. Per cobrir-lo, la Generalitat es veu obligada a comprar electricitat importada a preus molt alts, perjudicant directament la tresoreria pública i rebent crítiques per la pèrdua de Sobirania Energètica.
-              </p>
-            </div>
+          <div class="trilemma-details" id="trilemma-details-box" style="margin: 0; width: 100%;">
+            <h4 id="trilemma-title" style="color: var(--secondary); margin-bottom: 0.5rem;">Seguretat del Subministrament</h4>
+            <p id="trilemma-desc" style="font-size: 0.85rem; color: var(--text-muted);">
+              Has d'assegurar-te que la producció (en Megawatts, MW) cobreixi sempre la demanda del territori. Si la producció és insuficient, es produeix un dèficit. Per cobrir-lo, la Generalitat es veu obligada a comprar electricitat importada a preus molt alts, perjudicant directament la tresoreria pública i rebent crítiques per la pèrdua de Sobirania Energètica.
+            </p>
           </div>
         </div>
       </div>
 
-      <!-- 3. MIX ELÈCTRIC REAL DE CATALUNYA (2023) -->
+      <!-- 3. LA DIMENSIÓ SOCIAL: POBRESA ENERGÈTICA A CATALUNYA -->
       <div class="glass-card" style="margin-top: 1.5rem;">
         <h2>
-          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
-          Dades Reals de Partida: Mix de Generació Elèctrica a Catalunya (2023)
+          <svg style="width:24px; height:24px; fill:var(--rose);" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 13c-1.1 0-2-.9-2-2s2-4 2-4 2 3 2 4-.9 2-2 2z"/></svg>
+          Pobresa Energètica: La Dimensió Social del Model
         </h2>
         <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
-          Abans de començar a governar i simular el futur, és imprescindible conèixer el punt de partida real del país. Passa el ratolí per sobre de les barres per veure els GWh produïts i les emissions de cicle de vida.
+          La transició energètica no només planteja reptes tecnològics o econòmics, sinó també una profunda problemàtica social. La vulnerabilitat de milers de llars per pagar els serveis d'aigua, llum i gas demana polítiques que garanteixin l'energia com a dret humà bàsic. Passa el ratolí per sobre de les barres d'indicadors per conèixer les dades reals a Catalunya.
         </p>
 
         <div class="interactive-chart-container">
           <div class="mix-chart-layout">
             <div class="mix-bars">
-              <!-- Nuclear -->
-              <div class="mix-bar-item" data-tech="nuclear" data-gwh="24.019 GWh" data-pct="59,6%" data-co2="~12 gCO₂eq/kWh" style="--color: var(--indigo); --w: 59.6%;">
-                <div class="mix-bar-label">☢️ Nuclear</div>
+              <!-- Indicador 1: Incapacitat temperatura -->
+              <div class="poverty-bar-item" data-poverty="temperatura" data-val="20,0%" style="--color: var(--rose); --w: 20%;">
+                <div class="mix-bar-label">🏠 Incapacitat de mantenir la llar calenta (Població)</div>
                 <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 59.6%;"></div></div>
-                  <div class="mix-bar-val">59,6%</div>
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 20%;"></div></div>
+                  <div class="mix-bar-val">20,0%</div>
                 </div>
               </div>
-              <!-- Gas -->
-              <div class="mix-bar-item" data-tech="gas" data-gwh="7.979 GWh" data-pct="19,8%" data-co2="~490 gCO₂eq/kWh" style="--color: var(--rose); --w: 19.8%;">
-                <div class="mix-bar-label">🔥 Gas (Cicle Combinat)</div>
+              <!-- Indicador 2: Despesa desproporcionada -->
+              <div class="poverty-bar-item" data-poverty="despesa" data-val="12,9%" style="--color: var(--amber); --w: 12.9%;">
+                <div class="mix-bar-label">📊 Llars amb despesa energètica excessiva</div>
                 <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 19.8%;"></div></div>
-                  <div class="mix-bar-val">19,8%</div>
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 12.9%;"></div></div>
+                  <div class="mix-bar-val">12,9%</div>
                 </div>
               </div>
-              <!-- Eolica -->
-              <div class="mix-bar-item" data-tech="eolica" data-gwh="2.982 GWh" data-pct="7,4%" data-co2="~11 gCO₂eq/kWh" style="--color: var(--secondary); --w: 7.4%;">
-                <div class="mix-bar-label">💨 Eòlica Terrestre</div>
+              <!-- Indicador 3: Retards factures -->
+              <div class="poverty-bar-item" data-poverty="retards" data-val="9,4%" style="--color: var(--secondary); --w: 9.4%;">
+                <div class="mix-bar-label">⏳ Retards en el pagament de factures</div>
                 <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 7.4%;"></div></div>
-                  <div class="mix-bar-val">7,4%</div>
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 9.4%;"></div></div>
+                  <div class="mix-bar-val">9,4%</div>
                 </div>
               </div>
-              <!-- Hidro -->
-              <div class="mix-bar-item" data-tech="hidro" data-gwh="2.498 GWh" data-pct="6,2%" data-co2="~24 gCO₂eq/kWh" style="--color: var(--amber); --w: 6.2%;">
-                <div class="mix-bar-label">💧 Hidroelèctrica</div>
+              <!-- Indicador 4: Talls evitats -->
+              <div class="poverty-bar-item" data-poverty="talls-evitats" data-val="100%" style="--color: var(--primary); --w: 100%;">
+                <div class="mix-bar-label">🛡️ Talls evitats per Llei 24/2015 (Principi de Precaució)</div>
                 <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 6.2%;"></div></div>
-                  <div class="mix-bar-val">6,2%</div>
-                </div>
-              </div>
-              <!-- Solar -->
-              <div class="mix-bar-item" data-tech="solar" data-gwh="1.492 GWh" data-pct="3,7%" data-co2="~45 gCO₂eq/kWh" style="--color: var(--primary); --w: 3.7%;">
-                <div class="mix-bar-label">☀️ Solar Fotovoltaica</div>
-                <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 3.7%;"></div></div>
-                  <div class="mix-bar-val">3,7%</div>
-                </div>
-              </div>
-              <!-- Altres -->
-              <div class="mix-bar-item" data-tech="altres" data-gwh="1.328 GWh" data-pct="3,3%" data-co2="Variables segons font" style="--color: var(--text-muted); --w: 3.3%;">
-                <div class="mix-bar-label">🔄 Altres (Biomassa, cogeneració)</div>
-                <div class="mix-bar-fill-wrapper">
-                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 3.3%;"></div></div>
-                  <div class="mix-bar-val">3,3%</div>
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 100%;"></div></div>
+                  <div class="mix-bar-val">+200k</div>
                 </div>
               </div>
             </div>
 
             <!-- Dynamic Tooltip Panel inside Tab 1 -->
-            <div class="mix-tooltip-panel" id="mix-tooltip-box">
-              <h4 style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 700;">Tecnologia Seleccionada</h4>
+            <div class="mix-tooltip-panel" id="poverty-tooltip-box">
+              <h4 style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 700;">Indicadors de Vulnerabilitat</h4>
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
-                Posa el cursor a sobre de qualsevol sector de la gràfica per conèixer els detalls operatius i ambientals reals de Catalunya.
+                Posa el cursor a sobre de qualsevol indicador de la gràfica per conèixer els detalls operatius i socials reals de Catalunya.
               </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Noticia Real y Extensa con Cartell de Campanya -->
+        <div style="margin-top: 2rem; border-top: 1px solid var(--card-border); padding-top: 1.5rem;">
+          <div class="mix-chart-layout" style="grid-template-columns: 1.4fr 1.6fr; gap: 2rem; align-items: start;">
+            <!-- Left: Cartell de Campanya -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+                <img src="assets/news/pobresa_energetica.png" alt="Campanya L'energia és un dret a Catalunya" style="width: 100%; height: auto; display: block;" />
+              </div>
+              <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center; font-style: italic; margin-top: 0.25rem; line-height: 1.3;">
+                Cartell oficial de campanya: L'accés a l'aigua, la llum i el gas com a dret fonamental garantit per la societat civil catalana.
+              </p>
+            </div>
+
+            <!-- Right: Noticia Text -->
+            <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <h3 style="color: var(--rose); font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin: 0;">
+                L'Aliança contra la Pobresa Energètica (APE) i la lluita civil pels subministraments bàsics
+              </h3>
+              <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.55; margin: 0;">
+                L'<strong>Aliança contra la Pobresa Energètica (APE)</strong> és un moviment social nascut a Catalunya el 2014 que agrupa persones afectades i entitats socials per defensar els drets humans bàsics de tothom. Sota el lema de combat <em>"Ni talls, ni deutes! Aigua, llum i gas per a tothom!"</em>, l'APE ha liderat la mobilització social i la incidència política per garantir que cap llar vulnerable es quedi sense subministraments bàsics.
+              </p>
+              <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin: 0;">
+                La seva fita més important va ser la redacció i promoció de la <strong>Llei 24/2015</strong> de mesures urgents per afrontar l'emergència en l'habitatge i la pobresa energètica, aprovada per unanimitat pel Parlament de Catalunya. Aquesta norma legal implanta l'anomenat <strong>"principi de precaució"</strong>: obliga les empreses de serveis bàsics a consultar amb els serveis socials abans d'efectuar qualsevol tall, per comprovar si es tracta d'una família vulnerable. Des de la seva ratificació, s'estima que s'han aconseguit aturar més de <strong>200.000 talls de subministraments</strong> a llars en situació crítica (<a href="https://pobresaenergetica.es/que-es-la-llei-24-2015/" target="_blank" rel="noopener" class="news-link" style="text-decoration: underline; font-weight: 500;">detalls de la llei</a>).
+              </p>
+              <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin: 0;">
+                A més de protegir contra els talls, la mobilització de l'APE va forçar el març del 2021 la signatura d'un **conveni històric entre la Generalitat de Catalunya i Endesa**. Mitjançant aquest acord, es va condonar totalment el deute acumulat per factures impagades de més de 35.000 llars vulnerables des del 2015. La distribució del cost de la condonació es va fixar en un 73% a càrrec de la pròpia companyia elèctrica i un 27% a càrrec de les administracions públiques. L'organització continua realitzant <strong>assessoraments col·lectius</strong> quinzenals, un espai on les famílies comparteixen experiències, perden la vergonya dels deutes, aprenen a fer front de forma conjunta a les companyies i coordinen accions de denúncia pública per defensar l'accés garantit als recursos bàsics.
+              </p>
+              <div style="background: rgba(244, 63, 94, 0.02); border-left: 3px solid var(--rose); padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.82rem; color: var(--text-main); font-family: 'Outfit', sans-serif; line-height: 1.45;">
+                <strong>Com actuar davant d'una amenaça de tall segons l'APE:</strong>
+                <ol style="margin-left: 1.2rem; margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.25rem;">
+                  <li>Sol·licitar l'informe de vulnerabilitat de forma immediata als serveis socials de l'Ajuntament.</li>
+                  <li>Presentar una còpia d'aquest document registrat a la subministradora per aturar qualsevol suspensió en base a la Llei 24/2015.</li>
+                  <li>Acudir a les assemblees d'assessorament col·lectiu de l'APE per preparar la defensa davant de possibles pràctiques abusives.</li>
+                </ol>
+              </div>
+              <div class="news-clipping-ref" style="margin-top: 0.25rem; font-size: 0.82rem; display: flex; flex-direction: column; gap: 0.4rem;">
+                <div>
+                  Enllaç oficial de l'APE: <a href="https://pobresaenergetica.es/generalitat-i-endesa-signen-un-conveni-historic-per-eixugar-el-deute-de-les-families-vulnerables/" target="_blank" rel="noopener" class="news-link" style="display:inline-flex; align-items:center; gap:0.25rem; font-weight: 700;">
+                    📄 Comunicat oficial de la signatura del Conveni
+                    <svg style="width:12px; height:12px; fill:currentColor" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                  </a>
+                </div>
+                <div>
+                  Notícia històrica del tancament de l'acord: <a href="https://www.ccma.cat/324/acord-historic-generalitat-i-endesa-condonaran-el-deute-de-la-pobresa-energetica/noticia/3086038/" target="_blank" rel="noopener" class="news-link" style="display:inline-flex; align-items:center; gap:0.25rem; font-weight: 700;">
+                    📰 Generalitat i Endesa condonaran el deute (CCMA/3Cat)
+                    <svg style="width:12px; height:12px; fill:currentColor" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2101,6 +2127,15 @@
     <section id="tab-fonts" class="tab-content">
       <!-- 1. INTRODUCCIÓ PEDAGÒGICA -->
       <div class="glass-card">
+        <div style="background: rgba(16, 185, 129, 0.02); border: 1px solid rgba(16, 185, 129, 0.15); padding: 1.25rem; border-radius: 12px; margin-bottom: 2rem;">
+          <h3 style="color: var(--primary); margin-top: 0; font-size: 1.15rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>💡</span> Què és una font d'energia?
+          </h3>
+          <p style="font-size: 0.92rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+            Una <strong>font d'energia</strong> és qualsevol recurs natural, fenomen físic o substància de la qual es pot extreure energia útil per dur a terme un treball (com ara generar calor, moviment o electricitat). A la natura, aquestes fonts es presenten en forma d'<strong>energia primària</strong>. Segons la seva disponibilitat, es divideixen en <strong>renovables</strong> (aquelles que es regeneren constantment a través de fluxos naturals continus, com el sol o el vent) i <strong>no renovables</strong> (aquelles basades en estocs limitats de recursos que es consumeixen a gran velocitat en comparació amb el seu temps de formació geològica, com els combustibles fòssils o l'urani).
+          </p>
+        </div>
+
         <h2>
           <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
           Comprendre l'Energia: Fonts Primàries vs. Vector Elèctric
@@ -2894,7 +2929,81 @@
           </table>
         </div>
 
-        <h3 style="color: var(--amber); margin-top: 2.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">La Paradoxa de la Potència: Capacitat Instal·lada vs. Producció Real</h3>
+      <!-- MIX ELÈCTRIC REAL DE CATALUNYA (2023) (Traslladat des de la primera pestanya) -->
+      <div class="glass-card" style="margin-top: 2.5rem;">
+        <h3 style="color: var(--primary); border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <svg style="width:24px; height:24px; fill:var(--primary)" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
+          Dades Reals de Partida: Mix de Generació Elèctrica a Catalunya (2023)
+        </h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; margin-top: 0.75rem;">
+          Abans de planificar o governar el futur model elèctric del país, és imprescindible conèixer d'on prové exactament cada unitat de potència real neta consumida. Passa el ratolí per sobre de les barres per veure els GWh produïts i les emissions de cicle de vida.
+        </p>
+
+        <div class="interactive-chart-container">
+          <div class="mix-chart-layout">
+            <div class="mix-bars">
+              <!-- Nuclear -->
+              <div class="mix-bar-item" data-tech="nuclear" data-gwh="24.019 GWh" data-pct="59,6%" data-co2="~12 gCO₂eq/kWh" style="--color: var(--indigo); --w: 59.6%;">
+                <div class="mix-bar-label">☢️ Nuclear</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 59.6%;"></div></div>
+                  <div class="mix-bar-val">59,6%</div>
+                </div>
+              </div>
+              <!-- Gas -->
+              <div class="mix-bar-item" data-tech="gas" data-gwh="7.979 GWh" data-pct="19,8%" data-co2="~490 gCO₂eq/kWh" style="--color: var(--rose); --w: 19.8%;">
+                <div class="mix-bar-label">🔥 Gas (Cicle Combinat)</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 19.8%;"></div></div>
+                  <div class="mix-bar-val">19,8%</div>
+                </div>
+              </div>
+              <!-- Eolica -->
+              <div class="mix-bar-item" data-tech="eolica" data-gwh="2.982 GWh" data-pct="7,4%" data-co2="~11 gCO₂eq/kWh" style="--color: var(--secondary); --w: 7.4%;">
+                <div class="mix-bar-label">💨 Eòlica Terrestre</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 7.4%;"></div></div>
+                  <div class="mix-bar-val">7,4%</div>
+                </div>
+              </div>
+              <!-- Hidro -->
+              <div class="mix-bar-item" data-tech="hidro" data-gwh="2.498 GWh" data-pct="6,2%" data-co2="~24 gCO₂eq/kWh" style="--color: var(--amber); --w: 6.2%;">
+                <div class="mix-bar-label">💧 Hidroelèctrica</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 6.2%;"></div></div>
+                  <div class="mix-bar-val">6,2%</div>
+                </div>
+              </div>
+              <!-- Solar -->
+              <div class="mix-bar-item" data-tech="solar" data-gwh="1.492 GWh" data-pct="3,7%" data-co2="~45 gCO₂eq/kWh" style="--color: var(--primary); --w: 3.7%;">
+                <div class="mix-bar-label">☀️ Solar Fotovoltaica</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 3.7%;"></div></div>
+                  <div class="mix-bar-val">3,7%</div>
+                </div>
+              </div>
+              <!-- Altres -->
+              <div class="mix-bar-item" data-tech="altres" data-gwh="1.328 GWh" data-pct="3,3%" data-co2="Variables segons font" style="--color: var(--text-muted); --w: 3.3%;">
+                <div class="mix-bar-label">🔄 Altres (Biomassa, cogeneració)</div>
+                <div class="mix-bar-fill-wrapper">
+                  <div class="mix-bar-track"><div class="mix-bar-fill" style="width: 3.3%;"></div></div>
+                  <div class="mix-bar-val">3,3%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Tooltip Panel inside Tab 3 -->
+            <div class="mix-tooltip-panel" id="mix-tooltip-box">
+              <h4 style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 700;">Tecnologia Seleccionada</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                Posa el cursor a sobre de qualsevol sector de la gràfica per conèixer els detalls operatius i ambientals reals de Catalunya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: var(--amber); margin-top: 2.5rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">La Paradoxa de la Potència: Capacitat Instal·lada vs. Producció Real</h3>
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
           Existeix una gran diferència entre la <strong>Potència Instal·lada</strong> — quants MW té una central connectats a la xarxa, és a dir, quant pot produir en el millor moment — i la <strong>Producció Real Anual</strong> — quanta electricitat ha generat realment durant tot l'any (en GWh).
         </p>
@@ -4252,6 +4361,7 @@
             </button>
           </div>
         </div>
+      </div>
     </section>
 
     <!-- TAB 5: POLÍTIQUES PÚBLIQUES -->
@@ -4283,6 +4393,7 @@
             <div style="font-size: 0.8rem; color: var(--text-muted);">Retorn estimat per torn</div>
           </div>
         </div>
+      </div>
 
         <!-- Simbologia del pressupost per a l'activitat/joc -->
         <div class="glass-card" style="border: 2px solid var(--indigo); background: rgba(79, 70, 229, 0.02); margin-bottom: 1.5rem; padding: 1.5rem;">
@@ -6677,6 +6788,29 @@
       }
     };
 
+    const povertyDetails = {
+      temperatura: {
+        title: "🏠 Incapacitat de mantenir la llar calenta",
+        val: "20,0% de la població",
+        desc: "Aproximadament 1,5 milions de persones a Catalunya no poden mantenir el seu habitatge a una temperatura adequada durant els mesos freds. Aquesta xifra ha crescut de forma alarmant els darrers anys a causa de l'increment de preus de l'energia i els baixos ingressos de les famílies vulnerables."
+      },
+      despesa: {
+        title: "📊 Llars amb despesa energètica excessiva",
+        val: "12,9% de les llars",
+        desc: "Un 12,9% de les llars catalanes destinen una part desproporcionada del seu pressupost (més del 10% dels seus ingressos totals) al pagament de factures de subministraments energètics bàsics, el que aboca a la precarietat en altres necessitats vitals com l'alimentació o els medicaments."
+      },
+      retards: {
+        title: "⏳ Retards en el pagament de factures",
+        val: "9,4% de la població",
+        desc: "Aproximadament un 9,4% dels ciutadans catalans declaren tenir dificultats per pagar a temps els rebuts de l'aigua, el gas o la llum. Això genera un deute acumulat de milers d'euros per família que les companyies reclamen judicialment o mitjançant empreses de cobrament de deutes."
+      },
+      "talls-evitats": {
+        title: "🛡️ Talls evitats per Llei 24/2015",
+        val: "+200.000 talls evitats des de 2015",
+        desc: "El principi de precaució obligatori a Catalunya ha evitat que les empreses tallin els subministraments de forma unilateral sense abans consultar amb serveis socials. L'Aliança contra la Pobresa Energètica vigila i denuncia qualsevol intent d'incomplir aquesta llei per part de les grans multinacionals."
+      }
+    };
+
     // Bind hover listeners for Tab 1 Mix bars
     function initTab1Interactivity() {
       document.querySelectorAll('.mix-bar-item').forEach(item => {
@@ -6702,6 +6836,36 @@
             <h4 style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 700;">Tecnologia Seleccionada</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
               Posa el cursor a sobre de qualsevol sector de la gràfica per conèixer els detalls operatius i ambientals reals de Catalunya.
+            </p>
+          `;
+          tooltip.style.borderColor = 'var(--card-border)';
+        });
+      });
+    }
+
+    function initPovertyInteractivity() {
+      document.querySelectorAll('.poverty-bar-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          const poverty = item.getAttribute('data-poverty');
+          const details = povertyDetails[poverty];
+          if (details) {
+            const tooltip = document.getElementById('poverty-tooltip-box');
+            tooltip.innerHTML = `
+              <h4 style="margin-bottom: 0.5rem; color: ${item.style.getPropertyValue('--color') || 'var(--rose)'}; font-weight: 700;">${details.title}</h4>
+              <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 0.5rem;">
+                <strong>Prevalença:</strong> ${details.val}
+              </p>
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">${details.desc}</p>
+            `;
+            tooltip.style.borderColor = item.style.getPropertyValue('--color') || 'var(--rose)';
+          }
+        });
+        item.addEventListener('mouseleave', () => {
+          const tooltip = document.getElementById('poverty-tooltip-box');
+          tooltip.innerHTML = `
+            <h4 style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 700;">Indicadors de Vulnerabilitat</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+              Posa el cursor a sobre de qualsevol indicador per conèixer els detalls i context social d'aquestes dades a Catalunya.
             </p>
           `;
           tooltip.style.borderColor = 'var(--card-border)';
@@ -7021,6 +7185,7 @@
 
     // Initializations
     initTab1Interactivity();
+    initPovertyInteractivity();
     initTab2Interactivity();
     initTab3Interactivity();
     initTab4Interactivity();
