@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier d'Activitats — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --rose: #e11d48;
+      --amber: #d97706;
+      --indigo: #4f46e5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5pt;
+      color: var(--text-main);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    /* ─── PAGE LAYOUT (screen) ─── */
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+    }
+
+    /* ─── PRINT RULES ─── */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 14mm 15mm 18mm 15mm;
+      }
+      body { font-size: 10pt; }
+      .page-wrapper { max-width: 100%; padding: 0; margin: 0; }
+      .no-break { page-break-inside: avoid; }
+      .page-break { page-break-before: always; }
+      .print-btn { display: none !important; }
+      a { color: inherit; text-decoration: none; }
+      a[href]::after { content: " (" attr(href) ")"; font-size: 7pt; color: #94a3b8; }
+    }
+
+    /* ─── PRINT BUTTON (screen only) ─── */
+    .print-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2,132,199,0.3);
+      z-index: 999;
+    }
+    .print-btn:hover { background: #0369a1; }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 260mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .cover-logo {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    .cover h1 {
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cover h1 span { color: var(--primary); }
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .cover-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cover-intro {
+      max-width: 500px;
+      font-size: 10pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: #f8fafc;
+      text-align: left;
+    }
+    .cover-intro strong { color: var(--text-main); }
+
+    /* ─── INDEX ─── */
+    .toc { margin: 24px 0 32px; }
+    .toc h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--secondary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--border);
+      font-size: 10pt;
+    }
+    .toc-item .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 8px;
+      min-width: 24px;
+    }
+    .toc-item .toc-title { flex: 1; }
+    .toc-item .toc-phase {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ─── ACTIVITAT: ESTRUCTURA ─── */
+    .activity {
+      margin-bottom: 36px;
+    }
+
+    .act-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+    }
+    .act-number {
+      min-width: 40px; height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .act-number.blue  { background: var(--secondary); }
+    .act-number.rose  { background: var(--rose); }
+    .act-number.amber { background: var(--amber); }
+    .act-number.indigo { background: var(--indigo); }
+
+    .act-title-block { flex: 1; }
+    .act-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .act-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .act-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .act-tag {
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-time { background: #eff6ff; color: var(--secondary); border-color: #bfdbfe; }
+    .tag-group { background: #f0fdf4; color: var(--primary); border-color: #bbf7d0; }
+    .tag-mat { background: #fefce8; color: var(--amber); border-color: #fde68a; }
+
+    /* ─── SECCIONS D'ACTIVITAT ─── */
+    .section-label {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 12px 0 5px;
+    }
+
+    p { margin-bottom: 8px; }
+    ul, ol { padding-left: 1.4em; margin-bottom: 8px; }
+    li { margin-bottom: 4px; line-height: 1.5; }
+    strong { color: var(--text-main); }
+
+    /* ─── CAIXA CONTEXT ─── */
+    .context-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    .context-box .box-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CAIXES DE TIPUS ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 9.5pt;
+    }
+    .info-box.green  { background: #f0fdf4; border-color: #bbf7d0; }
+    .info-box.blue   { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber  { background: #fffbeb; border-color: #fde68a; }
+    .info-box.rose   { background: #fff1f2; border-color: #fecdd3; }
+    .info-box.indigo { background: #eef2ff; border-color: #c7d2fe; }
+
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 9.5pt;
+    }
+
+    /* ─── TAULES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 12px;
+    }
+    th {
+      background: var(--text-main);
+      color: white;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ─── GRAELLA DE ROLS ─── */
+    .rol-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .rol-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 9pt;
+    }
+    .rol-card .rol-name {
+      font-weight: 700;
+      font-size: 10pt;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rol-card ul { margin-bottom: 0; padding-left: 1.2em; }
+
+    /* ─── ESPAI RESPOSTES ─── */
+    .answer-box {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 12px;
+      min-height: 45px;
+      background: #fafafa;
+    }
+    .answer-line {
+      border-bottom: 1px solid #e2e8f0;
+      height: 22px;
+      margin-bottom: 2px;
+    }
+
+    /* ─── SEPARADOR ─── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ─── NOTÍCIES / FONTS ─── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .news-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+    }
+    .news-card .news-source {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2px;
+      font-size: 8pt;
+    }
+    .news-card a { color: var(--text-main); word-break: break-all; }
+
+    /* ─── AVALUACIÓ ─── */
+    .rubric table th { background: var(--indigo); }
+    .rubric table th:first-child { background: #374151; }
+
+    /* ─── CAPÇALERA DE PÀGINA (per impressió) ─── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      font-size: 8.5pt;
+      color: var(--text-muted);
+    }
+    .page-header strong { color: var(--primary); font-size: 10pt; }
+
+    /* Nom alumne */
+    .alumne-block {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 10px;
+      font-size: 9pt;
+    }
+    .alumne-field {
+      flex: 1;
+      border-bottom: 1.5px solid var(--text-main);
+      padding-bottom: 2px;
+    }
+    .alumne-label {
+      font-size: 8pt;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button>
+
+<div class="page-wrapper">
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  PORTADA                                       -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="cover no-break">
+    <div class="cover-logo">⚡</div>
+    <h1>Catalunya:<br><span>Repte Energètic</span></h1>
+    <p class="subtitle">Dossier d'Activitats de l'Alumnat</p>
+    <div class="cover-meta">
+      <span class="cover-badge">📚 Projecte Interdisciplinari</span>
+      <span class="cover-badge">🏫 ESO / Batxillerat</span>
+      <span class="cover-badge">⏱️ 6–8 sessions</span>
+      <span class="cover-badge">🗓️ Curs ______</span>
+    </div>
+    <div class="cover-intro">
+      <strong>Objectiu del projecte:</strong> Entendre el sistema energètic de Catalunya i els reptes
+      de la transició energètica a través de simulació, anàlisi de conflictes reals i presa de decisions
+      com a actors socials. L'alumnat actuarà com a <strong>Conseller/a de Territori, Habitatge i Transició Ecològica</strong>
+      de la Generalitat de Catalunya.
+      <br><br>
+      <strong>Nom:</strong> _________________________________ &nbsp;
+      <strong>Grup:</strong> _______ &nbsp;
+      <strong>Data inici:</strong> _____________
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  ÍNDEX                                         -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="toc no-break">
+    <h2>📋 Índex d'Activitats</h2>
+    <div class="toc-item">
+      <span class="toc-num">A1</span>
+      <span class="toc-title"><strong>Pobresa Energètica: Un Problema Real</strong> — Activació i diagnosi inicial</span>
+      <span class="toc-phase">Fase 1 · Sessió 1</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A2</span>
+      <span class="toc-title"><strong>El Trilema Energètic: Qui Mana?</strong> — Mapa mental i debat inicial</span>
+      <span class="toc-phase">Fase 1 · Sessió 1</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A3</span>
+      <span class="toc-title"><strong>Les Centrals de Catalunya</strong> — Catàleg i comparació de tecnologies</span>
+      <span class="toc-phase">Fase 2 · Sessió 2</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A4</span>
+      <span class="toc-title"><strong>Simulador de Demanda i Consum</strong> — Experimentació guiada</span>
+      <span class="toc-phase">Fase 2 · Sessió 3</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A5</span>
+      <span class="toc-title"><strong>L'Aeroport del Prat: Qui té raó?</strong> — Debat amb rols i actors socials</span>
+      <span class="toc-phase">Fase 3 · Sessió 4</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A6</span>
+      <span class="toc-title"><strong>Mini-joc de Consens Social</strong> — Simulació de decisions polítiques</span>
+      <span class="toc-phase">Fase 3 · Sessió 4–5</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A7</span>
+      <span class="toc-title"><strong>Planificador de Polítiques Públiques</strong> — Disseny del pla de transició</span>
+      <span class="toc-phase">Fase 4 · Sessió 5–6</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A8</span>
+      <span class="toc-title"><strong>El Gran Joc: Simulació completa</strong> — Joc de gestió legislativa</span>
+      <span class="toc-phase">Fase 4 · Sessió 6–7</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">A9</span>
+      <span class="toc-title"><strong>Reflexió Final i Síntesi</strong> — Avaluació i metacognició</span>
+      <span class="toc-phase">Fase 5 · Sessió 8</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A1 — POBRESA ENERGÈTICA                                       -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number rose">A1</div>
+      <div class="act-title-block">
+        <div class="act-label">Activació inicial · Fase 1 · Sessió 1</div>
+        <div class="act-title">Pobresa Energètica: Un Problema Real</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 45–55 min</span>
+          <span class="act-tag tag-group">👥 Grups de 3–4</span>
+          <span class="act-tag tag-mat">📄 Notícies impreses o dispositiu</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🧭 Per què comencem aquí?</div>
+      L'energia no és un tema abstracte. A Catalunya, milers de famílies passen fred a l'hivern o calor a l'estiu perquè no es poden permetre pagar la factura de la llum. Abans d'entrar al simulador i als grans debats polítics, volem que t'adonis que <strong>l'energia és un dret fonamental</strong> que afecta les persones de manera molt desigual. Aquesta activitat et demana que pensis com a ciutadà/ana i, a continuació, com a governant.
+    </div>
+
+    <div class="section-label">🔎 Fase 1 — Diagnosi (15 min)</div>
+    <div class="info-box blue no-break">
+      <div class="box-head">📰 Llegeix i analitza les notícies reals</div>
+      Llegeix les notícies a continuació (o les que et doni el professor/a) i respon les preguntes de diagnosi. Recorda subratllat o anotar el que et sembla més important.
+    </div>
+
+    <div class="news-grid no-break">
+      <div class="news-card">
+        <div class="news-source">CCMA / 324</div>
+        <strong>La APE i el tancament de la llum</strong><br>
+        La plataforma d'Afectats per la Pobresa Energètica (APE) denuncia talls de subministrament a famílies vulnerables i exigeix una moratòria urgent al Parlament.<br>
+        <a href="https://www.ccma.cat/324/la-pobresa-energetica-afecta-a-mes-de-164000-llars-catalanes/noticia/2852434/">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">Ajuntament de Barcelona</div>
+        <strong>El Punt Energètic de Referència</strong><br>
+        Barcelona ha creat punts d'assessorament energètic per ajudar llars vulnerables a gestionar la seva factura i accedir a ajudes del Bo Social Elèctric.<br>
+        <a href="https://www.barcelona.cat/habitatge/ca/assessorament/pobresa-energetica">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">Diari Ara</div>
+        <strong>El Bo Social: insuficient?</strong><br>
+        El descompte del Bo Social de l'Estat és del 25–65% de la factura per a col·lectius vulnerables, però moltes famílies no el sol·liciten per desconeixement o per barreres burocràtiques.<br>
+        <a href="https://www.ara.cat/economia/que-es-el-bo-social-electric-qui-te-dret_1_3810142.html">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">Nació Digital</div>
+        <strong>La crisi del gas rus i els preus de la llum</strong><br>
+        L'escalada dels preus del gas natural el 2022 va disparar la factura elèctrica fins a màxims històrics. Els col·lectius vulnerables van ser els més perjudicats.<br>
+        <a href="https://www.naciodigital.cat/noticia/238712/crisis-energetica-gas-rus-sobrecost-combustibles">[Accés en línia]</a>
+      </div>
+    </div>
+
+    <div class="section-label">✏️ Preguntes de diagnosi inicial (individual)</div>
+
+    <p><strong>1.</strong> Amb les teves pròpies paraules, <strong>Què és la pobresa energètica?</strong></p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>2.</strong> Qui creus que són les persones més afectades per la pobresa energètica a Catalunya? Fes una llista de col·lectius:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>3.</strong> La plataforma APE (Afectats per la Pobresa Energètica) és un moviment social que actua al carrer, al Parlament i als jutjats. Creus que els <strong>moviments socials</strong> poden canviar lleis energètiques? Argumenta-ho.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <div class="section-label no-break">🗺️ Fase 2 — Mapa d'Actors (15 min, en grup)</div>
+    <div class="info-box amber no-break">
+      <div class="box-head">👥 Qui intervé en la pobresa energètica?</div>
+      La pobresa energètica no és un problema simple: hi intervenen molts actors amb interessos diferents. En el vostre grup, completeu la taula identificant <strong>qui és cada actor, quin interès té i quina capacitat d'actuació</strong>.
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Actor</th>
+          <th>Qui és concretament?</th>
+          <th>Quin interès té?</th>
+          <th>Quina eina/poder té?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>👨‍👩‍👧 Família vulnerable</strong></td>
+          <td>Persona amb ingressos baixos, atur...</td>
+          <td></td>
+          <td>Vot, protesta, associació</td>
+        </tr>
+        <tr>
+          <td><strong>⚡ Empresa elèctrica</strong><br><small>(Endesa, Naturgy...)</small></td>
+          <td></td>
+          <td>Benefici econòmic</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>🏛️ Conseller/a de Territori</strong><br><small>(Govern de la Generalitat)</small></td>
+          <td></td>
+          <td></td>
+          <td>Legislació, subvencions, regulació</td>
+        </tr>
+        <tr>
+          <td><strong>✊ APE / Moviments socials</strong></td>
+          <td></td>
+          <td>Protecció dels més vulnerables</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>🏙️ Ajuntament</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>🇪🇺 Unió Europea</strong></td>
+          <td></td>
+          <td></td>
+          <td>Directives, fons, multes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">⚖️ Fase 3 — Tu ets el/la Conseller/a (15 min, grup)</div>
+    <div class="info-box rose no-break">
+      <div class="box-head">🏛️ El teu primer dilema com a governant</div>
+      Acabes de ser nomenat/da Conseller/a de Territori, Habitatge i Transició Ecològica de la Generalitat. La primera crisi que t'arriba és la pobresa energètica. Tens tres possibles línies d'acció. Discutiu en grup i <strong>decidiu quina defenseu i per què</strong>.
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th style="width:35%;">Opció de política pública</th>
+          <th>Avantatges</th>
+          <th>Inconvenients</th>
+          <th>Qui ho aprova?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A)</strong> Ampliar el Bo Social Elèctric: incrementar el descompte del 25% al 50% per a 200.000 llars vulnerables</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>B)</strong> Moratòria de talls de llum: prohibir el tall de subministrament elèctric durant l'hivern i l'estiu</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>C)</strong> Crear fons de rehabilitació energètica: pagar l'aïllament tèrmic als edificis dels barris més pobres per reduir el consum estructuralment</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>La nostra proposta és l'opció ___.</strong> La defensem perquè:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <div class="info-box green no-break">
+      <div class="box-head">💡 Per reflexionar: Poder legislatiu real del Conseller/a</div>
+      El/la Conseller/a de Territori <strong>sí</strong> té poder real: pot presentar projectes de llei al Parlament, gestionar subvencions europees (Next Generation EU), regular les tarifes de xarxa dins del marge autonòmic i supervisar les empreses de distribució al territori català. <strong>Però</strong> els preus de la llum els fixa el Govern de l'Estat i la CNMC (Comissió Nacional), no la Generalitat. Aquí és on el poder té límits clars.
+    </div>
+
+    <div class="section-label">🔁 Posada en comú (5 min, gran grup)</div>
+    <p>Cada grup exposa la seva opció de política pública elegida. El professor/a fa de "Parlament" i voteu la proposta final de la classe.</p>
+    <p><strong>Opció guanyadora de la classe:</strong> _____ &nbsp; <strong>Raó principal:</strong> ________________________</p>
+
+  </div><!-- /A1 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A2 — EL TRILEMA ENERGÈTIC                                     -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number blue">A2</div>
+      <div class="act-title-block">
+        <div class="act-label">Activació · Fase 1 · Sessió 1</div>
+        <div class="act-title">El Trilema Energètic: Qui Mana?</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 30 min</span>
+          <span class="act-tag tag-group">👤 Individual → debat</span>
+          <span class="act-tag tag-mat">📱 Simulador en línia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🔺 Què és el Trilema Energètic?</div>
+      El <strong>World Energy Council</strong> defineix el Trilema Energètic com l'equilibri impossible entre tres objectius que qualsevol govern ha de balancejar alhora:<br>
+      <strong>⚡ Seguretat</strong> (que sempre hi hagi llum) + <strong>🌿 Sostenibilitat</strong> (sense malmetre el planeta) + <strong>💰 Accessibilitat</strong> (que tothom se la pugui pagar).<br>
+      El problema: millorar un dels tres sol empitjorar els altres dos.
+    </div>
+
+    <div class="section-label">✏️ Exercici 1 — Situa't al triangle (individual)</div>
+    <p>Llegeix cadascun dels tres objectius i marca amb una X on creus que hauria d'estar Catalunya i on estàs tu personalment com a prioritat:</p>
+
+    <table class="no-break">
+      <thead>
+        <tr><th>Objectiu</th><th>Descripció</th><th>On és ara Catalunya?</th><th>On hauria d'anar?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>⚡ <strong>Seguretat</strong></td>
+          <td>Que mai hi hagi talls de llum; centrals de reserva; interconnexions internacionals</td>
+          <td>Alta: nuclear + gas de suport</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>🌿 <strong>Sostenibilitat</strong></td>
+          <td>Energia sense CO₂; tancament de nuclears i fòssils; objectius climàtics UE 2030</td>
+          <td>Feble: 58% nucl. + 22% gas</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>💰 <strong>Accessibilitat</strong></td>
+          <td>Factura assequible per a tothom; sense pobresa energètica; preus estables</td>
+          <td>Moderada: afectada per preus gas</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">🗣️ Exercici 2 — Debat ràpid (15 min)</div>
+    <div class="info-box amber no-break">
+      <div class="box-head">💬 Pregunta per debatre</div>
+      <em>"Si haguessis de sacrificar un dels tres objectius del trilema per millorar els altres dos, quin sacrificaries i per quin motiu?"</em><br><br>
+      Cada alumne té 1 minut per argumentar la seva posició. No es pot dir "cap" ni "tots tres igualment".
+    </div>
+    <p><strong>El meu objectiu sacrificable seria</strong> __________________ <strong>perquè:</strong></p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <p><strong>Un argument que m'ha convençut d'un company/a:</strong></p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A2 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A3 — LES CENTRALS                                             -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A3</div>
+      <div class="act-title-block">
+        <div class="act-label">Recerca i Anàlisi · Fase 2 · Sessió 2</div>
+        <div class="act-title">Les Centrals de Catalunya: Comparació de Tecnologies</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 50 min</span>
+          <span class="act-tag tag-group">👥 Parelles</span>
+          <span class="act-tag tag-mat">📱 Guia de centrals (app) + internet</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🏭 Context</div>
+      Catalunya té 6 grans tecnologies de generació elèctrica. Cadascuna té avantatges i inconvenients que el govern ha de ponderar. Usant la pestanya <strong>"Catàleg de Centrals"</strong> de l'aplicació i les teves recerques, completeu la taula comparativa.
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Tecnologia</th>
+          <th>MW instal·lats</th>
+          <th>GWh/any reals</th>
+          <th>Hores equiv./any</th>
+          <th>CO₂ (g/kWh)</th>
+          <th>Principal inconvenient</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>☢️ Nuclear</td><td>3.000</td><td>24.000</td><td>~8.000</td><td>~12</td><td></td></tr>
+        <tr><td>🔥 Cicle Combinat (Gas)</td><td></td><td></td><td></td><td>~490</td><td></td></tr>
+        <tr><td>💧 Hidroelèctrica</td><td></td><td></td><td></td><td>~24</td><td></td></tr>
+        <tr><td>💨 Eòlica Terrestre</td><td></td><td></td><td></td><td>~11</td><td></td></tr>
+        <tr><td>☀️ Solar FV</td><td></td><td></td><td></td><td>~45</td><td></td></tr>
+        <tr><td>🌿 Biomassa</td><td></td><td></td><td></td><td>~230</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">✏️ Preguntes d'anàlisi</div>
+
+    <p><strong>1.</strong> Per quin motiu la nuclear té menys MW que el gas però genera molts més GWh? Explica-ho amb l'analogia del cotxe:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>2.</strong> La solar té el rendiment base més baix (22%). Significa que és una mala tecnologia? Justifica:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>3.</strong> Si tanques les centrals nuclears el 2035 (com preveu el calendari europeu), quina o quines tecnologies podrien substituir-ne el volum de producció? Fes els càlculs aproximats:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A3 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A4 — SIMULADOR                                                -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number amber">A4</div>
+      <div class="act-title-block">
+        <div class="act-label">Experimentació guiada · Fase 2 · Sessió 3</div>
+        <div class="act-title">Simulador de Demanda i Consum: Juga amb la Xarxa Elèctrica</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 45 min</span>
+          <span class="act-tag tag-group">👤 Individual</span>
+          <span class="act-tag tag-mat">💻 App — pestanya "Demanda i consum"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box blue no-break">
+      <div class="box-head">📍 Com usar el simulador</div>
+      Obre l'aplicació i vés a la pestanya <strong>"Demanda i consum d'energia"</strong>. Experimenta modificant:
+      <ul>
+        <li>La <strong>Demanda Base</strong> (slider superior)</li>
+        <li>L'<strong>Estació de l'Any</strong> (Q1–Q4)</li>
+        <li>L'<strong>Estat Climatològic</strong> (normal, tòrrid, DANA...)</li>
+        <li>Les <strong>Centrals actives</strong> i el percentatge de funcionament del gas i la biomassa</li>
+      </ul>
+    </div>
+
+    <div class="section-label">🧪 Experiments guiats (anota els resultats)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Experiment</th>
+          <th>Configuració</th>
+          <th>Producció (MW)</th>
+          <th>Demanda (MW)</th>
+          <th>Balanç</th>
+          <th>Impacte financer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Estiu normal</strong></td>
+          <td>Q2, Normal, totes actives, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>2. Estiu tòrrid</strong></td>
+          <td>Q2, Tòrrid, totes actives, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>3. Sense nuclear</strong></td>
+          <td>Q2, Normal, nuclear inactiva, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>4. DANA de tardor</strong></td>
+          <td>Q3, Plujosa DANA, totes actives, demanda 6.500 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>5. El teu experiment</strong></td>
+          <td>(defineix tu la configuració)</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">✏️ Reflexió</div>
+    <p><strong>1.</strong> Quin experiment t'ha sorprès més? Per quin motiu?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>2.</strong> En quin escenari el cost d'importació d'electricitat és màxim? Com s'evita?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A4 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A5 — AEROPORT                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number indigo">A5</div>
+      <div class="act-title-block">
+        <div class="act-label">Debat amb rols · Fase 3 · Sessió 4</div>
+        <div class="act-title">L'Aeroport del Prat: Qui té raó?</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 55 min</span>
+          <span class="act-tag tag-group">👥 Grups de 4 (un per rol)</span>
+          <span class="act-tag tag-mat">📰 Notícies + App (secció actors socials)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">✈️ El context: Un debat real i encallat</div>
+      L'<strong>ampliació de l'Aeroport de Barcelona-El Prat</strong> és un dels conflictes territorials més emblemàtics de Catalunya. Il·lustra perfectament el Trilema Energètic aplicat a una infraestructura real: creixement econòmic vs. protecció ambiental vs. qualitat de vida dels veïns. El debat porta <strong>més de 10 anys bloquejat</strong> al Govern de l'Estat i ha provocat la renúncia de l'aeroport als fons europeus de modernització.
+    </div>
+
+    <div class="section-label">📖 Fase 1 — Lectura i documentació (15 min)</div>
+    <div class="news-grid no-break">
+      <div class="news-card">
+        <div class="news-source">CCMA / 3Cat</div>
+        <strong>Les claus del debat encallat entre economia i clima</strong><br>
+        Anàlisi de les posicions d'Aena, el Govern de l'Estat, la Generalitat i els grups ecologistes.<br>
+        <a href="https://www.ccma.cat/324/ampliacio-de-laeroport-del-prat-les-claus-dun-debat-encallat-entre-economia-i-clima/noticia/3116921/">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">Diari Ara</div>
+        <strong>L'impacte sobre La Ricarda i el Delta del Llobregat</strong><br>
+        La llacuna de La Ricarda és espai protegit Xarxa Natura 2000. L'ampliació destruiria 164 ha d'aiguamolls únics a tot el Mediterrani.<br>
+        <a href="https://www.ara.cat/territori/la-ricarda-delta-llobregat-aeroport-el-prat-impacte-ambiental_1_4109402.html">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">La Vanguardia</div>
+        <strong>L'impacte econòmic: 10.000 llocs de treball</strong><br>
+        Les patronals i la cambra de comerç estimen que l'ampliació crearia 10.000 llocs de treball directes i atrauríe vols de llarg radi clau per al turisme d'alta gamma.<br>
+        <a href="https://www.lavanguardia.com/economia/20211015/7780617/aeroport-del-prat-impacte-economic-pib.html">[Accés en línia]</a>
+      </div>
+      <div class="news-card">
+        <div class="news-source">El Periódico</div>
+        <strong>El rebuig de les comunitats veïnals</strong><br>
+        Els veïns de Gavà, Castelldefels i Viladecans denuncien l'increment de soroll i contaminació que implicaria el creixement del nombre de vols.<br>
+        <a href="https://www.elperiodico.com/es/barcelona/20211011/prat-ampliacion-ruido-vecinos-12115233.html">[Accés en línia]</a>
+      </div>
+    </div>
+
+    <div class="section-label">🎭 Fase 2 — Assignació de rols i preparació (10 min)</div>
+    <div class="rol-grid no-break">
+      <div class="rol-card">
+        <div class="rol-name">✈️ Grup A: AENA / Patronals</div>
+        <ul>
+          <li>Arguments: PIB, ocupació, turisme d'alta gamma</li>
+          <li>Demanda: aprovació ràpida del projecte</li>
+          <li>Punt feble: impacte ambiental, dependència del petroli</li>
+        </ul>
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🦆 Grup B: Ecologistes (SEO/BirdLife, Gepec)</div>
+        <ul>
+          <li>Arguments: La Ricarda, biodiversitat, Xarxa Natura 2000, clima</li>
+          <li>Demanda: aturada total del projecte</li>
+          <li>Punt feble: alternativa econòmica als llocs de treball</li>
+        </ul>
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🏘️ Grup C: Veïns de Gavà i Castelldefels</div>
+        <ul>
+          <li>Arguments: soroll nocturn, qualitat de vida, salut</li>
+          <li>Demanda: compensació o reducció de vols nocturns</li>
+          <li>Punt feble: alguns veïns es beneficien de l'ocupació</li>
+        </ul>
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🏛️ Grup D: Conseller/a (Govern)</div>
+        <ul>
+          <li>Arguments: buscar el consens, complir la llei europea</li>
+          <li>Demanda: una solució que satisfaci la majoria</li>
+          <li>Punt feble: competència de l'Estat (Aena és estatal)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">🗣️ Fase 3 — Debat estructurat (20 min)</div>
+    <p>Cada grup presenta la seva posició en <strong>2 minuts</strong>. Després, torn de preguntes creuades: cada grup fa 1 pregunta a un altre. El Grup D (Conseller/a) fa la proposta de consens final.</p>
+
+    <div class="section-label">✏️ Conclusions individuals</div>
+    <p><strong>Proposta de consens que defensaria jo com a Conseller/a:</strong></p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>Quin actor crec que té l'argument més fort? Per qué?</strong></p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A5 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A6 — MINI-JOC ACTORS                                          -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number rose">A6</div>
+      <div class="act-title-block">
+        <div class="act-label">Simulació de decisió · Fase 3 · Sessió 4–5</div>
+        <div class="act-title">Mini-Joc de Consens Social: El Repte dels Actors</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 40 min</span>
+          <span class="act-tag tag-group">👤 Individual</span>
+          <span class="act-tag tag-mat">💻 App — pestanya "Guia d'Actors Socials"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🎮 Com funciona el joc</div>
+      Elegiràs un rol (Ciutadania, Empresariat, Ecologistes o Polítics) i prendràs 5 decisions reals relacionades amb aquell col·lectiu. L'objectiu és <strong>maximitzar el suport del teu col·lectiu</strong> sense destruir el consens general. Cada decisió afecta diferent els 4 grups socials.
+    </div>
+
+    <div class="section-label">📋 Registre de partida</div>
+    <p><strong>Rol elegit:</strong> ___________________________ &nbsp; <strong>Suport inicial:</strong> 50%</p>
+    <br>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Títol de la decisió</th>
+          <th>Opció triada (A/B)</th>
+          <th>Canvi al meu col·lectiu</th>
+          <th>Canvi més gran en un altre</th>
+          <th>Reflexió breu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>5</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f0fdf4; font-weight:600;">
+          <td colspan="2"><strong>RESULTAT FINAL</strong></td>
+          <td colspan="2">Suport del meu col·lectiu: ____%</td>
+          <td colspan="2">Suport mig general: ____%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">✏️ Reflexió post-joc</div>
+    <p><strong>1.</strong> Quin veredicte has obtingut? T'ha semblat just? Per qué?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>2.</strong> Hi ha hagut alguna decisió on defensar els interessos del teu col·lectiu perjudicava molt els altres? Descriu-la:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>3.</strong> Creus que les decisions del joc reflecteixen situacions reals? Posa un exemple de la vida real que reconeixis:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A6 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A7 — PLANIFICADOR DE POLÍTIQUES                               -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A7</div>
+      <div class="act-title-block">
+        <div class="act-label">Disseny de polítiques · Fase 4 · Sessió 5–6</div>
+        <div class="act-title">Planificador de Polítiques Públiques: El Teu Pla de Transició</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 50 min</span>
+          <span class="act-tag tag-group">👥 Grups de 3</span>
+          <span class="act-tag tag-mat">💻 App — pestanya "Polítiques Públiques"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🏛️ El vostre mandat legislatiu</div>
+      Teniu un pressupost de <strong>3.000 M€</strong> per invertir en polítiques de transició energètica. Heu d'escollir un màxim de polítiques que cabiguen dins del pressupost i que maximitzin l'impacte social i ambiental. Recordeu: no podeu aprovar-ne més del que el pressupost permet.
+    </div>
+
+    <div class="section-label">✅ Polítiques aprovades pel nostre grup (ompliu usant l'app)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Política Pública</th>
+          <th>Categoria</th>
+          <th>Cost (M€)</th>
+          <th>Efecte principal</th>
+          <th>Per qué la triem?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f0fdf4; font-weight:700;">
+          <td colspan="2">TOTAL</td>
+          <td>____ M€</td>
+          <td colspan="2">Estalvi demanda: _____ MW</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">📊 Indicadors del nostre pla (de l'app)</div>
+
+    <div class="rol-grid no-break">
+      <div class="rol-card">
+        <div class="rol-name">👥 Aprovació Social</div>
+        Ciutadania: ____% &nbsp; Empresariat: ____%<br>
+        Ecologistes: ____% &nbsp; Polítics: ____%
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">💰 Balanç Fiscal</div>
+        Retorn fiscal: ______ M€/torn<br>
+        Eficiència R+D: ______________________
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🔧 Millores Operatives</div>
+        Estalvi manteniment: ___________________<br>
+        Reducció temps const.: _________________
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🔓 Tecnologies Noves</div>
+        Habilitades: ___________________________<br>
+        ________________________________________
+      </div>
+    </div>
+
+    <div class="section-label">✏️ Justificació del pla</div>
+    <p><strong>Quin és el principal objectiu del vostre pla? Com equilibreu sostenibilitat, seguretat i cost?</strong></p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>Quina política heu deixat fora i us hauria agradat incloure? Per qué no hi cap?</strong></p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A7 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A8 — GRAN JOC                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number blue">A8</div>
+      <div class="act-title-block">
+        <div class="act-label">Simulació completa · Fase 4 · Sessió 6–7</div>
+        <div class="act-title">El Gran Joc: Conseller/a durant 4 anys</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 60–80 min</span>
+          <span class="act-tag tag-group">👤 Individual o parella</span>
+          <span class="act-tag tag-mat">💻 App principal — "Catalunya: Repte Energètic"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box green no-break">
+      <div class="box-head">🎮 Objectiu: No perdre la partida (Game Over evitable)</div>
+      Has de gestionar 4 anys (16 trimestres) com a Conseller/a. Perdràs si:
+      <ul>
+        <li>💸 El pressupost cau a <strong>0 M€</strong> (bancarrota)</li>
+        <li>😡 L'aprovació social baixa del <strong>15%</strong> (revolta)</li>
+        <li>🌡️ Superes el límit d'emissions de CO₂ al final del mandat (sanció UE)</li>
+      </ul>
+    </div>
+
+    <div class="section-label">📋 Registre de partida (ompliu cada 4 trimestres)</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Trimestre</th>
+          <th>Pressupost (M€)</th>
+          <th>Aprovació ciutadania</th>
+          <th>Aprovació ecol.</th>
+          <th>Mix renovable %</th>
+          <th>Decisió clau presa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>T1–T4 (Any 1)</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>T5–T8 (Any 2)</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>T9–T12 (Any 3)</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>T13–T16 (Any 4)</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f0fdf4; font-weight:700;">
+          <td><strong>FINAL</strong></td>
+          <td></td><td></td><td></td><td></td>
+          <td>☐ Victòria &nbsp; ☐ Game Over</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">✏️ Anàlisi de la partida</div>
+    <p><strong>1.</strong> Quin ha estat el moment de més crisi durant la partida? Com l'has resolt?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>2.</strong> Quin tipus de centrals has construït majoritàriament? Quin ha estat el teu mix elèctric final?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>3.</strong> Si poguessis tornar a jugar, qué canviaries en la teva estratègia del primer any?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+  </div><!-- /A8 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A9 — REFLEXIÓ FINAL                                           -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number">A9</div>
+      <div class="act-title-block">
+        <div class="act-label">Síntesi i avaluació · Fase 5 · Sessió 8</div>
+        <div class="act-title">Reflexió Final: Què he après?</div>
+        <div class="act-meta">
+          <span class="act-tag tag-time">⏱️ 45 min</span>
+          <span class="act-tag tag-group">👤 Individual</span>
+          <span class="act-tag tag-mat">📄 Aquest dossier</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">🎯 Objectius d'aprenentatge — Autoavaluació</div>
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Objectiu</th>
+          <th>Ho sabia abans</th>
+          <th>Ho he après al projecte</th>
+          <th>Encara tinc dubtes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Entendre la diferència entre MW (potència) i GWh (producció)</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+        <tr>
+          <td>Explicar el Trilema Energètic amb exemples reals</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+        <tr>
+          <td>Identificar els actors socials i els seus interessos en el debat energètic</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+        <tr>
+          <td>Entendre per qué la pobresa energètica és una injustícia social</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+        <tr>
+          <td>Explicar com les polítiques públiques afecten el sistema elèctric</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+        <tr>
+          <td>Argumentar i defensar una posició en un debat complex</td>
+          <td>☐</td><td>☐</td><td>☐</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">✏️ Preguntes de síntesi</div>
+
+    <p><strong>1.</strong> Si haguessis de resumir en 3 frases el que has après en aquest projecte, quines serien?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>2.</strong> Quina activitat t'ha resultat més interessant i per qué?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>3.</strong> Si tu fossis realment el/la Conseller/a, quina seria la primera mesura que prendries? Justifica-ho:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>4.</strong> Creus que com a ciutadà/ana tens poder per influir en la transició energètica? Qué pots fer tu concretament?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <hr>
+
+    <div class="info-box green no-break">
+      <div class="box-head">📝 Rúbrica d'Autoavaluació Final (per al professor/a)</div>
+      <table class="rubric">
+        <thead>
+          <tr>
+            <th>Criteri</th>
+            <th>Excel·lent (4)</th>
+            <th>Satisfactori (3)</th>
+            <th>En progrés (2)</th>
+            <th>Insuficient (1)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Comprensió conceptual</strong></td>
+            <td>Explica MW vs GWh, trilema i actors amb precisió i exemples propis</td>
+            <td>Explica correctament la majoria dels conceptes</td>
+            <td>Entén els conceptes bàsics però cometé errors</td>
+            <td>No demostra comprensió dels conceptes clau</td>
+          </tr>
+          <tr>
+            <td><strong>Pensament crític</strong></td>
+            <td>Argumenta amb fonts, reconeix la complexitat i qüestiona hipòtesis</td>
+            <td>Argumenta amb raons sòlides</td>
+            <td>Presenta arguments però poc fonamentats</td>
+            <td>No argumenta ni justifica les seves opinions</td>
+          </tr>
+          <tr>
+            <td><strong>Participació al debat</strong></td>
+            <td>Defensa el rol assignat amb dades; escolta i rebat arguments</td>
+            <td>Participa activament al debat</td>
+            <td>Participa poc o de forma superficial</td>
+            <td>No participa al debat</td>
+          </tr>
+          <tr>
+            <td><strong>Dossier complet</strong></td>
+            <td>Totes les activitats completades amb respostes elaborades</td>
+            <td>La majoria d'activitats completades</td>
+            <td>Algunes activitats incompletes</td>
+            <td>Dossier molt incomplet</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <p style="font-size:9pt;"><strong>Puntuació total: ______ / 16</strong> &nbsp;&nbsp; <strong>Qualificació: ____________</strong> &nbsp;&nbsp; <strong>Signatura professor/a: ____________________</strong></p>
+    </div>
+
+  </div><!-- /A9 -->
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
