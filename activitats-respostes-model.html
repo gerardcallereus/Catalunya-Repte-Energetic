@@ -1691,12 +1691,82 @@
   </div><!-- /A7 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->
-  <!--  A8 — EL GRAN JOC                                               -->
+  <!--  A8 — PLANIFICACIÓ TERRITORIAL (PLATER)                       -->
   <!-- ══════════════════════════════════════════════════════════════ -->
   <div class="page-break"></div>
   <div class="activity">
     <div class="act-header no-break">
       <div class="act-number blue">A8</div>
+      <div class="act-title-block">
+        <div class="act-title">Pla Territorial Sectorial Renovables (PLATER) — Guia Model</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🧭 Per què comencem aquí?</div>
+      La transició a les energies renovables necessita espai físic. A Catalunya, el **PLATER** (Pla Territorial Sectorial per a la generació elèctrica eòlica i fotovoltaica, les seves línies d’evacuació i els seus elements d’emmagatzematge) és el pla que ordena on es poden instal·lar els parcs eòlics i solars. Aprendràs com es coordina la transició energètica a escala del país mitjançant la planificació del sòl no urbanitzable per minimitzar els impactes ambientals i socials, i el rol que hi tenen la tecnologia (SIG) i la cooperació comarcal.
+    </div>
+
+    <div class="info-box blue no-break">
+      <div class="box-head">📖 Fonaments Teòrics: Què és el PLATER?</div>
+      <p>El <strong>Pla Territorial Sectorial per a la generació elèctrica eòlica i fotovoltaica, les seves línies d’evacuació i els seus elements d’emmagatzematge (PLATER)</strong>, formulat per l'<strong>ICAEN</strong> (Institut Català d'Energia), és l'eina del Govern per planificar on es poden col·locar les instal·lacions de producció d'energia eòlica i solar fotovoltaica a tot Catalunya.</p>
+      <p>Per a l'any 2050, la prospectiva energètica (<strong>PROENCAT 2050</strong>) estima que Catalunya necessitarà <strong>23.136 MW</strong> d'energia eòlica terrestre i <strong>19.394 MW</strong> de solar fotovoltaica a terra per descarbonitzar la societat i no dependre del gas i el petroli importats.</p>
+      <p>Per trobar l'espai físic necessari reduint al mínim l'impacte visual, ecològic o sobre els camps de conreu, el PLATER utilitza <strong>Sistemes d'Informació Geogràfica (SIG)</strong> creuant **141 capes de dades territorials** per classificar el sòl no urbanitzable en:</p>
+      <ul>
+        <li>❌ <strong>Zones no aptes:</strong> Parcs naturals protegits, sòls agraris d'alt valor productiu o zones amb patrimoni històric-artístic on no es pot construir.</li>
+        <li>⚠️ <strong>Zones aptes amb condicionants:</strong> Zones on es pot construir si es prenen mesures especials de protecció ambiental o de distància als nuclis de població.</li>
+        <li>✅ <strong>Zones prioritàries:</strong> Àrees amb molt bon recurs de vent o sol i baix impacte on es recomana i s'agilitza la construcció.</li>
+      </ul>
+      <p>A més, el pla defineix els <strong>passadissos per a les línies d'evacuació d'alta tensió</strong> per connectar els punts de producció rural amb les ciutats consumidores, i planifica els punts de connexió d'<strong>emmagatzematge amb bateries</strong> per guardar l'excedent elèctric.</p>
+    </div>
+
+    <div class="task-header">Tasca 1: El Filtre Digital (El SIG com a eina de planificació)</div>
+    <div class="q-block no-break">
+      <div class="q-text">1. Per què és necessari utilitzar Sistemes d'Informació Geogràfica (SIG) i creuar 141 capes de dades territorials per decidir on situar les centrals renovables, en lloc de deixar que les empreses decideixin lliurement on construir? Esmenta 3 tipus de dades territorials que s'hagin de creuar.</div>
+      <div class="answer">
+        <p><strong>Resposta model d'excel·lència:</strong></p>
+        <p>La utilització d'un SIG unificat a nivell de país evita que la implantació de renovables es regeixi exclusivament per criteris lucratius i de baix cost del sòl per part de les empreses privades, fet que provocaria una saturació de parcs en poques comarques (com ja ha passat a la Terra Alta) i afectaria entorns d'alt valor. L'ús dels SIG permet unificar criteris i protegir el territori d'acord amb l'interès general.</p>
+        <p>Tres capes essencials que es creuen són:</p>
+        <ol>
+          <li><strong>Capes ecològiques i de biodiversitat:</strong> Rutes de pas d'aus migratòries, hàbitats d'espècies amenaçades i espais naturals protegits per la Xarxa Natura 2000 o el PEIN (Classificades com a zones "no aptes").</li>
+          <li><strong>Capes de sòl agrari:</strong> Mapes d'aprofitament agrícola per evitar instal·lar plaques solars sobre camps de conreu d'alt rendiment (regadius de valor històric o alimentari) i prioritzar sòls degradats, industrials o erms.</li>
+          <li><strong>Capes de xarxa elèctrica i de connexió:</strong> Distància a subestacions elèctriques de transport. Una gran central de 50 MW col·locada massa lluny d'una línia requereix estendre quilòmetres de noves línies elèctriques, creant més rebuig i despesa econòmica.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="task-header">Tasca 2: Fem números: Teulades o Camps de Conreu?</div>
+    <div class="q-block no-break">
+      <div class="q-text">2. Catalunya té l'objectiu d'instal·lar 11.144 MW de plaques solars en teulades de houses i indústries (autoconsum) per al 2050. Tanmateix, es necessiten 19.394 MW addicionals instal·lats a terra. Justifica físicament i de consum per què l'autoconsum a les ciutats és insuficient per cobrir tota la demanda d'una societat industrialitzada i per què cal utilitzar sòl obert.</div>
+      <div class="answer">
+        <p><strong>Resposta model d'excel·lència:</strong></p>
+        <p>Aquesta limitació és de caràcter físic i de distribució i respon a dos motius:</p>
+        <ul>
+          <li><strong>Baixa densitat de potència de l'energia solar (\(\text{W/m}^2\)):</strong> La radiació solar que arriba a les ciutats té un límit físic. Per a generar un megawatt (MW) real es necessita una gran quantitat de superfície (aprox. 1,5 o 2 hectàrees). A les ciutats, la superfície útil de teulades està molt limitada per l'alçada dels edificis (un bloc de 10 pisos té 40 habitatges però només una teulada compartida petita), orientacions incorrectes de façanes o ombres d'altres edificis.</li>
+          <li><strong>Desconnexió geogràfica entre generació i demanda industrial:</strong> La major part del consum elèctric de Catalunya no ve de la il·luminació de les llars, sinó del sector del transport (electrificat), del sector serveis, i especialment de la gran indústria (química a Tarragona, metal·lúrgia, fabricació). Aquestes indústries consumeixen de forma massiva i continuada (les 24 hores) i estan situades fora de les ciutats en zones on és físicament impossible abastar-les només amb les teulades urbanes. Per tant, cal recórrer a grans parcs de generació a terra per disposar del volum d'energia necessari.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="task-header">Tasca 3: El Debat de la Solidaritat Territorial (Justícia Energètica)</div>
+    <div class="q-block no-break">
+      <div class="q-text">3. Molts municipis rurals i sindicats de pagesos protesten perquè consideren que les instal·lacions renovables es concentren a les seves comarques per abastar l'electricitat de les grans ciutats. Com intenta el PLATER resoldre aquest conflicte fixant objectius comarcals? Quina és la teva opinió sobre com s'hauria de distribuir aquest deure territorial de forma justa?</div>
+      <div class="answer">
+        <p><strong>Resposta model d'excel·lència:</strong></p>
+        <p>El PLATER intenta revertir la desproporció actual assignant uns objectius concrets d'energia solar i eòlica a cadascuna de les 42 comarques i a les vegueries de Catalunya. Aquesta distribució es fa ponderant la capacitat d'acollida de cada comarca: les comarques amb sòl més pla i lliure d'espais protegits tenen objectius majors, però totes han de contribuir en la mesura de les seves possibilitats per evitar que unes poques (com la Terra Alta, l'Anoia o el Segrià) concentrin gairebé tot el pes de la transició.</p>
+        <p><em>(Opinió personal de l'alumne, s'avalua la maduresa de l'argument):</em> L'alumne/a ha de raonar si considera just el principi de "solidaritat territorial" (tothom ha de produir una part de l'energia que necessita el país) o si creu que s'hauria de compensar econòmicament als municipis productors rurals mitjançant una reducció de cànons o reinversió dels impostos de les elèctriques directament als pressupostos d'aquests municipis (com preveu la reforma fiscal del joc). També pot valorar la importància de protegir el sector agrícola català per assegurar la sobirania alimentària enfront de la descarbonització.</p>
+      </div>
+    </div>
+
+  </div><!-- /A8 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!--  A9 — EL GRAN JOC                                               -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <div class="activity">
+    <div class="act-header no-break">
+      <div class="act-number blue">A9</div>
       <div class="act-title-block">
         <div class="act-title">El Gran Joc: 4 anys com a Conseller/a — Guia d'Anàlisi Model</div>
       </div>
@@ -1716,7 +1786,7 @@
     <div class="info-box amber no-break">
       <div class="box-head">🗺️ Estratègia recomanada any a any</div>
       <ul>
-        <li><strong>Any 1 (T1-T4):</strong> No construeixis centrals cares el primer any. Consolida les finances: ven l'excedent elèctric quan el temps acompanyi. Aprova polítiques d'eficiència barates (educació energètica, simplificació burocràtica) per no gastar tot el pressupost. Observa quin estat climatològic et penalitza més.</li>
+        <li><strong>Any 1 (T1-T4):</strong> No construeixis centrals cares el primer any. Consolida les finances: ven l'excedent elèctric quan el temps acompanyi. Aprova polítiques de planificació i eficiència econòmiques com l'ordenació del territori (<strong>PLATER</strong>) o la simplificació burocràtica per no gastar tot el pressupost, fet que reduirà en un trimestre el temps de construcció dels teus futurs projectes. Observa quin estat climatològic et penalitza més.</li>
         <li><strong>Any 2 (T5-T8):</strong> Construeix la primera central eòlica terrestre o solar (baix cost, ràpides de construir). Si tens pressupost, inicia el desbloqueig de l'eòlica marina. Vigila l'aprovació dels ecologistes si gastes molt en gas.</li>
         <li><strong>Any 3 (T9-T12):</strong> Ja tens renovables noves en producció. Redueix la dependència del gas (baixa el percentatge de funcionament al mínim). Aprova el pla de rehabilitació per reduir la demanda base permanentment.</li>
         <li><strong>Any 4 (T13-T16):</strong> Gestiona la crisi política si arriba (aprovació baixa). Assegura't que el mix renovable supera el 40% per evitar la sanció d'emissions de la UE. Acaba el mandat amb saldo positiu.</li>
@@ -1751,15 +1821,15 @@
       </div>
     </div>
 
-  </div><!-- /A8 -->
+  </div><!-- /A9 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->
-  <!--  A9 — REFLEXIÓ FINAL                                            -->
+  <!--  A10 — REFLEXIÓ FINAL                                           -->
   <!-- ══════════════════════════════════════════════════════════════ -->
   <div class="page-break"></div>
   <div class="activity">
     <div class="act-header no-break">
-      <div class="act-number">A9</div>
+      <div class="act-number">A10</div>
       <div class="act-title-block">
         <div class="act-title">Reflexió Final — Respostes Model d'Excel·lència</div>
       </div>
@@ -1828,17 +1898,17 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong>Comprensió conceptual</strong><br><small>MW/GWh, trilema, actors, pobresa energètica</small></td>
-          <td>Explica tots els conceptes amb precisió, connecta'ls entre si i aporta exemples propis elaborats</td>
+          <td><strong>Comprensió conceptual</strong><br><small>MW/GWh, trilema, pobresa energètica, PLATER</small></td>
+          <td>Explica tots els conceptes amb precisió, connecta'ls entre si i aporta exemples propis elaborats sobre PLATER o pobresa</td>
           <td>Explica correctament la majoria dels conceptes amb petits errors o omissions</td>
           <td>Entén els conceptes bàsics però comet errors conceptuals significatius</td>
           <td>No demostra comprensió dels conceptes clau del projecte</td>
         </tr>
         <tr>
           <td><strong>Pensament crític</strong><br><small>Arguments, evidències, contradicions</small></td>
-          <td>Argumenta amb dades concretes, reconeix la complexitat i les contradiccions de les seves pròpies posicions</td>
-          <td>Argumenta amb raons sòlides però sense reconèixer les limitacions de la pròpia posició</td>
-          <td>Presenta arguments superficials o sense suport en fets</td>
+          <td>Argumenta amb dades de consum i espai (càlculs de teulades i limitacions físiques), i entén el dilema territorial</td>
+          <td>Argumenta amb raons sòlides basades en el dossier</td>
+          <td>Presenta arguments superficials o sense suport en fets o dades de la realitat</td>
           <td>No argumenta ni justifica les opinions</td>
         </tr>
         <tr>
@@ -1849,10 +1919,10 @@
           <td>No participa o dificulta el debat</td>
         </tr>
         <tr>
-          <td><strong>Coherència del pla</strong><br><small>A7: Planificador. A8: Gran Joc</small></td>
-          <td>El pla de polítiques té un objectiu clar, les polítiques es complementen i la justificació és argumentada i coherent amb el trilema</td>
-          <td>El pla és coherent però la justificació és parcial o li manquen connexions entre polítiques</td>
-          <td>El pla és arbitrari o no justificat; les polítiques no es complementen</td>
+          <td><strong>Coherència del pla</strong><br><small>A7: Planificador. A8: PLATER. A9: Joc</small></td>
+          <td>El pla de polítiques (A7) té coherència interna, comprèn el paper del territori (A8) i s'aplica amb èxit al joc (A9)</td>
+          <td>El pla és coherent i s'aplica bé, però amb poca justificació del repartiment territorial</td>
+          <td>El pla de polítiques és arbitrari i la integració de renovables al joc és pobra o no justificada</td>
           <td>No hi ha pla o és incoherent</td>
         </tr>
         <tr>
@@ -1875,7 +1945,7 @@
       <strong>Insuficient:</strong> &lt;10 pts
     </p>
 
-  </div><!-- /A9 -->
+  </div><!-- /A10 -->
 
 </div><!-- /page-wrapper -->
 </body>
