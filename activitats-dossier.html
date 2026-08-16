@@ -41,15 +41,38 @@
     @media print {
       @page {
         size: A4 portrait;
-        margin: 14mm 15mm 18mm 15mm;
+        margin: 12mm 14mm 16mm 14mm;
       }
-      body { font-size: 10pt; }
-      .page-wrapper { max-width: 100%; padding: 0; margin: 0; }
-      .no-break { page-break-inside: avoid; }
-      .page-break { page-break-before: always; }
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        font-size: 10pt;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .page-wrapper { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      .page-break { break-before: page; page-break-before: always; }
       .print-btn { display: none !important; }
       a { color: inherit; text-decoration: none; }
-      a[href]::after { content: " (" attr(href) ")"; font-size: 7pt; color: #94a3b8; }
+      a[href]::after { content: ""; }
+      .info-box, .context-box, .nota-doc {
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .answer-box {
+        border: 1px solid #94a3b8 !important;
+        background: #ffffff !important;
+      }
+      .answer-line {
+        border-bottom: 1px dashed #cbd5e1 !important;
+      }
+      table {
+        page-break-inside: avoid;
+      }
     }
 
     /* ─── PRINT BUTTON (screen only) ─── */
@@ -1838,6 +1861,14 @@
       </ul>
     </div>
 
+    <div class="info-box blue no-break" style="margin-bottom: 12px; background: #f0f9ff; border: 1.5px solid #0284c7;">
+      <div class="box-head">🔑 Codi de recuperació de la partida (Chromebook / Canvi d'equip)</div>
+      Apunta aquí el codi que et dóna el botó <strong>💾 Desar / Codi</strong> del simulador per si a la propera classe fas servir un altre dispositiu:<br>
+      <div style="margin-top: 6px; font-family: monospace; font-size: 11pt; padding: 6px 12px; border: 1.5px dashed #0284c7; background: #fff; border-radius: 6px; display: inline-block; min-width: 280px; letter-spacing: 1px;">
+        Codi: ________________________________________________
+      </div>
+    </div>
+
     <table class="no-break">
       <thead>
         <tr>
@@ -1870,7 +1901,7 @@
     <p><strong>3.</strong> Si poguessis tornar a jugar, qué canviaries en la teva estratègia del primer any?</p>
     <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
 
-  </div><!-- /A8 -->
+  </div><!-- /A9 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->
   <!--  A10 — REFLEXIÓ FINAL                                          -->

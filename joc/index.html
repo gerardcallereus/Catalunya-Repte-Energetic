@@ -46,7 +46,236 @@
 </script>
   <script type="module" crossorigin src="/joc/assets/index-BacU10Dc.js"></script>
 </head>
-  <body class="text-slate-800 m-0 bg-slate-50">
+  <body class="text-slate-800 m-0 bg-slate-50 font-sans">
     <div id="root"></div>
+
+    <!-- Floating Action Button for Chromebook/Save Game -->
+    <button id="save-load-trigger-btn" onclick="openSaveModal()" title="Gestor de partides i codis per a Chromebooks">
+      <span>💾</span>
+      <span>Desar / Codi de Partida</span>
+    </button>
+
+    <!-- Save & Load Modal -->
+    <div id="save-load-modal" onclick="if(event.target===this) closeSaveModal()">
+      <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-8 border border-slate-200 relative overflow-hidden">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-xl font-bold">
+              💾
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900 leading-tight">Desar i Recuperar Partida</h2>
+              <p class="text-xs text-slate-500">Eina per a Chromebooks i registre al dossier (A9)</p>
+            </div>
+          </div>
+          <button onclick="closeSaveModal()" class="text-slate-400 hover:text-slate-700 w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-100 transition-colors text-lg font-bold">
+            ✕
+          </button>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Card 1: Desat Local (Chromebook) -->
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+                Desat Automàtic Local (Aquest dispositiu)
+              </span>
+              <span id="save-status-badge" class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                Actiu
+              </span>
+            </div>
+            <p id="save-info-text" class="text-sm text-slate-600 mb-3">
+              El joc desa automàticament les teves decisions a la memòria d'aquest navegador cada trimestre.
+            </p>
+            <div class="flex gap-2">
+              <button id="btn-resume-saved" onclick="resumeSavedGame()" class="hidden px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold transition-colors shadow-sm">
+                ▶️ Continuar partida desada
+              </button>
+              <button onclick="clearSavedGame()" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-semibold transition-colors">
+                🔄 Reiniciar desat
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Codi de Recuperació (Paper / Altre ordinador) -->
+          <div class="bg-sky-50/70 rounded-xl p-4 border border-sky-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-sky-800 flex items-center gap-1.5">
+                <span>🔑</span> Codi de Partida (Per al Dossier de Paper)
+              </span>
+            </div>
+            <p class="text-xs text-sky-900 mb-2 leading-relaxed">
+              Si a la propera classe fas servir un <strong>altre Chromebook</strong>, copia aquest codi i <strong>apunta'l a la fitxa de la Tasca 1 del teu dossier (A9)</strong>:
+            </p>
+            <div class="flex gap-2">
+              <input id="export-code-input" type="text" readonly placeholder="Inicia una partida per generar el teu codi..." class="w-full font-mono text-xs p-2.5 bg-white border border-sky-300 rounded-lg text-slate-700 select-all focus:outline-none" />
+              <button onclick="copyExportCode()" id="btn-copy-code" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold whitespace-nowrap transition-colors shadow-sm flex items-center gap-1.5">
+                <span>📋</span> Copiar
+              </button>
+            </div>
+            <p id="copy-feedback-msg" class="text-xs text-emerald-600 font-semibold mt-1.5 hidden">
+              ✓ Codi copiat al porta-retalls! Ja el pots anotar al teu dossier.
+            </p>
+          </div>
+
+          <!-- Card 3: Carregar Partida amb Codi -->
+          <div class="bg-amber-50/60 rounded-xl p-4 border border-amber-200">
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5 mb-2">
+              <span>📥</span> Carregar Partida d'una sessió anterior
+            </span>
+            <p class="text-xs text-amber-900 mb-2">
+              Enganxa el codi que vas anotar al teu dossier en paper per reprendre el teu mandat:
+            </p>
+            <div class="flex gap-2">
+              <input id="import-code-input" type="text" placeholder="Enganxa aquí el codi CRE-..." class="w-full font-mono text-xs p-2.5 bg-white border border-amber-300 rounded-lg text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+              <button onclick="applyImportCode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap transition-colors shadow-sm flex items-center gap-1.5">
+                <span>🚀</span> Carregar
+              </button>
+            </div>
+            <p id="import-error-msg" class="text-xs text-rose-600 font-semibold mt-1.5 hidden">
+              ⚠️ Codi no vàlid. Assegura't d'haver copiat el codi complet.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+          <button onclick="closeSaveModal()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-sm font-semibold transition-colors">
+            Tancar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      #save-load-trigger-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #0284c7;
+        color: #ffffff;
+        padding: 10px 18px;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+        border: 2px solid #ffffff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      #save-load-trigger-btn:hover {
+        background: #0369a1;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
+      }
+      #save-load-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      #save-load-modal.active {
+        display: flex;
+      }
+    </style>
+
+    <script>
+      function openSaveModal() {
+        const modal = document.getElementById('save-load-modal');
+        modal.classList.add('active');
+        updateModalData();
+      }
+
+      function closeSaveModal() {
+        const modal = document.getElementById('save-load-modal');
+        modal.classList.remove('active');
+        document.getElementById('copy-feedback-msg').classList.add('hidden');
+        document.getElementById('import-error-msg').classList.add('hidden');
+      }
+
+      function updateModalData() {
+        const exportInput = document.getElementById('export-code-input');
+        const resumeBtn = document.getElementById('btn-resume-saved');
+        const infoText = document.getElementById('save-info-text');
+
+        if (window.__REPTE_GAME__) {
+          const code = window.__REPTE_GAME__.exportCode();
+          if (code) {
+            exportInput.value = code;
+          } else {
+            exportInput.value = "Inicia o continua una partida per obtenir el codi.";
+          }
+
+          const saved = window.__REPTE_GAME__.hasSavedGame();
+          if (saved && saved.gameState) {
+            const gs = saved.gameState;
+            const turn = saved.turn || 0;
+            const year = saved.gameState.startYear ? saved.gameState.startYear + Math.floor((turn + (saved.gameState.startQuarterIndex||0))/4) : (2024 + Math.floor(turn/4));
+            const quarters = ["Primavera", "Estiu", "Tardor", "Hivern"];
+            const qName = quarters[(turn + (saved.gameState.startQuarterIndex||0)) % 4] || ("T" + (turn+1));
+            
+            infoText.innerHTML = "<strong>Partida desada:</strong> Conseller/a <em>" + (gs.playerName || 'Anònim') + "</em> · " + qName + " de " + year + " (Trimestre " + (turn+1) + "/16) · Pressupost: <strong>" + Math.round(gs.budget).toLocaleString() + " M€</strong>";
+            resumeBtn.classList.remove('hidden');
+          } else {
+            infoText.textContent = "No hi ha cap partida guardada en aquest dispositiu encara.";
+            resumeBtn.classList.add('hidden');
+          }
+        }
+      }
+
+      function copyExportCode() {
+        const exportInput = document.getElementById('export-code-input');
+        if (!exportInput.value || exportInput.value.startsWith("Inicia")) return;
+        exportInput.select();
+        navigator.clipboard.writeText(exportInput.value).then(() => {
+          const feedback = document.getElementById('copy-feedback-msg');
+          feedback.classList.remove('hidden');
+          setTimeout(() => feedback.classList.add('hidden'), 4000);
+        });
+      }
+
+      function applyImportCode() {
+        const input = document.getElementById('import-code-input');
+        const errorMsg = document.getElementById('import-error-msg');
+        if (!input.value.trim()) return;
+
+        if (window.__REPTE_GAME__) {
+          const ok = window.__REPTE_GAME__.importCode(input.value);
+          if (ok) {
+            errorMsg.classList.add('hidden');
+            closeSaveModal();
+          } else {
+            errorMsg.classList.remove('hidden');
+          }
+        }
+      }
+
+      function resumeSavedGame() {
+        if (window.__REPTE_GAME__) {
+          const ok = window.__REPTE_GAME__.loadSavedGame();
+          if (ok) {
+            closeSaveModal();
+          }
+        }
+      }
+
+      function clearSavedGame() {
+        if (confirm("Segur que vols esborrar la partida desada d'aquest dispositiu?")) {
+          try {
+            localStorage.removeItem('repte_energetic_save');
+            updateModalData();
+          } catch(e) {}
+        }
+      }
+    </script>
 </body>
 </html>
