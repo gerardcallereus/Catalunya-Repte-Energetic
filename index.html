@@ -1883,40 +1883,69 @@
       margin-top: 1.5rem;
     }
     .sim-tech-selector {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
       margin-bottom: 1.5rem;
     }
+    @media (max-width: 640px) {
+      .sim-tech-selector {
+        grid-template-columns: 1fr;
+      }
+    }
     .sim-tech-btn {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      padding: 0.85rem 1.1rem;
+      border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: flex-start;
+      gap: 0.85rem;
       transition: all 0.2s ease;
+      text-align: left;
     }
     .sim-tech-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.07);
       border-color: var(--primary);
       transform: translateY(-2px);
     }
     .sim-tech-btn.active {
-      background: var(--primary);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.35) 100%);
       color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      border: 2px solid var(--primary);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
     }
     .sim-tech-btn.active.no-turbine {
-      background: #f59e0b;
-      border-color: #f59e0b;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.35) 100%);
+      border: 2px solid #f59e0b;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+    }
+    .sim-tech-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .sim-tech-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .sim-tech-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .sim-tech-sub {
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+    .sim-tech-btn.active .sim-tech-sub {
+      color: #e2e8f0;
     }
     .sim-stage-wrapper {
       display: grid;
@@ -3416,16 +3445,32 @@
         </div>
         <div class="sim-tech-selector" id="sim-tech-buttons">
           <button class="sim-tech-btn active" data-sim="hidro">
-            <span>💧</span> Hidroelèctrica (Aigua a Pressió)
+            <span class="sim-tech-icon">💧</span>
+            <div class="sim-tech-info">
+              <span class="sim-tech-title">Central Hidroelèctrica</span>
+              <span class="sim-tech-sub">Aigua a pressió &rarr; Turbina Francis/Kaplan</span>
+            </div>
           </button>
           <button class="sim-tech-btn" data-sim="vent">
-            <span>💨</span> Eòlica (Força del Vent)
+            <span class="sim-tech-icon">💨</span>
+            <div class="sim-tech-info">
+              <span class="sim-tech-title">Aerogenerador (Eòlica)</span>
+              <span class="sim-tech-sub">Força del vent &rarr; Pales del rotor</span>
+            </div>
           </button>
           <button class="sim-tech-btn" data-sim="vapor">
-            <span>🔥</span> Vapor (Nuclear / Gas / Biomassa / Geotèrmica)
+            <span class="sim-tech-icon">🔥</span>
+            <div class="sim-tech-info">
+              <span class="sim-tech-title">Centrals de Vapor (Nuclear / Gas)</span>
+              <span class="sim-tech-sub">Calor &rarr; Vapor a pressió &rarr; Turbina</span>
+            </div>
           </button>
           <button class="sim-tech-btn no-turbine" data-sim="solar">
-            <span>☀️</span> Solar Fotovoltaica (🚫 L'Excepció!)
+            <span class="sim-tech-icon">☀️</span>
+            <div class="sim-tech-info">
+              <span class="sim-tech-title">Solar Fotovoltaica</span>
+              <span class="sim-tech-sub">🚫 Sense turbina ni alternador (Silici)</span>
+            </div>
           </button>
         </div>
 
@@ -3676,19 +3721,19 @@
               </div>
             </div>
 
-            <!-- Indicadors Mètrics -->
+            <!-- Indicadors Didàctics Simplificats (Per a 4t d'ESO) -->
             <div style="display: flex; flex-direction: column; gap: 0.6rem;">
               <div class="sim-metric-card">
-                <span class="sim-metric-lbl">Velocitat de gir (Turbina):</span>
-                <span class="sim-metric-val" id="sim-rpm-val" style="color: var(--secondary);">2.400 rpm</span>
+                <span class="sim-metric-lbl">Estat del Moviment:</span>
+                <span class="sim-metric-val" id="sim-motion-val" style="color: var(--secondary); font-size: 0.88rem;">🔄 Girant ràpidament (80%)</span>
               </div>
               <div class="sim-metric-card">
-                <span class="sim-metric-lbl">Freqüència de la Xarxa:</span>
-                <span class="sim-metric-val" id="sim-hz-val" style="color: var(--amber);">50,0 Hz</span>
+                <span class="sim-metric-lbl">Transformació d'Energia:</span>
+                <span class="sim-metric-val" id="sim-transform-val" style="color: var(--amber); font-size: 0.88rem;">💧 Cinètica ➔ ⚡ Elèctrica</span>
               </div>
               <div class="sim-metric-card">
-                <span class="sim-metric-lbl">Potència Elèctrica Induïda:</span>
-                <span class="sim-metric-val" id="sim-mw-val" style="color: var(--primary);">800 MW</span>
+                <span class="sim-metric-lbl">Producció Elèctrica:</span>
+                <span class="sim-metric-val" id="sim-light-val" style="color: var(--primary); font-size: 0.88rem;">💡 Bombeta brillant (80%)</span>
               </div>
             </div>
 
@@ -8134,9 +8179,9 @@
       const buttons = document.querySelectorAll('#sim-tech-buttons .sim-tech-btn');
       const slider = document.getElementById('sim-speed-slider');
       const pctDisplay = document.getElementById('sim-pct-display');
-      const rpmVal = document.getElementById('sim-rpm-val');
-      const hzVal = document.getElementById('sim-hz-val');
-      const mwVal = document.getElementById('sim-mw-val');
+      const motionVal = document.getElementById('sim-motion-val');
+      const transformVal = document.getElementById('sim-transform-val');
+      const lightVal = document.getElementById('sim-light-val');
       const explBox = document.getElementById('sim-explanation-box');
       const viewMech = document.getElementById('sim-view-mechanical');
       const viewSolar = document.getElementById('sim-view-solar');
@@ -8174,32 +8219,28 @@
           label: "💧 Aigua a Pressió",
           color1: "#0284c7",
           color2: "#38bdf8",
-          maxMw: 1000,
-          baseRpm: 600,
+          transformText: "💧 Cinètica de l'Aigua ➔ ⚡ Elèctrica",
           text: "<strong style='color: var(--primary);'>💧 Central Hidroelèctrica:</strong> L'aigua canalitzada a gran pressió impacta directament contra els àleps de la <strong>turbina hidràulica</strong> (Francis/Kaplan). L'eix fa girar l'alternador per induir electricitat d'origen mecànic i 100% renovable."
         },
         vent: {
           label: "💨 Flux de Vent (12 m/s)",
           color1: "#0891b2",
           color2: "#67e8f9",
-          maxMw: 5,
-          baseRpm: 1500,
+          transformText: "💨 Cinètica del Vent ➔ ⚡ Elèctrica",
           text: "<strong style='color: var(--secondary);'>💨 Aerogenerador (Eòlica):</strong> El vent fa girar les pales del rotor a 15 rpm. Una <strong>caixa multiplicadora d'engranatges</strong> eleva la rotació fins a <strong>1.500 rpm</strong> per fer girar l'eix de l'alternador a gran velocitat."
         },
         vapor: {
           label: "♨️ Vapor d'Aigua a 550°C",
           color1: "#e11d48",
           color2: "#fda4af",
-          maxMw: 1200,
-          baseRpm: 3000,
+          transformText: "♨️ Tèrmica del Vapor ➔ ⚡ Elèctrica",
           text: "<strong style='color: var(--rose);'>🔥 Centrals de Vapor (Nuclear, Gas, Biomassa):</strong> La calor produeix vapor a altíssima pressió. El doll dispara els àleps de la <strong>turbina de vapor</strong> a 3.000 rpm abans d'anar al condensador."
         },
         solar: {
           label: "☀️ Llum Solar (Fotons)",
           color1: "#f59e0b",
           color2: "#fef08a",
-          maxMw: 500,
-          baseRpm: 0,
+          transformText: "☀️ Llum Solar (Fotons) ➔ ⚡ Elèctrica",
           text: "<strong style='color: #f59e0b;'>☀️ Solar Fotovoltaica (🚫 L'Excepció!):</strong> <strong>NO hi ha cap moviment mecànic, ni vapor, ni alternador!</strong> La llum del sol allibera electrons directament del silici per l'efecte fotoelèctric. És una transformació 100% quàntica i d'estat sòlid."
         }
       };
@@ -8213,21 +8254,29 @@
         if (currentMode === 'solar') {
           if (viewMech) viewMech.style.display = 'none';
           if (viewSolar) viewSolar.style.display = 'flex';
-          if (rpmVal) {
-            rpmVal.textContent = '0 rpm (Sense peces mòbils)';
-            rpmVal.style.color = '#f59e0b';
+          
+          if (motionVal) {
+            motionVal.textContent = pct === 0 ? '⏸️ Sense llum (0%)' : '☀️ Estat sòlid (Sense peces mòbils)';
+            motionVal.style.color = pct === 0 ? 'var(--text-muted)' : '#f59e0b';
           }
-          if (hzVal) {
-            hzVal.textContent = 'Corrent Continu (DC)';
-            hzVal.style.color = '#f59e0b';
+          if (transformVal) {
+            transformVal.textContent = conf.transformText;
+            transformVal.style.color = '#f59e0b';
           }
-          const solarMw = Math.round((pct / 100) * conf.maxMw);
-          if (mwVal) {
-            mwVal.textContent = `${solarMw} MW`;
-            mwVal.style.color = '#f59e0b';
+          if (lightVal) {
+            if (pct === 0) {
+              lightVal.textContent = '⚫ Bombeta apagada (0%)';
+              lightVal.style.color = 'var(--text-muted)';
+            } else if (pct < 50) {
+              lightVal.textContent = `🟡 Bombeta tènue (${pct}%)`;
+              lightVal.style.color = '#f59e0b';
+            } else {
+              lightVal.textContent = `💡 Bombeta a màxima llum (${pct}%)`;
+              lightVal.style.color = '#f59e0b';
+            }
           }
           if (solarBulbGlow) {
-            solarBulbGlow.style.opacity = (0.1 + (pct / 100) * 0.9).toFixed(2);
+            solarBulbGlow.style.opacity = (0.05 + (pct / 100) * 0.95).toFixed(2);
           }
           if (explBox) explBox.innerHTML = conf.text;
           return;
@@ -8241,36 +8290,29 @@
         if (streamLine2) streamLine2.setAttribute('stroke', conf.color2);
         if (streamLine3) streamLine3.setAttribute('stroke', conf.color1);
 
+        if (transformVal) {
+          transformVal.textContent = conf.transformText;
+          transformVal.style.color = 'var(--amber)';
+        }
+
         if (pct === 0) {
-          if (rpmVal) {
-            rpmVal.textContent = '0 rpm (Aturat)';
-            rpmVal.style.color = 'var(--text-muted)';
+          if (motionVal) {
+            motionVal.textContent = '⏸️ Aturat (Sense moviment)';
+            motionVal.style.color = 'var(--text-muted)';
           }
-          if (hzVal) {
-            hzVal.textContent = '0,0 Hz';
-            hzVal.style.color = 'var(--text-muted)';
-          }
-          if (mwVal) {
-            mwVal.textContent = '0 MW';
-            mwVal.style.color = 'var(--text-muted)';
+          if (lightVal) {
+            lightVal.textContent = '⚫ Bombeta apagada (0%)';
+            lightVal.style.color = 'var(--text-muted)';
           }
           if (bulbGlow) bulbGlow.style.opacity = '0.05';
         } else {
-          const rpm = Math.round((pct / 100) * conf.baseRpm);
-          const hz = (50.0 * (pct / 100)).toFixed(1);
-          const mw = Math.round((pct / 100) * conf.maxMw);
-
-          if (rpmVal) {
-            rpmVal.textContent = `${rpm.toLocaleString('ca-ES')} rpm`;
-            rpmVal.style.color = 'var(--secondary)';
+          if (motionVal) {
+            motionVal.textContent = pct < 50 ? `🔄 Gir lent (${pct}%)` : `🔄 Gir ràpid a ple rendiment (${pct}%)`;
+            motionVal.style.color = 'var(--secondary)';
           }
-          if (hzVal) {
-            hzVal.textContent = `${hz} Hz`;
-            hzVal.style.color = 'var(--amber)';
-          }
-          if (mwVal) {
-            mwVal.textContent = `${mw.toLocaleString('ca-ES')} MW`;
-            mwVal.style.color = 'var(--primary)';
+          if (lightVal) {
+            lightVal.textContent = pct < 50 ? `🟡 Bombeta tènue (${pct}%)` : `💡 Bombeta a màxima potència (${pct}%)`;
+            lightVal.style.color = 'var(--primary)';
           }
           if (bulbGlow) {
             bulbGlow.style.opacity = (0.15 + (pct / 100) * 0.85).toFixed(2);
