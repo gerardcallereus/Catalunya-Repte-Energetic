@@ -90,7 +90,7 @@
     }
 
     h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.1;
@@ -98,15 +98,117 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .lead {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
+      max-width: 680px;
+      margin: 0;
       font-weight: 300;
+      line-height: 1.55;
+    }
+
+    .main-hero-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .hero-text-col {
+      flex: 1;
+    }
+
+    .hero-simulator-card {
+      flex-shrink: 0;
+      width: 310px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(99, 102, 241, 0.1) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.35);
+      border-radius: 18px;
+      padding: 1.25rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-simulator-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .hero-simulator-card:hover::before {
+      left: 100%;
+    }
+
+    .hero-simulator-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.25);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(99, 102, 241, 0.18) 100%);
+    }
+
+    .hero-simulator-card:hover .sim-arrow {
+      transform: translateX(4px);
+      color: var(--primary);
+    }
+
+    .sim-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+
+    .sim-card-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 880px) {
+      .main-hero-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text-col .lead {
+        margin: 0 auto;
+        text-align: center;
+      }
+      .hero-simulator-card {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+      }
     }
 
     h2 {
@@ -2028,9 +2130,23 @@
   <div class="container">
     
     <!-- HEADER -->
-    <header>
-      <h1>Catalunya: Repte Energètic</h1>
-      <p class="lead">Comprèn les bases tecnològiques, ambientals, socials i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
+    <header class="main-hero-header">
+      <div class="hero-text-col">
+        <h1>Catalunya: Repte Energètic</h1>
+        <p class="lead">Comprèn les bases tecnològiques, ambientals, socials i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
+      </div>
+      <a href="./joc/index.html" target="_blank" rel="noopener noreferrer" class="hero-simulator-card" title="Obre el simulador interactiu de presa de decisions en una nova pestanya">
+        <div class="sim-card-badge">
+          <span>🎮</span> SIMULADOR DE GOVERN
+        </div>
+        <div class="sim-card-title">
+          <span>Accés al Simulador</span>
+          <span class="sim-arrow">➔</span>
+        </div>
+        <div class="sim-card-desc">
+          Pren decisions com a Conseller/a, gestiona el mix elèctric i assoleix el consens social 2030.
+        </div>
+      </a>
     </header>
 
     <!-- TABS NAVIGATION -->
@@ -2041,7 +2157,6 @@
       <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Demanda i consum d'energia</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-simulador')">🎮 El Simulador</button>
     </nav>
 
     <!-- TAB 1: EL REPTE DE GOVERN -->
@@ -5961,34 +6076,8 @@
                 </div>
               </details>
             </div>
-            <div class="policy-card-meta">
-              <span>Cost: 100 M€</span>
-              <span>Construcció: -1 tr.</span>
-            </div>
           </div>
         </div>
-    <!-- TAB 7: EL SIMULADOR DE TRANSICIÓ -->
-    <section id="tab-simulador" class="tab-content">
-      <div class="glass-card" style="margin-bottom: 1.5rem;">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
-          <div>
-            <h2 style="margin-bottom: 0.5rem; color: var(--secondary); display: flex; align-items: center; gap: 0.6rem;">
-              <span>🎮</span> Repte Final: El Simulador de Transició
-            </h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
-              Lidera la transició energètica de Catalunya durant 4 anys (16 trimestres) prenent decisions sobre noves centrals, gestió de la xarxa i equilibrant les pressions dels actors socials.
-            </p>
-          </div>
-          <div>
-            <a href="./joc/index.html" target="_blank" class="tab-btn active" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-size: 0.95rem; font-weight: 700; padding: 0.7rem 1.4rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);">
-              <span>Obrir en finestra completa ↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div style="width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: var(--bg-card);">
-        <iframe src="./joc/index.html" style="width: 100%; height: 900px; border: none; display: block;" title="Simulador de Transició Energètica"></iframe>
       </div>
     </section>
 
