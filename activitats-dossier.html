@@ -682,6 +682,92 @@
       text-align: center;
       color: var(--text-muted);
     }
+
+    /* ─── TEST I QÜESTIONARIS ─── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 700px) {
+      .test-grid { grid-template-columns: 1fr; }
+    }
+    .test-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .test-q-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .test-opt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    .test-opt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.3;
+      color: #334155;
+    }
+    .test-checkbox {
+      display: inline-block;
+      min-width: 12px;
+      height: 12px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .test-correct-ans {
+      background: #dcfce7;
+      border: 1px solid #16a34a;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    /* ─── GUIA GEMINI NOTEBOOK ─── */
+    .guide-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+    }
+    .guide-step-title {
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: monospace;
+      font-size: 8pt;
+      color: #0f172a;
+      margin: 4px 0;
+    }
   </style>
 </head>
 <body>
@@ -720,7 +806,7 @@
     </div>
     <div class="toc-item">
       <span class="toc-num">A2</span>
-      <span class="toc-title"><strong>Fonts d'Energia i Dependència Geopolítica</strong></span>
+      <span class="toc-title"><strong>Fonts d'Energia, Història i Dependència Geopolítica</strong></span>
     </div>
     <div class="toc-item">
       <span class="toc-num">A3</span>
@@ -773,9 +859,48 @@
       L'energia no és un tema abstracte. A Catalunya, milers de famílies passen fred a l'hivern o calor a l'estiu perquè no es poden permetre pagar la factura de la llum. Abans d'entrar al simulador i als grans debats polítics, volem que t'adonis que <strong>l'energia és un dret fonamental</strong> que afecta les persones de manera molt desigual. Aquesta activitat et demana que pensis com a ciutadà/ana i, a continuació, com a governant.
     </div>
 
-    <div class="task-header">Tasca 1: Diagnosi de la pobresa energètica a Catalunya</div>
+    <div class="task-header">Tasca 1: Diagnosi i Indicadors de la Pobresa Energètica a Catalunya</div>
 
-    <p>Llegiu les següents tres notícies breus sobre la realitat socioenergètica a Catalunya i contesteu els apartats següents:</p>
+    <!-- Indicadors Estadístics en Estàtic per a Paper -->
+    <div class="no-break" style="margin-bottom: 14px;">
+      <div class="section-label">📊 Indicadors Oficials de Vulnerabilitat a Catalunya (Idescat & APE)</div>
+      <table style="font-size: 8.5pt; margin-bottom: 6px;">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Indicador de Pobresa Energètica</th>
+            <th style="width: 14%; text-align: center;">Dada Oficial</th>
+            <th>Descripció i Impacte Real a la Població</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🏠 Incapacitat de mantenir la llar calenta</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--rose); font-size: 10pt;">20,0%</td>
+            <td>1 de cada 5 catalans no pot mantenir el seu habitatge a una temperatura adequada a l'hivern (mínim de 18 ºC recomanat per l'OMS), generant problemes de salut i humitats.</td>
+          </tr>
+          <tr>
+            <td><strong>📊 Despesa energètica desproporcionada</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--amber); font-size: 10pt;">12,9%</td>
+            <td>Percentatge de llars que han de destinar una part excessiva dels seus ingressos a pagar la llum i el gas, havent de retallar en alimentació o medicaments.</td>
+          </tr>
+          <tr>
+            <td><strong>⏳ Retards en pagament de factures</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--secondary); font-size: 10pt;">9,4%</td>
+            <td>Llars que s'endarrereixen en el pagament dels rebuts de subministraments bàsics per motius econòmics o asfíxia financera.</td>
+          </tr>
+          <tr>
+            <td><strong>🛡️ Talls de serveis bàsics evitats</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--primary); font-size: 10pt;">+200.000</td>
+            <td>Talls d'aigua, llum i gas aturats a Catalunya gràcies a l'aplicació del "Principi de Precaució" de la Llei 24/2015 impulsada per la societat civil.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size: 7.5pt; color: var(--text-muted); text-align: right; margin-bottom: 12px;">
+        <em>Fonts: Enquesta de Condicions de Vida (Idescat) i informes de pobresaenergetica.es</em>
+      </div>
+    </div>
+
+    <p>Llegiu els següents tres retalls de context i notícies sobre la realitat socioenergètica a Catalunya i contesteu els apartats següents:</p>
 
     <div class="news-grid">
       <!-- Notícia 1: Definició de Pobresa Energètica -->
@@ -789,7 +914,7 @@
           "La pobresa energètica es defineix com la situació en què es troba una llar que té greus dificultats per pagar els subministraments bàsics d'electricitat, aigua o gas per cobrir les seves necessitats vitals, o que s'ha de veure obligada a destinar-hi un percentatge desproporcionat dels seus ingressos. Segons els experts, aquest fenomen té tres causes que actuen de forma combinada: el baix nivell de renda de les famílies, l'increment constant de les tarifes elèctriques de l'oligopoli i la pèssima eficiència energètica de molts habitatges (manca d'aïllament tèrmic). Això es tradueix en llars que no poden mantenir una temperatura saludable (mínim 18 ºC) a l'hivern."
         </div>
         <div class="news-clipping-ref">
-          Referència: <a href="https://www.amb.cat/ca/web/amb/desenvolupament-social-i-economic/pobresa-energetica" target="_blank">Àrea Metropolitana de Barcelona (AMB)</a>
+          Referència: Àrea Metropolitana de Barcelona (AMB)
         </div>
       </div>
 
@@ -804,22 +929,22 @@
           "L'Enquesta de Condicions de Vida de l'Idescat confirma que la pobresa energètica a Catalunya té rostre de dona i afecta de manera molt desigual. Els col·lectius més afectats són les llars monoparentals (majoritàriament mares soles amb menors a càrrec), les dones grans que viuen soles amb pensions de jubilació mínimes, i les llars amb tots els membres a l'atur. La taxa de risc de pobresa o exclusió social (AROPE) per a les llars monoparentals s'enfila per sobre del 40%, fet que obliga aquestes famílies a retallar en l'ús de la calefacció per poder fer front a altres despeses bàsiques com l'alimentació o el lloguer."
         </div>
         <div class="news-clipping-ref">
-          Referència: <a href="https://www.idescat.cat/indicadors/?id=anuals&n=10432" target="_blank">Idescat: Condicions de Vida</a>
+          Referència: Idescat: Condicions de Vida
         </div>
       </div>
 
-      <!-- Notícia 3: APE i Llei 24/2015 -->
+      <!-- Notícia 3: APE, Llei 24/2015 i Conveni de Deute -->
       <div class="news-clipping blue">
         <div class="news-clipping-header">
           <span class="news-clipping-source">Aliança contra la Pobresa Energètica (APE)</span>
           <span>20/03/2025</span>
         </div>
-        <div class="news-clipping-title">Deu anys de la Llei 24/2015: el 'principi de precaució' que atura els talls de llum i aigua a Catalunya</div>
+        <div class="news-clipping-title">L'Aliança contra la Pobresa Energètica (APE) i la lluita civil pels subministraments bàsics</div>
         <div class="news-clipping-quote">
-          "L'Aliança contra la Pobresa Energètica ha celebrat una dècada de resistència civil en defense dels subministraments bàsics com a drets fonamentals. La seva gran fita legal, la Llei 24/2015, continua essent l'escut principal de les llars vulnerables a Catalunya a través del 'principi de precaució'. Aquest principi prohibeix a les empreses subministradores tallar l'aigua, el gas o la llum a qualsevol llar amb informe de vulnerabilitat dels serveis socials. L'APE calcula que aquesta mesura nascuda de la mobilització ciutadana ha evitat més de 200.000 talls de serveis bàsics en la darrera dècada."
+          "L'Aliança contra la Pobresa Energètica (APE) és un moviment social nascut a Catalunya el 2014 que agrupa persones afectades i entitats per defensar els drets humans bàsics sota el lema 'Ni talls, ni deutes! Aigua, llum i gas per a tothom!'. La seva gran fita va ser impulsar la Llei 24/2015 i el seu 'principi de precaució', que prohibeix a les companyies tallar el servei a famílies vulnerables sense informe de serveis socials, evitant més de 200.000 talls. A més, la mobilització va forçar el 2021 un conveni històric amb Endesa per condonar el deute acumulat a 35.000 llars (assumit en un 73% per l'elèctrica i un 27% pel Govern), mentre manté assessoraments col·lectius quinzenals."
         </div>
         <div class="news-clipping-ref">
-          Referència: <a href="https://pobresaenergetica.es/10-anys-llei-24-2015-balanc/" target="_blank">pobresaenergetica.es</a>
+          Referència: pobresaenergetica.es
         </div>
       </div>
     </div>
@@ -853,176 +978,239 @@
       </p>
       <ul style="margin-left: 1.2rem; margin-bottom: 0; display: flex; flex-direction: column; gap: 0.4rem; font-size: 8.5pt; line-height: 1.4; color: var(--text-muted);">
         <li>
-          <strong>Potència Nominal (<i>P</i>):</strong> És la capacitat d'un aparell per transformar energia per unitat de temps (el seu ritme de consum de treball instantani). Es mesura en <strong>watts (W)</strong> o <strong>kilowatts (kW)</strong>, on 1 kW = 1.000 W.
+          <strong>Potència (<i>P</i>):</strong> És la capacitat d'un aparell per transformar o consumir energia per unitat de temps (el seu ritme de consum instantani). Es mesura en <strong>watts (W)</strong> o <strong>kilowatts (kW)</strong>, on 1 kW = 1.000 W.
         </li>
         <li>
           <strong>Temps d'ús (<i>t</i>):</strong> El període de temps durant el qual l'aparell està en funcionament consumint electricitat. Se sol mesurar en <strong>hores (h)</strong>.
         </li>
         <li>
-          <strong>Energia Elèctrica (<i>E</i>):</strong> És la quantitat total de treball elèctric realitzat o consumit al llarg d'un temps determinat. Es calcula mitjançant la fórmula física: <i>E = P &middot; t</i>. La unitat comercial facturada per les companyies és el <strong>kilowatt-hora (kWh)</strong>.
+          <strong>Energia Elèctrica (<i>E</i>):</strong> És la quantitat total de treball elèctric consumit en un temps determinat. Es calcula mitjançant la fórmula: <i>E = P &middot; t</i>. La unitat comercial facturada és el <strong>kilowatt-hora (kWh)</strong>.
         </li>
       </ul>
     </div>
 
-    <div style="background: rgba(2, 132, 199, 0.02); border: 1px solid rgba(2, 132, 199, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 9pt; line-height: 1.5;">
-      <strong>Situació problema:</strong> En una llar catalana en situació de vulnerabilitat que té dificultats de tancaments i mal aïllament tèrmic, per combatre el fred de l'hivern s'utilitza un radiador elèctric d'oli amb una potència nominal de <i>P</i> = 2,0 kW. A causa de les pèrdues de calor estructurals de l'habitatge, cal tenir-lo encès durant un temps mitjà de <i>t</i> = 5,0 hores al dia.
+    <div style="background: rgba(2, 132, 199, 0.02); border: 1px solid rgba(2, 132, 199, 0.1); padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 0.8rem; font-size: 9pt; line-height: 1.45;">
+      <strong>Situació problema:</strong> En una llar catalana en situació de vulnerabilitat que té dificultats d'aïllament tèrmic, per combatre el fred de l'hivern s'utilitza un radiador elèctric d'oli amb una potència de <strong><i>P</i> = 2,0 kW</strong>. A causa de les pèrdues de calor de l'habitatge, cal tenir-lo encès durant un temps mitjà de <strong><i>t</i> = 5,0 hores al dia</strong>.
     </div>
 
-    <p style="margin-left: 1rem;"><strong>a) Càlcul de l'energia consumida:</strong> Aplica la fórmula física de l'energia elèctrica: <i>E = P &middot; t</i>. Calcula l'energia elèctrica consumida per aquest radiador in un dia (en kWh) i l'energia elèctrica acumulada en un mes de 30 dies. Mostra els teus càlculs i unitats.</p>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>a) Energia diària consumida:</strong> Quants kWh d'energia elèctrica consumeix aquest radiador en un sol dia (5,0 h d'ús)?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia (kWh): Multiplica la potència en kW pel temps en hores (<i>E = P &middot; t</i>).</em>
+    </div>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
-    <p style="margin-left: 1rem;"><strong>b) Anàlisi econòmica i Bo Social:</strong> Si el cost de l'electricitat amb la tarifa regulada (PVPC) sense cap bonificació és de 0,15 €/kWh (impostos inclosos), calcula el cost mensual del radiador. Si els ingressos de la família són de 900 € al mes, quin percentatge d'aquests ingressos es destina només a pagar la calefacció d'aquesta única habitació? Com canviaria aquest percentatge si reben un Bo Social que els bonifica el 65% de la factura?</p>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>b) Energia mensual acumulada:</strong> Quants kWh consumirà el radiador al llarg de tot un mes d'hivern (30 dies)?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia mensual: Multiplica l'energia d'un sol dia pels 30 dies del mes (<i>E</i><sub>mes</sub> = <i>E</i><sub>dia</sub> &middot; 30).</em>
+    </div>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>c) Cost econòmic mensual (Tarifa ordinària):</strong> Si el preu de l'electricitat és de 0,15 €/kWh (impostos inclosos), quin és el cost total en euros d'encendre el radiador durant aquest mes?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el cost (€): Multiplica els kWh consumits pel preu d'un kWh (0,15 €/kWh).</em>
+    </div>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>d) Pes en el pressupost familiar:</strong> Si els ingressos de tota la família són de 900 € al mes, quin percentatge d'aquests ingressos es gasta exclusivament en la calefacció d'aquesta única estança?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el percentatge (%): Divideix el cost mensual entre els ingressos familiars (900 €) i multiplica per 100.</em>
+    </div>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>e) Protecció social: Impacte del Bo Social:</strong> Si Serveis Socials tramita el Bo Social que bonifica el 65% de la factura, quants euros pagarà finalment la família al mes? Quin percentatge dels seus ingressos suposarà ara?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Amb el Bo Social (65% de descompte): La família només paga el 35% de la factura (o resta el 65% al cost total). Després calcula el nou percentatge sobre els 900 €.</em>
+    </div>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <div class="page-break"></div>
     <div class="task-header">Tasca 3: L'aïllament deficient i la factura de l'energia malbaratada (Circuits, rendiment i pèrdues tèrmiques)</div>
 
     <div class="info-box blue no-break" style="background: rgba(2, 132, 199, 0.03); border-color: rgba(2, 132, 199, 0.25); margin-top: 1.5rem;">
-      <div class="box-head">📖 Introducció teòrica: Potència elèctrica i Llei d'Ohm</div>
+      <div class="box-head">📖 Introducció teòrica: Llei d'Ohm, potència i rendiment</div>
       <p style="margin-bottom: 6px; font-size: 8.8pt; line-height: 1.45; color: var(--text-main);">
-        Per resoldre el següent exercici, repassa aquests conceptes de la matèria de tecnologia de 4t d'ESO:
+        Per resoldre el següent exercici, recorda aquests conceptes generals de la matèria de tecnologia:
       </p>
       <ul style="margin-left: 1.2rem; margin-bottom: 0; display: flex; flex-direction: column; gap: 0.4rem; font-size: 8.5pt; line-height: 1.4; color: var(--text-muted);">
-        <li><strong>Potència Elèctrica (<i>P</i>):</strong> Mesura la rapidesa amb què es transforma l'energia elèctrica. Es calcula mitjançant el producte de la tensió i el corrent: <i>P = V &middot; I</i> (es mesura en watts, W, o kilowatts, kW).</li>
-        <li><strong>Llei d'Ohm:</strong> Relaciona la tensió (<i>V</i>), la intensitat (<i>I</i>) i la resistència (<i>R</i>) del filament d'un circuit: <i>V = I &middot; R</i>, que permet aïllar la resistència com <i>R = V / I</i> (es mesura en ohms, &Omega;).</li>
-        <li><strong>Rendiment tèrmic (&eta;):</strong> Percentatge d'energia aprofitada respecte a la consumida total: &eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100.</li>
+        <li><strong>Llei d'Ohm:</strong> Relaciona la tensió (<i>V</i>, en volts V), la intensitat de corrent (<i>I</i>, en amperes A) i la resistència (<i>R</i>, en ohms &Omega;) d'un circuit elèctric: <i>V = I &middot; R</i>, d'on podem aïllar la resistència com <i>R = V / I</i>.</li>
+        <li><strong>Fórmula de la Potència Elèctrica (<i>P</i>):</strong> La potència total consumida per un receptor elèctric és el producte de la tensió i la intensitat: <i>P</i><sub>total</sub> = <i>V &middot; I</i>, d'on podem aïllar la intensitat com <i>I = P</i><sub>total</sub> / <i>V</i>.</li>
+        <li><strong>Potència útil (<i>P</i><sub>útil</sub>) i pèrdues energètiques (<i>P</i><sub>pèrdua</sub>):</strong> En qualsevol aparell o instal·lació, una part de la potència total absorbida es dissipa de forma no aprofitada cap a l'exterior (<i>P</i><sub>pèrdua</sub>). La potència que realment s'aprofita per realitzar la funció desitjada és la <strong>potència útil</strong>: <i>P</i><sub>útil</sub> = <i>P</i><sub>total</sub> - <i>P</i><sub>pèrdua</sub>.</li>
+        <li><strong>Rendiment energètic o eficiència (&eta;):</strong> És el percentatge de potència útil que s'aprofita respecte a la potència total consumida: &eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100.</li>
       </ul>
     </div>
-
 
     <div style="background: rgba(2, 132, 199, 0.02); border: 1px solid rgba(2, 132, 199, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 9pt; line-height: 1.5;">
-      <strong>Situació independent:</strong> Suposem que en una altra llar vulnerable s'utilitza un radiador elèctric portàtil que té una potència nominal de <i>P</i><sub>total</sub> = 1.500 W i es connecta a la xarxa elèctrica estàndard de <i>V</i> = 230 V. A causa de les escletxes a les finestres i de la manca d'aïllament a les parets, aquest habitatge perd constantment cap a l'exterior una potència de calor equivalent a <i>P</i><sub>pèrdua</sub> = 600 W.
+      <strong>Situació independent:</strong> Suposem que en una altra llar vulnerable s'utilitza un radiador elèctric portàtil que té una potència de <i>P</i><sub>total</sub> = 1.500 W i es connecta a la xarxa elèctrica estàndard de <i>V</i> = 230 V. A causa de les escletxes a les finestres i de la manca d'aïllament a les parets, aquest habitatge perd constantment cap a l'exterior una potència de calor equivalent a <i>P</i><sub>pèrdua</sub> = 600 W.
     </div>
 
-    <p style="margin-left: 1rem;"><strong>a) Circuits elèctrics: Intensitat i Resistència:</strong> Aplica les fórmules elèctriques <i>P = V &middot; I</i> i la Llei d'Ohm <i>R = V / I</i>. Calcula la intensitat de corrent (<i>I</i>, en amperes A) que circula pel radiador i la resistència elèctrica (<i>R</i>, en ohms &Omega;) del seu filament.</p>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>a) Intensitat de corrent (<i>I</i>):</strong> Calcula la intensitat de corrent en amperes (A) que circula pel radiador.</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la intensitat (A): Aplica <i>I = P<sub>total</sub> / V</i> dividint la potència (1.500 W) entre la tensió de la xarxa (230 V).</em>
+    </div>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
-    <p style="margin-left: 1rem;"><strong>b) Potència útil i rendiment tèrmic (Eficiència):</strong> Calcula la potència útil (<i>P</i><sub>útil</sub> = <i>P</i><sub>total</sub> - <i>P</i><sub>pèrdua</sub>, en W i kW) que realment es queda a la llar per escalfar la cambra. A continuació, calcula el rendiment elèctric o eficiència de calefacció (&eta;) de l'habitació mitjançant la fórmula: &eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100.</p>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>b) Resistència elèctrica (<i>R</i>):</strong> Aplica la Llei d'Ohm per calcular la resistència elèctrica en ohms (&Omega;) del filament calefactor.</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la resistència (&Omega;): Aplica <i>R = V / I</i> dividint la tensió (230 V) entre la intensitat (<i>I</i>) de l'apartat anterior.</em>
+    </div>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
-    <p style="margin-left: 1rem;"><strong>c) Energia i diners desaprofitats:</strong> Si el radiador funciona <i>t</i> = 4,0 hores al dia durant un mes de 30 dies, calcula l'energia elèctrica total que s'escapa literalment al carrer en un mes (<i>E</i><sub>pèrdua</sub> = <i>P</i><sub>pèrdua</sub> &middot; <i>t</i> &middot; 30, en kWh). Amb un preu de la llum de 0,15 €/kWh, quants diners al mes està llençant al carrer aquesta família degut al mal aïllament?</p>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>c) Potència útil (<i>P</i><sub>útil</sub>):</strong> Calcula la potència real que es queda a l'habitació per escalfar la llar en watts (W) i en kilowatts (kW).</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la potència útil: Resta la pèrdua a la potència total (<i>P</i><sub>útil</sub> = <i>P</i><sub>total</sub> - <i>P</i><sub>pèrdua</sub> = 1.500 W - 600 W). Per passar a kW, divideix entre 1.000.</em>
+    </div>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
-    <div class="task-header">Tasca 4: Priorització del Trilema Energètic</div>
-    <div class="context-box no-break">
-      <div class="box-title">Què és el Trilema Energètic?</div>
-      El <strong>World Energy Council</strong> defineix el Trilema Energètic com l'equilibri de tres objectius que qualsevol govern ha de balancejar alhora:<br>
-      <strong>⚡ Seguretat</strong> (que sempre hi hagi llum) + <strong>🌿 Sostenibilitat</strong> (sense emissions ni dany al planeta) + <strong>💰 Accessibilitat</strong> (que tothom la pugui pagar).<br>
-      El problema: millorar un dels tres sol empitjorar els altres dos. Qualsevol Conseller/a ha d'afrontar aquest trilema diàriament en prendre decisions sobre el mix energètic.
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>d) Rendiment tèrmic i eficiència (&eta;):</strong> Quin percentatge de l'energia consumida s'aprofita realment per escalfar la casa?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el rendiment (%): Divideix la potència útil entre la potència total i multiplica per 100 [&eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100].</em>
     </div>
-
-    <p>Llegeix cadascun dels tres objectius i marca amb una X la prioritat que creus que hauria d'acatar la Generalitat de Catalunya i quina prioritat tens tu personalment:</p>
-    <table class="no-break" style="margin-bottom: 1.5rem; font-size: 8.5pt;">
-      <thead>
-        <tr>
-          <th>Objectiu</th>
-          <th>Descripció</th>
-          <th>On és ara Catalunya?</th>
-          <th>On hauria d'anar segons el teu criteri?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>⚡ <strong>Seguretat</strong></td>
-          <td>Que mai hi hagi talls de llum; centrals de reserva; interconnexions internacionals</td>
-          <td>Alta: nuclear + gas de suport</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>🌿 <strong>Sostenibilitat</strong></td>
-          <td>Energia sense CO₂; tancament de nuclears i fòssils; objectius climàtics UE 2030</td>
-          <td>Feble: 58% nucl. + 22% gas</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>💰 <strong>Accessibilitat</strong></td>
-          <td>Factura assequible per a tothom; sense pobresa energètica; preus estables</td>
-          <td>Moderada: afectada per preus gas</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="task-header">Tasca 5: Debat i reflexió sobre el Trilema Energètic</div>
-    <p>Si haguessis de sacrificar un dels tres objectius del trilema per millorar els altres dos en les polítiques de la Generalitat de Catalunya, quin sacrificaries i per quin motiu? Justifica la teva resposta:</p>
     <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
 
-    <div class="task-header">Tasca 6: Presa de decisions: Tu ets el/la Conseller/a</div>
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>e) Energia desaprofitada al mes (<i>E</i><sub>pèrdua</sub>):</strong> Si el radiador funciona 4,0 h/dia durant 30 dies, quants kWh d'energia s'escapen al carrer en un mes?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia perduda (kWh): Passa la pèrdua a kW (0,6 kW) i multiplica pel temps mensual (4,0 h/dia &middot; 30 dies = 120 h). Fórmula: <i>E</i><sub>pèrdua</sub> = <i>P</i><sub>pèrdua</sub> &middot; <i>t</i>.</em>
+    </div>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>f) Diners malbaratats al mes:</strong> Amb un preu de la llum de 0,15 €/kWh, quants diners al mes està llençant al carrer aquesta família degut al mal aïllament?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular la despesa inútil (€): Multiplica els kWh perduts al mes pel preu d'un kWh (0,15 €/kWh).</em>
+    </div>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <div class="task-header">Tasca 4: Presa de decisions: Tu ets el/la Conseller/a</div>
     <div class="info-box rose no-break">
       <div class="box-head">🏛️ El teu primer dilema com a governant de Catalunya</div>
-      Acabes de ser nomenat/da Conseller/a de Territori, Habitatge i Transició Ecològica de la Generalitat de Catalunya. La primera gran crisi del teu mandat és el fort increment de la pobresa energètica a tot el territori. Com a governant regional, <strong>has de triar quina de les següents tres polítiques públiques —totes dins de la teva competència autonòmica real— implementareu com a prioritat</strong>.
+      Acabes de ser nomenat/da Conseller/a de Territori, Habitatge i Transició Ecològica de la Generalitat de Catalunya. La primera gran crisi del teu mandat és el fort increment de la pobresa energètica a tot el territori. Com a governant regional, analitza els avantatges i inconvenients de cadascuna de les 3 polítiques públiques autonòmiques i <strong>tria quina implementareu com a prioritat</strong>:
     </div>
 
-    <!-- Informació prèvia detallada -->
-    <div class="info-box green no-break" style="background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.25); font-size: 8.8pt;">
-      <div class="box-head">📋 Informació de suport sobre les competències i opcions disponibles:</div>
-      <p style="margin-bottom: 6px; line-height: 1.45; color: var(--text-main);">
-        Llegiu detingudament el context de cadascuna de les opcions que teniu sobre la taula abans de completar la graella de debat:
+    <!-- OPCIÓ A -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--rose);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        🏛️ Opció A: Convenis de coresponsabilitat i condonació de deutes (Llei 24/2015)
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        La Generalitat acorda convenis amb les distribuïdores elèctriques per obligar-les a cofinançar (p. ex. 73% l'elèctrica i 27% la Generalitat) el deute acumulat per factures impagades de les famílies vulnerables i sancionar les empreses si tallen la llum sense informe previ de serveis socials.
       </p>
-      <ul style="margin-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; line-height: 1.45; color: var(--text-muted); padding-left: 1rem;">
-        <li>
-          <strong>Opció A (Ajuts de deute i Convenis de coresponsabilitat - Llei 24/2015):</strong> La Generalitat té competència exclusiva per aplicar la Llei 24/2015. El Conseller pot signar convenis amb les distribuïdores elèctriques per obligar-les a cofinançar (p. ex., un 73% l'elèctrica i un 27% el Govern) el deute acumulat per factures impagades de les famílies vulnerables i evitar així que s'arrosseguin deutes eterns, sancionant les empreses si tallen el subministrament sense informe de serveis socials.
-        </li>
-        <li>
-          <strong>Opció B (Comunitats d'Autoconsum Social via L'Energètica pública):</strong> Mitjançant l'empresa pública d'energia de la Generalitat, es poden destinar fons públics a omplir de plaques solars les teulades d'instituts, hospitals i edificis oficials en barris vulnerables. L'excedent elèctric es distribueix gratuïtament a les llars vulnerables situades a menys de 2 km, abaratint directament les seves factures amb energia neta pròpia.
-        </li>
-        <li>
-          <strong>Opció C (Fons autonòmic d'aïllament tèrmic i rehabilitació estructural d'edificis):</strong> Atès que molts habitatges vulnerables tenen pèrdues de calor molt elevades a causa de tancaments vells i de la manca d'aïllament, el Govern pot crear una línia de subvencions directes del 100% per reformar i millorar l'eficiència dels edificis antics (doble vidre, aïllament de façanes i sostres), reduint de manera permanent la necessitat de consumir electricitat.
-        </li>
-      </ul>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <table class="no-break" style="font-size: 8.5pt;">
-      <thead>
-        <tr>
-          <th style="width:38%;">Opció de política pública (competència catalana)</th>
-          <th>Avantatges</th>
-          <th>Inconvenients</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>A) Convenis i coresponsabilitat elèctrica:</strong> Condonar el deute acumulat de les llars vulnerables aplicant la Llei 24/2015 i forçant les companyies a assumir la major part del cost.</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><strong>B) Autoconsum Social amb L'Energètica:</strong> Distribuir gratuïtament els excedents solars generats en teulades d'edificis públics a llars vulnerables veïnes (radi de 2 km).</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><strong>C) Rehabilitació estructural dels edificis:</strong> Subvencionar totalment l'aïllament tèrmic i canvi de finestres de les llars ineficients als barris amb més pobresa energètica.</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- OPCIÓ B -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--primary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        ☀️ Opció B: Comunitats d'Autoconsum Social amb L'Energètica pública
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Instal·lar plaques solars de titularitat pública en teulades d'instituts, hospitals i edificis oficials en barris vulnerables per distribuir gratuïtament els excedents elèctrics generats a les llars vulnerables situades en un radi de 2 km.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <p><strong>La nostra proposta és l'opció ___.</strong> La defensem perquè:</p>
-    <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    <!-- OPCIÓ C -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--secondary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        🧱 Opció C: Fons de rehabilitació tèrmica i aïllament estructural d'edificis
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Crear una línia de subvencions del 100% per millorar l'aïllament tèrmic (doble vidre, tancaments eficients i aïllament de façanes/sostres) als blocs d'habitatges vells, reduint de manera permanent les fuites de calor i la despesa energètica.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISIÓ FINAL -->
+    <div class="no-break" style="margin-top: 14px; margin-bottom: 12px;">
+      <p style="font-size: 9pt; margin-bottom: 4px;">
+        <strong>🏛️ Veredicte del Conseller/a:</strong> La política pública prioritària que trio implementar és l'<strong>Opció [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]</strong>.
+      </p>
+      <p style="font-size: 8.5pt; color: var(--text-muted); margin-bottom: 4px;">
+        Justifica la decisió: Per què prioritzeu aquesta mesura per davant de les altres dues i com compensareu els seus inconvenients?
+      </p>
+      <div class="answer-box">
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+      </div>
     </div>
 
     <div class="info-box green no-break">
       <div class="box-head">💡 Per reflexionar: Poder legislatiu real del Conseller/a</div>
       El/la Conseller/a de Territori <strong>sí</strong> té poder real: pot presentar projectes de llei al Parlament, gestionar subvencions europees (Next Generation EU), regular les tarifes de xarxa dins del marge autonòmic i supervisar les empreses de distribució al territori català. <strong>Però</strong> els preus de la llum els fixa el Govern de l'Estat i la CNMC (Comissió Nacional), no la Generalitat. Aquí és on el poder té límits clars.
     </div>
-
-    <div class="section-label">🔁 Posada en comú</div>
-    <p>Cada grup exposa la seva opció de política pública elegida. El professor/a fa de "Parlament" i voteu la proposta final de la classe.</p>
-    <p><strong>Opció guanyadora de la classe:</strong> _____ &nbsp; <strong>Raó principal:</strong> ________________________</p>
 
   </div><!-- /A1 -->
 
@@ -1034,114 +1222,677 @@
     <div class="act-header no-break">
       <div class="act-number blue">A2</div>
       <div class="act-title-block">
-        <div class="act-title">Fonts d'Energia i Dependència Geopolítica</div>
+        <div class="act-title">Fonts d'Energia, Història i Dependència Geopolítica</div>
       </div>
     </div>
 
     <div class="context-box no-break">
-      <div class="box-title">🌍 Què aprendrem sobre les fonts d'energia i la geopolítica?</div>
-      Catalunya consumeix diàriament una gran quantitat d'energia, però d'on prové realment? En aquesta activitat, aprendràs a classificar les diferents fonts d'energia primàries (renovables i no renovables) i a entendre com la dependència exterior de combustibles fòssils i nuclears afecta directament l'economia de la societat catalana i la seguretat del nostre subministrament en moments de crisi internacional.
+      <div class="box-title">🌍 Què aprendrem sobre les fonts d'energia, la seva història i la geopolítica?</div>
+      Catalunya és una societat altament industrialitzada i mòbil que depèn diàriament d'un cabal gegantí d'energia. D'on prové aquest recurs? En aquesta activitat aprendrem a classificar les diferents <strong>fonts d'energia</strong> (renovables i no renovables), viatjarem per l'evolució històrica de l'energia des del domini del foc i els molins tradicionals fins a l'era fòssil i nuclear, i aprofundirem en com la dependència de recursos exteriors i la mineria de la transició condicionen la nostra economia i sobirania.
     </div>
 
-    <div class="task-header">Tasca 1: Classificació i orígens de les fonts d'energia</div>
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- TASCA 1: PROJECTE GEMINI NOTEBOOK (PRESENTACIÓ COOPERATIVA) -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <div class="task-header">Tasca 1: Projecte Cooperatiu amb Gemini Notebook — Recerca i Exposició d'una Font d'Energia</div>
 
-    <div class="context-box no-break">
-      <div class="box-title">💡 Què és una font d'energia primària?</div>
-      La natura ens ofereix <strong>energia primària</strong> en forma de fluxos continus (sol, vent, aigua) o d'estocs finits (combustibles fòssils com el carbó, petroli, gas, o minerals com l'urani). L'electricitat no és una font primària: és un <strong>vector energètic secundari</strong> que hem de produir transformant aquestes fonts primàries mitjançant generadors o alternadors (excepte en la solar fotovoltaica).
+    <div class="info-box indigo no-break">
+      <div class="box-head">🎯 Objectiu del Repte en Equip</div>
+      En grups de <strong>3 o 4 persones</strong>, seleccionareu <strong>una de les fonts d'energia</strong> tractades a la pestanya <em>"Fonts d'Energia"</em> de la web (Carbó, Petroli, Gas Natural, Urani/Nuclear, Solar, Eòlica, Hidràulica, Biomassa/Biogàs, o Geotèrmia).<br><br>
+      Fent servir <strong>Gemini Notebook (NotebookLM)</strong> com a assistent d'investigació documental, analitzareu el contingut i les notícies per elaborar i defensar una <strong>presentació oral de 3 a 5 minuts</strong> davant la classe.
     </div>
 
-    <p>Consulteu la informació de la pestanya <strong>"Fonts d'Energia"</strong> de la web i completeu la següent taula classificant els recursos clau del mix energètic català:</p>
+    <!-- Fitxa de Planificació del Grup -->
+    <div class="no-break" style="margin-bottom: 14px;">
+      <div class="section-label">📝 Fitxa de Planificació del Grup</div>
+      <table style="font-size: 8.5pt; margin-bottom: 6px;">
+        <tbody>
+          <tr>
+            <td style="width: 30%;"><strong>Font d'energia seleccionada:</strong></td>
+            <td>_________________________________________________________________</td>
+          </tr>
+          <tr>
+            <td><strong>Membres de l'equip:</strong></td>
+            <td>
+              1. _________________________________ &nbsp;&nbsp;|&nbsp;&nbsp; 2. _________________________________<br>
+              3. _________________________________ &nbsp;&nbsp;|&nbsp;&nbsp; 4. _________________________________
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Titular del Cas Real / Notícia triada:</strong><br><small style="color: var(--text-muted);">(De la web o cercada pel grup)</small></td>
+            <td>_________________________________________________________________</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <table class="no-break" style="margin-bottom: 1.5rem; font-size: 8.5pt;">
-      <thead>
-        <tr>
-          <th style="width: 25%;">Recurs Energètic</th>
-          <th style="width: 25%;">Renovable / No Renovable</th>
-          <th style="width: 25%;">Origen (Local / 100% Importat)</th>
-          <th style="width: 25%;">Tecnologia de conversió elèctrica</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Gas Natural</strong></td>
-          <td></td>
-          <td></td>
-          <td>Turbina de gas i de vapor (Cicle Combinat)</td>
-        </tr>
-        <tr>
-          <td><strong>Urani (Nuclear)</strong></td>
-          <td></td>
-          <td></td>
-          <td>Fissió nuclear i turbina de vapor (Central Nuclear)</td>
-        </tr>
-        <tr>
-          <td><strong>Radiació Solar</strong></td>
-          <td></td>
-          <td></td>
-          <td>Plaques fotovoltaiques (Efecte fotoelèctric)</td>
-        </tr>
-        <tr>
-          <td><strong>Vent (Eòlica)</strong></td>
-          <td></td>
-          <td></td>
-          <td>Aerogeneradors (Turbina eòlica)</td>
-        </tr>
-        <tr>
-          <td><strong>Cicle de l'Aigua (Hidroelèctrica)</strong></td>
-          <td></td>
-          <td></td>
-          <td>Turbina hidràulica (central de generació)</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="no-break" style="margin-bottom: 12px;">
+      <div class="section-label">📋 Guió de la Presentació (Estructura de 5 Diapositives Recomanada)</div>
+      <table style="font-size: 8.5pt;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Secció / Diapositiva</th>
+            <th>Continguts Clau a Desenvolupar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Identificació de la Font</strong></td>
+            <td>Què és aquesta font d'energia, com es defineix, si és un recurs renovable (flux natural) o no renovable (estoc geològic finit) i quina presència té a Catalunya.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Origen i Extracció / Captació</strong></td>
+            <td>Com s'obté a la natura (pous de petroli/gas, mines de carbó/urani, captació solar o de vent, rius o boscos), on es troben les reserves i si Catalunya en té o l'ha d'importar.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Avantatges i Inconvenients</strong></td>
+            <td>Punts forts (disponibilitat, cost, absència d'emissions directes) i principals riscos o impactes ambientals (emissions de gasos, residus perillosos, impacte paisatgístic o dependència exterior).</td>
+          </tr>
+          <tr>
+            <td><strong>4. Cas Real / Notícia d'Actualitat</strong></td>
+            <td>Anàlisi crítica d'un cas pràctic o notícia real d'actualitat (podeu triar una de les notícies de la web o bé un cas nou d'actualitat que hàgiu cercat vosaltres).</td>
+          </tr>
+          <tr>
+            <td><strong>5. Veredicte del Grup</strong></td>
+            <td>Posicionament del grup: Quin futur hauria de tenir aquesta font a la Catalunya del 2030-2050? Hauríem de potenciar-la, reduir-la o substituir-la? Quines condicions proposeu?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <div class="task-header">Tasca 2: El Repte de la Dependència Exterior (Gràfica i Competencial)</div>
-    <p>Catalunya importa pràcticament el 100% del petroli, del gas natural i de l'urani que consumeix. La següent gràfica mostra la dependència energètica exterior (el percentatge de recursos energètics primaris que s'han de comprar a l'estranger):</p>
+    <div class="no-break" style="margin-bottom: 14px;">
+      <div class="section-label">💡 Guia Pas a Pas per Utilitzar Gemini Notebook (NotebookLM)</div>
+      
+      <div class="guide-step">
+        <div class="guide-step-title"><span>1️⃣</span> Pas 1: Carregar la font documental a NotebookLM</div>
+        Obre l'eina NotebookLM (o Gemini), crea un nou quadern anomenat <em>"[Nom de la Font] - Catalunya Repte Energètic"</em> i afegeix com a font de text el bloc teòric i les notícies de la teva font d'energia extrets de la pestanya <strong>"Fonts d'Energia"</strong> de la web (o articles nous de premsa que hàgiu trobat).
+      </div>
 
-    <div class="chart-box">
-      <div class="chart-box-title">📊 Dependència Energètica Exterior (2023)</div>
+      <div class="guide-step">
+        <div class="guide-step-title"><span>2️⃣</span> Pas 2: Formular Prompts Estratègics d'Investigació</div>
+        Utilitza aquests prompts per guiar la IA i extreure informació contrastada basada exclusivament en els teus documents:
+        <div class="prompt-box">"Explica en 3-4 punts clau què és aquesta font d'energia, d'on s'extreu o capta a la natura i si és renovable o no renovable."</div>
+        <div class="prompt-box">"Genera una taula comparativa amb els 3 avantatges principals i els 3 inconvenients més greus d'aquest recurs segons el text."</div>
+        <div class="prompt-box">"Analitza la notícia d'actualitat: quin és el conflicte o avanç, quins actors hi participen i quines solucions es plantegen?"</div>
+        <div class="prompt-box">"Formula 2 preguntes obertes i desafiants sobre el futur d'aquesta font d'energia per plantejar a la classe al final de la nostra presentació."</div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-title"><span>3️⃣</span> Pas 3: Elaboració de Diapositives i Preparació Oral</div>
+        Organitzeu la informació en un màxim de 5-6 diapositives visuals (recomanació: frases sintètiques, dades destacades, sense paràgrafs densos). Tots els membres del grup han de participar en l'exposició oral.
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- TASCA 2: QÜESTIONARI D'AUTOAVALUACIÓ GLOBAL (10 PREGUNTES)   -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <div class="task-header">Tasca 2: Qüestionari d'Autoavaluació Global — Les Fonts d'Energia a la Web (10 Preguntes Tipus Test)</div>
+    <p style="font-size: 9pt; color: var(--text-muted); margin-bottom: 12px;">
+      Consulteu la informació de la pestanya <strong>"Fonts d'Energia"</strong> de la web i marqueu l'opció correcta per a cadascuna de les 10 preguntes següents:
+    </p>
+
+    <div class="test-grid">
+      <!-- P1 -->
+      <div class="test-card">
+        <div class="test-q-title">1. Quina és la diferència principal entre una font d'energia renovable i una font no renovable?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Les renovables només s'usen a la indústria i les no renovables només a les llars.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Les renovables aprofiten fluxos naturals continus que es regeneren constantment, mentre que les no renovables depenen d'estocs geològics finits que s'esgoten en consumir-los.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Les renovables són sempre d'origen nuclear i les no renovables són només el carbó.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Totes les fonts d'energia s'esgoten exactament al mateix ritme temporal.</span></li>
+        </ul>
+      </div>
+
+      <!-- P2 -->
+      <div class="test-card">
+        <div class="test-q-title">2. Quina d'aquestes fonts d'energia és 100% autòctona a Catalunya (es capta al territori sense importar combustible)?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> El gas natural canalitzat.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> L'urani enriquit per a centrals nuclears.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> La radiació solar i la força del vent.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> El petroli cru per a refineries.</span></li>
+        </ul>
+      </div>
+
+      <!-- P3 -->
+      <div class="test-card">
+        <div class="test-q-title">3. Quina és la realitat del consum i refinament de petroli a Catalunya?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> S'extreu íntegrament de jaciments submarins propis al Delta de l'Ebre.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Només s'utilitza per a la calefacció d'hospitals i centres públics.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Catalunya n'importa el 100% per vaixell i el refina a Tarragona per a combustibles de transport i indústria química.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> El petroli ja ha estat prohibit i substituït completament des del 2020.</span></li>
+        </ul>
+      </div>
+
+      <!-- P4 -->
+      <div class="test-card">
+        <div class="test-q-title">4. Què és el gas natural i quin és el seu principal component i impacte ambiental?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> És un combustible fòssil compost principalment per metà (CH₄) que emet CO₂ en cremar-se i pot provocar fuites amb alt efecte hivernacle.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> És un gas 100% inofensiu que neteja la contaminació de les ciutats.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> És una font d'energia que es genera de manera il·limitada als boscos.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> És un mineral sòlid que s'extreu de pedreres a cel obert.</span></li>
+        </ul>
+      </div>
+
+      <!-- P5 -->
+      <div class="test-card">
+        <div class="test-q-title">5. Quina és la propietat energètica més destacable de l'urani com a recurs nuclear?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Una densitat energètica colossal: un sol gram allibera una quantitat massiva de calor en comparació amb tones de combustibles fòssils.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Que es regenera espontàniament a l'escorça terrestre en 24 hores.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Que no genera cap mena de residu perillós ni radioactiu.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Que es pot emprar directament com a combustible líquid en automòbils.</span></li>
+        </ul>
+      </div>
+
+      <!-- P6 -->
+      <div class="test-card">
+        <div class="test-q-title">6. L'energia solar arriba a la Terra en forma de radiació electromagnètica. Quina és la seva característica clau?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> És un recurs infinit i autòcton, però intermitent segons el cicle de dia/nit i la nuvolositat.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Només es pot captar a l'hivern quan fa fred.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Produeix fums tòxics quan arriba al terra.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> S'esgotarà completament en els pròxims 10 anys.</span></li>
+        </ul>
+      </div>
+
+      <!-- P7 -->
+      <div class="test-card">
+        <div class="test-q-title">7. L'energia eòlica aprofita la força del vent, originada per:</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Les diferències de temperatura i pressió atmosfèrica creades per l'escalfament del Sol sobre la Terra.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> La combustió de carbó a les capes altes de l'atmosfera.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> El camp magnètic dels pols terrestres.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> El moviment dels vaixells als oceans.</span></li>
+        </ul>
+      </div>
+
+      <!-- P8 -->
+      <div class="test-card">
+        <div class="test-q-title">8. Per què l'energia hidràulica fluvial a Catalunya està molt condicionada pel canvi climàtic?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Perquè les sequeres prolongades redueixen dràsticament el cabal dels rius i la capacitat dels embassaments.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Perquè l'aigua dolça s'evapora i es converteix en petroli.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Perquè la pluja impedeix que l'aigua baixi per les muntanyes.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Perquè l'aigua és un combustible fòssil que no es pot regenerar.</span></li>
+        </ul>
+      </div>
+
+      <!-- P9 -->
+      <div class="test-card">
+        <div class="test-q-title">9. Quin és el benefici ambiental clau del biogàs / biometà a partir de purins i residus ramaders?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Transforma les dejeccions en un recurs energètic net, evitant emissions incontrolades de metà i filtracions de nitrats.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Asseca el subsòl per evitar qualsevol presència d'humitat.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Substitueix completament el consum d'aigua a les granges de porcs.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Genera urani pur com a subproducte orgànic de digestió.</span></li>
+        </ul>
+      </div>
+      
+      <!-- P10 -->
+      <div class="test-card">
+        <div class="test-q-title">10. Per què la transició cap a renovables i bateries augmenta la necessitat d'extracció de minerals com el liti i el cobalt?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Perquè es cremen a les calderes com a substituts directes del carbó.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Perquè són matèries primeres clau per fabricar cel·les de bateries electroquímiques, circuits electrònics i imants d'aerogeneradors.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Perquè dissolen els gasos contaminants presents a l'atmosfera.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Perquè permeten refredar els reactors nuclears sense utilitzar aigua.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- TASCA 3: ACTIVITAT COMPETENCIAL 1 (HISTÒRIA DE L'ENERGIA)     -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <div class="task-header">Tasca 3: Activitat Competencial 1 — De la Flama al Fòssil: L'Evolució Històrica de l'Energia</div>
+
+    <!-- Text de Comprensió Lectora -->
+    <div class="news-clipping blue no-break">
+      <div class="news-clipping-header">
+        <span class="news-clipping-source">📖 Text de Comprensió Lectora: Història de la Tecnologia Energètica</span>
+      </div>
+      <div class="news-clipping-title">De la foguera paleolítica a la crisi fòssil: El llarg camí energètic de la humanitat</div>
+      <div style="font-size: 8.8pt; color: #334155; line-height: 1.5; display: flex; flex-direction: column; gap: 0.5rem; text-align: justify;">
+        <p style="margin:0;">
+          Durant més del 99% de la història de la humanitat, la nostra espècie va viure sota el que els historiadors anomenen el <strong>règim energètic orgànic</strong>. L'energia disponible depenia estrictament dels fluxos solars captats per la biosfera en temps present: la força muscular dels braços i dels animals domesticats (bous, cavalls), la llenya dels boscos per cuinar i escalfar-se, i la força mecànica del vent i dels rius canalitzada a través de molins per moldre gra o bombar aigua. La societat no podia consumir més energia de la que la terra era capaç de regenerar anualment.
+        </p>
+        <p style="margin:0;">
+          Aquest equilibri es va trencar a finals del segle XVIII amb la <strong>Primera Revolució Industrial</strong>. El perfeccionament de la màquina de vapor per James Watt va permetre transformar per primera vegada la calor en moviment mecànic continu. Per alimentar aquestes màquines, la humanitat va començar a desenterrar un "sol fossilitzat" acumulat durant centenars de milions d'anys: el <strong>carbó mineral</strong>. A Catalunya, la manca de grans conques carboníferes va impulsar la construcció de colònies tèxtils al llarg dels rius Ter i Llobregat (aprofitant la força hidràulica) i la importació de carbó britànic per als grans vapors industrials de la costa.
+        </p>
+        <p style="margin:0;">
+          A finals del segle XIX i durant el segle XX, l'arribada del <strong>petroli</strong>, el gas natural i el motor de combustió interna va multiplicar exponencialment la quantitat d'energia disponible, revolucionant el transport de mercaderies i l'agricultura (fertilitzants sintètics derivats del gas). Més tard, a la segona meitat del segle XX, el domini de la física atòmica va incorporar la <strong>fissió nuclear de l'urani</strong>, un mineral capaç d'alliberar milions de vegades més calor per gram que qualsevol enllaç químic.
+        </p>
+        <p style="margin:0;">
+          Tanmateix, l'extracció i la crema massiva d'aquests estocs fòssils ha provocat una greu crisi climàtica i una perillosa acumulació de gasos d'efecte hivernacle. Al segle XXI, la humanitat afronta el repte urgent de tornar a basar la seva economia en els fluxos naturals (sol, vent, aigua i biomassa), abandonant l'era dels combustibles contaminants i reduint el consum global.
+        </p>
+      </div>
+    </div>
+
+    <!-- Taula Cronològica -->
+    <div class="no-break" style="margin-bottom: 12px;">
+      <div class="section-label">📊 Taula Cronològica de les Fonts d'Energia al Llarg de la Història</div>
+      <table style="font-size: 8.2pt; margin-bottom: 8px;">
+        <thead>
+          <tr>
+            <th>Etapa Històrica</th>
+            <th>Font Predominant</th>
+            <th>Tecnologia / Ús Principal</th>
+            <th>Rendiment i Densitat</th>
+            <th>Canvi Social i Impacte Ambiental</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Preindustrial (&lt; 1780)</strong></td>
+            <td>Biomassa (fusta), tracció animal, aigua i vent</td>
+            <td>Foc directe, llenya per escalfar, molins de gra tradicionals</td>
+            <td>Molt baix (&lt; 5-10%). Densitat limitada pel cicle solar anual.</td>
+            <td>Societat agrària. Emissió de CO₂ de cicle curt; risc de desforestació local.</td>
+          </tr>
+          <tr>
+            <td><strong>1a Rev. Industrial (1780-1870)</strong></td>
+            <td>Carbó mineral</td>
+            <td>Màquina de vapor (Watt), fàbriques tèxtils i ferrocarril</td>
+            <td>Baix (~5-12%). Alta concentració de calor en pes respecte a la fusta.</td>
+            <td>Naixement de la indústria moderna. Primeres boires de fum (smog) i pluja àcida.</td>
+          </tr>
+          <tr>
+            <td><strong>2a Rev. Industrial (1870-1970)</strong></td>
+            <td>Petroli i carbó</td>
+            <td>Motors de combustió interna, automoció, aviació i química</td>
+            <td>Moderat (~20-35%). Combustible líquid d'altíssim poder calorífic.</td>
+            <td>Mobilitat massiva de persones i mercaderies. Disparada global d'emissions de CO₂.</td>
+          </tr>
+          <tr>
+            <td><strong>Era Moderna (1970-2025)</strong></td>
+            <td>Gas natural, petroli, urani i renovables</td>
+            <td>Climatització, transport, xarxes energètiques i indústries</td>
+            <td>Molt alt. L'urani té la the màxima densitat energètica coneguda.</td>
+            <td>Consum energètic colossal. Crisi climàtica, residus radioactius i necessitat de transició.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Gràfica d'Evolució Històrica del Consum (Llegibilitat Millorada) -->
+    <div class="chart-box no-break">
+      <div class="chart-box-title">📈 Evolució Estimada del Consum Energètic Mundial (1850 - 2025)</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; margin-top: 6px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 140px; font-weight: 700; font-size: 8pt; color: var(--text-main); flex-shrink: 0;">1850 (Era Fusta)</div>
+          <div style="flex: 1; background: rgba(0,0,0,0.06); height: 20px; border-radius: 4px; overflow: hidden; display: flex;">
+            <div style="width: 5%; background: var(--amber); height: 100%;"></div>
+          </div>
+          <div style="width: 250px; font-size: 8pt; color: var(--text-main); flex-shrink: 0;"><strong>~5.000 TWh</strong> <span style="color: var(--text-muted);">(85% Fusta / Biomassa)</span></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 140px; font-weight: 700; font-size: 8pt; color: var(--text-main); flex-shrink: 0;">1900 (Era Carbó)</div>
+          <div style="flex: 1; background: rgba(0,0,0,0.06); height: 20px; border-radius: 4px; overflow: hidden; display: flex;">
+            <div style="width: 12%; background: #64748b; height: 100%;"></div>
+          </div>
+          <div style="width: 250px; font-size: 8pt; color: var(--text-main); flex-shrink: 0;"><strong>~12.000 TWh</strong> <span style="color: var(--text-muted);">(60% Carbó, 35% Fusta)</span></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 140px; font-weight: 700; font-size: 8pt; color: var(--text-main); flex-shrink: 0;">1960 (Era Petroli)</div>
+          <div style="flex: 1; background: rgba(0,0,0,0.06); height: 20px; border-radius: 4px; overflow: hidden; display: flex;">
+            <div style="width: 35%; background: var(--rose); height: 100%;"></div>
+          </div>
+          <div style="width: 250px; font-size: 8pt; color: var(--text-main); flex-shrink: 0;"><strong>~40.000 TWh</strong> <span style="color: var(--text-muted);">(Petroli + Carbó + Gas)</span></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 140px; font-weight: 700; font-size: 8pt; color: var(--text-main); flex-shrink: 0;">Actualitat (Mix Global)</div>
+          <div style="flex: 1; background: rgba(0,0,0,0.06); height: 20px; border-radius: 4px; overflow: hidden; display: flex;">
+            <div style="width: 95%; background: var(--secondary); height: 100%;"></div>
+          </div>
+          <div style="width: 250px; font-size: 8pt; color: var(--text-main); flex-shrink: 0;"><strong>~175.000 TWh</strong> <span style="color: var(--text-muted);">(80% Fòssils, 20% Altres)</span></div>
+        </div>
+      </div>
+      <div class="chart-box-source" style="margin-top: 6px;">Font: Our World in Data / Vaclav Smil, Energy Transitions.</div>
+    </div>
+
+    <!-- Preguntes Tipus Test Història (4 preguntes) -->
+    <div class="section-label">❓ Preguntes de Comprensió Històrica (Tipus Test)</div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-q-title">H1. Quin invent tecnològic va marcar el pas del règim orgànic (fusta/molins) a l'extracció massiva de carbó?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> La roda hidràulica de fusta.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> La màquina de vapor de James Watt a la Revolució Industrial.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> El descobriment de la fissió de l'urani.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> El panell solar fotovoltaic.</span></li>
+        </ul>
+      </div>
+
+      <div class="test-card">
+        <div class="test-q-title">H2. Quina és la diferència ecològica clau entre cremar fusta fa segles i cremar carbó o gas avui dia?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> La fusta no alliberava mai cap tipus de calor.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> La fusta forma part del cicle del carboni recent (cicle curt), mentre que els fòssils alliberen carboni enterrat fa milions d'anys (cicle llarg).</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Els combustibles fòssils no produeixen cap emissió a l'atmosfera.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> L'ús de la fusta a l'Edat Mitjana és la causa de l'escalfament global actual.</span></li>
+        </ul>
+      </div>
+
+      <div class="test-card">
+        <div class="test-q-title">H3. Per què el petroli es va convertir en el recurs energètic dominant del segle XX per davant del carbó?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Perquè és un combustible líquid amb gran densitat energètica i fàcil de transportar per abastir motors de vehicles.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Perquè és una font 100% inesgotable que es regenera en 24 hores.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Perquè el carbó es va prohibir a tot el món l'any 1900.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Perquè no cal extreure'l de pous ni refinar-lo.</span></li>
+        </ul>
+      </div>
+
+      <div class="test-card">
+        <div class="test-q-title">H4. Què demostren les dades d'evolució històrica del consum energètic mundial?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Que la humanitat ha anat "sumant" noves fonts sense abandonar les anteriors, multiplicant el consum per més de 30 des de 1850.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Que avui es consumeix menys energia que durant la Revolució Industrial.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Que el 95% de l'energia mundial actual prové exclusivament de la fusta.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Que la transició a les renovables es va completar completament l'any 1970.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Preguntes Reflexives Història -->
+    <div class="section-label">✍️ Preguntes d'Anàlisi Competencial i Reflexió Crítica</div>
+
+    <p><strong>1. La Logística i el Transport Global de l'Energia: Del carbó als superpetroliers i metaners de GNL.</strong> Històricament, el carbó va impulsar la xarxa de ferrocarrils i vaixells de vapor per moure tones de mineral des de mines llunyanes. Avui dia, milions de barrils de petroli i tones de gas natural liquat (GNL a -160 °C) viatgen milers de quilòmetres en superpetroliers i vaixells metaners fins als ports de Tarragona i Barcelona. Quins riscos ambientals té el transport massiu a escala planetària comparat amb l'aprofitament directe de fonts autòctones com el sol o el vent?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>2. L'Evolució de la Taxa de Retorn Energètic (TRE / EROI): De 100:1 a menys de 10:1.</strong> Fa un segle, per extreure 100 barrils de petroli només calia gastar l'energia d'1 barril (TRE = 100:1, jaciments superficials fàcils). Avui, per extreure hidrocarburs d'aigües ultraprofundes o d'esquists mitjançant fracking, cal gastar 1 barril per obtenir-ne només entre 5 i 10 (TRE ≈ 5:1 - 10:1). Explica què significa aquest canvi per a la nostra societat: Com afecta el cost econòmic i l'energia neta que queda realment disponible a mesura que s'esgoten els jaciments més accessibles?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>3. Els límits del règim orgànic i la gràfica de consum (1850 vs Actualitat).</strong> Observa la gràfica d'evolució del consum mundial: l'any 1850 la humanitat consumia <strong>~5.000 TWh</strong> anuals (on el 85% era fusta) per a uns 1.200 milions d'habitants. Avui el consum s'ha multiplicat per 35 fins a <strong>~175.000 TWh</strong> per a 8.000 milions de persones. A partir d'aquestes dades, explica per què seria físicament impossible cobrir la demanda de la societat actual únicament tornant a la biomassa tradicional i als molins de vent/aigua sense provocar un col·lapse ecològic i forestal immediat.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p><strong>4. La Geopolítica dels "Colls d'Ampolla": El cas de l'Estret d'Ormuz (Iran vs EUA).</strong> L'Estret d'Ormuz, al Golf Pèrsic, és un pas marítim estret pel qual navega cada dia més del 20% del petroli mundial. Les tensions geopolítiques entre l'Iran i els Estats Units amenacen sovint amb el bloqueig d'aquest pas estratègic. Què passaria amb el subministrament i el preu dels carburants a Catalunya si esclatés un conflicte que tanqués l'Estret d'Ormuz? Per quins motius un model basat en fonts autòctones (sol i vent) fa que un país sigui molt més resilient i sobirà davant d'aquests xocs internacionals?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- TASCA 4: ACTIVITAT COMPETENCIAL 2 (DEPENDÈNCIA I GEOPOLÍTICA)  -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <div class="task-header">Tasca 4: Presa de Decisions del Conseller/a — Com Reduir la Dependència Energètica Exterior (84,2%)</div>
+
+    <!-- Text de Comprensió Lectora -->
+    <div class="news-clipping amber no-break">
+      <div class="news-clipping-header">
+        <span class="news-clipping-source">🌍 Text de Comprensió Lectora: Geopolítica dels Recursos i Extractivisme</span>
+      </div>
+      <div class="news-clipping-title">La cruïlla energètica de Catalunya: Entre la dependència exterior i els recursos de la transició</div>
+      <div style="font-size: 8.8pt; color: #334155; line-height: 1.5; display: flex; flex-direction: column; gap: 0.5rem; text-align: justify;">
+        <p style="margin:0;">
+          Catalunya presenta un índex de <strong>dependència energètica exterior de l'84,2%</strong>. Això significa que per cada 100 unitats d'energia que consumeixen les nostres indústries, transports i llars, més de 84 provenen de combustibles comprats a milers de quilòmetres de distància. Importem el 100% del petroli cru (procedent de països com Nigèria, Mèxic o l'Aràbia Saudita), el 100% del gas natural (canalitzat per gasoducte des d'Algèria o portat en vaixells metaners liquat des dels Estats Units) i el 100% de l'urani enriquit (procedent de mines del Canadà, Kazakhstan o el Níger).
+        </p>
+        <p style="margin:0;">
+          Aquesta dependència converteix l'economia catalana en extremadament vulnerable als xocs geopolítics internacionals. Quan esclata una guerra o una crisi diplomàtica en un país productor, el preu dels hidrocarburs es dispara al mercat internacional, encarint automàticament el transport, la calefacció i els costos energètics de totes les famílies i empreses catalanes.
+        </p>
+        <p style="margin:0;">
+          Davant d'aquesta vulnerabilitat, l'aprofitament de fonts d'energia autòctones (com la radiació solar o la força del vent) ofereix una oportunitat clau per recuperar sobirania: el recurs és local, inesgotable i no depèn de vaixells ni gasoductes exteriors. Tanmateix, la fabricació de noves tecnologies (com les bateries per a mobilitat elèctrica o l'emmagatzematge) requereix <strong>minerals crítics</strong> com el liti (procedent de salars de Xile i l'Argentina) o el cobalt (de la República Democràtica del Congo).
+        </p>
+        <p style="margin:0;">
+          Per tant, per assolir una sobirania energètica real i justa cal combinar el desplegament de recursos autòctons amb mesures d'<strong>eficiència, reciclatge massiu de materials i sobrietat en el consum</strong>, evitant traslladar l'impacte ambiental cap a altres territoris del planeta.
+        </p>
+      </div>
+    </div>
+
+    <!-- Dades i Taula Geopolítica -->
+    <div class="no-break" style="margin-bottom: 12px;">
+      <div class="section-label">📊 Mapa de Vulnerabilitat i Cadena de Subministrament de Recursos</div>
+      <table style="font-size: 8.2pt; margin-bottom: 8px;">
+        <thead>
+          <tr>
+            <th>Recurs Energètic / Material</th>
+            <th>Principals Països d'Origen</th>
+            <th>Consum a Catalunya</th>
+            <th>Vulnerabilitat Geopolítica i Riscos d'Extracció</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gas Natural</strong></td>
+            <td>Algèria, EUA, Rússia, Qatar</td>
+            <td>100% Importat (Calefacció, indústries i usos tèrmics)</td>
+            <td>Volatilitat extrema de preus, dependència de gasoductes i impacte del fracking i emissions de metà.</td>
+          </tr>
+          <tr>
+            <td><strong>Petroli Cru</strong></td>
+            <td>Nigèria, EUA, Mèxic, Aràbia Saudita</td>
+            <td>100% Importat (Combustible per a transport i petroquímica)</td>
+            <td>Vulnerabilitat a conflictes a l'Orient Mitjà, rutes marítimes i principal font de contaminació urbana.</td>
+          </tr>
+          <tr>
+            <td><strong>Urani Enriquit</strong></td>
+            <td>Kazakhstan, Canadà, Namíbia, Níger</td>
+            <td>100% Importat (Combustible nuclear d'alta densitat)</td>
+            <td>Risc d'inestabilitat política a països miners i acumulació indefinida de residus radioactius.</td>
+          </tr>
+          <tr>
+            <td><strong>Liti i Cobalt (Bateries)</strong></td>
+            <td>Xile, Austràlia, R.D. Congo, Xina</td>
+            <td>100% Importat (Materials per a bateries i electrònica)</td>
+            <td>Consum massiu d'aigua en salars, condicions d'extracció minera precàries i monopoli de processament a Àsia.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Gràfica de Dependència Exterior -->
+    <div class="chart-box no-break">
+      <div class="chart-box-title">📊 Dependència Energètica Exterior: Catalunya vs Unió Europea (2023)</div>
       <div class="bar-chart-horizontal">
         <div class="bar-row">
           <div class="bar-row-label">Catalunya</div>
           <div class="bar-row-track">
-            <div class="bar-row-fill rose" style="width: 84.2%;">84,2%</div>
+            <div class="bar-row-fill rose" style="width: 84.2%;">84,2% (Molt Alta Dependència Exterior)</div>
           </div>
         </div>
         <div class="bar-row">
           <div class="bar-row-label">Unió Europea (UE-27)</div>
           <div class="bar-row-track">
-            <div class="bar-row-fill gray" style="width: 55.5%;">55,5%</div>
+            <div class="bar-row-fill gray" style="width: 55.5%;">55,5% (Mitjana Europea)</div>
           </div>
         </div>
       </div>
-      <div class="chart-box-source">Font: Institut Català d'Energia (ICAEN) i Eurostat.</div>
+      <div class="chart-box-source">Fonts: Institut Català d'Energia (ICAEN) i Eurostat.</div>
     </div>
 
-    <p><strong>1.</strong> Analitza les dades de la gràfica. Explica quins factors estructurals fan que la dependència energètica exterior de Catalunya sigui molt superior a la de la mitjana de la Unió Europea.</p>
-    <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    <!-- Preguntes Tipus Test Geopolítica (6 preguntes) -->
+    <div class="section-label">❓ Preguntes de Comprensió Geopolítica (Tipus Test)</div>
+    <div class="test-grid">
+      <!-- G1 -->
+      <div class="test-card">
+        <div class="test-q-title">G1. Per què la dependència energètica de Catalunya (84,2%) és molt superior a la mitjana de la UE (55,5%)?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Perquè Catalunya consumeix el triple per persona que qualsevol altre país europeu.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Per la manca de jaciments propis de petroli/gas, la importació del 100% de l'urani i una baixa implantació històrica de renovables autòctones.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Perquè a Catalunya està prohibit per llei utilitzar recursos naturals propis.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Perquè tota l'energia catalana es regala obligatòriament a França.</span></li>
+        </ul>
+      </div>
+
+      <!-- G2 -->
+      <div class="test-card">
+        <div class="test-q-title">G2. Quina diferència bàsica hi ha entre cremar combustibles fòssils i emprar materials com el liti en bateries?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> El combustible fòssil es crema i es destrueix definitivament, mentre que els minerals d'una bateria es poden reciclar i reutilitzar en nous cicles.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> El liti és un gas que s'escapa per l'aire en funcionar.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> El petroli és infinit i el liti s'esgotarà completament en poques setmanes.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> No hi ha cap diferència; tots dos s'encenen amb foc a les calderes.</span></li>
+        </ul>
+      </div>
+
+      <!-- G3 -->
+      <div class="test-card">
+        <div class="test-q-title">G3. Com repercuteix un conflicte diplomàtic o bèl·lic en un país productor de petroli o gas sobre les famílies catalanes?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Encareix directament el transport, els carburants i la despesa energètica en dependre totalment d'importacions exteriors.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Fa que l'aigua dels rius catalans deixi de córrer.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> No té cap mena d'impacte perquè Catalunya no compra res a l'estranger.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Provoca que els panells solars deixin de rebre llum solar.</span></li>
+        </ul>
+      </div>
+
+      <!-- G4 -->
+      <div class="test-card">
+        <div class="test-q-title">G4. Gran part del gas natural arriba en vaixells metaners de GNL al Port de Barcelona. Quin és el risc d'aquesta logística?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Que el gas es desintegra espontàniament a l'aigua de mar.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Que depèn de rutes marítimes internacionals, assegurances de transport naval i preus volàtils de mercats globals.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Que els vaixells només poden atracar al port durant els mesos d'estiu.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Que el GNL és un recurs gratuït i inesgotable que no costa diners.</span></li>
+        </ul>
+      </div>
+
+      <!-- G5 -->
+      <div class="test-card">
+        <div class="test-q-title">G5. Catalunya depèn de l'urani per a bona part del seu mix elèctric. D'on prové aquest combustible?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> S'extreu de jaciments locals situats a les comarques de l'Ebre.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> És 100% importat de mines de països com el Kazakhstan, el Canadà o el Níger, generant dependència exterior.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Es recull del vapor d'aigua condensat als cims dels Pirineus.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Es produeix de forma natural a partir dels purins de les granges.</span></li>
+        </ul>
+      </div>
+
+      <!-- G6 -->
+      <div class="test-card">
+        <div class="test-q-title">G6. Per què la concentració geogràfica de la mineria i refinament de minerals crítics (liti/cobalt) és un repte geopolític?</div>
+        <ul class="test-opt-list">
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>A)</strong> Perquè molt pocs països en controlen l'extracció i el refinament, podent imposar restriccions a la transició europea.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>B)</strong> Perquè aquests metalls es dissolen a l'aire europeu en ser transportats.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>C)</strong> Perquè la mineria de liti no necessita cap consum d'aigua ni energia.</span></li>
+          <li class="test-opt-item"><span class="test-checkbox"></span> <span><strong>D)</strong> Perquè el cobalt només es pot fer servir un únic dia després d'extreure'l.</span></li>
+        </ul>
+      </div>
     </div>
 
-    <p><strong>2.</strong> Des del punt de vista de la seguretat del transport de combustibles, descriu quines conseqüències geopolítiques i econòmiques té per a les llars catalanes una crisi internacional en els països d'on prové el gas natural (com ara Algèria o els EUA).</p>
-    <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    <!-- TASCA 4: PRESA DE DECISIONS: EL/LA CONSELLER/A -->
+    <div class="task-header">Tasca 4: Presa de decisions: Tu ets el/la Conseller/a</div>
+    <div class="info-box blue no-break">
+      <div class="box-head">🏛️ Simulació de Govern: El teu repte de sobirania energètica (2025-2040)</div>
+      Com a Conseller/a de Territori, Habitatge i Transició Ecològica de la Generalitat de Catalunya, el teu gran repte estratègic és <strong>reduir la dependència energètica exterior de Catalunya de l'actual 84,2% a menys del 40% cap a l'any 2040</strong>. Analitza els avantatges i inconvenients de cadascuna de les 3 polítiques públiques estratègiques i <strong>tria quina implementareu com a prioritat</strong>:
     </div>
 
-    <div class="task-header">Tasca 3: El Cas de l'Urani i la Densitat Energètica (Càlcul i Competència Tecnològica)</div>
-    <div style="background: rgba(99, 102, 241, 0.02); border: 1px solid rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 9pt; line-height: 1.5;">
-      <strong>Cas de l'Urani a Catalunya:</strong> Gairebé el 58% de l'electricitat generada a Catalunya prové dels reactors d'Ascó i Vandellòs. L'urani és 100% importat. Tanmateix, té una densitat energètica colossal.
-      <br><br>
-      A les centrals nuclears, per cada gram d'Urani-235 fisionat s'allibera una energia tèrmica d'aproximadament <i>E</i><sub>tèrmica</sub> = 22.800 kWh. El rendiment tèrmic de la central per transformar calor en electricitat mitjançant la turbina és d'&eta; = 33% (és a dir, només s'aprofita el 33% de la calor en forma d'energia elèctrica).
+    <!-- OPCIÓ A -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--primary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        ☀️ Opció A: Estratègia de Sobirania Renovable Autòctona (Sol, Vent i Biomassa)
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Invertir massivament en parcs solars, aerogeneradors terrestres i marins, i aprofitament de biomassa i purins locals per cobrir la demanda amb recursos 100% catalans i eliminar la necessitat de comprar gas i petroli a l'estranger.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <p><strong>1.</strong> Calcula l'energia elèctrica realment generada (<i>E</i><sub>elèctrica</sub>, en kWh) que s'obté per cada gram d'Urani-235 fisionat a la central tenint en compte el rendiment de la transformació (&eta;). Mostra les operacions.</p>
-    <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    <!-- OPCIÓ B -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--amber);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        🚢 Opció B: Estratègia de Diversificació Geopolítica i Rutes Segures d'Importació
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Mantenir la compra exterior de petroli, gas natural liquat (GNL) i urani però reforçant les terminals del Port de Barcelona i Tarragona i signant tractats comercials amb diversos països aliats per evitar talls sobtats de subministrament.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <p><strong>2.</strong> Sabent que una llar mitjana a Catalunya consumeix aproximadament uns 3.500 kWh d'electricitat a l'any, calcula quants grams d'Urani-235 es consumeixen per abastir completament aquesta llar durant tot un any. Creus que el baix pes del combustible facilita el transport i la seguretat respecte al carbó o el gas? Comenta-ho.</p>
-    <div class="answer-box">
-      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    <!-- OPCIÓ C -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--secondary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        📉 Opció C: Estratègia de Sobrietat Energètica, Eficiència i Reducció de Demanda
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Prioritzar la reducció dràstica del consum d'energia: aïllament tèrmic obligatori d'edificis, restriccions severes a l'ús del vehicle privat, foment massiu del tren i límits al consum energètic de grans indústries i turisme.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISIÓ FINAL -->
+    <div class="no-break" style="margin-top: 14px; margin-bottom: 12px;">
+      <p style="font-size: 9pt; margin-bottom: 4px;">
+        <strong>🏛️ Veredicte del Conseller/a:</strong> La política pública prioritària que trio implementar és l'<strong>Opció [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]</strong>.
+      </p>
+      <p style="font-size: 8.5pt; color: var(--text-muted); margin-bottom: 4px;">
+        Justifica la decisió: Per què prioritzeu aquesta estratègia per davant de les altres dues i quines mesures concretes aplicareu per compensar els seus inconvenients i gestionar l'oposició territorial?
+      </p>
+      <div class="answer-box">
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+      </div>
+    </div>
+
+    <div class="info-box green no-break">
+      <div class="box-head">💡 Per reflexionar: Sobirania energètica i realitat competencial</div>
+      El Govern de la Generalitat té competències per planificar el territori, tramitar parcs d'energies renovables, gestionar la biomassa dels boscos locals i atorgar ajuts d'eficiència i aïllament d'habitatges. Tanmateix, les grans infraestructures internacionals de transport energètic (gasoductes, grans ports, alta tensió i mercat marginalista) depenen de la regulació estatal i europea.
     </div>
 
   </div><!-- /A2 -->
