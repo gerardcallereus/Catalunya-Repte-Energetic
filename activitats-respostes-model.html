@@ -154,17 +154,25 @@
       letter-spacing: 0.06em; color: var(--text-muted); margin: 12px 0 5px;
     }
     .task-header {
-      background: var(--text-main);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
-      padding: 6px 12px;
-      font-size: 9.5pt;
-      font-weight: 700;
-      margin: 20px 0 12px 0;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: block;
+      padding: 10px 16px;
+      font-size: 11pt;
+      font-weight: 800;
+      margin: 28px 0 16px 0;
+      border-radius: 8px;
+      border-left: 6px solid var(--secondary);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
       page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-header::before {
+      content: "📌";
+      font-size: 11pt;
     }
     p { margin-bottom: 8px; }
 
@@ -731,6 +739,24 @@
       </div>
     </div>
 
+    <div class="q-block no-break">
+      <div class="q-label">Pregunta 1e</div>
+      <div class="q-text"><strong>e) Estimació estadística d'impacte a la població catalana:</strong> Càlculs aplicats amb dades de Catalunya (8.000.000 hab. i 3.000.000 de llars).</div>
+      <div class="answer">
+        <p><strong>1. Persones que passen fred:</strong><br>
+        <code>Població afectada = 8.000.000 hab. &middot; 0,20 (20,0%) = <strong>1.600.000 persones</strong> (1,6 milions de ciutadans catalans).</code></p>
+        
+        <p><strong>2. Llars amb despesa desproporcionada i retards:</strong><br>
+        <code>Llars amb despesa desproporcionada = 3.000.000 llars &middot; 0,129 (12,9%) = <strong>387.000 llars</strong>.</code><br>
+        <code>Llars amb retards en factures = 3.000.000 llars &middot; 0,094 (9,4%) = <strong>282.000 llars</strong>.</code></p>
+        
+        <p><strong>3. Càlcul del conveni de condonació de deute (Endesa-Govern):</strong><br>
+        <code>Deute mitjà per llar = 17.500.000 € / 35.000 llars = <strong>500 € per llar</strong>.</code><br>
+        <code>Aportació Endesa (73%) = 17.500.000 € &middot; 0,73 = <strong>12.775.000 €</strong> (12,78 M€).</code><br>
+        <code>Aportació Generalitat (27%) = 17.500.000 € &middot; 0,27 = <strong>4.725.000 €</strong> (4,73 M€ de fons públics).</code></p>
+      </div>
+    </div>
+
     <div class="task-header">Tasca 2: L'impacte econòmic de la calefacció en llars vulnerables (Càlculs de consum i despesa)</div>
     
     <div class="info-box blue no-break" style="background: rgba(2, 132, 199, 0.03); border-color: rgba(2, 132, 199, 0.25);">
@@ -965,6 +991,39 @@
 
     <div class="nota-doc">
       <strong>📌 Nota pedagògica:</strong> Les opcions A i B també poden ser excel·lents si l'alumnat argumenta bé per què prioritza la solució a curt termini (emergència immediata de deute o consum gratuït immediat de proximitat) sobre la solució estructural. El criteri d'excel·lència és la qualitat de l'argumentació i la consciència de les limitacions de la pròpia opció, no la tria en si.
+    </div>
+
+    <div class="page-break"></div>
+    <div class="task-header">Tasca 5: Reflexió personal sobre la pobresa energètica — Respostes Model</div>
+
+    <div class="q-block no-break">
+      <div class="q-text">1. Què és el que més t'ha sorprès o impactat? D'entre totes les dades reals, situacions i càlculs que has fet, quina t'ha cridat més l'atenció i per què?</div>
+      <div class="answer">
+        <p><strong>Resposta model orientativa:</strong> Sol impactar molt el càlcul de la despesa del radiador (més de 90 €/mes, representant més del 10% dels ingressos totals d'una llar vulnerable), així com constatar matemàticament que per culpa del mal aïllament s'escapen 600 W continus (el 40% de l'energia consumida i gairebé 33 € llençats al carrer cada mes). També sorprèn que a Catalunya 1 de cada 5 persones no pugui mantenir la llar calenta malgrat viure en un país ric i industrialitzat.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-text">2. La pobresa energètica com a dret humà i salut: Per què diem que la pobresa energètica no és només un assumpte tècnic de kilowatts o de diners, sinó un problema fonamental de salut física, benestar emocional i dignitat humana?</div>
+      <div class="answer">
+        <p><strong>Resposta model orientativa:</strong> Viure en una casa freda o amb humitats provoca i agreuja malalties respiratòries (asma, bronquitis), cardiovasculars i problemes de son en infants i gent gran. A més, l'angoixa constant de no poder pagar les factures o la vergonya de no poder convidar amics a casa genera aïllament social i problemes de salut mental (depressió, estrès crònic). L'energia és necessària per cuinar, rentar-se amb aigua calenta, estudiar i conservar aliments; per tant, sense energia garantida no es pot exercir una vida digna.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-text">3. Consells individuals d'estalvi vs. solucions estructurals: Sovint sentim que per estalviar n'hi ha prou amb "apagar els llums o posar-se una manta". Tenint en compte els càlculs de rendiment i pèrdues tèrmiques que has fet a la Tasca 3, creus que els consells individuals són suficients per acabar amb la pobresa energètica o calen inversions estructurals (aïllament d'edificis, reformes de tarifes)? Raona la resposta.</div>
+      <div class="answer">
+        <p><strong>Resposta model orientativa:</strong> Els petits canvis d'hàbits individuals ajuden a no malbaratar, però són totalment insuficients davant la pobresa energètica. Si una casa perd el 40% o el 50% de la calor per les parets i finestres velles, per molt que la família apagui els llums o porti jerseis, la calor generada s'escaparà igualment i continuarà passant fred. Per tant, la solució real exigeix <strong>inversions estructurals públiques</strong>: aïllar façanes i teulades (rehabilitació tèrmica), canviar finestres, regular el preu del kWh i garantir ingressos dignes.</p>
+      </div>
+    </div>
+
+    <div class="q-block no-break">
+      <div class="q-text">4. Lliçó per al futur model energètic (Pla 2030): Com a ciutadà/ana i en el teu rol de Conseller/a de Territori i Transició Ecològica, quina és la conclusió o principi clau que t'emportes d'aquest bloc per dissenyar el model energètic de Catalunya 2030?</div>
+      <div class="answer">
+        <p><strong>Resposta model orientativa:</strong> La lliçó clau és que la transició energètica no pot ser només un repte tecnològic de construir centrals renovables, sinó que ha de ser una <em>transició justa</em>. L'energia més neta, barata i justa és la que no cal gastar (eficiència i estalvi). El disseny del model 2030 ha de posar les persones i la garantia dels drets bàsics al centre abans de qualsevol benefici corporatiu.</p>
+      </div>
+    </div>
+
   </div><!-- /A1 -->
 
   <!-- ══════════════════════════════════════════════════════════════ -->

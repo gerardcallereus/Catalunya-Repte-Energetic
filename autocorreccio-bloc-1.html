@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 1 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #059669;
+      --correct-bg: #ecfdf5;
+      --correct-border: #a7f3d0;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(5, 150, 105, 0.3);
+      color: #34d399;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #059669; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #059669;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #047857; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 12px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-badge-pts {
+      background: #059669;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 9999px;
+      border: 1px solid var(--correct-border);
+      white-space: nowrap;
+    }
+    .solution-formula {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 8.2pt;
+      margin: 4px 0;
+      color: #0f172a;
+      line-height: 1.35;
+    }
+    .solution-steps {
+      font-size: 8.2pt;
+      line-height: 1.4;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+    .solution-result {
+      font-weight: 800;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 2.5px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 3px;
+      font-size: 8.2pt;
+    }
+    .solution-note {
+      font-size: 7.8pt;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 4px 7px;
+      border-radius: 4px;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    .solution-error-warning {
+      font-size: 7.8pt;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 4px 7px;
+      border-radius: 4px;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    /* ─── GRID DE 2 COLUMNES PER A CÀLCULS COMPACTES ─── */
+    .calc-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    /* ─── TARGETES D'OPCIÓ AMB AVANTATGES I INCONVENIENTS ─── */
+    .option-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .option-card-title {
+      font-weight: 800;
+      font-size: 8.4pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .pros-cons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 7.8pt;
+    }
+    .pros-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 4px;
+      padding: 4px 7px;
+      color: #166534;
+      line-height: 1.3;
+    }
+    .cons-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 4px;
+      padding: 4px 7px;
+      color: #991b1b;
+      line-height: 1.3;
+    }
+
+    /* ─── CRITERIS DE REVISIÓ (CHECKLIST) ─── */
+    .criteria-checklist {
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px dashed var(--border);
+      font-size: 7.8pt;
+      color: var(--text-muted);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px 8px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      line-height: 1.3;
+    }
+    .checkbox {
+      width: 11px;
+      height: 11px;
+      border: 1.5px solid #64748b;
+      border-radius: 2px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+
+    /* ─── CAIXES D'INFORMACIÓ ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      font-size: 8.2pt;
+      page-break-inside: avoid;
+    }
+    .info-box.blue { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber { background: #fffbeb; border-color: #fde68a; }
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 3px;
+      font-size: 8.4pt;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn active">✅ Bloc 1</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 1</div>
+        <div class="header-title">Solucionari Pas a Pas, Criteris de Puntuació i Diagnosi</div>
+        <div class="header-desc">Pauta detallada d'autoavaluació per a l'alumnat amb procediment matemàtic complet, respostes model, alertes d'errors freqüents i barem directe sobre 10 punts.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field">
+        <strong>Alumne/a:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Grup / Classe:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Data:</strong>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box blue no-break">
+    <div class="box-head">🧭 Pautes per a la correcció: Com avaluar amb rigor i agilitat?</div>
+    <div style="font-size: 8pt; line-height: 1.35;">
+      • <strong>Procediment i unitats:</strong> Per obtenir la màxima puntuació en els càlculs, és imprescindible indicar la fórmula, el desenvolupament numèric i la unitat correcta (kWh, €, %, A, &Omega;, W).<br>
+      • <strong>Errors d'arrossegament:</strong> Si un alumne s'equivoca en un càlcul inicial (ex. intensitat) però aplica correctament les fórmules posteriors (resistència, potència), puntueu el procediment de les següents preguntes com a vàlid.<br>
+      • <strong>Flexibilitat conceptual:</strong> A les preguntes teòriques i de reflexió s'avalua la comprensió dels conceptes clau (Llei 24/2015, confort tèrmic, salut, transició justa), no la reproducció literal del text.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 1                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 1: Diagnosi, Indicadors i Càlculs Estadístics</span>
+    <span class="task-badge-pts">Total: 2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Apartats a, b, c, d — Marc Teòric, Drets i Llei 24/2015</span>
+      <span class="solution-points">1,00 pt (4 &times; 0,25 pt)</span>
+    </div>
+    <div class="solution-steps">
+      <ul style="margin-left: 1.1rem; display: flex; flex-direction: column; gap: 3.5px;">
+        <li><strong>a) Què és la pobresa energètica? (0,25 pts):</strong> Incapacitat d'una llar d'accedir o pagar els serveis energètics bàsics (electricitat, gas, aigua) necessaris per garantir unes condicions de vida dignes i un confort tèrmic adequat (18–21 &ordm;C a l'hivern, aigua calenta sanitària, il·luminació i cocció d'aliments), o haver de destinar-hi un percentatge desproporcionat dels seus ingressos (>10%).</li>
+        <li><strong>b) Les 3 causes combinades (0,25 pts):</strong> La pobresa energètica és multifactorial i sorgeix de la intersecció de: <strong>1) Ingressos baixos</strong> (precarietat laboral, atur, pensions insuficients), <strong>2) Preus elevats de l'energia</strong> (tarifes cares, costos fixos de potència, impostos), i <strong>3) Habitatges ineficients</strong> (edificis construïts abans de 1980 sense aïllament tèrmic, finestres simples que perden calor).</li>
+        <li><strong>c) Col·lectius més vulnerables (0,25 pts):</strong> Famílies monoparentals (majoritàriament mares amb fills al càrrec, amb una taxa de risc de pobresa AROPE superior al 40%), gent gran que viu sola (especialment dones amb pensions mínimes o de viduïtat), persones amb malalties cròniques o dependència que requereixen equips elèctrics vitals (concentradors d'oxigen, teràpies respiratòries) i llars amb tots els membres a l'atur.</li>
+        <li><strong>d) Moviments socials, Llei 24/2015 i Principi de Precaució (0,25 pts):</strong> La Llei 24/2015 (nascuda d'una Iniciativa Legislativa Popular impulsada per l'Aliança contra la Pobresa Energètica - APE i la PAH) estableix el <em>principi de precaució</em>: les companyies elèctriques, de gas o d'aigua tenen la prohibició legal de tallar el subministrament a cap llar vulnerable sense consultar abans als Serveis Socials municipals per comprovar si la família està en situació d'exclusió residencial. Aquesta mobilització ha aturat més de 200.000 talls i ha forçat convenis de condonació de deute a Catalunya.</li>
+      </ul>
+    </div>
+    <div class="criteria-checklist">
+      <div class="checklist-item"><div class="checkbox"></div> <strong>a)</strong> Esmenta confort tèrmic (18 &ordm;C) o despesa desproporcionada [0,25 pt]</div>
+      <div class="checklist-item"><div class="checkbox"></div> <strong>b)</strong> Identifica clarament els 3 factors (ingressos, preus, aïllament) [0,25 pt]</div>
+      <div class="checklist-item"><div class="checkbox"></div> <strong>c)</strong> Cita almenys 2 col·lectius concrets (monoparentals, gent gran, etc.) [0,25 pt]</div>
+      <div class="checklist-item"><div class="checkbox"></div> <strong>d)</strong> Explica la prohibició de talls sense informe previ de Serveis Socials [0,25 pt]</div>
+    </div>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Apartat e — Càlculs Estadístics de la Realitat a Catalunya</span>
+      <span class="solution-points">1,00 pt (Desglossat en 3 sub-apartats)</span>
+    </div>
+    
+    <div style="margin-bottom: 6px;">
+      <strong>1. Persones que no poden mantenir la llar calenta a l'hivern (20,0% sobre 8.000.000 hab.) [0,30 pts]:</strong>
+      <div class="solution-formula">N_persones = 8.000.000 habitants &times; 0,20 = 1.600.000 persones</div>
+      <div class="solution-result">Resultat: 1.600.000 catalans (1 de cada 5 ciutadans passa fred a casa)</div>
+      <div class="solution-note">💡 <em>Criteri:</em> 0,30 pt si el resultat és 1.600.000 o 1,6 milions. Penalitzar 0,10 pt si no s'indica la unitat (persones/habitants).</div>
+    </div>
+
+    <div style="margin-bottom: 6px;">
+      <strong>2. Llars amb despesa desproporcionada (12,9%) i retards en rebuts (9,4%) sobre 3.000.000 llars [0,30 pts]:</strong>
+      <div class="solution-formula">
+        • Despesa desproporcionada (>10% ingressos) = 3.000.000 &times; 0,129 = 387.000 llars<br>
+        • Retards en el pagament de factures = 3.000.000 &times; 0,094 = 282.000 llars
+      </div>
+      <div class="solution-result">Resultat: 387.000 llars (despesa desproporcionada) i 282.000 llars (retards)</div>
+      <div class="solution-note">💡 <em>Criteri:</em> 0,15 pt per cadascun dels dos càlculs correctes (387.000 i 282.000 llars).</div>
+    </div>
+
+    <div>
+      <strong>3. Conveni de Condonació de Deute Històric (17.500.000 € acumulats per 35.000 famílies) [0,40 pts]:</strong>
+      <div class="solution-formula">
+        • Deute mitjà acumulat per família = 17.500.000 € / 35.000 llars = 500,00 €/llar<br>
+        • Aportació assumida per Endesa (73%) = 17.500.000 € &times; 0,73 = 12.775.000 €<br>
+        • Aportació assumida per la Generalitat (27%) = 17.500.000 € &times; 0,27 = 4.725.000 €
+      </div>
+      <div class="solution-result">Resultat: 500 €/família · Endesa: 12.775.000 € · Generalitat: 4.725.000 €</div>
+      <div class="solution-error-warning">⚠️ <em>Error típic:</em> Comprovar que la suma dels dos imports (12.775.000 + 4.725.000) dona exactament el total de 17.500.000 €.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 2                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 2: Càlculs de Consum i Despesa — Cas Família Garcia</span>
+    <span class="task-badge-pts">Total: 2,5 punts (5 &times; 0,50 pt)</span>
+  </div>
+
+  <div class="calc-grid-2 no-break">
+    <!-- 2a -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>a) Energia diària consumida (P = 2,0 kW, t = 5,0 h)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">E_diaria = P &times; t = 2,0 kW &times; 5,0 h = 10,0 kWh</div>
+      <div class="solution-result">Resultat: 10,0 kWh/dia (o 10 kWh)</div>
+      <div class="solution-note">💡 Acceptar si han fet 2.000 W &times; 5 h = 10.000 Wh = 10 kWh. Exigir unitat kWh.</div>
+    </div>
+
+    <!-- 2b -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>b) Energia mensual consumida (mes tipus de 30 dies)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">E_mensual = 10,0 kWh/dia &times; 30 dies = 300,0 kWh</div>
+      <div class="solution-result">Resultat: 300 kWh/mes</div>
+      <div class="solution-note">💡 Si a l'apartat a) s'ha comès un error numèric, acceptar el producte de la seva dada per 30.</div>
+    </div>
+  </div>
+
+  <div class="calc-grid-2 no-break">
+    <!-- 2c -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>c) Cost econòmic mensual (Tarifa: 0,15 €/kWh)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">Cost_mensual = 300 kWh &times; 0,15 €/kWh = 45,00 €</div>
+      <div class="solution-result">Resultat: 45,00 €/mes per un sol radiador</div>
+      <div class="solution-note">💡 45 € només per escalfar una habitació durant l'hivern.</div>
+    </div>
+
+    <!-- 2d -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>d) Percentatge d'esforç (Ingressos: 900 €/mes)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">%_ingressos = (45,00 € / 900,00 €) &times; 100 = 5,0%</div>
+      <div class="solution-result">Resultat: 5,0% dels ingressos totals de la llar</div>
+      <div class="solution-error-warning">⚠️ <em>Diagnosi:</em> Representa la meitat del límit crític del 10% només en un sol aparell!</div>
+    </div>
+  </div>
+
+  <!-- 2e -->
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>e) Protecció social: Impacte del Bo Social Elèctric (65% de descompte sobre el consum)</span>
+      <span class="solution-points">0,50 pt</span>
+    </div>
+    <div class="solution-formula">
+      • Factura amb Bo Social = 45,00 € &times; (1 - 0,65) = 45,00 € &times; 0,35 = 15,75 €/mes (Estalvi directe de 29,25 €)<br>
+      • Nou percentatge d'esforç sobre els ingressos = (15,75 € / 900,00 €) &times; 100 = 1,75%
+    </div>
+    <div class="solution-result">Resultat: La família passa a pagar 15,75 €/mes (estalvia 29,25 € i l'esforç baixa del 5,0% a l'1,75%)</div>
+    <div class="solution-note">💡 <em>Anàlisi qualitativa:</em> El Bo Social actua com a escut protector fonamental: redueix la despesa a un terç i evita que la família caigui en situació d'asfíxia econòmica severa.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 3                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 3: Circuits, Pèrdues Tèrmiques i Rendiment — Cas Família López</span>
+    <span class="task-badge-pts">Total: 2,5 punts (5 &times; 0,50 pt)</span>
+  </div>
+
+  <div class="calc-grid-2 no-break">
+    <!-- 3a -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>a) Intensitat de corrent (P = 1.500 W, V = 230 V)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">I = P / V = 1.500 W / 230 V = 6,5217... A &approx; 6,52 A</div>
+      <div class="solution-result">Resultat: 6,52 A (acceptar 6,5 A)</div>
+      <div class="solution-note">💡 Fórmula: I = P / V. Exigir unitat en Amperes (A).</div>
+    </div>
+
+    <!-- 3b -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>b) Resistència elèctrica del radiador (Llei d'Ohm)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">
+        • Via Ohm: R = V / I = 230 V / 6,52 A = 35,28 &Omega;<br>
+        • Via directa: R = V&sup2; / P = 230&sup2; / 1.500 = 35,27 &Omega;
+      </div>
+      <div class="solution-result">Resultat: 35,27 &Omega; a 35,28 &Omega; (acceptar 35,3 &Omega;)</div>
+      <div class="solution-note">💡 Exigir unitat en Ohms (&Omega;). Totes dues vies són vàlides.</div>
+    </div>
+  </div>
+
+  <div class="calc-grid-2 no-break">
+    <!-- 3c -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>c) Potència útil real que escalfa la llar (P_pèrdua = 600 W)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">P_util = P_total - P_perdua = 1.500 W - 600 W = 900 W</div>
+      <div class="solution-result">Resultat: 900 W (o 0,9 kW)</div>
+      <div class="solution-note">💡 Dels 1.500 W elèctrics consumits, només 900 W es queden a l'habitació.</div>
+    </div>
+
+    <!-- 3d -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>d) Rendiment energètic de la instal·lació (&eta;)</span>
+        <span class="solution-points">0,50 pt</span>
+      </div>
+      <div class="solution-formula">&eta; = (P_util / P_total) &times; 100 = (900 W / 1.500 W) &times; 100 = 60,0%</div>
+      <div class="solution-result">Resultat: 60,0% de rendiment (Pèrdua del 40,0%)</div>
+      <div class="solution-error-warning">⚠️ <em>Diagnosi física:</em> El 40% de l'energia pagada es fuga directament per les parets i vidres vells.</div>
+    </div>
+  </div>
+
+  <!-- 3e -->
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>e) Diners malbaratats al mes a causa del mal aïllament (Ús: 6 h/dia durant 30 dies a 0,15 €/kWh)</span>
+      <span class="solution-points">0,50 pt</span>
+    </div>
+    <div class="solution-formula">
+      1. Potència perduda convertida a kW = 600 W / 1.000 = 0,6 kW<br>
+      2. Hores d'ús mensuals = 6 h/dia &times; 30 dies = 180 hores<br>
+      3. Energia malbaratada = 0,6 kW &times; 180 h = 108 kWh/mes<br>
+      4. Cost dels diners llençats al carrer = 108 kWh &times; 0,15 €/kWh = 16,20 €/mes
+    </div>
+    <div class="solution-result">Resultat: 16,20 € llençats al carrer cada mes per manca d'aïllament tèrmic</div>
+    <div class="solution-note">💡 <em>Càlcul alternatiu:</em> Cost total mensual (1,5 kW &times; 180 h &times; 0,15 € = 40,50 €) &times; 40% pèrdua = 16,20 €. Qualsevol dels dos procediments és 100% correcte.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 4: PRESA DE DECISIONS                                    -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 4: Presa de Decisions del Conseller/a — Política Pública Prioritària</span>
+    <span class="task-badge-pts">Total: 1,0 punt (2 &times; 0,50 pt)</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Guia d'Avaluació: Avantatges, Inconvenients i Veredicte del Conseller/a</span>
+      <span class="solution-points">1,00 pt (0,50 pt Justificació + 0,50 pt Mitigació d'inconvenients)</span>
+    </div>
+    <p style="font-size: 8pt; margin-bottom: 6px; color: var(--text-muted);">
+      L'alumnat pot triar <strong>qualsevol de les 3 opcions</strong> (A, B o C). Totes tres són vàlides perquè representen debats reals de governança energètica. S'avalua la qualitat dels arguments tècnics i la proposta de compensació:
+    </p>
+
+    <!-- OPCIÓ A -->
+    <div class="option-card">
+      <div class="option-card-title">💳 Opció A: Targeta Moneder d'Urgència / Bo Social Català (Ajut econòmic d'emergència)</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li>Immediatesa absoluta: evita talls de subministrament aquest mateix hivern.</li>
+            <li>Àgil de tramitar mitjançant Serveis Socials i empodera la família amb liquiditat.</li>
+            <li>Protegeix les llars més greument asfixiades sense esperar terminis d'obres.</li>
+          </ul>
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i Com compensar-los:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li><strong>Inconvenient:</strong> No resol la causa física (l'edifici continua perdent el 40% de calor; la despesa pública és recurrent).</li>
+            <li><strong>Compensació:</strong> Condicionar la targeta a una auditoria energètica gratuïta i derivació al pla de rehabilitació.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓ B -->
+    <div class="option-card">
+      <div class="option-card-title">☀️ Opció B: Autoconsum Públic Compartit amb L'Energètica (Energia pública municipal)</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li>Electricitat 100% renovable, pública i a cost gairebé zero durant més de 25-30 anys.</li>
+            <li>Aprofita cobertes d'edificis públics (escoles, pavellons, biblioteques) de proximitat.</li>
+            <li>Democratitza l'energia i trenca la dependència de l'oligopoli elèctric privat.</li>
+          </ul>
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i Com compensar-los:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li><strong>Inconvenient:</strong> Genera només en hores de sol (no resol la calefacció nocturna a l'hivern ni el butà/gas).</li>
+            <li><strong>Compensació:</strong> Incorporar bateries comunitàries de barri i acords de compensació d'excedents a la factura.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓ C -->
+    <div class="option-card">
+      <div class="option-card-title">🏗️ Opció C: Pla Renova Llar — Fons de Rehabilitació i Aïllament Tèrmic d'Edificis</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li><strong>Solució estructural i permanent:</strong> Redueix la demanda de calefacció un 50–70% de per vida.</li>
+            <li>Millora dràstica de la salut (elimina humitats i fongs) i revalora el parc d'habitatge públic.</li>
+            <li>Crea ocupació verda local en el sector de la construcció i rehabilitació energètica.</li>
+          </ul>
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i Com compensar-los:</strong>
+          <ul style="margin-left: 0.9rem; margin-top: 1px;">
+            <li><strong>Inconvenient:</strong> Inversió inicial molt alta i execució lenta (obres molestes que trigaran mesos/anys a completar-se).</li>
+            <li><strong>Compensació:</strong> Oferir un ajut econòmic pont d'emergència durant el primer hivern mentre s'executen les obres.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEREDICTE I CRITERIS -->
+    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 5px; padding: 6px 9px; margin-top: 6px; font-size: 8pt;">
+      <div style="font-weight: 700; color: #047857; margin-bottom: 3px;">🏛️ Com puntuar el Veredicte del Conseller/a:</div>
+      <div>
+        • <strong>0,50 pt (Opció triada i justificació):</strong> Ha marcat l'opció (A, B o C) i ha redactat un paràgraf coherent explicant per què la prioritza davant les altres basant-se en dades del bloc.<br>
+        • <strong>0,50 pt (Identificació d'inconvenients i proposta de mitigació):</strong> Demostra maduresa política i tècnica en reconèixer què li falta a la seva mesura i com pensa compensar-ho.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 5: REFLEXIÓ PERSONAL                                     -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 5: Reflexió Personal sobre la Pobresa Energètica</span>
+    <span class="task-badge-pts">Total: 2,0 punts (4 &times; 0,50 pt)</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris d'Avaluació i Respostes Model de les 4 Preguntes de Síntesi</span>
+      <span class="solution-points">2,00 pts (0,50 pt per cada reflexió ben raonada)</span>
+    </div>
+    
+    <table style="font-size: 7.8pt; margin-bottom: 0;">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Pregunta de Reflexió</th>
+          <th style="width: 63%;">Criteris d'Assoliment i Conceptes Clau que han d'aparèixer</th>
+          <th style="width: 15%; text-align: center;">Puntuació</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Què és el que més t'ha impactat?</strong></td>
+          <td>
+            • <strong>Excel·lent (0,50 pt):</strong> Cita dades concretes treballades al dossier (ex: que 1,6 milions de catalans passin fred, que un sol radiador costi 45 €/mes i suposi el 5% d'un sou precari, o que es llencin 16,20 €/mes per culpa del mal aïllament) i raona personalment el perquè de l'impacte.<br>
+            • <em>Parcial (0,25 pt):</em> Resposta genèrica ("m'ha sorprès que hi hagi pobresa") sense citar cap xifra ni càlcul.
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #047857;">0,50 pt</td>
+        </tr>
+        <tr>
+          <td><strong>2. Pobresa energètica, dret humà i salut</strong></td>
+          <td>
+            • <strong>Excel·lent (0,50 pt):</strong> Articula que l'energia és un requisit previ per als drets fonamentals: la manca de calefacció provoca malalties respiratòries cròniques (asma, bronquitis), agreuja problemes cardiovasculars, genera estrès, angoixa i vergonya social (salut mental), i impedeix als infants estudiar en condicions dignes.<br>
+            • <em>Parcial (0,25 pt):</em> Només esmenta que "estar a casa amb fred no és agradable" sense connectar-ho amb salut ni drets.
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #047857;">0,50 pt</td>
+        </tr>
+        <tr>
+          <td><strong>3. Consells individuals vs. Solucions estructurals</strong></td>
+          <td>
+            • <strong>Excel·lent (0,50 pt):</strong> Argumenta clarament que els hàbits d'estalvi (apagar llums, tapar-se amb mantes) ajuden però són completament insuficients davant la pobresa energètica: si l'edifici té un rendiment tèrmic del 60% i perd el 40% de la calor, calen <em>inversions estructurals públiques</em> (rehabilitació de façanes, doble vidre, reforma de tarifes).<br>
+            • <em>Parcial (0,25 pt):</em> Afirma que amb consells domèstics ja n'hi ha prou o no connecta amb els càlculs de rendiment.
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #047857;">0,50 pt</td>
+        </tr>
+        <tr>
+          <td><strong>4. Lliçó per al model Catalunya 2030</strong></td>
+          <td>
+            • <strong>Excel·lent (0,50 pt):</strong> Conclou que la transició energètica no pot ser un simple negoci tecnològic de construir parcs renovables, sinó una <em>transició justa</em> que posi la ciutadania al centre, prioritzi l'eficiència energètica (l'energia més neta i barata és la que no cal produir) i garanteixi que ningú quedi enrere.<br>
+            • <em>Parcial (0,25 pt):</em> Resposta vaga o poc vinculada a la sostenibilitat i la justícia social.
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #047857;">0,50 pt</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 10px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 10pt; color: #047857; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Suma directa sobre 10 punts)</span>
+      <span style="font-size: 8pt; color: var(--text-muted); font-weight: 600;">Sense decimals complexos · Barem clar i transparent</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tasca 1:</strong> Diagnosi, Indicadors i Estadística Social (a, b, c, d, e)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 2:</strong> Càlculs de Consum i Despesa Calefacció Radiador (5 &times; 0,5 pt)</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 3:</strong> Circuits, Pèrdues Tèrmiques i Rendiment (5 &times; 0,5 pt)</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 4:</strong> Presa de Decisions i Veredicte del Conseller/a (Opció i Mitigació)</td>
+          <td style="text-align: center; font-weight: 700;">1,0 pt</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,0</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 5:</strong> Reflexió Personal i Consolidació d'Aprenentatges (4 &times; 0,5 pt)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (BLOC 1):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #047857; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div>
+        <strong>Punts forts del treball:</strong> __________________________________________________
+      </div>
+      <div>
+        <strong>Aspectes a millorar per al proper bloc:</strong> ________________________________
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

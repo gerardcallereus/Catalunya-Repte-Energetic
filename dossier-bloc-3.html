@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloc 3: El Sistema Elèctric Català (Centrals i Xarxa) — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --rose: #e11d48;
+      --amber: #d97706;
+      --indigo: #4f46e5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5pt;
+      color: var(--text-main);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    /* ─── PAGE LAYOUT (screen) ─── */
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+    }
+
+    /* ─── PRINT RULES ─── */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm 16mm 14mm;
+      }
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        font-size: 10pt;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .page-wrapper { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      .page-break { break-before: page; page-break-before: always; }
+      .print-btn { display: none !important; }
+      a { color: inherit; text-decoration: none; }
+      a[href]::after { content: ""; }
+      .info-box, .context-box, .nota-doc {
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .answer-box {
+        border: 1px solid #94a3b8 !important;
+        background: #ffffff !important;
+      }
+      .answer-line {
+        border-bottom: 1px dashed #cbd5e1 !important;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* ─── PRINT BUTTON (screen only) ─── */
+    .print-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2,132,199,0.3);
+      z-index: 999;
+    }
+    .print-btn:hover { background: #0369a1; }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 260mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .cover-logo {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    .cover h1 {
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cover h1 span { color: var(--primary); }
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .cover-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cover-intro {
+      max-width: 500px;
+      font-size: 10pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: #f8fafc;
+      text-align: left;
+    }
+    .cover-intro strong { color: var(--text-main); }
+
+    /* ─── INDEX ─── */
+    .toc { margin: 24px 0 32px; }
+    .toc h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--secondary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--border);
+      font-size: 10pt;
+    }
+    .toc-item .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 8px;
+      min-width: 24px;
+    }
+    .toc-item .toc-title { flex: 1; }
+    .toc-item .toc-phase {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ─── ACTIVITAT: ESTRUCTURA ─── */
+    .activity {
+      margin-bottom: 36px;
+    }
+
+    .act-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+    }
+    .act-number {
+      min-width: 40px; height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .act-number.blue  { background: var(--secondary); }
+    .act-number.rose  { background: var(--rose); }
+    .act-number.amber { background: var(--amber); }
+    .act-number.indigo { background: var(--indigo); }
+
+    .act-title-block { flex: 1; }
+    .act-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .act-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .act-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .act-tag {
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-time { background: #eff6ff; color: var(--secondary); border-color: #bfdbfe; }
+    .tag-group { background: #f0fdf4; color: var(--primary); border-color: #bbf7d0; }
+    .tag-mat { background: #fefce8; color: var(--amber); border-color: #fde68a; }
+
+    /* ─── SECCIONS D'ACTIVITAT I ENCAPÇALAMENTS DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 11pt;
+      font-weight: 800;
+      margin: 28px 0 16px 0;
+      border-radius: 8px;
+      border-left: 6px solid var(--secondary);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-header::before {
+      content: "📌";
+      font-size: 11pt;
+    }
+
+    .section-label {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 12px 0 5px;
+    }
+
+    p { margin-bottom: 8px; }
+    ul, ol { padding-left: 1.4em; margin-bottom: 8px; }
+    li { margin-bottom: 4px; line-height: 1.5; }
+    strong { color: var(--text-main); }
+
+    /* ─── CAIXA CONTEXT ─── */
+    .context-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    .context-box .box-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CAIXES DE TIPUS ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 9.5pt;
+    }
+    .info-box.green  { background: #f0fdf4; border-color: #bbf7d0; }
+    .info-box.blue   { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber  { background: #fffbeb; border-color: #fde68a; }
+    .info-box.rose   { background: #fff1f2; border-color: #fecdd3; }
+    .info-box.indigo { background: #eef2ff; border-color: #c7d2fe; }
+
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 9.5pt;
+    }
+
+    /* ─── TAULES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 12px;
+    }
+    th {
+      background: var(--text-main);
+      color: white;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ─── GRAELLA DE ROLS ─── */
+    .rol-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .rol-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 9pt;
+    }
+    .rol-card .rol-name {
+      font-weight: 700;
+      font-size: 10pt;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rol-card ul { margin-bottom: 0; padding-left: 1.2em; }
+
+    /* ─── ESPAI RESPOSTES ─── */
+    .answer-box {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 12px;
+      min-height: 45px;
+      background: #fafafa;
+    }
+    .answer-line {
+      border-bottom: 1px solid #e2e8f0;
+      height: 22px;
+      margin-bottom: 2px;
+    }
+    .calc-box {
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      min-height: 85px;
+      margin: 8px 0 14px 1rem;
+      background: #ffffff;
+      padding: 8px 10px;
+    }
+
+    /* ─── SEPARADOR ─── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ─── NOTÍCIES / FONTS ─── */
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .news-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+    }
+    .news-card .news-source {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2px;
+      font-size: 8pt;
+    }
+    .news-card a { color: var(--text-main); word-break: break-all; }
+
+    /* ─── RETALLS DE PREMSA INCRUSTATS (CLIPPING) ─── */
+    .news-clipping {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--rose);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 9.5pt;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      page-break-inside: avoid;
+    }
+    .news-clipping.blue { border-left-color: var(--secondary); }
+    .news-clipping.amber { border-left-color: var(--amber); }
+    .news-clipping.indigo { border-left-color: var(--indigo); }
+    
+    .news-clipping-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-clipping-source {
+      color: var(--rose);
+      font-weight: 800;
+    }
+    .news-clipping.blue .news-clipping-source { color: var(--secondary); }
+    .news-clipping.amber .news-clipping-source { color: var(--amber); }
+    .news-clipping.indigo .news-clipping-source { color: var(--indigo); }
+
+    .news-clipping-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .news-clipping-quote {
+      font-style: italic;
+      color: #334155;
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 3px double #cbd5e1;
+      margin: 8px 0;
+      font-size: 9pt;
+      text-align: justify;
+    }
+    .news-clipping-ref {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 6px;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 4px;
+      text-align: right;
+    }
+    .news-clipping-ref a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .news-clipping-ref a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── AVALUACIÓ ─── */
+    .rubric table th { background: var(--indigo); }
+    .rubric table th:first-child { background: #374151; }
+
+    /* ─── CAPÇALERA DE PÀGINA (per impressió) ─── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      font-size: 8.5pt;
+      color: var(--text-muted);
+    }
+    .page-header strong { color: var(--primary); font-size: 10pt; }
+
+    /* Nom alumne */
+    .alumne-block {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 10px;
+      font-size: 9pt;
+    }
+    .alumne-field {
+      flex: 1;
+      border-bottom: 1.5px solid var(--text-main);
+      padding-bottom: 2px;
+    }
+    .alumne-label {
+      font-size: 8pt;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    /* ─── CUSTOM PRINT-FRIENDLY CHARTS FOR DOSSIERS ─── */
+    .chart-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .chart-box-title {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chart-box-source {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+    }
+    .bar-chart-vertical {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 140px;
+      padding-top: 15px;
+      border-bottom: 1.5px solid var(--text-main);
+      margin: 10px 0;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15%;
+    }
+    .bar-val-top {
+      font-size: 7.5pt;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .bar-fill {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--primary);
+    }
+    .bar-fill.rose { background: var(--rose); }
+    .bar-fill.indigo { background: var(--indigo); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.secondary { background: var(--secondary); }
+    .bar-label {
+      font-size: 7.5pt;
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    
+    .bar-chart-horizontal {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-row-label {
+      width: 120px;
+      font-size: 8pt;
+      font-weight: 600;
+      text-align: right;
+      color: var(--text-main);
+    }
+    .bar-row-track {
+      flex: 1;
+      height: 18px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-row-fill {
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      color: white;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 4px 0 0 4px;
+    }
+    .bar-row-fill.rose { background: var(--rose); }
+    .bar-row-fill.indigo { background: var(--indigo); }
+    .bar-row-fill.amber { background: var(--amber); }
+    .bar-row-fill.secondary { background: var(--secondary); }
+    .bar-row-fill.gray { background: #64748b; }
+    
+    /* Line chart table rendering (highly readable and reliable for print) */
+    .line-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      height: 120px;
+      border-bottom: 1.5px solid var(--text-main);
+      border-left: 1.5px solid var(--text-main);
+      margin: 15px 0 5px 25px;
+      position: relative;
+    }
+    .grid-y-axis {
+      position: absolute;
+      left: -25px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: var(--text-muted);
+      text-align: right;
+      width: 20px;
+    }
+    .grid-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      position: relative;
+    }
+    .grid-col::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-s);
+      background: var(--rose);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-w);
+      background: var(--secondary);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col .col-dot-s {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-s);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-col .col-dot-w {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-w);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-x-labels {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      margin-left: 25px;
+      margin-bottom: 12px;
+    }
+    .grid-x-label {
+      font-size: 7pt;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* ─── TEST I QÜESTIONARIS ─── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 700px) {
+      .test-grid { grid-template-columns: 1fr; }
+    }
+    .test-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .test-q-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .test-opt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    .test-opt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.3;
+      color: #334155;
+    }
+    .test-checkbox {
+      display: inline-block;
+      min-width: 12px;
+      height: 12px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .test-correct-ans {
+      background: #dcfce7;
+      border: 1px solid #16a34a;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    /* ─── GUIA GEMINI NOTEBOOK ─── */
+    .guide-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+    }
+    .guide-step-title {
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: monospace;
+      font-size: 8pt;
+      color: #0f172a;
+      margin: 4px 0;
+    }
+    /* ─── BLOCK DOSSIER NAVIGATION & HEADER ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .nav-tag {
+      font-size: 10px;
+      background: rgba(2, 132, 199, 0.3);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .nav-btn.active {
+      background: #059669;
+      color: #fff;
+      font-weight: 700;
+    }
+    .nav-btn.secondary {
+      background: rgba(2, 132, 199, 0.2);
+      color: #7dd3fc;
+    }
+    .nav-separator {
+      color: #475569;
+      font-size: 12px;
+      margin: 0 2px;
+    }
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .print-action-btn:hover {
+      background: #0369a1;
+    }
+    @media print {
+      .block-nav-bar, .no-print, .print-btn {
+        display: none !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  
+    .block-header-card {
+      border: 2px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .block-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .block-badge {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .block-header-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 2px 0 4px 0;
+      line-height: 1.2;
+    }
+    .block-header-desc {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .block-student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 9pt;
+      background: var(--bg);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .student-field strong {
+      color: var(--text-muted);
+      font-size: 8pt;
+      text-transform: uppercase;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      height: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossier per Blocs</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn ">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn ">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn active">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn ">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn ">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn ">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir aquest Bloc (PDF)</button>
+</div>
+
+
+<div class="page-wrapper">
+
+  <div class="block-header-card no-break">
+    <div class="block-header-top">
+      <div>
+        <div class="block-badge">BLOC 3 · CENTRALS I XARXA · Activitats A3 i A4</div>
+        <div class="block-header-title">Catalunya: Repte Energètic</div>
+        <div style="font-size: 12pt; font-weight: 700; color: var(--secondary); margin-bottom: 4px;">Bloc 3: El Sistema Elèctric Català (Centrals i Xarxa)</div>
+        <div class="block-header-desc">Diferenciar la potència instal·lada (MW) de l'energia real generada (GWh), conèixer el catàleg de centrals de Catalunya i experimentar amb el repte de balancejar la xarxa elèctrica.</div>
+      </div>
+      <div style="text-align: right; font-size: 8.5pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    
+    <div class="block-student-fields">
+      <div class="student-field">
+        <strong>Alumne/a:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Grup:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Data:</strong>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="activity">
+<div class="act-header no-break">
+      <div class="act-number">A3</div>
+      <div class="act-title-block">
+        <div class="act-title">Les Centrals de Catalunya: Comparació de Tecnologies</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🏭 Per què comparem les diferents tecnologies de generació?</div>
+      No totes les centrals elèctriques són iguals: algunes són estables però contaminants, altres són netes de CO₂ directes però intermitents. En aquesta activitat, analitzarem el catàleg de centrals de Catalunya per comprender conceptes tecnològics clau com la potència instal·lada (MW), la generació real (GWh) i el factor de capacitat. Això et permetrà avaluar amb criteri tècnic els avantatges i inconvenients de cada tecnologia per dissenyar un mix elèctric òptim.
+    </div>
+
+    <div class="task-header">Tasca 1: Taula comparativa de les tecnologies de generació elèctrica</div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🏭 Context</div>
+      Catalunya té 6 grans tecnologies de generació elèctrica. Cadascuna té avantatges i inconvenients que el govern ha de ponderar. Usant la pestanya <strong>"Catàleg de Centrals"</strong> de l'aplicació i les teves recerques, completeu la taula comparativa.
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Tecnologia</th>
+          <th>MW instal·lats</th>
+          <th>GWh/any reals</th>
+          <th>Hores equiv./any</th>
+          <th>CO₂ (g/kWh)</th>
+          <th>Principal inconvenient</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>☢️ Nuclear</td><td>3.000</td><td>24.000</td><td>~8.000</td><td>~12</td><td></td></tr>
+        <tr><td>🔥 Cicle Combinat (Gas)</td><td></td><td></td><td></td><td>~490</td><td></td></tr>
+        <tr><td>💧 Hidroelèctrica</td><td></td><td></td><td></td><td>~24</td><td></td></tr>
+        <tr><td>💨 Eòlica Terrestre</td><td></td><td></td><td></td><td>~11</td><td></td></tr>
+        <tr><td>☀️ Solar FV</td><td></td><td></td><td></td><td>~45</td><td></td></tr>
+        <tr><td>🌿 Biomassa</td><td></td><td></td><td></td><td>~230</td><td></td></tr>
+      </tbody>
+    </table>
+    <div style="font-size: 8pt; color: var(--text-muted); margin-top: -8px; margin-bottom: 1.5rem; text-align: right; font-style: italic;">
+      Font de dades: Balanços energètics de l'Institut Català d'Energia (ICAEN) i Red Eléctrica de España (REE).
+    </div>
+
+    <div class="task-header">Tasca 2: Preguntes d'anàlisi de rendiment i capacitat</div>
+
+    <p><strong>1.</strong> Per quin motiu la nuclear té menys MW que el gas però genera molts més GWh? Explica-ho amb l'analogia del cotxe:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>2.</strong> La solar té el rendiment base més baix (22%). Significa que és una mala tecnologia? Justifica:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <p><strong>3.</strong> Si tanques les centrals nuclears el 2035 (com preveu el calendari europeu), quina o quines tecnologies podrien substituir-ne el volum de producció? Fes els càlculs aproximats:</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <div class="task-header">Tasca 3: Mix de Generació Elèctrica a Catalunya (2023)</div>
+    <p>Aquesta taula i gràfica representen la producció elèctrica neta real a Catalunya durant l'any 2023:</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📊 Mix Elèctric Català 2023 (Generació Total: 40.298 GWh)</div>
+      
+      <table style="margin-bottom: 12px; font-size: 8.5pt;">
+        <thead>
+          <tr>
+            <th>Tecnologia</th>
+            <th>Generació (GWh)</th>
+            <th>Percentatge (%)</th>
+            <th>Tipus d'emissions directes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>☢️ Nuclear</td>
+            <td>24.019</td>
+            <td>59,6%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>🔥 Cicle Combinat (Gas)</td>
+            <td>7.979</td>
+            <td>19,8%</td>
+            <td>Emissions altes (~400-500 gCO₂/kWh)</td>
+          </tr>
+          <tr>
+            <td>💨 Eòlica</td>
+            <td>2.982</td>
+            <td>7,4%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>💧 Hidroelèctrica</td>
+            <td>2.498</td>
+            <td>6,2%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>☀️ Solar Fotovoltaica</td>
+            <td>1.492</td>
+            <td>3,7%</td>
+            <td>Lliure de CO₂ directes</td>
+          </tr>
+          <tr>
+            <td>🔄 Altres (Biomassa, residus, cogeneració)</td>
+            <td>1.328</td>
+            <td>3,3%</td>
+            <td>Variables segons combustible</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="bar-chart-horizontal">
+        <div class="bar-row">
+          <div class="bar-row-label">Nuclear (59,6%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill secondary" style="width: 59.6%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Gas (19,8%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill rose" style="width: 19.8%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Eòlica (7,4%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill indigo" style="width: 7.4%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Hidroelèctrica (6,2%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill amber" style="width: 6.2%;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-row-label">Solar FV (3,7%)</div>
+          <div class="bar-row-track"><div class="bar-row-fill" style="width: 3.7%;"></div></div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Dades oficials de l'Institut Català d'Energia (ICAEN).</div>
+    </div>
+
+    <p><strong>4.</strong> Fent servir les dades de la taula anterior, calcula el percentatge total de la producció elèctrica catalana del 2023 que va estar <strong>lliure d'emissions directes de CO₂</strong> (suma de Nuclear + Eòlica + Hidroelèctrica + Solar FV). Mostra el procediment matemàtic:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+    <p><strong>5.</strong> En un any de pluges normals a Catalunya, la producció hidroelèctrica mitjana se situa al voltant dels <strong>4.500 GWh</strong>. L'any 2023 va estar marcat per una greu sequera estructural. Calcula la caiguda percentual de la generació hidroelèctrica de l'any 2023 respecte a un any normal. Explica quina font d'energia s'ha d'activar a la xarxa elèctrica catalana per compensar immediatament aquesta pèrdua de producció neta i com afecta això al Trilema Energètic:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+  </div><!-- /A3 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="page-break"></div>
+<div class="activity">
+<div class="act-header no-break">
+      <div class="act-number amber">A4</div>
+      <div class="act-title-block">
+        <div class="act-title">El repte de balancejar la xarxa elèctrica (Simulador de demanda i consum)</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">⚖️ Per què experimentem amb el simulador de demanda i consum?</div>
+      Gestionar la xarxa elèctrica d'un país sencer és com fer equilibris en la corda fluixa: la producció i la demanda s'han d'acoblar en temps real per evitar talls de llum. Amb el simulador interactiu de demanda, aprendràs a actuar com a operador del sistema energètic en diferents estacions i situacions climàtiques extremes (DANEs, onades de calor), prenent consciència dels reptes físics de la intermitència de les renovables i de la necessitat de backups estables.
+    </div>
+
+    <div class="task-header">Tasca 1: Experiments guiats amb el simulador interactiu de demanda i consum</div>
+
+    <div class="info-box blue no-break">
+      <div class="box-head">📍 Com usar el simulador</div>
+      Obre l'aplicació i vés a la pestanya <strong>"Demanda i consum d'energia"</strong>. Experimenta modificant:
+      <ul>
+        <li>La <strong>Demanda Base</strong> (slider superior)</li>
+        <li>L'<strong>Estació de l'Any</strong> (Q1–Q4)</li>
+        <li>L'<strong>Estat Climatològic</strong> (normal, tòrrid, DANA...)</li>
+        <li>Les <strong>Centrals actives</strong> i el percentatge de funcionament del gas i la biomassa</li>
+      </ul>
+    </div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Experiment</th>
+          <th>Configuració</th>
+          <th>Producció (MW)</th>
+          <th>Demanda (MW)</th>
+          <th>Balanç</th>
+          <th>Impacte financer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Estiu normal</strong></td>
+          <td>Q2, Normal, totes actives, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>2. Estiu tòrrid</strong></td>
+          <td>Q2, Tòrrid, totes actives, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>3. Sense nuclear</strong></td>
+          <td>Q2, Normal, nuclear inactiva, demanda 7.000 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>4. DANA de tardor</strong></td>
+          <td>Q3, Plujosa DANA, totes actives, demanda 6.500 MW</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><strong>5. El teu experiment</strong></td>
+          <td>(defineix tu la configuració)</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="task-header">Tasca 2: Reflexió sobre la gestió de la xarxa elèctrica</div>
+    <p><strong>1.</strong> Quin experiment t'ha sorprès més? Per quin motiu?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>2.</strong> En quin escenari el cost d'importació d'electricitat és màxim? Com s'evita?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <div class="task-header">Tasca 3: Anàlisi de la corba de càrrega diària a Catalunya</div>
+    <p>Aquesta gràfica representa la demanda elèctrica real (en MW) al llarg de les 24 hores d'un dia típic d'estiu (vermell) i un dia típic d'hivern (blau):</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📈 Corba de Càrrega Diària a Catalunya (Demanda en MW)</div>
+      
+      <div class="line-chart-grid" style="--val-s: 50%; --val-w: 50%;">
+        <div class="grid-y-axis">
+          <span>8.000 MW</span>
+          <span>6.000 MW</span>
+          <span>4.000 MW</span>
+          <span>2.000 MW</span>
+        </div>
+        <div class="grid-col" style="--val-s: 48%; --val-w: 43%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 46%; --val-w: 40%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 48%; --val-w: 48%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 68%; --val-w: 68%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 82%; --val-w: 80%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 88%; --val-w: 82%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 98%; --val-w: 75%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 95%; --val-w: 72%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 88%; --val-w: 78%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 85%; --val-w: 94%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 80%; --val-w: 92%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+        <div class="grid-col" style="--val-s: 60%; --val-w: 58%;"><span class="col-dot-s"></span><span class="col-dot-w"></span></div>
+      </div>
+      <div class="grid-x-labels">
+        <div class="grid-x-label">02h</div>
+        <div class="grid-x-label">04h</div>
+        <div class="grid-x-label">06h</div>
+        <div class="grid-x-label">08h</div>
+        <div class="grid-x-label">10h</div>
+        <div class="grid-x-label">12h</div>
+        <div class="grid-x-label">14h</div>
+        <div class="grid-x-label">16h</div>
+        <div class="grid-x-label">18h</div>
+        <div class="grid-x-label">20h</div>
+        <div class="grid-x-label">22h</div>
+        <div class="grid-x-label">24h</div>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 16px; font-size: 8pt; font-weight: bold; margin-top: 5px;">
+        <span style="color: var(--rose);">● Estiu (Pic a les 14h-15h)</span>
+        <span style="color: var(--secondary);">● Hivern (Pic a les 20h-21h)</span>
+      </div>
+      <div class="chart-box-source">Font: Red Eléctrica de España (REE) i ICAEN.</div>
+    </div>
+
+    <p><strong>3.</strong> Explica quina diferència social i física justifica que a l'estiu el pic de demanda màxim es produeixi al migdia (14:00h - 16:00h) i a l'hivern es desplaci a la nit (20:00h - 22:00h):</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+    <p><strong>4.</strong> A partir d'aquesta corba, analitza el repte de la <strong>intermitència</strong> de l'energia solar fotovoltaica. Si instal·les molta solar a Catalunya per cobrir la transició energètica, podràs cobrir de forma directa el pic de demanda d'un dia fred de gener a les 20:30h? Quines alternatives té el model energètic per solucionar aquest desacoblament?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+  </div><!-- /A4 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

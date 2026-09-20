@@ -43,6 +43,31 @@
   }
 }
 </script>
+  <!-- Configuration File -->
+  <script src="../config.js"></script>
+  <script>
+    if (window.APP_CONFIG && window.APP_CONFIG.simulator === false) {
+      window.stop(); // Stops loading React and assets
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.innerHTML = `
+          <div class="min-h-screen bg-slate-900 flex items-center justify-center p-4 text-slate-100 font-sans">
+            <div class="max-w-md w-full bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center shadow-2xl">
+              <div class="w-16 h-16 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+                🔒
+              </div>
+              <h1 class="text-2xl font-bold text-white mb-2">Simulador Desactivat</h1>
+              <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                L'accés al simulador interactiu de govern està desactivat en aquests moments. Pots tornar a la pàgina principal per continuar les activitats.
+              </p>
+              <a href="../index.html" class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-emerald-900/30">
+                ← Tornar a la Portada
+              </a>
+            </div>
+          </div>
+        `;
+      });
+    }
+  </script>
   <script type="module" crossorigin src="./assets/index-BacU10Dc.js"></script>
 </head>
   <body class="text-slate-800 m-0 bg-slate-50 font-sans">

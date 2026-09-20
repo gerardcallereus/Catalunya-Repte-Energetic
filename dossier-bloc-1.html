@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloc 1: Diagnosi Inicial i Pobresa Energètica — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --rose: #e11d48;
+      --amber: #d97706;
+      --indigo: #4f46e5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5pt;
+      color: var(--text-main);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    /* ─── PAGE LAYOUT (screen) ─── */
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+    }
+
+    /* ─── PRINT RULES ─── */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm 16mm 14mm;
+      }
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        font-size: 10pt;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .page-wrapper { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      .page-break { break-before: page; page-break-before: always; }
+      .print-btn { display: none !important; }
+      a { color: inherit; text-decoration: none; }
+      a[href]::after { content: ""; }
+      .info-box, .context-box, .nota-doc {
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .answer-box {
+        border: 1px solid #94a3b8 !important;
+        background: #ffffff !important;
+      }
+      .answer-line {
+        border-bottom: 1px dashed #cbd5e1 !important;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* ─── PRINT BUTTON (screen only) ─── */
+    .print-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2,132,199,0.3);
+      z-index: 999;
+    }
+    .print-btn:hover { background: #0369a1; }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 260mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .cover-logo {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    .cover h1 {
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cover h1 span { color: var(--primary); }
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .cover-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cover-intro {
+      max-width: 500px;
+      font-size: 10pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: #f8fafc;
+      text-align: left;
+    }
+    .cover-intro strong { color: var(--text-main); }
+
+    /* ─── INDEX ─── */
+    .toc { margin: 24px 0 32px; }
+    .toc h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--secondary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--border);
+      font-size: 10pt;
+    }
+    .toc-item .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 8px;
+      min-width: 24px;
+    }
+    .toc-item .toc-title { flex: 1; }
+    .toc-item .toc-phase {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ─── ACTIVITAT: ESTRUCTURA ─── */
+    .activity {
+      margin-bottom: 36px;
+    }
+
+    .act-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+    }
+    .act-number {
+      min-width: 40px; height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .act-number.blue  { background: var(--secondary); }
+    .act-number.rose  { background: var(--rose); }
+    .act-number.amber { background: var(--amber); }
+    .act-number.indigo { background: var(--indigo); }
+
+    .act-title-block { flex: 1; }
+    .act-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .act-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .act-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .act-tag {
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-time { background: #eff6ff; color: var(--secondary); border-color: #bfdbfe; }
+    .tag-group { background: #f0fdf4; color: var(--primary); border-color: #bbf7d0; }
+    .tag-mat { background: #fefce8; color: var(--amber); border-color: #fde68a; }
+
+    /* ─── SECCIONS D'ACTIVITAT I ENCAPÇALAMENTS DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 11pt;
+      font-weight: 800;
+      margin: 28px 0 16px 0;
+      border-radius: 8px;
+      border-left: 6px solid var(--secondary);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-header::before {
+      content: "📌";
+      font-size: 11pt;
+    }
+
+    .section-label {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 12px 0 5px;
+    }
+
+    p { margin-bottom: 8px; }
+    ul, ol { padding-left: 1.4em; margin-bottom: 8px; }
+    li { margin-bottom: 4px; line-height: 1.5; }
+    strong { color: var(--text-main); }
+
+    /* ─── CAIXA CONTEXT ─── */
+    .context-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    .context-box .box-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CAIXES DE TIPUS ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 9.5pt;
+    }
+    .info-box.green  { background: #f0fdf4; border-color: #bbf7d0; }
+    .info-box.blue   { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber  { background: #fffbeb; border-color: #fde68a; }
+    .info-box.rose   { background: #fff1f2; border-color: #fecdd3; }
+    .info-box.indigo { background: #eef2ff; border-color: #c7d2fe; }
+
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 9.5pt;
+    }
+
+    /* ─── TAULES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 12px;
+    }
+    th {
+      background: var(--text-main);
+      color: white;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ─── GRAELLA DE ROLS ─── */
+    .rol-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .rol-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 9pt;
+    }
+    .rol-card .rol-name {
+      font-weight: 700;
+      font-size: 10pt;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rol-card ul { margin-bottom: 0; padding-left: 1.2em; }
+
+    /* ─── ESPAI RESPOSTES ─── */
+    .answer-box {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 12px;
+      min-height: 45px;
+      background: #fafafa;
+    }
+    .answer-line {
+      border-bottom: 1px solid #e2e8f0;
+      height: 22px;
+      margin-bottom: 2px;
+    }
+    .calc-box {
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      min-height: 85px;
+      margin: 8px 0 14px 1rem;
+      background: #ffffff;
+      padding: 8px 10px;
+    }
+
+    /* ─── SEPARADOR ─── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ─── NOTÍCIES / FONTS ─── */
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .news-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+    }
+    .news-card .news-source {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2px;
+      font-size: 8pt;
+    }
+    .news-card a { color: var(--text-main); word-break: break-all; }
+
+    /* ─── RETALLS DE PREMSA INCRUSTATS (CLIPPING) ─── */
+    .news-clipping {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--rose);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 9.5pt;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      page-break-inside: avoid;
+    }
+    .news-clipping.blue { border-left-color: var(--secondary); }
+    .news-clipping.amber { border-left-color: var(--amber); }
+    .news-clipping.indigo { border-left-color: var(--indigo); }
+    
+    .news-clipping-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-clipping-source {
+      color: var(--rose);
+      font-weight: 800;
+    }
+    .news-clipping.blue .news-clipping-source { color: var(--secondary); }
+    .news-clipping.amber .news-clipping-source { color: var(--amber); }
+    .news-clipping.indigo .news-clipping-source { color: var(--indigo); }
+
+    .news-clipping-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .news-clipping-quote {
+      font-style: italic;
+      color: #334155;
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 3px double #cbd5e1;
+      margin: 8px 0;
+      font-size: 9pt;
+      text-align: justify;
+    }
+    .news-clipping-ref {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 6px;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 4px;
+      text-align: right;
+    }
+    .news-clipping-ref a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .news-clipping-ref a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── AVALUACIÓ ─── */
+    .rubric table th { background: var(--indigo); }
+    .rubric table th:first-child { background: #374151; }
+
+    /* ─── CAPÇALERA DE PÀGINA (per impressió) ─── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      font-size: 8.5pt;
+      color: var(--text-muted);
+    }
+    .page-header strong { color: var(--primary); font-size: 10pt; }
+
+    /* Nom alumne */
+    .alumne-block {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 10px;
+      font-size: 9pt;
+    }
+    .alumne-field {
+      flex: 1;
+      border-bottom: 1.5px solid var(--text-main);
+      padding-bottom: 2px;
+    }
+    .alumne-label {
+      font-size: 8pt;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    /* ─── CUSTOM PRINT-FRIENDLY CHARTS FOR DOSSIERS ─── */
+    .chart-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .chart-box-title {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chart-box-source {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+    }
+    .bar-chart-vertical {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 140px;
+      padding-top: 15px;
+      border-bottom: 1.5px solid var(--text-main);
+      margin: 10px 0;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15%;
+    }
+    .bar-val-top {
+      font-size: 7.5pt;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .bar-fill {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--primary);
+    }
+    .bar-fill.rose { background: var(--rose); }
+    .bar-fill.indigo { background: var(--indigo); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.secondary { background: var(--secondary); }
+    .bar-label {
+      font-size: 7.5pt;
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    
+    .bar-chart-horizontal {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-row-label {
+      width: 120px;
+      font-size: 8pt;
+      font-weight: 600;
+      text-align: right;
+      color: var(--text-main);
+    }
+    .bar-row-track {
+      flex: 1;
+      height: 18px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-row-fill {
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      color: white;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 4px 0 0 4px;
+    }
+    .bar-row-fill.rose { background: var(--rose); }
+    .bar-row-fill.indigo { background: var(--indigo); }
+    .bar-row-fill.amber { background: var(--amber); }
+    .bar-row-fill.secondary { background: var(--secondary); }
+    .bar-row-fill.gray { background: #64748b; }
+    
+    /* Line chart table rendering (highly readable and reliable for print) */
+    .line-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      height: 120px;
+      border-bottom: 1.5px solid var(--text-main);
+      border-left: 1.5px solid var(--text-main);
+      margin: 15px 0 5px 25px;
+      position: relative;
+    }
+    .grid-y-axis {
+      position: absolute;
+      left: -25px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: var(--text-muted);
+      text-align: right;
+      width: 20px;
+    }
+    .grid-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      position: relative;
+    }
+    .grid-col::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-s);
+      background: var(--rose);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-w);
+      background: var(--secondary);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col .col-dot-s {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-s);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-col .col-dot-w {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-w);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-x-labels {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      margin-left: 25px;
+      margin-bottom: 12px;
+    }
+    .grid-x-label {
+      font-size: 7pt;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* ─── TEST I QÜESTIONARIS ─── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 700px) {
+      .test-grid { grid-template-columns: 1fr; }
+    }
+    .test-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .test-q-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .test-opt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    .test-opt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.3;
+      color: #334155;
+    }
+    .test-checkbox {
+      display: inline-block;
+      min-width: 12px;
+      height: 12px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .test-correct-ans {
+      background: #dcfce7;
+      border: 1px solid #16a34a;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    /* ─── GUIA GEMINI NOTEBOOK ─── */
+    .guide-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+    }
+    .guide-step-title {
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: monospace;
+      font-size: 8pt;
+      color: #0f172a;
+      margin: 4px 0;
+    }
+    /* ─── BLOCK DOSSIER NAVIGATION & HEADER ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .nav-tag {
+      font-size: 10px;
+      background: rgba(2, 132, 199, 0.3);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .nav-btn.active {
+      background: #059669;
+      color: #fff;
+      font-weight: 700;
+    }
+    .nav-btn.secondary {
+      background: rgba(2, 132, 199, 0.2);
+      color: #7dd3fc;
+    }
+    .nav-separator {
+      color: #475569;
+      font-size: 12px;
+      margin: 0 2px;
+    }
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .print-action-btn:hover {
+      background: #0369a1;
+    }
+    @media print {
+      .block-nav-bar, .no-print, .print-btn {
+        display: none !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  
+    .block-header-card {
+      border: 2px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .block-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .block-badge {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .block-header-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 2px 0 4px 0;
+      line-height: 1.2;
+    }
+    .block-header-desc {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .block-student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 9pt;
+      background: var(--bg);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .student-field strong {
+      color: var(--text-muted);
+      font-size: 8pt;
+      text-transform: uppercase;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      height: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossier per Blocs</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn active">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn ">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn ">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn ">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn ">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn ">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir aquest Bloc (PDF)</button>
+</div>
+
+
+<div class="page-wrapper">
+
+  <div class="block-header-card no-break">
+    <div class="block-header-top">
+      <div>
+        <div class="block-badge">BLOC 1 · DIAGNOSI I DRETS · Activitat A1</div>
+        <div class="block-header-title">Catalunya: Repte Energètic</div>
+        <div style="font-size: 12pt; font-weight: 700; color: var(--secondary); margin-bottom: 4px;">Bloc 1: Diagnosi Inicial i Pobresa Energètica</div>
+        <div class="block-header-desc">Comprendre l'impacte humà i social de l'energia a través de la pobresa energètica, analitzar dades oficials de Catalunya, calcular el cost real de la calefacció i les pèrdues per mal aïllament, i reflexionar sobre la justícia energètica.</div>
+      </div>
+      <div style="text-align: right; font-size: 8.5pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    
+    <div class="block-student-fields">
+      <div class="student-field">
+        <strong>Alumne/a:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Grup:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Data:</strong>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="activity">
+<div class="act-header no-break">
+      <div class="act-number rose">A1</div>
+      <div class="act-title-block">
+        <div class="act-title">Pobresa Energètica: Un Problema Real</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🧭 Per què comencem aquí?</div>
+      L'energia no és un tema abstracte. A Catalunya, milers de famílies passen fred a l'hivern o calor a l'estiu perquè no es poden permetre pagar la factura de la llum. Abans d'entrar al simulador i als grans debats polítics, volem que t'adonis que <strong>l'energia és un dret fonamental</strong> que afecta les persones de manera molt desigual. Aquesta activitat et demana que pensis com a ciutadà/ana i, a continuació, com a governant.
+    </div>
+
+    <div class="task-header">Tasca 1: Diagnosi i Indicadors de la Pobresa Energètica a Catalunya</div>
+
+    <!-- Indicadors Estadístics en Estàtic per a Paper -->
+    <div class="no-break" style="margin-bottom: 14px;">
+      <div class="section-label">📊 Indicadors Oficials de Vulnerabilitat a Catalunya (Idescat & APE)</div>
+      <table style="font-size: 8.5pt; margin-bottom: 6px;">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Indicador de Pobresa Energètica</th>
+            <th style="width: 14%; text-align: center;">Dada Oficial</th>
+            <th>Descripció i Impacte Real a la Població</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🏠 Incapacitat de mantenir la llar calenta</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--rose); font-size: 10pt;">20,0%</td>
+            <td>1 de cada 5 catalans no pot mantenir el seu habitatge a una temperatura adequada a l'hivern (mínim de 18 ºC recomanat per l'OMS), generant problemes de salut i humitats.</td>
+          </tr>
+          <tr>
+            <td><strong>📊 Despesa energètica desproporcionada</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--amber); font-size: 10pt;">12,9%</td>
+            <td>Percentatge de llars que han de destinar una part excessiva dels seus ingressos a pagar la llum i el gas, havent de retallar en alimentació o medicaments.</td>
+          </tr>
+          <tr>
+            <td><strong>⏳ Retards en pagament de factures</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--secondary); font-size: 10pt;">9,4%</td>
+            <td>Llars que s'endarrereixen en el pagament dels rebuts de subministraments bàsics per motius econòmics o asfíxia financera.</td>
+          </tr>
+          <tr>
+            <td><strong>🛡️ Talls de serveis bàsics evitats</strong></td>
+            <td style="text-align: center; font-weight: 700; color: var(--primary); font-size: 10pt;">+200.000</td>
+            <td>Talls d'aigua, llum i gas aturats a Catalunya gràcies a l'aplicació del "Principi de Precaució" de la Llei 24/2015 impulsada per la societat civil.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size: 7.5pt; color: var(--text-muted); text-align: right; margin-bottom: 12px;">
+        <em>Fonts: Enquesta de Condicions de Vida (Idescat) i informes de pobresaenergetica.es</em>
+      </div>
+    </div>
+
+    <p>Llegiu els següents tres retalls de context i notícies sobre la realitat socioenergètica a Catalunya i contesteu els apartats següents:</p>
+
+    <div class="news-grid">
+      <!-- Notícia 1: Definició de Pobresa Energètica -->
+      <div class="news-clipping">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">El Periódico / Generalitat de Catalunya</span>
+          <span>15/01/2026</span>
+        </div>
+        <div class="news-clipping-title">Què és la pobresa energètica i quines en són les causes principals?</div>
+        <div class="news-clipping-quote">
+          "La pobresa energètica es defineix com la situació en què es troba una llar que és incapaç d'accedir a una quantitat mínima d'energia per cobrir les seves necessitats vitals bàsiques —com mantenir una temperatura adequada (mínim 18 ºC a l'hivern i confort a l'estiu), disposar d'aigua calenta sanitària, il·luminació i poder cuinar o refrigerar aliments—, o bé quan ha de destinar un percentatge desproporcionat dels seus ingressos familiars a pagar la factura energètica.<br><br>
+          Segons els informes tècnics de la Generalitat i l'Àrea Metropolitana de Barcelona (AMB), aquest fenomen no és conjuntural sinó estructural, fruit de la interacció combinada de tres grans causes:
+          <br><strong>1. Baixos ingressos i precarietat laboral:</strong> La manca de feina estable, sous insuficients o pensions mínimes impedeixen a moltes famílies fer front a l'alça de les despeses quotidianes.
+          <br><strong>2. Preus elevats de l'energia i tarifes complexes:</strong> L'escalada del cost del kWh al mercat elèctric, la inflació i els termes de potència fixos encareixen desmesuradament el rebut de la llum.
+          <br><strong>3. Pèssima eficiència energètica dels habitatges:</strong> Un percentatge molt elevat d'edificis catalans van ser construïts abans dels anys 80 sense cap normativa d'aïllament tèrmic (murs buits, finestres de vidre simple sense ruptura de pont tèrmic), provocant pèrdues massives de calor que obliguen a gastar molta més electricitat per escalfar la llar."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: Àrea Metropolitana de Barcelona (AMB) & Generalitat de Catalunya
+        </div>
+      </div>
+
+      <!-- Notícia 2: Població Afectada a Catalunya -->
+      <div class="news-clipping amber">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Idescat & Taula del Tercer Sector</span>
+          <span>28/02/2025</span>
+        </div>
+        <div class="news-clipping-title">Les persones més afectades per la pobresa energètica a Catalunya</div>
+        <div class="news-clipping-quote">
+          "L'Enquesta de Condicions de Vida de l'Idescat i els informes de les entitats socials confirmen que la vulnerabilitat energètica a Catalunya no afecta tothom per igual, sinó que s'acarnissa en col·lectius concrets i presenta una clara feminització de la pobresa:
+          <br>• <strong>Famílies monoparentals:</strong> Més del 40% es troben en risc d'exclusió social (taxa AROPE). Majoritàriament liderades per mares soles amb infants a càrrec, sovint es veuen obligades a triar entre alimentar els seus fills o encendre la calefacció.
+          <br>• <strong>Dones grans que viuen soles:</strong> Amb pensions de jubilació o viudetat mínimes i vivint en pisos vells de lloguer o propietat sense aïllar, pateixen fred crònic per por a factures impagables.
+          <br>• <strong>Llars amb infants, joves o persones dependents:</strong> El fred a la llar multiplica les malalties respiratòries (asma, bronquitis) i afecta directament el rendiment escolar i el descans dels menors. Les persones amb malalties cròniques que necessiten equips mèdics elèctrics (com oxigenoteràpia) són especialment vulnerables.
+          <br>• <strong>Pobresa energètica d'estiu:</strong> Amb les onades de calor extremes, les llars sense refrigeració arriben a més de 32 ºC a l'interior, causant cops de calor i deshidratació greu en gent gran."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: Idescat: Enquesta de Condicions de Vida (ECV)
+        </div>
+      </div>
+
+      <!-- Notícia 3: APE, Llei 24/2015 i Conveni de Deute -->
+      <div class="news-clipping blue">
+        <div class="news-clipping-header">
+          <span class="news-clipping-source">Aliança contra la Pobresa Energètica (APE)</span>
+          <span>20/03/2025</span>
+        </div>
+        <div class="news-clipping-title">L'Aliança contra la Pobresa Energètica (APE) i la conquesta del dret als subministraments bàsics</div>
+        <div class="news-clipping-quote">
+          "L'Aliança contra la Pobresa Energètica (APE) és un moviment social nascut a Catalunya el 2014 que reuneix persones afectades, col·lectius veïnals i plataformes ciutadanes per defensar que l'accés a l'aigua, la llum i el gas és un dret humà bàsic. Sota el lema <em>'Ni talls, ni deutes! Aigua, llum i gas per a tothom!'</em>, l'APE va impulsar una històrica Iniciativa Legislativa Popular (ILP) que va desembocar en l'aprovació per unanimitat de la <strong>Llei 24/2015</strong> al Parlament de Catalunya.<br><br>
+          La gran fita d'aquesta llei és el <strong>'Principi de Precaució'</strong>: les companyies elèctriques i d'aigua tenen prohibit per llei tallar el subministrament a cap família sense demanar abans un informe als Serveis Socials municipals. Si la llar és vulnerable, el tall no es pot executar sota cap concepte. Gràcies a aquesta eina pionera a Europa s'han aturat més de 200.000 talls a Catalunya. A més, l'any 2021 la pressió social va aconseguir signar un conveni històric amb Endesa per condonar el deute acumulat a 35.000 famílies (assumit en un 73% per la companyia i un 27% per la Generalitat), alhora que s'exigeix la instal·lació de comptadors socials segurs per erradicar el risc d'incendis."
+        </div>
+        <div class="news-clipping-ref">
+          Referència: pobresaenergetica.es (Aliança contra la Pobresa Energètica)
+        </div>
+      </div>
+    </div>
+
+    <!-- Salt i separació abans de les preguntes -->
+    <div style="margin-top: 1.75rem; margin-bottom: 1rem; border-top: 1px dashed var(--border); padding-top: 0.75rem;"></div>
+
+    <p style="margin-left: 1rem;"><strong>a) Què és la pobresa energètica?</strong> Amb les teves pròpies paraules, defineix aquest concepte.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>b) Causes de la pobresa energètica:</strong> Quines en són les causes principals? Explica com actuen de forma combinada.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>c) Col·lectius més afectats:</strong> Qui són les persones més afectades per la pobresa energètica a Catalunya? Fes-ne una llista de col·lectius:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <!-- Salt de línia / salt de pàgina abans de d) -->
+    <div class="page-break"></div>
+    <div style="margin-top: 1.5rem; margin-bottom: 0.75rem; border-top: 1px dashed var(--border); padding-top: 0.5rem;"></div>
+
+    <p style="margin-left: 1rem;"><strong>d) Moviments socials i legislació:</strong> Explica què és el "principi de precaució" de la Llei 24/2015 i si creus que els moviments socials com l'APE tenen un paper clau per canviar lleis energètiques.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem; margin-top: 12px;"><strong>e) Estimació estadística d'impacte a la població catalana:</strong> Sabent que Catalunya té aproximadament <strong>8.000.000 d'habitants</strong> i uns <strong>3.000.000 de llars</strong>, utilitza les dades de la taula i dels retalls de premsa per resoldre aquests càlculs estadístics:</p>
+    
+    <p style="margin-left: 1.5rem; margin-bottom: 2px;"><strong>1. Persones que passen fred a l'hivern:</strong> Si el 20,0% de la població no pot mantenir la casa a una temperatura adequada (mínim 18 ºC), quantes persones afectades representa a Catalunya?</p>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1.5rem; margin-bottom: 2px;"><strong>2. Llars amb despesa desproporcionada vs. retards:</strong> Quantes llars catalanes pateixen despesa energètica desproporcionada (12,9%) i quantes tenen retards en el pagament de factures (9,4%)?</p>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1.5rem; margin-bottom: 2px;"><strong>3. Càlcul del conveni de condonació de deute (Endesa-Govern):</strong> Si es va condonar un deute acumulat de 17.500.000 € a 35.000 llars (assumit en un 73% per l'elèctrica i un 27% per la Generalitat), quin va ser el deute mitjà per llar i quants diners va aportar cadascuna de les dues parts?</p>
+    <div class="calc-box"></div>
+
+    <div class="task-header">Tasca 2: L'impacte econòmic de la calefacció en llars vulnerables (Càlculs de consum i despesa)</div>
+    
+    <div class="info-box blue no-break" style="background: rgba(2, 132, 199, 0.03); border-color: rgba(2, 132, 199, 0.25);">
+      <div class="box-head">📖 Introducció teòrica: Conceptes clau d'energia i calor</div>
+      <p style="margin-bottom: 6px; font-size: 8.8pt; line-height: 1.45; color: var(--text-main);">
+        Abans de començar els càlculs, repassa aquests conceptes fonamentals de física i tecnologia:
+      </p>
+      <ul style="margin-left: 1.2rem; margin-bottom: 0; display: flex; flex-direction: column; gap: 0.4rem; font-size: 8.5pt; line-height: 1.4; color: var(--text-muted);">
+        <li>
+          <strong>Potència (<i>P</i>):</strong> És la capacitat d'un aparell per transformar o consumir energia per unitat de temps (el seu ritme de consum instantani). Es mesura en <strong>watts (W)</strong> o <strong>kilowatts (kW)</strong>, on 1 kW = 1.000 W.
+        </li>
+        <li>
+          <strong>Temps d'ús (<i>t</i>):</strong> El període de temps durant el qual l'aparell està en funcionament consumint electricitat. Se sol mesurar en <strong>hores (h)</strong>.
+        </li>
+        <li>
+          <strong>Energia Elèctrica (<i>E</i>):</strong> És la quantitat total de treball elèctric consumit en un temps determinat. Es calcula mitjançant la fórmula: <i>E = P &middot; t</i>. La unitat comercial facturada és el <strong>kilowatt-hora (kWh)</strong>.
+        </li>
+      </ul>
+    </div>
+
+    <div style="background: rgba(2, 132, 199, 0.02); border: 1px solid rgba(2, 132, 199, 0.1); padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 0.8rem; font-size: 9pt; line-height: 1.45;">
+      <strong>Situació problema:</strong> En una llar catalana en situació de vulnerabilitat que té dificultats d'aïllament tèrmic, per combatre el fred de l'hivern s'utilitza un radiador elèctric d'oli amb una potència de <strong><i>P</i> = 2,0 kW</strong>. A causa de les pèrdues de calor de l'habitatge, cal tenir-lo encès durant un temps mitjà de <strong><i>t</i> = 5,0 hores al dia</strong>.
+    </div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>a) Energia diària consumida:</strong> Quants kWh d'energia elèctrica consumeix aquest radiador en un sol dia (5,0 h d'ús)?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia (kWh): Multiplica la potència en kW pel temps en hores (<i>E = P &middot; t</i>).</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>b) Energia mensual acumulada:</strong> Quants kWh consumirà el radiador al llarg de tot un mes d'hivern (30 dies)?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia mensual: Multiplica l'energia d'un sol dia pels 30 dies del mes (<i>E</i><sub>mes</sub> = <i>E</i><sub>dia</sub> &middot; 30).</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>c) Cost econòmic mensual (Tarifa ordinària):</strong> Si el preu de l'electricitat és de 0,15 €/kWh (impostos inclosos), quin és el cost total en euros d'encendre el radiador durant aquest mes?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el cost (€): Multiplica els kWh consumits pel preu d'un kWh (0,15 €/kWh).</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>d) Pes en el pressupost familiar:</strong> Si els ingressos de tota la família són de 900 € al mes, quin percentatge d'aquests ingressos es gasta exclusivament en la calefacció d'aquesta única estança?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el percentatge (%): Divideix el cost mensual entre els ingressos familiars (900 €) i multiplica per 100.</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>e) Protecció social: Impacte del Bo Social:</strong> Si Serveis Socials tramita el Bo Social que bonifica el 65% de la factura, quants euros pagarà finalment la família al mes? Quin percentatge dels seus ingressos suposarà ara?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Amb el Bo Social (65% de descompte): La família només paga el 35% de la factura (o resta el 65% al cost total). Després calcula el nou percentatge sobre els 900 €.</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <div class="task-header">Tasca 3: L'aïllament deficient i la factura de l'energia malbaratada (Circuits, rendiment i pèrdues tèrmiques)</div>
+
+    <div class="info-box blue no-break" style="background: rgba(2, 132, 199, 0.03); border-color: rgba(2, 132, 199, 0.25);">
+      <div class="box-head">📖 Introducció teòrica: Llei d'Ohm, potència i rendiment</div>
+      <p style="margin-bottom: 6px; font-size: 8.8pt; line-height: 1.45; color: var(--text-main);">
+        Per resoldre el següent exercici, recorda aquests conceptes generals de la matèria de tecnologia:
+      </p>
+      <ul style="margin-left: 1.2rem; margin-bottom: 0; display: flex; flex-direction: column; gap: 0.4rem; font-size: 8.5pt; line-height: 1.4; color: var(--text-muted);">
+        <li><strong>Llei d'Ohm:</strong> Relaciona la tensió (<i>V</i>, en volts V), la intensitat de corrent (<i>I</i>, en amperes A) i la resistència (<i>R</i>, en ohms &Omega;) d'un circuit elèctric: <i>V = I &middot; R</i>, d'on podem aïllar la resistència com <i>R = V / I</i>.</li>
+        <li><strong>Fórmula de la Potència Elèctrica (<i>P</i>):</strong> La potència total consumida per un receptor elèctric és el producte de la tensió i la intensitat: <i>P</i><sub>total</sub> = <i>V &middot; I</i>, d'on podem aïllar la intensitat com <i>I = P</i><sub>total</sub> / <i>V</i>.</li>
+        <li><strong>Potència útil (<i>P</i><sub>útil</sub>) i pèrdues energètiques (<i>P</i><sub>pèrdua</sub>):</strong> En qualsevol aparell o instal·lació, una part de la potència total absorbida es dissipa de forma no aprofitada cap a l'exterior (<i>P</i><sub>pèrdua</sub>). La potència que realment s'aprofita per realitzar la funció desitjada és la <strong>potència útil</strong>: <i>P</i><sub>útil</sub> = <i>P</i><sub>total</sub> - <i>P</i><sub>pèrdua</sub>.</li>
+        <li><strong>Rendiment energètic o eficiència (&eta;):</strong> És el percentatge de potència útil que s'aprofita respecte a la potència total consumida: &eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100.</li>
+      </ul>
+    </div>
+
+    <div style="background: rgba(2, 132, 199, 0.02); border: 1px solid rgba(2, 132, 199, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 9pt; line-height: 1.5;">
+      <strong>Situació independent:</strong> Suposem que en una altra llar vulnerable s'utilitza un radiador elèctric portàtil que té una potència de <i>P</i><sub>total</sub> = 1.500 W i es connecta a la xarxa elèctrica estàndard de <i>V</i> = 230 V. A causa de les escletxes a les finestres i de la manca d'aïllament a les parets, aquest habitatge perd constantment cap a l'exterior una potència de calor equivalent a <i>P</i><sub>pèrdua</sub> = 600 W.
+    </div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>a) Intensitat de corrent (<i>I</i>):</strong> Calcula la intensitat de corrent en amperes (A) que circula pel radiador.</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la intensitat (A): Aplica <i>I = P<sub>total</sub> / V</i> dividint la potència (1.500 W) entre la tensió de la xarxa (230 V).</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>b) Resistència elèctrica (<i>R</i>):</strong> Aplica la Llei d'Ohm per calcular la resistència elèctrica en ohms (&Omega;) del filament calefactor.</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la resistència (&Omega;): Aplica <i>R = V / I</i> dividint la tensió (230 V) entre la intensitat (<i>I</i>) de l'apartat anterior.</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>c) Potència útil (<i>P</i><sub>útil</sub>):</strong> Calcula la potència real que es queda a l'habitació per escalfar la llar en watts (W) i en kilowatts (kW).</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar la potència útil: Resta la pèrdua a la potència total (<i>P</i><sub>útil</sub> = <i>P</i><sub>total</sub> - <i>P</i><sub>pèrdua</sub> = 1.500 W - 600 W). Per passar a kW, divideix entre 1.000.</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>d) Rendiment tèrmic i eficiència (&eta;):</strong> Quin percentatge de l'energia consumida s'aprofita realment per escalfar la casa?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular el rendiment (%): Divideix la potència útil entre la potència total i multiplica per 100 [&eta; = (<i>P</i><sub>útil</sub> / <i>P</i><sub>total</sub>) &middot; 100].</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>e) Energia desaprofitada al mes (<i>E</i><sub>pèrdua</sub>):</strong> Si el radiador funciona 4,0 h/dia durant 30 dies, quants kWh d'energia s'escapen al carrer en un mes?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per trobar l'energia perduda (kWh): Passa la pèrdua a kW (0,6 kW) i multiplica pel temps mensual (4,0 h/dia &middot; 30 dies = 120 h). Fórmula: <i>E</i><sub>pèrdua</sub> = <i>P</i><sub>pèrdua</sub> &middot; <i>t</i>.</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <p style="margin-left: 1rem; margin-bottom: 2px;"><strong>f) Diners malbaratats al mes:</strong> Amb un preu de la llum de 0,15 €/kWh, quants diners al mes està llençant al carrer aquesta família degut al mal aïllament?</p>
+    <div style="margin-left: 1rem; font-size: 8pt; color: #047857; margin-bottom: 6px;">
+      💡 <em>Per calcular la despesa inútil (€): Multiplica els kWh perduts al mes pel preu d'un kWh (0,15 €/kWh).</em>
+    </div>
+    <div class="calc-box"></div>
+
+    <div class="task-header">Tasca 4: Presa de decisions: Tu ets el/la Conseller/a</div>
+    <div class="info-box rose no-break">
+      <div class="box-head">🏛️ El teu primer dilema com a governant de Catalunya</div>
+      Acabes de ser nomenat/da Conseller/a de Territori, Habitatge i Transició Ecològica de la Generalitat de Catalunya. La primera gran crisi del teu mandat és el fort increment de la pobresa energètica a tot el territori. Com a governant regional, analitza els avantatges i inconvenients de cadascuna de les 3 polítiques públiques autonòmiques i <strong>tria quina implementareu com a prioritat</strong>:
+    </div>
+
+    <!-- OPCIÓ A -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--rose);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        🏛️ Opció A: Convenis de coresponsabilitat i condonació de deutes (Llei 24/2015)
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        La Generalitat acorda convenis amb les distribuïdores elèctriques per obligar-les a cofinançar (p. ex. 73% l'elèctrica i 27% la Generalitat) el deute acumulat per factures impagades de les famílies vulnerables i sancionar les empreses si tallen la llum sense informe previ de serveis socials.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓ B -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--primary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        ☀️ Opció B: Comunitats d'Autoconsum Social amb L'Energètica pública
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Instal·lar plaques solars de titularitat pública en teulades d'instituts, hospitals i edificis oficials en barris vulnerables per distribuir gratuïtament els excedents elèctrics generats a les llars vulnerables situades en un radi de 2 km.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPCIÓ C -->
+    <div class="test-card no-break" style="margin-bottom: 12px; border-left: 4px solid var(--secondary);">
+      <div style="font-weight: 700; font-size: 9.2pt; color: var(--text-main); margin-bottom: 3px;">
+        🧱 Opció C: Fons de rehabilitació tèrmica i aïllament estructural d'edificis
+      </div>
+      <p style="font-size: 8.3pt; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+        Crear una línia de subvencions del 100% per millorar l'aïllament tèrmic (doble vidre, tancaments eficients i aïllament de façanes/sostres) als blocs d'habitatges vells, reduint de manera permanent les fuites de calor i la despesa energètica.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #047857; margin-bottom: 4px;">✅ Avantatges:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 6px; padding: 7px 9px;">
+          <div style="font-weight: 700; font-size: 8.3pt; color: #b91c1c; margin-bottom: 4px;">⚠️ Inconvenients / Limitacions:</div>
+          <div class="answer-box" style="margin: 0;">
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+            <div class="answer-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISIÓ FINAL -->
+    <div class="no-break" style="margin-top: 14px; margin-bottom: 12px;">
+      <p style="font-size: 9pt; margin-bottom: 4px;">
+        <strong>🏛️ Veredicte del Conseller/a:</strong> La política pública prioritària que trio implementar és l'<strong>Opció [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]</strong>.
+      </p>
+      <p style="font-size: 8.5pt; color: var(--text-muted); margin-bottom: 4px;">
+        Justifica la decisió: Per què prioritzeu aquesta mesura per davant de les altres dues i com compensareu els seus inconvenients?
+      </p>
+      <div class="answer-box">
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+        <div class="answer-line"></div>
+      </div>
+    </div>
+
+    <div class="info-box green no-break">
+      <div class="box-head">💡 Per reflexionar: Poder legislatiu real del Conseller/a</div>
+      El/la Conseller/a de Territori <strong>sí</strong> té poder real: pot presentar projectes de llei al Parlament, gestionar subvencions europees (Next Generation EU), regular les tarifes de xarxa dins del marge autonòmic i supervisar les empreses de distribució al territori català. <strong>Però</strong> els preus de la llum els fixa el Govern de l'Estat i la CNMC (Comissió Nacional), no la Generalitat. Aquí és on el poder té límits clars.
+    </div>
+
+    <div class="page-break"></div>
+    <div class="task-header">Tasca 5: Reflexió personal: Què he après sobre la pobresa energètica?</div>
+    <div class="context-box no-break">
+      <div class="box-title">💭 Reflexió i consolidació dels aprenentatges</div>
+      Després d'analitzar la realitat social de Catalunya, calcular l'impacte econòmic dels aparells elèctrics, mesurar les pèrdues energètiques per manca d'aïllament i prendre decisions com a Conseller/a, reflexiona sobre aquests aprenentatges clau:
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>1. Què és el que més t'ha sorprès o impactat?</strong> D'entre totes les dades reals, situacions i càlculs que has fet (despesa en calefacció, diners llençats per mal aïllament, famílies afectades...), quina t'ha cridat més l'atenció i per què?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>2. La pobresa energètica com a dret humà i salut:</strong> Per què diem que la pobresa energètica no és només un assumpte tècnic de kilowatts o de diners, sinó un problema fonamental de salut física, benestar emocional i dignitat humana?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>3. Consells individuals d'estalvi vs. solucions estructurals:</strong> Sovint sentim que per estalviar n'hi ha prou amb "apagar els llums o posar-se una manta". Tenint en compte els càlculs de rendiment i pèrdues tèrmiques que has fet a la Tasca 3, creus que els consells individuals són suficients per acabar amb la pobresa energètica o calen inversions estructurals (aïllament d'edificis, reformes de tarifes)? Raona la resposta.</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+    <p style="margin-left: 1rem;"><strong>4. Lliçó per al futur model energètic (Pla 2030):</strong> Com a ciutadà/ana i en el teu rol de Conseller/a de Territori i Transició Ecològica, quina és la conclusió o principi clau que t'emportes d'aquest bloc per dissenyar el model energètic de Catalunya 2030?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+
+  </div><!-- /A1 -->
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

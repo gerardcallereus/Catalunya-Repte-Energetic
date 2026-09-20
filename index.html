@@ -7,8 +7,9 @@
   
   <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Configuration File -->
+  <script src="config.js"></script>
 
   <style>
     :root {
@@ -112,15 +113,23 @@
 
     .main-hero-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      text-align: left;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
     }
 
     .hero-text-col {
-      flex: 1;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-text-col .lead {
+      margin: 0 auto;
+      text-align: center;
     }
 
     .hero-simulator-card {
@@ -2164,7 +2173,7 @@
         <h1>Catalunya: Repte Energètic</h1>
         <p class="lead">Comprèn les bases tecnològiques, ambientals, socials i econòmiques de la producció d'electricitat a Catalunya i aprèn a governar la transició energètica.</p>
       </div>
-      <a href="./joc/index.html" target="_blank" rel="noopener noreferrer" class="hero-simulator-card" title="Obre el simulador interactiu de presa de decisions en una nova pestanya">
+      <a href="./joc/index.html" id="hero-simulator-card" target="_blank" rel="noopener noreferrer" class="hero-simulator-card" title="Obre el simulador interactiu de presa de decisions en una nova pestanya">
         <div class="sim-card-badge">
           <span>🎮</span> SIMULADOR DE GOVERN
         </div>
@@ -2180,12 +2189,12 @@
 
     <!-- TABS NAVIGATION -->
     <nav class="tabs-nav" aria-label="Navegació principal">
-      <button class="tab-btn active" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-fonts')">Fonts d'Energia</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-balanca')">Demanda i consum d'energia</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
-      <button class="tab-btn" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
+      <button class="tab-btn active" data-tab-id="repte" onclick="switchTab(event, 'tab-repte')">El Repte de Govern</button>
+      <button class="tab-btn" data-tab-id="fonts" onclick="switchTab(event, 'tab-fonts')">Fonts d'Energia</button>
+      <button class="tab-btn" data-tab-id="centrals" onclick="switchTab(event, 'tab-centrals')">Catàleg de Centrals</button>
+      <button class="tab-btn" data-tab-id="balanca" onclick="switchTab(event, 'tab-balanca')">Demanda i consum d'energia</button>
+      <button class="tab-btn" data-tab-id="actors" onclick="switchTab(event, 'tab-actors')">Guia d'Actors Socials</button>
+      <button class="tab-btn" data-tab-id="politiques" onclick="switchTab(event, 'tab-politiques')">Polítiques Públiques</button>
     </nav>
 
     <!-- TAB 1: EL REPTE DE GOVERN -->
@@ -2255,7 +2264,7 @@
               <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 0;">Dossier d'Activitats</h3>
             </div>
             <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.8rem; color: var(--secondary); font-weight: 600;">
-              Suport en paper
+              Suport en paper dividit per blocs
             </div>
           </div>
 
@@ -6129,23 +6138,98 @@
     <!-- FOOTER -->
     <footer>
       <p>Desenvolupat per a la comunitat educativa. Catalunya: Repte Energètic és una eina Open Source adaptada per a projectes de centre i de secundària.</p>
-      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Generalitat de Catalunya · Departament d'Educació · <a href="https://github.com/gerardcallereus/Catalunya-Repte-Energetic" target="_blank">Repositori de Codi a GitHub</a></p>
     </footer>
-
   </div>
 
   <!-- SCRIPT FOR SIMULATORS & INTERACTIVITY -->
   <script>
+    // Control de visibilitat i configuració (config.js)
+    function applyAppConfig() {
+      const config = window.APP_CONFIG || {
+        tabs: { repte: true, fonts: true, centrals: true, balanca: true, actors: true, politiques: true },
+        simulator: true
+      };
+
+      // 1. Visibilitat de la targeta del simulador de la capçalera
+      const simCard = document.getElementById('hero-simulator-card');
+      if (simCard) {
+        simCard.style.display = config.simulator ? 'flex' : 'none';
+      }
+
+      // 2. Mapeig i visibilitat de pestanyes
+      const tabMapping = {
+        repte: 'tab-repte',
+        fonts: 'tab-fonts',
+        centrals: 'tab-centrals',
+        balanca: 'tab-balanca',
+        actors: 'tab-actors',
+        politiques: 'tab-politiques'
+      };
+
+      let visibleTabsCount = 0;
+      let firstVisibleTabId = null;
+
+      Object.keys(tabMapping).forEach(key => {
+        const tabSectionId = tabMapping[key];
+        const isVisible = !(config.tabs && config.tabs[key] === false);
+        const btn = document.querySelector(`.tab-btn[data-tab-id="${key}"]`);
+        const section = document.getElementById(tabSectionId);
+
+        if (btn) {
+          btn.style.display = isVisible ? '' : 'none';
+        }
+        if (section) {
+          if (!isVisible) {
+            section.classList.remove('active');
+            section.style.display = 'none';
+          } else {
+            section.style.display = '';
+          }
+        }
+
+        if (isVisible) {
+          visibleTabsCount++;
+          if (!firstVisibleTabId) {
+            firstVisibleTabId = tabSectionId;
+          }
+        }
+      });
+
+      // 3. Barra de pestanyes: si només n'hi ha 1 de visible (com la portada), s'oculta la barra per deixar la portada neta
+      const tabsNav = document.querySelector('.tabs-nav');
+      if (tabsNav) {
+        tabsNav.style.display = visibleTabsCount > 1 ? 'flex' : 'none';
+      }
+
+      // 4. Si la pestanya activa actual està oculta, activem la primera visible
+      const currentActive = document.querySelector('.tab-content.active');
+      if (!currentActive || currentActive.style.display === 'none') {
+        if (firstVisibleTabId) {
+          const targetSection = document.getElementById(firstVisibleTabId);
+          if (targetSection) targetSection.classList.add('active');
+
+          const targetKey = Object.keys(tabMapping).find(k => tabMapping[k] === firstVisibleTabId);
+          const targetBtn = document.querySelector(`.tab-btn[data-tab-id="${targetKey}"]`);
+          if (targetBtn) targetBtn.classList.add('active');
+        }
+      }
+    }
+
     // Tab switching logic
     function switchTab(evt, tabId) {
+      const targetSection = document.getElementById(tabId);
+      if (!targetSection || targetSection.style.display === 'none') return;
+
       const tabContents = document.querySelectorAll('.tab-content');
       tabContents.forEach(tab => tab.classList.remove('active'));
 
       const tabButtons = document.querySelectorAll('.tab-btn');
       tabButtons.forEach(btn => btn.classList.remove('active'));
 
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
+      targetSection.classList.add('active');
+      if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add('active');
+      }
     }
 
     // Trilemma Visualizer data switcher
@@ -8385,6 +8469,7 @@
     }
 
     // Initializations
+    applyAppConfig();
     initTab1Interactivity();
     initPovertyInteractivity();
     initTab2Interactivity();

@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloc 5: Polítiques Públiques i Territori — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --rose: #e11d48;
+      --amber: #d97706;
+      --indigo: #4f46e5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5pt;
+      color: var(--text-main);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    /* ─── PAGE LAYOUT (screen) ─── */
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+    }
+
+    /* ─── PRINT RULES ─── */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm 16mm 14mm;
+      }
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        font-size: 10pt;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .page-wrapper { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      .page-break { break-before: page; page-break-before: always; }
+      .print-btn { display: none !important; }
+      a { color: inherit; text-decoration: none; }
+      a[href]::after { content: ""; }
+      .info-box, .context-box, .nota-doc {
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .answer-box {
+        border: 1px solid #94a3b8 !important;
+        background: #ffffff !important;
+      }
+      .answer-line {
+        border-bottom: 1px dashed #cbd5e1 !important;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* ─── PRINT BUTTON (screen only) ─── */
+    .print-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2,132,199,0.3);
+      z-index: 999;
+    }
+    .print-btn:hover { background: #0369a1; }
+
+    /* ─── PORTADA ─── */
+    .cover {
+      min-height: 260mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .cover-logo {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    .cover h1 {
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cover h1 span { color: var(--primary); }
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .cover-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cover-intro {
+      max-width: 500px;
+      font-size: 10pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: #f8fafc;
+      text-align: left;
+    }
+    .cover-intro strong { color: var(--text-main); }
+
+    /* ─── INDEX ─── */
+    .toc { margin: 24px 0 32px; }
+    .toc h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--secondary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px dotted var(--border);
+      font-size: 10pt;
+    }
+    .toc-item .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 8px;
+      min-width: 24px;
+    }
+    .toc-item .toc-title { flex: 1; }
+    .toc-item .toc-phase {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ─── ACTIVITAT: ESTRUCTURA ─── */
+    .activity {
+      margin-bottom: 36px;
+    }
+
+    .act-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+    }
+    .act-number {
+      min-width: 40px; height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .act-number.blue  { background: var(--secondary); }
+    .act-number.rose  { background: var(--rose); }
+    .act-number.amber { background: var(--amber); }
+    .act-number.indigo { background: var(--indigo); }
+
+    .act-title-block { flex: 1; }
+    .act-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .act-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .act-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .act-tag {
+      font-size: 8pt;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .tag-time { background: #eff6ff; color: var(--secondary); border-color: #bfdbfe; }
+    .tag-group { background: #f0fdf4; color: var(--primary); border-color: #bbf7d0; }
+    .tag-mat { background: #fefce8; color: var(--amber); border-color: #fde68a; }
+
+    /* ─── SECCIONS D'ACTIVITAT I ENCAPÇALAMENTS DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 11pt;
+      font-weight: 800;
+      margin: 28px 0 16px 0;
+      border-radius: 8px;
+      border-left: 6px solid var(--secondary);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-header::before {
+      content: "📌";
+      font-size: 11pt;
+    }
+
+    .section-label {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 12px 0 5px;
+    }
+
+    p { margin-bottom: 8px; }
+    ul, ol { padding-left: 1.4em; margin-bottom: 8px; }
+    li { margin-bottom: 4px; line-height: 1.5; }
+    strong { color: var(--text-main); }
+
+    /* ─── CAIXA CONTEXT ─── */
+    .context-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      font-size: 9.5pt;
+    }
+    .context-box .box-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 4px;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── CAIXES DE TIPUS ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 9.5pt;
+    }
+    .info-box.green  { background: #f0fdf4; border-color: #bbf7d0; }
+    .info-box.blue   { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber  { background: #fffbeb; border-color: #fde68a; }
+    .info-box.rose   { background: #fff1f2; border-color: #fecdd3; }
+    .info-box.indigo { background: #eef2ff; border-color: #c7d2fe; }
+
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 9.5pt;
+    }
+
+    /* ─── TAULES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 12px;
+    }
+    th {
+      background: var(--text-main);
+      color: white;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ─── GRAELLA DE ROLS ─── */
+    .rol-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .rol-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 9pt;
+    }
+    .rol-card .rol-name {
+      font-weight: 700;
+      font-size: 10pt;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rol-card ul { margin-bottom: 0; padding-left: 1.2em; }
+
+    /* ─── ESPAI RESPOSTES ─── */
+    .answer-box {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 12px;
+      min-height: 45px;
+      background: #fafafa;
+    }
+    .answer-line {
+      border-bottom: 1px solid #e2e8f0;
+      height: 22px;
+      margin-bottom: 2px;
+    }
+    .calc-box {
+      border: 1.5px dashed #94a3b8;
+      border-radius: 8px;
+      min-height: 85px;
+      margin: 8px 0 14px 1rem;
+      background: #ffffff;
+      padding: 8px 10px;
+    }
+
+    /* ─── SEPARADOR ─── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ─── NOTÍCIES / FONTS ─── */
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .news-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+    }
+    .news-card .news-source {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 2px;
+      font-size: 8pt;
+    }
+    .news-card a { color: var(--text-main); word-break: break-all; }
+
+    /* ─── RETALLS DE PREMSA INCRUSTATS (CLIPPING) ─── */
+    .news-clipping {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--rose);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 9.5pt;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      page-break-inside: avoid;
+    }
+    .news-clipping.blue { border-left-color: var(--secondary); }
+    .news-clipping.amber { border-left-color: var(--amber); }
+    .news-clipping.indigo { border-left-color: var(--indigo); }
+    
+    .news-clipping-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      font-size: 8pt;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .news-clipping-source {
+      color: var(--rose);
+      font-weight: 800;
+    }
+    .news-clipping.blue .news-clipping-source { color: var(--secondary); }
+    .news-clipping.amber .news-clipping-source { color: var(--amber); }
+    .news-clipping.indigo .news-clipping-source { color: var(--indigo); }
+
+    .news-clipping-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .news-clipping-quote {
+      font-style: italic;
+      color: #334155;
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 3px double #cbd5e1;
+      margin: 8px 0;
+      font-size: 9pt;
+      text-align: justify;
+    }
+    .news-clipping-ref {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 6px;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 4px;
+      text-align: right;
+    }
+    .news-clipping-ref a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .news-clipping-ref a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── AVALUACIÓ ─── */
+    .rubric table th { background: var(--indigo); }
+    .rubric table th:first-child { background: #374151; }
+
+    /* ─── CAPÇALERA DE PÀGINA (per impressió) ─── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      font-size: 8.5pt;
+      color: var(--text-muted);
+    }
+    .page-header strong { color: var(--primary); font-size: 10pt; }
+
+    /* Nom alumne */
+    .alumne-block {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 10px;
+      font-size: 9pt;
+    }
+    .alumne-field {
+      flex: 1;
+      border-bottom: 1.5px solid var(--text-main);
+      padding-bottom: 2px;
+    }
+    .alumne-label {
+      font-size: 8pt;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    /* ─── CUSTOM PRINT-FRIENDLY CHARTS FOR DOSSIERS ─── */
+    .chart-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .chart-box-title {
+      font-weight: 700;
+      font-size: 9.5pt;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chart-box-source {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+      border-top: 1px dashed var(--border);
+      padding-top: 4px;
+    }
+    .bar-chart-vertical {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 140px;
+      padding-top: 15px;
+      border-bottom: 1.5px solid var(--text-main);
+      margin: 10px 0;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15%;
+    }
+    .bar-val-top {
+      font-size: 7.5pt;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .bar-fill {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--primary);
+    }
+    .bar-fill.rose { background: var(--rose); }
+    .bar-fill.indigo { background: var(--indigo); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.secondary { background: var(--secondary); }
+    .bar-label {
+      font-size: 7.5pt;
+      text-align: center;
+      margin-top: 6px;
+      font-weight: 500;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    
+    .bar-chart-horizontal {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-row-label {
+      width: 120px;
+      font-size: 8pt;
+      font-weight: 600;
+      text-align: right;
+      color: var(--text-main);
+    }
+    .bar-row-track {
+      flex: 1;
+      height: 18px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-row-fill {
+      height: 100%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      color: white;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 4px 0 0 4px;
+    }
+    .bar-row-fill.rose { background: var(--rose); }
+    .bar-row-fill.indigo { background: var(--indigo); }
+    .bar-row-fill.amber { background: var(--amber); }
+    .bar-row-fill.secondary { background: var(--secondary); }
+    .bar-row-fill.gray { background: #64748b; }
+    
+    /* Line chart table rendering (highly readable and reliable for print) */
+    .line-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      height: 120px;
+      border-bottom: 1.5px solid var(--text-main);
+      border-left: 1.5px solid var(--text-main);
+      margin: 15px 0 5px 25px;
+      position: relative;
+    }
+    .grid-y-axis {
+      position: absolute;
+      left: -25px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 7pt;
+      color: var(--text-muted);
+      text-align: right;
+      width: 20px;
+    }
+    .grid-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      position: relative;
+    }
+    .grid-col::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-s);
+      background: var(--rose);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: var(--val-w);
+      background: var(--secondary);
+      transform: translateX(-50%);
+      opacity: 0.7;
+    }
+    .grid-col .col-dot-s {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-s);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-col .col-dot-w {
+      position: absolute;
+      left: 50%;
+      bottom: var(--val-w);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+    .grid-x-labels {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      margin-left: 25px;
+      margin-bottom: 12px;
+    }
+    .grid-x-label {
+      font-size: 7pt;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* ─── TEST I QÜESTIONARIS ─── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 700px) {
+      .test-grid { grid-template-columns: 1fr; }
+    }
+    .test-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 8.8pt;
+      page-break-inside: avoid;
+    }
+    .test-q-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .test-opt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    .test-opt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.3;
+      color: #334155;
+    }
+    .test-checkbox {
+      display: inline-block;
+      min-width: 12px;
+      height: 12px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .test-correct-ans {
+      background: #dcfce7;
+      border: 1px solid #16a34a;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    /* ─── GUIA GEMINI NOTEBOOK ─── */
+    .guide-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--indigo);
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      font-size: 8.8pt;
+    }
+    .guide-step-title {
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: monospace;
+      font-size: 8pt;
+      color: #0f172a;
+      margin: 4px 0;
+    }
+    /* ─── BLOCK DOSSIER NAVIGATION & HEADER ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .nav-tag {
+      font-size: 10px;
+      background: rgba(2, 132, 199, 0.3);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .nav-btn.active {
+      background: #059669;
+      color: #fff;
+      font-weight: 700;
+    }
+    .nav-btn.secondary {
+      background: rgba(2, 132, 199, 0.2);
+      color: #7dd3fc;
+    }
+    .nav-separator {
+      color: #475569;
+      font-size: 12px;
+      margin: 0 2px;
+    }
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .print-action-btn:hover {
+      background: #0369a1;
+    }
+    @media print {
+      .block-nav-bar, .no-print, .print-btn {
+        display: none !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  
+    .block-header-card {
+      border: 2px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .block-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .block-badge {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .block-header-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 2px 0 4px 0;
+      line-height: 1.2;
+    }
+    .block-header-desc {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .block-student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 9pt;
+      background: var(--bg);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .student-field strong {
+      color: var(--text-muted);
+      font-size: 8pt;
+      text-transform: uppercase;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      height: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossier per Blocs</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn ">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn ">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn ">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn ">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn active">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn ">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir aquest Bloc (PDF)</button>
+</div>
+
+
+<div class="page-wrapper">
+
+  <div class="block-header-card no-break">
+    <div class="block-header-top">
+      <div>
+        <div class="block-badge">BLOC 5 · POLÍTIQUES I TERRITORI · Activitats A7 i A8</div>
+        <div class="block-header-title">Catalunya: Repte Energètic</div>
+        <div style="font-size: 12pt; font-weight: 700; color: var(--secondary); margin-bottom: 4px;">Bloc 5: Polítiques Públiques i Territori</div>
+        <div class="block-header-desc">Dissenyar un paquet coherent de polítiques energètiques equilibrant el pressupost públic, i planificar la implantació física de parcs renovables al territori català (PLATER).</div>
+      </div>
+      <div style="text-align: right; font-size: 8.5pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    
+    <div class="block-student-fields">
+      <div class="student-field">
+        <strong>Alumne/a:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Grup:</strong>
+        <div class="line"></div>
+      </div>
+      <div class="student-field">
+        <strong>Data:</strong>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="activity">
+<div class="act-header no-break">
+      <div class="act-number">A7</div>
+      <div class="act-title-block">
+        <div class="act-title">Planificador de Polítiques Públiques: El Teu Pla de Transició</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🏛️ Per què dissenyem un pla de polítiques públiques?</div>
+      Com a governant, el teu recurs més valuós i limitat és el pressupost públic. En aquesta activitat, hauràs de dissenyar un pla de transició energètica invertint 3.000 M€ en diferents polítiques d'eficiència, infraestructura i recerca. Aprendràs a analitzar indicadors econòmics, socials i ambientals reals (factor de capacitat solar, retorn fiscal, autoconsum) per justificar de forma argumentada quines són les millors estratègies del país, entenent que tota tria política implica renúncies inevitables.
+    </div>
+
+    <div class="task-header">Tasca 1: Selecció i registre de polítiques del nostre pla de transició</div>
+
+    <table class="no-break">
+      <thead>
+        <tr>
+          <th>Política Pública</th>
+          <th>Categoria</th>
+          <th>Cost (M€)</th>
+          <th>Efecte principal</th>
+          <th>Per qué la triem?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="background:#f0fdf4; font-weight:700;">
+          <td colspan="2">TOTAL</td>
+          <td>____ M€</td>
+          <td colspan="2">Estalvi demanda: _____ MW</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="task-header">Tasca 2: Anàlisi dels indicadors resultants del pla</div>
+
+    <div class="rol-grid no-break">
+      <div class="rol-card">
+        <div class="rol-name">👥 Aprovació Social</div>
+        Ciutadania: ____% &nbsp; Empresariat: ____%<br>
+        Ecologistes: ____% &nbsp; Polítics: ____%
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">💰 Balanç Fiscal</div>
+        Retorn fiscal: ______ M€/torn<br>
+        Eficiència R+D: ______________________
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🔧 Millores Operatives</div>
+        Estalvi manteniment: ___________________<br>
+        Reducció temps const.: _________________
+      </div>
+      <div class="rol-card">
+        <div class="rol-name">🔓 Tecnologies Noves</div>
+        Habilitades: ___________________________<br>
+        ________________________________________
+      </div>
+    </div>
+
+    <div class="task-header">Tasca 3: Justificació argumentada del pla aprovat</div>
+    <p><strong>1.</strong> Quin és el principal objectiu del vostre pla? Com equilibreu sostenibilitat, seguretat i cost?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <p><strong>2.</strong> Quina política heu deixat fora i us hauria agradat incloure? Per què no hi cap?</p>
+    <div class="answer-box"><div class="answer-line"></div><div class="answer-line"></div></div>
+
+    <div class="task-header">Tasca 4: Anàlisi de dades: Evolució de l'autoconsum solar fotovoltaic a Catalunya</div>
+    <p>Aquesta gràfica mostra l'evolució acumulada del nombre total de teulades solars (autoconsum) en servei a Catalunya des de 2019 fins a 2023:</p>
+
+    <div class="chart-box">
+      <div class="chart-box-title">📊 Nombre Acumulat de Teulades amb Autoconsum Solar Fotovoltaic</div>
+      <div class="bar-chart-vertical">
+        <div class="bar-col">
+          <div class="bar-val-top">1.500</div>
+          <div class="bar-fill" style="height: 1.5%;"></div>
+          <div class="bar-label">2019</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">6.000</div>
+          <div class="bar-fill" style="height: 6%;"></div>
+          <div class="bar-label">2020</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">17.000</div>
+          <div class="bar-fill" style="height: 17%;"></div>
+          <div class="bar-label">2021</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">60.000</div>
+          <div class="bar-fill" style="height: 60%;"></div>
+          <div class="bar-label">2022</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val-top">102.000</div>
+          <div class="bar-fill" style="height: 100%;"></div>
+          <div class="bar-label">2023</div>
+        </div>
+      </div>
+      <div class="chart-box-source">Font: Registre de l'Autoconsum de Catalunya, Institut Català d'Energia (ICAEN).</div>
+    </div>
+
+    <p><strong>3.</strong> Fent servir les dades acumulades de la gràfica, calcula el factor de creixement multiplicatiu del nombre d'instal·lacions solars a Catalunya entre l'any 2020 i el 2023. Mostra el procediment del càlcul:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+    <p><strong>4.</strong> Malgrat tenir més de 100.000 teulades solars l'any 2023, la solar fotovoltaica només va representar el <strong>3,7%</strong> del total de l'energia elèctrica neta generada a Catalunya. Justifica científicament aquesta aparent contradicció, argumentant sobre la diferència física entre la <strong>potència nominal instal·lada (MW)</strong> d'un panell de teulada i la seva <strong>generació real acumulada (GWh)</strong> al llarg de l'any (hores de sol, factor de capacitat, dispersió de la potència):</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+  </div><!-- /A7 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+<div class="page-break"></div>
+<div class="activity">
+<div class="act-header no-break">
+      <div class="act-number blue">A8</div>
+      <div class="act-title-block">
+        <div class="act-title">Pla Territorial Sectorial Renovables (PLATER)</div>
+      </div>
+    </div>
+
+    <div class="context-box no-break">
+      <div class="box-title">🧭 Per què comencem aquí?</div>
+      La transició a les energies renovables necessita espai físic. A Catalunya, el **PLATER** (Pla Territorial Sectorial per a la generació elèctrica eòlica i fotovoltaica, les seves línies d’evacuació i els seus elements d’emmagatzematge) és el pla que ordena on es poden instal·lar els parcs eòlics i solars. Aprendràs com es coordina la transició energètica a escala del país mitjançant la planificació del sòl no urbanitzable per minimitzar els impactes ambientals i socials, i el rol que hi tenen la tecnologia (SIG) i la cooperació comarcal.
+    </div>
+
+    <div class="info-box blue no-break">
+      <div class="box-head">📖 Fonaments Teòrics: Què és el PLATER?</div>
+      <p>El <strong>Pla Territorial Sectorial per a la generació elèctrica eòlica i fotovoltaica, les seves línies d’evacuació i els seus elements d’emmagatzematge (PLATER)</strong>, formulat per l'<strong>ICAEN</strong> (Institut Català d'Energia), és l'eina del Govern per planificar on es poden col·locar les instal·lacions de producció d'energia eòlica i solar fotovoltaica a tot Catalunya.</p>
+      <p>Per a l'any 2050, la prospectiva energètica (<strong>PROENCAT 2050</strong>) estima que Catalunya necessitarà <strong>23.136 MW</strong> d'energia eòlica terrestre i <strong>19.394 MW</strong> de solar fotovoltaica a terra per descarbonitzar la societat i no dependre del gas i el petroli importats.</p>
+      <p>Per trobar l'espai físic necessari reduint al mínim l'impacte visual, ecològic o sobre els camps de conreu, el PLATER utilitza <strong>Sistemes d'Informació Geogràfica (SIG)</strong> creuant **141 capes de dades territorials** per classificar el sòl no urbanitzable en:</p>
+      <ul>
+        <li>❌ <strong>Zones no aptes:</strong> Parcs naturals protegits, sòls agraris d'alt valor productiu o zones amb patrimoni històric-artístic on no es pot construir.</li>
+        <li>⚠️ <strong>Zones aptes amb condicionants:</strong> Zones on es pot construir si es prenen mesures especials de protecció ambiental o de distància als nuclis de població.</li>
+        <li>✅ <strong>Zones prioritàries:</strong> Àrees amb molt bon recurs de vent o sol i baix impacte on es recomana i s'agilitza la construcció.</li>
+      </ul>
+      <p>A maix, el pla defineix els <strong>passadissos per a les línies d'evacuació d'alta tensió</strong> per connectar els punts de producció rural amb les ciutats consumidores, i planifica els punts de connexió d'<strong>emmagatzematge amb bateries</strong> per guardar l'excedent elèctric.</p>
+    </div>
+
+    <div class="task-header">Tasca 1: El Filtre Digital (El SIG com a eina de planificació)</div>
+    <p><strong>1.</strong> Per què és necessari utilitzar Sistemes d'Informació Geogràfica (SIG) i creuar 141 capes de dades territorials per decidir on situar les centrals renovables, en lloc de deixar que les empreses decideixin lliurement on construir? Esmenta 3 tipus de dades territorials (ambientals, de conreu, urbanes, etc.) que s'hagin de creuar:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+    <div class="task-header">Tasca 2: Fem números: Teulades o Camps de Conreu?</div>
+    <p><strong>2.</strong> Catalunya té l'objectiu d'instal·lar 11.144 MW de plaques solars en teulades de cases i indústries (autoconsum) per al 2050. Tanmateix, es necessiten 19.394 MW addicionals instal·lats a terra. Justifica físicament i de consum per què l'autoconsum a les ciutats és insuficient per cobrir tota la demanda d'una societat industrialitzada i per què cal utilitzar sòl obert:</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+    <div class="task-header">Tasca 3: El Debat de la Solidaritat Territorial (Justícia Energètica)</div>
+    <p><strong>3.</strong> Molts municipis rurals i sindicats de pagesos protesten perquè consideren que les instal·lacions renovables es concentren a les seves comarques per abastar l'electricitat de les grans ciutats. Com intenta el PLATER resoldre aquest conflicte fixant objectius comarcals? Quina és la teva opinió sobre com s'hauria de distribuir aquest deure territorial de forma justa?</p>
+    <div class="answer-box">
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+      <div class="answer-line"></div>
+    </div>
+
+  </div><!-- /A8 -->
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
