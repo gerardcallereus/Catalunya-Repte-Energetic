@@ -11,7 +11,7 @@ window.APP_CONFIG = {
   // PESTANYES DE LA NAVEGACIÓ PRINCIPAL
   tabs: {
     repte: true,        // 'El Repte de Govern' (Portada / Introducció)
-    fonts: false,       // 'Fonts d'Energia'
+    fonts: true,        // 'Fonts d'Energia'
     centrals: false,    // 'Catàleg de Centrals'
     balanca: false,     // 'Demanda i consum d'energia' (inclou balanç i simulador de xarxa)
     actors: false,      // 'Guia d'Actors Socials'
