@@ -432,6 +432,11 @@
     <span class="nav-separator">|</span>
     <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
     <a href="autocorreccio-bloc-1.html" class="nav-btn active">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn">✅ Bloc 6</a>
   </div>
   <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
 </div>
@@ -615,7 +620,7 @@
   <!-- ══════════════════════════════════════════════════════════════ -->
   <div class="task-header no-break">
     <span>Tasca 3: Circuits, Pèrdues Tèrmiques i Rendiment — Cas Família López</span>
-    <span class="task-badge-pts">Total: 2,5 punts (5 &times; 0,50 pt)</span>
+    <span class="task-badge-pts">Total: 2,5 punts (a–d: 4 &times; 0,50 pt + e–f: 2 &times; 0,25 pt)</span>
   </div>
 
   <div class="calc-grid-2 no-break">
@@ -669,20 +674,35 @@
     </div>
   </div>
 
-  <!-- 3e -->
-  <div class="solution-block no-break">
-    <div class="solution-title">
-      <span>e) Diners malbaratats al mes a causa del mal aïllament (Ús: 6 h/dia durant 30 dies a 0,15 €/kWh)</span>
-      <span class="solution-points">0,50 pt</span>
+  <div class="calc-grid-2 no-break">
+    <!-- 3e -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>e) Energia desaprofitada al mes (t = 4,0 h/dia, 30 dies)</span>
+        <span class="solution-points">0,25 pt</span>
+      </div>
+      <div class="solution-formula">
+        • Temps d'ús mensual = 4,0 h/dia &times; 30 dies = 120 hores<br>
+        • Potència perduda = 600 W = 0,6 kW<br>
+        • E_pèrdua = P_pèrdua &times; t = 0,6 kW &times; 120 h = 72,0 kWh/mes
+      </div>
+      <div class="solution-result">Resultat: 72,0 kWh/mes que s'escapen cap a l'exterior</div>
+      <div class="solution-note">💡 Fórmula: E_pèrdua = P_pèrdua &middot; t. Exigir unitat en kWh.</div>
     </div>
-    <div class="solution-formula">
-      1. Potència perduda convertida a kW = 600 W / 1.000 = 0,6 kW<br>
-      2. Hores d'ús mensuals = 6 h/dia &times; 30 dies = 180 hores<br>
-      3. Energia malbaratada = 0,6 kW &times; 180 h = 108 kWh/mes<br>
-      4. Cost dels diners llençats al carrer = 108 kWh &times; 0,15 €/kWh = 16,20 €/mes
+
+    <!-- 3f -->
+    <div class="solution-block" style="margin-bottom: 0;">
+      <div class="solution-title">
+        <span>f) Diners malbaratats al mes (Preu: 0,15 €/kWh)</span>
+        <span class="solution-points">0,25 pt</span>
+      </div>
+      <div class="solution-formula">
+        • Cost malbaratat = 72 kWh &times; 0,15 €/kWh = 10,80 €/mes<br>
+        • Alternativa: Cost total (1,5 kW &times; 120 h &times; 0,15 € = 27,00 €) &times; 40% pèrdua = 10,80 €
+      </div>
+      <div class="solution-result">Resultat: 10,80 € llençats al carrer cada mes per manca d'aïllament</div>
+      <div class="solution-note">💡 <em>Diagnosi:</em> El 40% de la despesa del radiador (10,80 € de 27,00 €) es perd inútilment.</div>
     </div>
-    <div class="solution-result">Resultat: 16,20 € llençats al carrer cada mes per manca d'aïllament tèrmic</div>
-    <div class="solution-note">💡 <em>Càlcul alternatiu:</em> Cost total mensual (1,5 kW &times; 180 h &times; 0,15 € = 40,50 €) &times; 40% pèrdua = 16,20 €. Qualsevol dels dos procediments és 100% correcte.</div>
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════ -->
@@ -704,21 +724,21 @@
 
     <!-- OPCIÓ A -->
     <div class="option-card">
-      <div class="option-card-title">💳 Opció A: Targeta Moneder d'Urgència / Bo Social Català (Ajut econòmic d'emergència)</div>
+      <div class="option-card-title">🏛️ Opció A: Convenis de coresponsabilitat i condonació de deutes (Llei 24/2015)</div>
       <div class="pros-cons-grid">
         <div class="pros-box">
           <strong>✅ Avantatges clau:</strong>
           <ul style="margin-left: 0.9rem; margin-top: 1px;">
-            <li>Immediatesa absoluta: evita talls de subministrament aquest mateix hivern.</li>
-            <li>Àgil de tramitar mitjançant Serveis Socials i empodera la família amb liquiditat.</li>
-            <li>Protegeix les llars més greument asfixiades sense esperar terminis d'obres.</li>
+            <li>Elimina l'angoixa del deute acumulat a milers de famílies vulnerables i garanteix que no hi hagi talls.</li>
+            <li>Obliga les grans elèctriques a coresponsabilitzar-se assumint la major part del cost financer (73%).</li>
+            <li>Aplica el marc legal de la Llei 24/2015 i protegeix les famílies amb informe previ de Serveis Socials.</li>
           </ul>
         </div>
         <div class="cons-box">
           <strong>⚠️ Inconvenients i Com compensar-los:</strong>
           <ul style="margin-left: 0.9rem; margin-top: 1px;">
-            <li><strong>Inconvenient:</strong> No resol la causa física (l'edifici continua perdent el 40% de calor; la despesa pública és recurrent).</li>
-            <li><strong>Compensació:</strong> Condicionar la targeta a una auditoria energètica gratuïta i derivació al pla de rehabilitació.</li>
+            <li><strong>Inconvenient:</strong> No resol la causa física de la ineficiència (els pisos continuen perdent calor i generant deute nou cada hivern).</li>
+            <li><strong>Compensació:</strong> Condicionar els convenis a auditories energètiques i ajuts directes per aïllament per aturar el deute futur.</li>
           </ul>
         </div>
       </div>
@@ -726,13 +746,13 @@
 
     <!-- OPCIÓ B -->
     <div class="option-card">
-      <div class="option-card-title">☀️ Opció B: Autoconsum Públic Compartit amb L'Energètica (Energia pública municipal)</div>
+      <div class="option-card-title">☀️ Opció B: Comunitats d'Autoconsum Social amb L'Energètica pública</div>
       <div class="pros-cons-grid">
         <div class="pros-box">
           <strong>✅ Avantatges clau:</strong>
           <ul style="margin-left: 0.9rem; margin-top: 1px;">
             <li>Electricitat 100% renovable, pública i a cost gairebé zero durant més de 25-30 anys.</li>
-            <li>Aprofita cobertes d'edificis públics (escoles, pavellons, biblioteques) de proximitat.</li>
+            <li>Aprofita cobertes d'edificis públics (escoles, pavellons, biblioteques) de proximitat (radi de 2 km).</li>
             <li>Democratitza l'energia i trenca la dependència de l'oligopoli elèctric privat.</li>
           </ul>
         </div>
@@ -748,7 +768,7 @@
 
     <!-- OPCIÓ C -->
     <div class="option-card">
-      <div class="option-card-title">🏗️ Opció C: Pla Renova Llar — Fons de Rehabilitació i Aïllament Tèrmic d'Edificis</div>
+      <div class="option-card-title">🧱 Opció C: Fons de rehabilitació tèrmica i aïllament estructural d'edificis</div>
       <div class="pros-cons-grid">
         <div class="pros-box">
           <strong>✅ Avantatges clau:</strong>
@@ -804,7 +824,7 @@
         <tr>
           <td><strong>1. Què és el que més t'ha impactat?</strong></td>
           <td>
-            • <strong>Excel·lent (0,50 pt):</strong> Cita dades concretes treballades al dossier (ex: que 1,6 milions de catalans passin fred, que un sol radiador costi 45 €/mes i suposi el 5% d'un sou precari, o que es llencin 16,20 €/mes per culpa del mal aïllament) i raona personalment el perquè de l'impacte.<br>
+            • <strong>Excel·lent (0,50 pt):</strong> Cita dades concretes treballades al dossier (ex: que 1,6 milions de catalans passin fred, que un sol radiador costi 45 €/mes i suposi el 5% d'un sou precari, o que es llencin 10,80 €/mes per culpa del mal aïllament) i raona personalment el perquè de l'impacte.<br>
             • <em>Parcial (0,25 pt):</em> Resposta genèrica ("m'ha sorprès que hi hagi pobresa") sense citar cap xifra ni càlcul.
           </td>
           <td style="text-align: center; font-weight: 700; color: #047857;">0,50 pt</td>
@@ -866,7 +886,7 @@
           <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
         </tr>
         <tr>
-          <td><strong>Tasca 3:</strong> Circuits, Pèrdues Tèrmiques i Rendiment (5 &times; 0,5 pt)</td>
+          <td><strong>Tasca 3:</strong> Circuits, Pèrdues Tèrmiques i Rendiment (a, b, c, d, e, f)</td>
           <td style="text-align: center; font-weight: 700;">2,5 pts</td>
           <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
         </tr>

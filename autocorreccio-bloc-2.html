@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 2 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #0284c7;
+      --correct-bg: #f0f9ff;
+      --correct-border: #bae6fd;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(2, 132, 199, 0.3);
+      color: #7dd3fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #0284c7; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #0369a1; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 10px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+      break-after: avoid;
+      page-break-before: auto;
+      break-before: auto;
+    }
+    .task-badge-pts {
+      background: var(--correct);
+      color: white;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--correct-border);
+    }
+    .step-box {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 4px 0;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+    .step-box strong { color: var(--text-main); }
+    .error-box {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin-top: 4px;
+      font-size: 7.6pt;
+      color: #991b1b;
+    }
+
+    /* ─── DECISIÓ DEL CONSELLER ─── */
+    .option-card {
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 6px 9px;
+      margin-bottom: 6px;
+      background: #ffffff;
+      font-size: 7.9pt;
+    }
+    .option-card-title {
+      font-weight: 700;
+      font-size: 8.4pt;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .pros-cons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 3px;
+    }
+    .pros-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 4px;
+      padding: 4px 6px;
+      font-size: 7.5pt;
+    }
+    .cons-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 4px;
+      padding: 4px 6px;
+      font-size: 7.5pt;
+    }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .test-card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 5px 8px;
+      background: #ffffff;
+      font-size: 7.8pt;
+    }
+    .test-q-title {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+    .test-ans-correct {
+      background: var(--correct-bg);
+      border-left: 3px solid var(--correct);
+      padding: 2px 5px;
+      border-radius: 0 3px 3px 0;
+      font-weight: 700;
+      color: #0369a1;
+      margin: 2px 0;
+    }
+
+    /* ─── CAIXES D'INFORMACIÓ I RECOMANACIONS ─── */
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      font-size: 8.2pt;
+      page-break-inside: avoid;
+    }
+    .info-box.blue { background: #eff6ff; border-color: #bfdbfe; }
+    .info-box.amber { background: #fffbeb; border-color: #fde68a; }
+    .info-box.green { background: #f0fdf4; border-color: #bbf7d0; }
+    .info-box .box-head {
+      font-weight: 700;
+      margin-bottom: 3px;
+      font-size: 8.4pt;
+    }
+
+    /* ─── CHECKLIST D'AUTOAVALUACIÓ ─── */
+    .criteria-checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 5px;
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 7.6pt;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .checkbox {
+      width: 11px;
+      height: 11px;
+      border: 1.5px solid var(--text-muted);
+      border-radius: 2.5px;
+      flex-shrink: 0;
+    }
+
+    .recommendation-tag {
+      display: inline-block;
+      font-size: 7.2pt;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-right: 4px;
+      text-transform: uppercase;
+    }
+    .tag-tip { background: #dbeafe; color: #1e40af; }
+    .tag-warn { background: #fee2e2; color: #991b1b; }
+    .tag-good { background: #dcfce7; color: #166534; }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn active">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn">✅ Bloc 6</a>
+    <span class="nav-separator">|</span>
+    <a href="coavaluacio-presentacions-bloc-2.html" class="nav-btn" style="background: rgba(16, 185, 129, 0.25); color: #34d399; font-weight: 700;">👥 Coavaluació (9 Fonts)</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 2</div>
+        <div class="header-title">Solucionari Pas a Pas, Criteris de Puntuació i Geopolítica</div>
+        <div class="header-desc">Pauta d'autoavaluació per a l'alumnat (Tasques 2 a 5): resolució del test global de fonts (12 preguntes), evolució històrica, dependència exterior (84,2%) i simulació de govern sobre 10 punts totals.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field"><strong>Alumne/a:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Grup:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Data:</strong> <div class="line"></div></div>
+    </div>
+  </div>
+
+  <div class="info-box blue no-break">
+    <div class="box-head">🧭 Pautes per a l'autoavaluació del Bloc 2 (Tasques 2 a 5): Com aprendre i millorar amb aquesta guia?</div>
+    <div style="font-size: 8pt; line-height: 1.4;">
+      • <strong>Rigor conceptual i causa-efecte (Tasca 2):</strong> No et limitis a comprovar la lletra. Llegeix l'<strong>explicació tècnica</strong> de cada pregunta per entendre el fonament físic, químic i econòmic de cada recurs energètic.<br>
+      • <strong>Comprensió dels errors freqüents:</strong> Revisa els apartats d'<strong>error típic</strong>: identifiquen les confusions més habituals (ex. confondre central a Catalunya amb recurs autòcton, o pensar que el gas natural és "ecològic").<br>
+      • <strong>Preguntes de reflexió oberta (Tasques 3 i 4):</strong> Avalua si la teva resposta inclou els <em>conceptes clau imprescindibles</em> de la rúbrica (ex. rutes marítimes, cicle del carboni, TRE, concentració de minerals crítics).<br>
+      • <strong>Simulació de govern (Tasca 5):</strong> Es valora especialment que hagis proposat <em>mesures de mitigació</em> per als punts febles de la política escollida.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 2: TEST GLOBAL DE FONTS D'ENERGIA (12 PREGUNTES)         -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 2: Qüestionari d'Autoavaluació Global — Les Fonts d'Energia a la Web (12 Preguntes)</span>
+    <span class="task-badge-pts">Total: 3,0 punts (12 preguntes &times; 0,25 pt)</span>
+  </div>
+
+  <div class="solution-block">
+    <div class="solution-title">
+      <span>Solucions Model, Fonament Tècnic i Anàlisi d'Errors del Test de 12 Preguntes</span>
+      <span class="solution-points">12 preguntes &times; 0,25 pt = 3,00 pts</span>
+    </div>
+    
+    <div class="test-grid">
+      <!-- P1 -->
+      <div class="test-card">
+        <div class="test-q-title">1. Renovables vs No Renovables</div>
+        <div class="test-ans-correct">✅ Opció B: Fluxos naturals continus vs estocs geològics finits.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> La diferència rau en l'escala temporal humana: el sol i el vent són fluxos inesgotables que es regeneren diàriament; els fòssils i l'urani són reserves acumulades durant centenars de milions d'anys que es destrueixen quan es consumeixen.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Pensar que una font no renovable es pot reposar ràpidament o que les renovables només tenen aplicacions industrials.</span>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="test-card">
+        <div class="test-q-title">2. Font 100% autòctona a Catalunya</div>
+        <div class="test-ans-correct">✅ Opció C: La radiació solar i la força del vent.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> El sol i el vent incideixen directament sobre el territori català; no cal pagar factures d'importació ni depenen de vaixells ni gasoductes exteriors.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Creure que la nuclear és autòctona perquè les centrals d'Ascó i Vandellòs són a Catalunya. L'edifici és aquí, però el 100% de l'urani s'importa de mines estrangeres.</span>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="test-card">
+        <div class="test-q-title">3. Realitat del petroli a Catalunya</div>
+        <div class="test-ans-correct">✅ Opció C: 100% importat per vaixell i refinat a Tarragona.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> Catalunya no té jaciments actius de cru. Arriba íntegrament en petroliers al Port de Tarragona, on el complex petroquímic el refina per abastir el transport i la indústria química.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Pensar que s'extreu del subsòl del Delta de l'Ebre (jaciments tancats) o que el petroli ja s'ha eliminat (és el 45% de l'energia primària consumida).</span>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="test-card">
+        <div class="test-q-title">4. El gas natural a la transició</div>
+        <div class="test-ans-correct">✅ Opció A: Metà (CH₄) que emet CO₂ en cremar i té risc de fuites de gran efecte hivernacle.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> El gas natural és fonamentalment metà (CH₄). Tot i que en combustió emet menys que el carbó, si s'escapa sense cremar té un poder d'escalfament 84 vegades superior al CO₂ a 20 anys.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Caure en la trampa comercial que el gas natural és una energia neta i inofensiva: és un combustible fòssil causant d'escalfament global.</span>
+        </div>
+      </div>
+
+      <!-- P5 -->
+      <div class="test-card">
+        <div class="test-q-title">5. Urani i densitat energètica</div>
+        <div class="test-ans-correct">✅ Opció A: Densitat colossal; 1 g allibera calor massiva per fissió.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> 1 gram d'Urani-235 fisionat equival a cremar unes 2,5 tones de carbó o 1.500 litres de petroli. No emet CO₂ en funcionar, però produeix residus radioactius d'alta activitat durant milers d'anys.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Confondre la fissió nuclear amb una combustió química o pensar que l'urani és un recurs inesgotable.</span>
+        </div>
+      </div>
+
+      <!-- P6 -->
+      <div class="test-card">
+        <div class="test-q-title">6. Radiació solar a Catalunya</div>
+        <div class="test-ans-correct">✅ Opció A: Recurs infinit i autòcton, però intermitent (dia/nit i núvols).</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> Catalunya rep una radiació excel·lent (>2.500 hores de sol/any), però és intermitent: no produeix de nit ni amb boires espesses, requerint emmagatzematge o xarxa de recolzament.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Oblidar que la fotovoltaica requereix bateries o centrals reversibles per cobrir el consum nocturn.</span>
+        </div>
+      </div>
+
+      <!-- P7 -->
+      <div class="test-card">
+        <div class="test-q-title">7. Energia eòlica i origen del vent</div>
+        <div class="test-ans-correct">✅ Opció A: Diferències de temperatura i pressió atmosfèrica pel Sol.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> El vent és energia solar indirecta: la Terra s'escalfa desigualment pel Sol, l'aire calent puja, crea baixes pressions i l'aire circumdant es desplaça, fent girar les pales dels aerogeneradors.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Atribuir l'origen del vent a les marees, a camps magnètics o al moviment dels oceans.</span>
+        </div>
+      </div>
+
+      <!-- P8 -->
+      <div class="test-card">
+        <div class="test-q-title">8. Hidràulica fluvial i canvi climàtic</div>
+        <div class="test-ans-correct">✅ Opció A: Les sequeres prolongades redueixen cabals i embassaments.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> Depèn de la pluja i el desglaç de les neus pirinenques. Durant la sequera històrica recent, la turbinació elèctrica es va aturar a Sau i Susqueda per prioritzar l'aigua potable.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Pensar que l'aigua dels pantans sempre es pot fer servir per produir llum; l'aigua de boca té prioritat legal absoluta.</span>
+        </div>
+      </div>
+
+      <!-- P9 -->
+      <div class="test-card">
+        <div class="test-q-title">9. Biometà a partir de purins</div>
+        <div class="test-ans-correct">✅ Opció A: Transforma dejeccions en recurs net, evitant metà i nitrats.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> La digestió anaeròbia a granges d'Osona o Lleida captura el metà que s'escaparia a l'aire i produeix biometà net i fertilitzant higienitzat, salvant els aqüífers dels nitrats.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Confondre biogàs amb un fòssil o creure que els purins es cremen directament a una foguera.</span>
+        </div>
+      </div>
+
+      <!-- P10 -->
+      <div class="test-card">
+        <div class="test-q-title">10. Minerals crítics per a la transició</div>
+        <div class="test-ans-correct">✅ Opció B: Liti i cobalt per a cel·les de bateries i imants d'aerogeneradors.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> L'electrificació canvia el combustible líquid per bateries (liti, níquel, cobalt) i motors eficients (coure i terres rares per a imants permanents dels molins eòlics).<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Pensar que el liti es crema com a combustible fòssil; és un metall estructural que es pot i s'ha de reciclar.</span>
+        </div>
+      </div>
+
+      <!-- P11 -->
+      <div class="test-card">
+        <div class="test-q-title">11. Hidroelèctrica reversible (bombament)</div>
+        <div class="test-ans-correct">✅ Opció A: Bateria d'aigua que bomba amunt amb excedents i turbina en pics.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> Plantes com Sallente-Estany Gento utilitzen l'excedent solar barat del migdia per bombar aigua a l'estany superior, i la deixen caure de nit quan la demanda puja, amb un 80% d'eficiència.<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Confondre una central hidroelèctrica convencional que només turbina aigua riu avall amb una reversible de bombament.</span>
+        </div>
+      </div>
+
+      <!-- P12 -->
+      <div class="test-card">
+        <div class="test-q-title">12. Energia geotèrmica i climatització</div>
+        <div class="test-ans-correct">✅ Opció B: Bombes de calor i inèrcia tèrmica del subsòl per a fred/calor d'alta eficiència.</div>
+        <div style="font-size: 7.3pt; color: #334155; margin-top: 2px; line-height: 1.35;">
+          <strong>💡 Per què és correcta?</strong> A pocs metres de profunditat el terra està a uns 15 ºC tot l'any. Una bomba de calor geotèrmica n'aprofita la inèrcia amb un COP de 4 a 5 (multiplica per 4 o 5 l'energia invertida).<br>
+          <span style="color: #991b1b;"><strong>⚠️ Error típic:</strong> Creure que a Catalunya calen volcans actius o guèisers a 300 ºC; la geotèrmia de molt baixa entalpia s'aplica arreu per a edificis.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 3: HISTÒRIA DE L'ENERGIA                                 -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 3: Activitat Competencial 1 — Història de l'Energia (De la Flama al Fòssil)</span>
+    <span class="task-badge-pts">Total: 2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Solucions del Test Històric (0,80 pt) i Criteris de les 4 Preguntes Reflexives (1,20 pt)</span>
+      <span class="solution-points">4 preguntes test (0,80 pt) + 4 preguntes reflexives (1,20 pt) = 2,00 pts</span>
+    </div>
+
+    <div style="background: var(--bg); padding: 5px 8px; border-radius: 4px; margin-bottom: 6px; font-size: 7.9pt; line-height: 1.45;">
+      <strong>Solucions Test Històric (4 &times; 0,20 pt = 0,80 pt):</strong><br>
+      • <strong>H1:</strong> <span style="color:#0369a1; font-weight:700;">Opció B</span> (La màquina de vapor de James Watt — va permetre transformar per primer cop calor de carbó en moviment mecànic continu).<br>
+      • <strong>H2:</strong> <span style="color:#0369a1; font-weight:700;">Opció B</span> (La fusta forma part del cicle curt recent del carboni; els fòssils alliberen carboni enterrat fa milions d'anys que sobreescalfa l'atmosfera).<br>
+      • <strong>H3:</strong> <span style="color:#0369a1; font-weight:700;">Opció A</span> (Combustible líquid d'alta densitat energètica i facilitat de distribució per a motors de combustió de cotxes, camions i avions).<br>
+      • <strong>H4:</strong> <span style="color:#0369a1; font-weight:700;">Opció A</span> (Acumulació històrica de fonts: no hem substituït energies, sinó que les hem sumat, multiplicant el consum per 35 des de 1850).
+    </div>
+
+    <table style="margin-bottom: 4px;">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Pregunta Reflexiva</th>
+          <th>Conceptes Clau que han d'aparèixer a la Resposta Model</th>
+          <th style="width: 14%; text-align: center;">Punts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>3.1 Transport Global</strong></td>
+          <td>
+            <strong>Resposta model:</strong> El transport planetari de cru i GNL comporta greus riscos de marees negres (Prestige, Exxon Valdez), fuites de metà (gas d'alt efecte hivernacle) en el transport a -160 ºC i crema massiva de fuel en vaixells de càrrega. En contrast, el sol i el vent autòctons es capten al lloc de consum i no requereixen cap flota logística transoceànica.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,30 pt si contrasta els riscos ambientals navals amb la seguretat dels recursos locals.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,30 pt</td>
+        </tr>
+        <tr>
+          <td><strong>3.2 Taxa Retorn (TRE)</strong></td>
+          <td>
+            <strong>Resposta model:</strong> Amb una TRE de 100:1 (fa un segle), el 99% de l'energia extreta quedava lliure per a la societat (escoles, hospitals, indústria). Amb jaciments difícils com el fracking o arenes bituminoses (TRE de 5:1 a 10:1), cal gastar entre el 10% i el 20% de l'energia només en el procés extractiu, encarint tota l'economia.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,30 pt si explica la relació entre menys energia neta disponible i l'encariment econòmic.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,30 pt</td>
+        </tr>
+        <tr>
+          <td><strong>3.3 Límits Règim Orgànic</strong></td>
+          <td>
+            <strong>Resposta model:</strong> L'any 1850 la humanitat consumia ~5.000 TWh (1.200 milions d'habitants); avui en consumeix ~175.000 TWh (8.000 milions). Intentar cobrir la demanda actual només amb llenya talaria tots els boscos de la Terra en pocs anys per la baixa taxa de creixement dels arbres i la baixa densitat energètica de la biomassa tradicional.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,30 pt si utilitza les dades de la gràfica (5.000 vs 175.000 TWh) i argumenta el col·lapse ecològic.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,30 pt</td>
+        </tr>
+        <tr>
+          <td><strong>3.4 Estret d'Ormuz</strong></td>
+          <td>
+            <strong>Resposta model:</strong> Com que pel pas d'Ormuz navega més del 20% del cru mundial, un bloqueig militar entre l'Iran i els EUA dispararia automàticament el preu del petroli i el gas als mercats mundials, provocant inflació i encariment de transports a Catalunya. Un país amb sol, vent i biomassa és sobirà i resilient perquè cap exèrcit estranger pot bloquejar la llum solar.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,30 pt si connecta el xoc del Golf Pèrsic amb la inflació a Catalunya i la immunitat renovable.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,30 pt</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="criteria-checklist">
+      <div class="checklist-item"><div class="checkbox"></div> Cita el risc de marees negres o fuites de metà (GNL a -160 ºC).</div>
+      <div class="checklist-item"><div class="checkbox"></div> Defineix la TRE i com afecta l'energia neta disponible.</div>
+      <div class="checklist-item"><div class="checkbox"></div> Fa servir les dades de consum històric (5.000 vs 175.000 TWh).</div>
+      <div class="checklist-item"><div class="checkbox"></div> Argumenta la resiliència del model autòcton davant d'Ormuz.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 4: GEOPOLÍTICA I DEPENDÈNCIA EXTERIOR (84,2%)            -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 4: Activitat Competencial 2 — Geopolítica, Dependència Exterior i Minerals Crítics</span>
+    <span class="task-badge-pts">Total: 2,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Solucions del Test Geopolític (1,00 pt) i Criteris de les 3 Preguntes Reflexives (1,50 pt)</span>
+      <span class="solution-points">6 preguntes test (1,00 pt) + 3 reflexions &times; 0,50 pt (1,50 pt) = 2,50 pts</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px;">
+      <div style="background: var(--bg); padding: 5px 8px; border-radius: 4px; font-size: 7.7pt; line-height: 1.4;">
+        <strong>G1:</strong> <span style="color:#0369a1; font-weight:700;">Opció B</span> (84,2% per absència de jaciments fòssils, 100% urani importat i ritme històric lent de renovables).<br>
+        <strong>G2:</strong> <span style="color:#0369a1; font-weight:700;">Opció A</span> (Els minerals d'una bateria es reciclen en cicle tancat; el fòssil es crema i es destrueix per sempre).<br>
+        <strong>G3:</strong> <span style="color:#0369a1; font-weight:700;">Opció A</span> (Encareix directament el transport, el gasoil i la cistella de la compra de les famílies catalanes).
+      </div>
+      <div style="background: var(--bg); padding: 5px 8px; border-radius: 4px; font-size: 7.7pt; line-height: 1.4;">
+        <strong>G4:</strong> <span style="color:#0369a1; font-weight:700;">Opció B</span> (Vulnerabilitat a rutes marítimes internacionals, assegurances de transport naval i preus volàtils).<br>
+        <strong>G5:</strong> <span style="color:#0369a1; font-weight:700;">Opció B</span> (L'urani de les centrals catalanes prové 100% de mines estrangeres: Kazakhstan, Canadà, Níger).<br>
+        <strong>G6:</strong> <span style="color:#0369a1; font-weight:700;">Opció A</span> (Concentració minera i refinament a molt pocs països com la Xina, que pot fixar quotes i preus).
+      </div>
+    </div>
+
+    <table style="margin-bottom: 4px;">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Pregunta Reflexiva</th>
+          <th>Conceptes Clau que han d'aparèixer a la Resposta Model</th>
+          <th style="width: 14%; text-align: center;">Punts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>4.1 Dependència (84,2%)</strong></td>
+          <td>
+            <strong>Resposta model:</strong> Catalunya presenta un 84,2% de dependència exterior (mentre la UE està en el 55,5%) per la manca total de pous de petroli i gas, la importació del 100% de l'urani per a les tres nuclears i un retard històric en el desplegament de parcs solars i eòlics. Qualsevol guerra o crisi diplomàtica a països productors es trasllada de forma directa i immediata a la factura de la llum, el gasoil i el transport dels aliments.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,50 pt si cita la manca de recursos fòssils, l'urani exterior i l'impacte en la inflació familiar.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,50 pt</td>
+        </tr>
+        <tr>
+          <td><strong>4.2 Minerals Crítics</strong></td>
+          <td>
+            <strong>Resposta model:</strong> La transició no pot repetir el model colonial d'extracció destructiva (consum d'aigua als salars de liti a Xile/Argentina o condicions laborals a les mines de cobalt del Congo). Des de Catalunya i Europa cal exigir normatives de reciclatge obligatori de més del 90% dels metalls de les bateries, ecodisseny de vehicles amb menys bateria i prioritzar el transport públic electrificat en lloc del cotxe privat massiu.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,50 pt si adverteix contra el nou extractivisme i proposa reciclatge, sobrietat i transport públic.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,50 pt</td>
+        </tr>
+        <tr>
+          <td><strong>4.3 Justícia Territorial</strong></td>
+          <td>
+            <strong>Resposta model:</strong> L'Àrea Metropolitana de Barcelona consumeix la major part de l'energia però no té terreny per a grans instal·lacions, mentre que les zones rurals (Ponent, Terres de l'Ebre, la Segarra) pateixen la massificació de macroparcs. Per a una transició justa cal prioritzar teulades industrials i urbanes abans de sòl agrícola fèrtil, permetre la participació ciutadana i municipal en la propietat dels parcs i crear cànons que beneficiïn directament els pobles acollidors.<br>
+            <span style="font-size: 7.2pt; color: var(--text-muted);"><em>Pauta: Atorga 0,50 pt si identifica l'asimetria camp-ciutat i proposa mesures de concertació i retorn econòmic.</em></span>
+          </td>
+          <td style="text-align: center; font-weight: 700; color: #0284c7;">0,50 pt</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="criteria-checklist">
+      <div class="checklist-item"><div class="checkbox"></div> 4.1 Relaciona el 84,2% amb la manca d'hidrocarburs propis i urani 100% exterior.</div>
+      <div class="checklist-item"><div class="checkbox"></div> 4.1 Connecta les crisis exteriors amb la inflació i preu de la cistella de la compra.</div>
+      <div class="checklist-item"><div class="checkbox"></div> 4.2 Proposa solucions com el reciclatge de bateries en cicle tancat i transport col·lectiu.</div>
+      <div class="checklist-item"><div class="checkbox"></div> 4.3 Planteja compensacions justes per a les zones rurals generadores.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TASCA 5: PRESA DE DECISIONS DEL CONSELLER/A                    -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="task-header no-break">
+    <span>Tasca 5: Presa de Decisions del Conseller/a — Estratègia per Reduir la Dependència</span>
+    <span class="task-badge-pts">Total: 2,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Correcció de les 3 Opcions Estratègiques i Veredicte</span>
+      <span class="solution-points">Taula d'Opcions (1,25 pt) + Veredicte Argumentat (1,25 pt) = 2,50 pts</span>
+    </div>
+
+    <div class="option-card">
+      <div class="option-card-title">☀️ Opció A: Sobirania Renovable Autòctona (Sol, Vent i Biomassa)</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong> Combustible 100% gratuït, universal i inesgotable; retalla dràsticament les importacions de petroli i gas; garanteix zero emissions directes de CO₂; converteix Catalunya en un país sobirà i resilient.
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i mitigació:</strong> Ocupació extensiva de terrenys agrícoles i forestals; oposició veïnal (nimbyisme); forta intermitència que exigeix bombament pur i bateries. <em>Mitigació:</em> Prioritzar cobertes urbanes i sòls degradats, i oferir beneficis municipals directes.
+        </div>
+      </div>
+    </div>
+
+    <div class="option-card">
+      <div class="option-card-title">🚢 Opció B: Diversificació Geopolítica i Rutes Segures d'Importació</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong> No altera el paisatge natural català; continuïtat immediata per al parc mòbil actual (cotxes de combustió) i per al complex petroquímic de Tarragona sense obres mastodòntiques al territori.
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i riscos:</strong> Manté la dependència exterior en l'84,2%; perpetua la sortida de milers de milions d'euros a l'estranger; incompleix els compromisos climàtics i manté la vulnerabilitat extrema a talls de subministrament.
+        </div>
+      </div>
+    </div>
+
+    <div class="option-card">
+      <div class="option-card-title">📉 Opció C: Sobrietat Energètica, Eficiència i Reducció de Demanda</div>
+      <div class="pros-cons-grid">
+        <div class="pros-box">
+          <strong>✅ Avantatges clau:</strong> És la política més barata i immediata per reduir consum fòssil; no consumeix territori ni minerals crítics; redueix directament la despesa de les famílies mitjançant aïllament i electrificació eficient.
+        </div>
+        <div class="cons-box">
+          <strong>⚠️ Inconvenients i mitigació:</strong> Dificultat per canviar els hàbits de consum d'una societat hiperconsumista; xoc amb sectors econòmics com el turisme d'avió o l'automoció tradicional. <em>Mitigació:</em> Subvencions públiques d'aïllament i transport gratuït.
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 4px; padding: 6px 8px; font-size: 8pt; margin-top: 4px; line-height: 1.4;">
+      <strong>🏛️ Barem de Valoració del Veredicte del Conseller/a (1,25 pt):</strong><br>
+      • <strong>0,60 pt — Coherència i Dades:</strong> Tria una opció (o combinació realista, com A + C) demostrant com s'arriba a l'objectiu de reduir la dependència de l'84,2% a menys del 40% cap al 2040.<br>
+      • <strong>0,65 pt — Maduresa Política i Mitigació:</strong> Reconeix obertament el principal inconvenient de la seva opció i planteja solucions reals (ex: compensacions econòmiques a pagesos si tria l'Opció A; ajudes directes a famílies vulnerables si tria l'Opció C).<br>
+      <span style="color: #047857; font-weight: 600;">💡 Pista d'excel·lència: Les respostes més madures combinen la generació autòctona (Opció A) amb la sobrietat i eficiència (Opció C), recordant que "l'energia més neta i sobirana és aquella que no cal produir".</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 8px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 9.8pt; color: #0284c7; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Tasques 2 a 5 sobre 10 punts)</span>
+      <span style="font-size: 7.8pt; color: var(--text-muted); font-weight: 600;">Bloc 2 · Fonts d'Energia, Història i Geopolítica</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tasca 2:</strong> Qüestionari d'Autoavaluació Global de Fonts (12 preguntes tipus test &times; 0,25 pt)</td>
+          <td style="text-align: center; font-weight: 700;">3,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 3,0</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 3:</strong> Història de l'Energia: De la Flama al Fòssil (Test + 4 Reflexions)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 4:</strong> Geopolítica, Dependència Exterior (84,2%) i Minerals Crítics (Test + 3 Reflexions)</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>Tasca 5:</strong> Presa de Decisions del Conseller/a i Veredicte de Sobirania</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (TASQUES 2 A 5):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #0284c7; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div><strong>Punts forts del meu treball en aquest bloc:</strong> ____________________________________________</div>
+      <div><strong>Aspectes que he de millorar per al Bloc 3:</strong> __________________________________________</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

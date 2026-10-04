@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full de Coavaluació d'Exposicions Orals (Format A3 Horitzontal · Optimitzat B/N) — Catalunya: Repte Energètic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET I TIPOGRAFIA ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --accent: #6366f1;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --highlight: #f0fdf4;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 9.5pt;
+      color: var(--text);
+      background: #e2e8f0;
+      line-height: 1.35;
+    }
+
+    /* ─── BARRA DE NAVEGACIÓ (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      font-size: 11.5px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+    .nav-tag {
+      background: rgba(2, 132, 199, 0.4);
+      color: #7dd3fc;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(2, 132, 199, 0.5);
+    }
+    .nav-tag-a3 {
+      background: rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+      border: 1px solid rgba(16, 185, 129, 0.6);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+      font-size: 11px;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #059669; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.25); color: #7dd3fc; }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bw-toggle-btn {
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid #64748b;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .bw-toggle-btn:hover { background: #475569; }
+    .bw-toggle-btn.active {
+      background: #000;
+      color: #fff;
+      border-color: #fff;
+    }
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(2,132,199,0.3);
+    }
+    .print-action-btn:hover { background: #0369a1; }
+
+    /* ─── PAGE WRAPPER (A3 FORMAT HORITZONTAL: 420mm x 297mm) ─── */
+    .page-container {
+      width: 420mm;
+      min-height: 297mm;
+      margin: 16px auto;
+      padding: 10mm 13mm;
+      background: var(--card-bg);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      box-sizing: border-box;
+    }
+
+    /* ─── CAPÇALERA DEL FULL (A3) ─── */
+    .header-box {
+      border: 2px solid #0f172a;
+      border-top: 5px solid #059669;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin-bottom: 8px;
+      background: #ffffff;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .header-title-group h1 {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .header-subtitle {
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+    .header-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+    .header-tag {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 7.5pt;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .header-tag-format {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1e40af;
+      font-size: 7.5pt;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      border: 1px solid #bfdbfe;
+    }
+
+    .meta-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      font-size: 8.5pt;
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed var(--border);
+    }
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .field-row.full {
+      grid-column: span 2;
+    }
+    .field-label {
+      font-weight: 700;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .field-line {
+      flex: 1;
+      border-bottom: 1.5px dotted #64748b;
+      height: 14px;
+    }
+
+    /* ─── INSTRUCCIONS I ESCALA ─── */
+    .instructions-strip {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.2pt;
+    }
+    .inst-text {
+      color: #1e40af;
+      line-height: 1.3;
+    }
+    .scale-chips {
+      display: flex;
+      gap: 6px;
+    }
+    .scale-chip {
+      background: #fff;
+      border: 1px solid #93c5fd;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 7.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .chip-4 { color: #15803d; border-color: #86efac; background: #f0fdf4; }
+    .chip-3 { color: #0284c7; border-color: #7dd3fc; background: #f0f9ff; }
+    .chip-2 { color: #b45309; border-color: #fde68a; background: #fffbeb; }
+    .chip-1 { color: #b91c1c; border-color: #fca5a5; background: #fef2f2; }
+
+    /* ─── GRAELLA MATRICIAL DE COAVALUACIÓ EN A3 ─── */
+    .eval-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 8.2pt;
+      background: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .eval-table th, .eval-table td {
+      border: 1px solid #cbd5e1;
+      padding: 4px 5px;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    /* 9 Columnes de Fonts (7.8% cadascuna = 70.2%) */
+    .col-font {
+      width: 7.8%;
+    }
+    /* Columna d'Indicadors en format files a la dreta (29.8%) */
+    .col-indicator-right {
+      width: 29.8%;
+      text-align: left !important;
+      padding: 4px 9px !important;
+      background: #f8fafc;
+    }
+
+    /* Capçaleres de la taula */
+    .eval-table thead tr.head-top th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 8.5pt;
+      padding: 6px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .eval-table thead tr.head-group th {
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 7.5pt;
+      padding: 4px 2px;
+      border-bottom: 2.5px solid #0284c7;
+    }
+
+    /* Tematització de les fonts */
+    .th-fossil {
+      background: #27272a;
+      color: #fb7185;
+    }
+    .th-nuclear {
+      background: #1e1b4b;
+      color: #d8b4fe;
+    }
+    .th-renewable {
+      background: #064e3b;
+      color: #34d399;
+    }
+    .th-indicator-hdr {
+      background: #1e293b;
+      color: #38bdf8;
+      text-align: left !important;
+      padding-left: 10px !important;
+    }
+
+    /* Cel·les de puntuació */
+    .score-cell {
+      height: 42px;
+      background: #ffffff;
+      transition: background 0.15s;
+    }
+    .score-cell:hover {
+      background: #f0fdf4;
+    }
+    .score-box-input {
+      display: inline-block;
+      width: 28px;
+      height: 24px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 4px;
+      line-height: 24px;
+      font-weight: 800;
+      font-size: 10.5pt;
+      color: #0f172a;
+      background: #fff;
+    }
+
+    /* Cel·la d'indicador a la dreta */
+    .ind-title {
+      font-weight: 800;
+      font-size: 8.6pt;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .ind-weight {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 7.5pt;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+    .ind-desc {
+      font-size: 7.4pt;
+      color: #475569;
+      line-height: 1.3;
+    }
+    .ind-criteria {
+      font-size: 7.2pt;
+      color: #059669;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Fila final de totals */
+    .row-total td {
+      background: #f1f5f9;
+      font-weight: 800;
+      border-top: 2.5px solid #0f172a;
+      border-bottom: 2.5px solid #0f172a;
+      padding: 7px 3px;
+    }
+    .total-box {
+      font-size: 10.5pt;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    /* Peu de pàgina */
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.6pt;
+      color: #64748b;
+      margin-top: 6px;
+      border-top: 1.5px dashed #cbd5e1;
+      padding-top: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════════════════ */
+    /* ─── REGLAMENT EXCLUSIU PER A BLANC I NEGRE (PANTALLA I PRINT) ─ */
+    /* ══════════════════════════════════════════════════════════════ */
+    body.bw-mode, @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 9pt !important;
+      }
+      .page-container {
+        box-shadow: none !important;
+        background: #ffffff !important;
+      }
+      
+      /* Capçalera B/N */
+      .header-box {
+        border: 2px solid #000000 !important;
+        border-top: 5px solid #000000 !important;
+        background: #ffffff !important;
+      }
+      .header-title-group h1 {
+        color: #000000 !important;
+      }
+      .header-subtitle {
+        color: #222222 !important;
+      }
+      .header-tag {
+        background: #f0f0f0 !important;
+        color: #000000 !important;
+        border: 1.5px solid #000000 !important;
+      }
+      .header-tag-format {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1.5px solid #000000 !important;
+      }
+      .meta-fields {
+        background: #ffffff !important;
+        border: 1.5px dashed #000000 !important;
+      }
+      .field-label {
+        color: #000000 !important;
+      }
+      .field-line {
+        border-bottom: 1.5px dotted #000000 !important;
+      }
+
+      /* Instruccions B/N */
+      .instructions-strip {
+        background: #f8f8f8 !important;
+        border: 1.5px solid #000000 !important;
+      }
+      .inst-text {
+        color: #000000 !important;
+      }
+      .scale-chip {
+        background: #ffffff !important;
+        border: 1.5px solid #000000 !important;
+        color: #000000 !important;
+        font-weight: 800 !important;
+      }
+
+      /* Taula matricial en B/N (Línies nítides i contrast d'impressió òptim) */
+      .eval-table {
+        border: 2px solid #000000 !important;
+        background: #ffffff !important;
+      }
+      .eval-table th, .eval-table td {
+        border: 1.2px solid #000000 !important;
+        color: #000000 !important;
+      }
+      .eval-table thead tr.head-top th {
+        background: #e2e2e2 !important;
+        color: #000000 !important;
+        border: 1.8px solid #000000 !important;
+        font-weight: 800 !important;
+      }
+      .eval-table thead tr.head-group th {
+        background: #f4f4f4 !important;
+        color: #000000 !important;
+        border: 1.5px solid #000000 !important;
+        border-bottom: 2.5px solid #000000 !important;
+      }
+      .eval-table thead tr.head-group th span {
+        color: #222222 !important;
+        font-weight: 600 !important;
+      }
+      .th-fossil, .th-nuclear, .th-renewable, .th-indicator-hdr {
+        background: #f4f4f4 !important;
+        color: #000000 !important;
+      }
+      .score-cell {
+        background: #ffffff !important;
+        border: 1.2px solid #000000 !important;
+      }
+      .score-box-input {
+        border: 1.8px solid #000000 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .col-indicator-right {
+        background: #ffffff !important;
+        border-left: 2.5px solid #000000 !important;
+      }
+      .ind-title {
+        color: #000000 !important;
+      }
+      .ind-weight {
+        background: #eaeaea !important;
+        color: #000000 !important;
+        border: 1.2px solid #000000 !important;
+      }
+      .ind-desc {
+        color: #222222 !important;
+      }
+      .ind-criteria {
+        color: #000000 !important;
+        font-weight: 800 !important;
+      }
+      .row-total td {
+        background: #eeeeee !important;
+        border-top: 2.5px solid #000000 !important;
+        border-bottom: 2.5px solid #000000 !important;
+        color: #000000 !important;
+      }
+      .total-box {
+        color: #000000 !important;
+      }
+      .footer-note {
+        color: #000000 !important;
+        border-top: 1.5px dashed #000000 !important;
+      }
+    }
+
+    /* ─── PRINT RULES (A3 LANDSCAPE - 1 PÀGINA EXACTA) ─── */
+    @media print {
+      @page {
+        size: A3 landscape;
+        margin: 8mm 10mm;
+      }
+      html, body {
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+      }
+      .no-print { display: none !important; }
+      .page-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-break { page-break-inside: avoid !important; break-inside: avoid !important; }
+      table { page-break-inside: avoid !important; break-inside: avoid !important; }
+      tr { page-break-inside: avoid !important; break-inside: avoid !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Coavaluació Oral · Bloc 2</span>
+    <span class="nav-tag-a3">📐 FORMAT DIN A3 (420 × 297 mm)</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">📖 Dossier Bloc 2</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Autocorrecció Bloc 2</a>
+    <a href="coavaluacio-presentacions-bloc-2.html" class="nav-btn active">👥 Full de Coavaluació A3 (9 Fonts)</a>
+  </div>
+  <div class="nav-actions">
+    <button class="bw-toggle-btn" id="bw-btn" onclick="toggleBW()">🔲 Vista Blanc i Negre</button>
+    <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Full de Coavaluació (A3)</button>
+  </div>
+</div>
+
+<div class="page-container" id="printable-sheet">
+
+  <!-- CAPÇALERA FORMAT A3 -->
+  <div class="header-box no-break">
+    <div class="header-title-group">
+      <div class="header-badge-row">
+        <span class="header-tag">BLOC 2: FONTS D'ENERGIA, HISTÒRIA I GEOPOLÍTICA · COAVALUACIÓ FORMATIVA</span>
+        <span class="header-tag-format">FULL DE MATRIU GLOBAL EN FORMAT DIN A3 HORITZONTAL</span>
+      </div>
+      <h1>Full de Coavaluació d'Exposicions Orals: Les 9 Fonts d'Energia a l'Aula</h1>
+      <div class="header-subtitle">
+        Avaluació entre iguals durant les ponències (equips de 3 alumnes · durada de 4 a 5 minuts · 2 notícies reals analitzades · suport i recerca amb Gemini Notebook).
+      </div>
+    </div>
+    <div class="meta-fields">
+      <div class="field-row">
+        <span class="field-label">Alumne/a que avalua:</span>
+        <div class="field-line"></div>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Grup / Classe:</span>
+        <div class="field-line"></div>
+      </div>
+      <div class="field-row full">
+        <span class="field-label">Font del meu grup (deixar en blanc / no autoavaluar):</span>
+        <div class="field-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTRUCCIONS I ESCALA DE VALORACIÓ -->
+  <div class="instructions-strip no-break">
+    <div class="inst-text">
+      <strong>Instruccions per a la coavaluació:</strong> Durant l'exposició de cadascun dels 9 equips, assigna una puntuació de l'1 al 4 a cadascun dels <strong>6 indicadors (files)</strong> a la columna corresponent a la seva font d'energia. Deixa en blanc la columna del teu propi equip.
+    </div>
+    <div class="scale-chips">
+      <div class="scale-chip chip-4">4 = Excel·lent (complet, rigorós i argumentat)</div>
+      <div class="scale-chip chip-3">3 = Notable (assolit i ben exposat)</div>
+      <div class="scale-chip chip-2">2 = Bàsic (parcial o amb mancances)</div>
+      <div class="scale-chip chip-1">1 = Insuficient (feble o no assolit)</div>
+    </div>
+  </div>
+
+  <!-- MATRIU DE COAVALUACIÓ A3: 9 COLUMNES DE FONTS + INDICADORS EN FORMAT FILES A LA DRETA -->
+  <table class="eval-table no-break">
+    <thead>
+      <tr class="head-top">
+        <th colspan="9" style="border-right: 2.5px solid #000;">
+          FONTS D'ENERGIA EXPOSADES PELS 9 GRUPS DE L'AULA (9 COLUMNES)
+        </th>
+        <th rowspan="2" class="col-indicator-right th-indicator-hdr" style="border-left: 2.5px solid #000;">
+          📋 INDICADORS D'AVALUACIÓ EN FORMAT FILES (A LA DRETA)
+          <div style="font-size: 6.8pt; font-weight: 400; text-transform: none; margin-top: 2px;">
+            Criteris competencials d'assoliment basats en la recerca amb Gemini Notebook i l'expressió oral (Escala 1 a 4 punts)
+          </div>
+        </th>
+      </tr>
+      <tr class="head-group">
+        <!-- 9 Fonts d'energia en columnes -->
+        <th class="col-font th-fossil">
+          <strong>1. CARBÓ</strong><br>
+          <span style="font-size: 6.8pt;">Fòssil · Estoc</span>
+        </th>
+        <th class="col-font th-fossil">
+          <strong>2. PETROLI</strong><br>
+          <span style="font-size: 6.8pt;">Fòssil · Estoc</span>
+        </th>
+        <th class="col-font th-fossil">
+          <strong>3. GAS NATURAL</strong><br>
+          <span style="font-size: 6.8pt;">Fòssil · Estoc</span>
+        </th>
+        <th class="col-font th-nuclear">
+          <strong>4. URANI / NUCL.</strong><br>
+          <span style="font-size: 6.8pt;">Mineral · Fissió</span>
+        </th>
+        <th class="col-font th-renewable">
+          <strong>5. SOLAR</strong><br>
+          <span style="font-size: 6.8pt;">Renov. · FV/Tèrmica</span>
+        </th>
+        <th class="col-font th-renewable">
+          <strong>6. EÒLICA</strong><br>
+          <span style="font-size: 6.8pt;">Renov. · Aerogeneradors</span>
+        </th>
+        <th class="col-font th-renewable">
+          <strong>7. HIDRÀULICA</strong><br>
+          <span style="font-size: 6.8pt;">Renov. · Preses/Bombam.</span>
+        </th>
+        <th class="col-font th-renewable">
+          <strong>8. BIOMASSA</strong><br>
+          <span style="font-size: 6.8pt;">Renov. · Biogàs/Residus</span>
+        </th>
+        <th class="col-font th-renewable" style="border-right: 2.5px solid #000;">
+          <strong>9. GEOTÈRMIA</strong><br>
+          <span style="font-size: 6.8pt;">Renov. · Calor Terra</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- FILA 1: RIGOR TÈCNIC -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 1 · Rigor Tècnic, Tipus de Font i Origen</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Classifiquen amb precisió la font (renovable/flux o fòssil/estoc), descriuen com s'extreu o capta a la natura i expliquen clarament <strong>com arriba a Catalunya</strong> (transport marítim en metaners, oleoductes, xarxa de transport elèctric o captació autòctona sobre el territori).
+          </div>
+          <div class="ind-criteria">✓ 4 = Concepte exacte de flux vs estoc i descripció completa de la cadena d'arribada o captació a Catalunya.</div>
+        </td>
+      </tr>
+
+      <!-- FILA 2: BALANÇ AVANTATGES I INCONVENIENTS -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 2 · Balanç d'Avantatges i Inconvenients</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Exposició objectiva i equilibrada: no cauen en propaganda ni simplismes. Analitzen les emissions de gasos d'efecte d'hivernacle (CO₂), la producció de residus (tòxics, nuclears o orgànics), els costos econòmics, la continuïtat del subministrament i l'impacte ambiental o sobre la biodiversitat.
+          </div>
+          <div class="ind-criteria">✓ 4 = Argumenten de forma sòlida almenys 2 avantatges i 2 inconvenients de primer ordre amb dades concretes.</div>
+        </td>
+      </tr>
+
+      <!-- FILA 3: ANÀLISI DE 2 NOTÍCIES REALS -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 3 · Anàlisi de Dues Notícies Reals d'Actualitat</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Presenten <strong>dues notícies reals d'actualitat</strong> vinculades a la font (procedents de la web del projecte o cercades a l'hemeroteca). Expliquen el conflicte real de fons (social, territorial, geopolític o tecnològic), els actors confrontats i les propostes de solució en joc.
+          </div>
+          <div class="ind-criteria">✓ 4 = Identifiquen 2 casos reals concrets i analitzen el conflicte i les solucions sense limitar-se a llegir titulars.</div>
+        </td>
+      </tr>
+
+      <!-- FILA 4: VEREDICTE DEL GRUP (2030-2050) -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 4 · Veredicte del Grup i Proposta de Futur (2030-2050)</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Defensen una posició raonada i consensuada sobre quin ha de ser el paper d'aquesta font en la transició energètica catalana (tancament progressiu, manteniment com a tecnologia de suport, expansió accelerada o transformació tecnològica).
+          </div>
+          <div class="ind-criteria">✓ 4 = Posicionament crític, justificat i coherent amb el marc de descarbonització i sobirania energètica de Catalunya.</div>
+        </td>
+      </tr>
+
+      <!-- FILA 5: COMUNICACIÓ, TEMPS I COORDINACIÓ DE 3 PERSONES -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 5 · Expressió Oral, Equip de 3 i Control del Temps (4-5 minuts)</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Intervenció equilibrada i activa dels <strong>3 integrants</strong> de l'equip. To de veu segur, dicció clara, vocabulari tècnic acurat i contacte visual mantingut amb el conjunt de l'aula (sense dependència de papers). Durada exactament continguda entre <strong>4:00 i 5:00 minuts</strong>.
+          </div>
+          <div class="ind-criteria">✓ 4 = Parlen els 3 membres per igual, excel·lent expressió corporal/oral i temps clavat entre 4 i 5 minuts.</div>
+        </td>
+      </tr>
+
+      <!-- FILA 6: SUPORT VISUAL, GEMINI NOTEBOOK I PREGUNTA AL GRUP -->
+      <tr>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell"><span class="score-box-input"></span></td>
+        <td class="score-cell" style="border-right: 2.5px solid #000;"><span class="score-box-input"></span></td>
+        <td class="col-indicator-right">
+          <div class="ind-title">
+            <span>Fila 6 · Suport Visual, Ús Crític de la IA i Dinamització</span>
+            <span class="ind-weight">1 a 4 pts</span>
+          </div>
+          <div class="ind-desc">
+            Diapositives visuals d'alt impacte (gràfics, mapes i infografies sense blocs de text llegit), constància d'haver emprat <strong>Gemini Notebook (NotebookLM)</strong> com a assistent documental fiable i formulació d'una pregunta o dilema estimulant per generar debat a la classe.
+          </div>
+          <div class="ind-criteria">✓ 4 = Diapositives professionals i sintètiques, formulació d'un dilema ric per a la classe i ús madur de la IA.</div>
+        </td>
+      </tr>
+
+      <!-- FILA TOTAL -->
+      <tr class="row-total">
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td><div class="total-box">___/24</div></td>
+        <td style="border-right: 2.5px solid #000;"><div class="total-box">___/24</div></td>
+        <td class="col-indicator-right" style="font-weight: 800;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>TOTAL DE PUNTS ACUMULATS (Suma dels 6 indicadors de les files)</span>
+            <span style="font-size: 8.2pt; font-weight: 800;">Puntuació màxima: 24 punts</span>
+          </div>
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+  <!-- PEU DEL FULL (A3) -->
+  <div class="footer-note no-break">
+    <div>
+      <strong>Projecte Catalunya: Repte Energètic</strong> · Dossier Didàctic i Eines d'Avaluació Formativa (Tecnologia 4t d'ESO) · Departament d'Educació.
+    </div>
+    <div>
+      📐 <em>Document optimitzat per a impressió nítida en blanc i negre i fotocòpies en format DIN A3 horitzontal (420 × 297 mm).</em>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleBW() {
+    const isBW = document.body.classList.toggle("bw-mode");
+    const btn = document.getElementById("bw-btn");
+    if (isBW) {
+      btn.classList.add("active");
+      btn.innerText = "🎨 Vista a Color";
+    } else {
+      btn.classList.remove("active");
+      btn.innerText = "🔲 Vista Blanc i Negre";
+    }
+  }
+</script>
+
+</body>
+</html>

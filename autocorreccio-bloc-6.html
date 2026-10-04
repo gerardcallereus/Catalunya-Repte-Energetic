@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 6 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #0284c7;
+      --correct-bg: #f0f9ff;
+      --correct-border: #bae6fd;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(2, 132, 199, 0.3);
+      color: #7dd3fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #0284c7; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #0369a1; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 12px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-badge-pts {
+      background: var(--correct);
+      color: white;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--correct-border);
+    }
+    .step-box {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 4px 0;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+    .step-box strong { color: var(--text-main); }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn active">✅ Bloc 6</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 6</div>
+        <div class="header-title">El Gran Joc de Simulació de Govern (4 Anys) i Síntesi Final</div>
+        <div class="header-desc">Pauta d'autoavaluació per a les Activitats A9 (el Gran Joc de simulació 2024-2030, gestió del Trilema i crisis) i A10 (autoavaluació competencial i reflexió de tancament) sobre 10 punts.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field"><strong>Alumne/a:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Grup:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Data:</strong> <div class="line"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A9: EL GRAN JOC DE SIMULACIÓ                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A9 · Tasca 1: Registre Trimestral de la Partida del Gran Joc (16 Trimestres)</span>
+    <span class="task-badge-pts">2,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Valoració del Registre del Mandat i Codi de Partida</span>
+      <span class="solution-points">2,50 pts (Traçabilitat i coherència de les dades)</span>
+    </div>
+    <div class="step-box">
+      • <strong>Completitud de la Taula (1,50 pts):</strong> Ha anotat trimestre a trimestre (o almenys anualment per als 4 anys de legislatura) els indicadors clau: Pressupost acumulat, MW de noves centrals en construcció/producció, % de renovables al mix elèctric i estat d'aprovació dels col·lectius.<br>
+      • <strong>Gestió d'Esdeveniments (1,00 pt):</strong> Ha registrat com a mínim 2 o 3 esdeveniments aleatoris (onada de calor tòrrida, sequera, protestes territorials, sanció UE, etc.) i les mesures adoptades per evitar el Game Over (bancarrota o revolta social).
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A9 · Tasca 2: Anàlisi de la Partida i Decisions Preses com a Conseller/a</span>
+    <span class="task-badge-pts">2,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Correcció de les 3 Preguntes d'Anàlisi Estratègica</span>
+      <span class="solution-points">Crisis (1,00 pt) + Mix construït (0,75 pt) + Aprenentatge Any 1 (0,75 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Anàlisi 1 · El moment de més crisi durant la partida (1,00 pt):</strong><br>
+      • Identifica la crisi més severa (ex: onada de calor a l'estiu amb demanda disparada a 9.000 MW, sequera i cost d'importació extrem).<br>
+      • La resposta excel·lent explica una resolució preventiva o estratègica: mantenir una reserva activa de gas sense abusar-ne, accelerar parcs renovables i assumir dèficits temporals per mantenir el subministrament ciutadà.
+    </div>
+    <div class="step-box">
+      <strong>Anàlisi 2 · Mix tecnològic final construït (0,75 pt):</strong><br>
+      • Justifica quines centrals ha construït majoritàriament (solar, eòlica terrestre o marina) i per què.<br>
+      • Evidencia que construir només gas és una trampa a curt termini (barat d'inici però dispara emissions de CO₂ i penalitzacions de la UE).
+    </div>
+    <div class="step-box">
+      <strong>Anàlisi 3 · Què canviaria en l'estratègia del primer any? (0,75 pt):</strong><br>
+      • Raona que <strong>no s'ha d'esperar a estar en crisi per invertir</strong>: com que les centrals renovables triguen 2 trimestres a construir-se, començar a construir al Trimestre 1 o 2 és clau per tenir-les produint quan arribin les puntes d'estiu i hivern de l'Any 2 i 3.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A10: REFLEXIÓ FINAL I SÍNTESI                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A10 · Tasca 1: Rúbrica d'Autoavaluació d'Objectius d'Aprenentatge</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Autoavaluació Honest i Metacognitiva dels 6 Blocs Temàtics</span>
+      <span class="solution-points">1,50 pts (Graella completada amb reflexió justificativa)</span>
+    </div>
+    <div class="step-box">
+      • Ha valorat del nivell 1 al 4 el seu grau d'assoliment en: (1) Diagnosi i pobresa energètica; (2) Fonts i geopolítica; (3) Centrals i balanç de xarxa; (4) Consens social i debat; (5) Polítiques i territori; (6) Simulació i visió global.<br>
+      • Afegeix un breu comentari personal sobre quin àmbit li ha costat més i quin ha estat el descobriment més sorprenent.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A10 · Tasca 2: Preguntes de Síntesi Final d'Excel·lència</span>
+    <span class="task-badge-pts">3,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Models de Resposta de les 3 Grans Preguntes de Tancament del Projecte</span>
+      <span class="solution-points">Síntesi 3 frases (1,00 pt) + 1a Mesura (1,25 pts) + Poder ciutadà (1,25 pts)</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Síntesi del repte energètic en 3 frases (1,00 pt):</strong><br>
+      • <em>Lliçó 1 (Social):</em> La transició no és només tecnològica sinó de <strong>consens social</strong>: tota política crea tensions que cal negociar.<br>
+      • <em>Lliçó 2 (Física):</em> La diferència entre MW i GWh fa que necessitem emmagatzematge massiu o backups per no dependre del gas quan no fa sol ni vent.<br>
+      • <em>Lliçó 3 (Justícia):</em> L'energia és un dret humà essencial; cal acabar amb la pobresa energètica abans de donar lliçons de sostenibilitat.
+    </div>
+    <div class="step-box">
+      <strong>2. Si fossis realment Conseller/a, quina seria la primera mesura? (1,25 pts):</strong><br>
+      • <em>Resposta model:</em> Un <strong>Pla de Xoc contra la Pobresa Energètica i d'Aïllament d'Habitatges</strong> combinat amb la <strong>desburocratització immediata de l'autoconsum solar</strong>.<br>
+      • <em>Justificació:</em> Compleix simultàniament amb l'<em>equitat</em> (protegeix les famílies que passen fred), l'<em>eficiència</em> (redueix la demanda de fons públics per sempre) i genera un consens social unànime entre ciutadania, ecologistes i empresariat instal·lador.
+    </div>
+    <div class="step-box">
+      <strong>3. Quin poder real té la ciutadania individual per impulsar la transició? (1,25 pts):</strong><br>
+      • <em>Consum intel·ligent:</em> Triar tarifes amb discriminació horària i consumir quan el sol produeix més a la xarxa (migdia).<br>
+      • <em>Autoconsum i comunitats energètiques:</em> Instal·lar plaques a teulades pròpies o de comunitats de veïns.<br>
+      • <em>Participació democràtica i pressió ciutadana:</em> Exigir als partits polítics plans energètics rigorosos i transparents, i contractar l'electricitat amb cooperatives d'energia 100% verda certificada.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 8px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 9.8pt; color: #0284c7; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Suma directa sobre 10 punts)</span>
+      <span style="font-size: 7.8pt; color: var(--text-muted); font-weight: 600;">Bloc 6 · Simulació de Govern i Síntesi</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A9 · Tasca 1:</strong> Registre complet del mandat de 16 trimestres al joc</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>A9 · Tasca 2:</strong> Anàlisi de la partida: Crisis, mix construït i inversions</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>A10 · Tasca 1:</strong> Rúbrica d'autoavaluació d'objectius assolits (6 blocs)</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A10 · Tasca 2:</strong> Preguntes de síntesi final (3 lliçons, 1a mesura i ciutadania)</td>
+          <td style="text-align: center; font-weight: 700;">3,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 3,5</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (BLOC 6):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #0284c7; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div><strong>Punts forts del treball:</strong> __________________________________________________</div>
+      <div><strong>Aspectes a millorar per al proper bloc:</strong> ________________________________</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 3 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #4f46e5;
+      --correct-bg: #eef2ff;
+      --correct-border: #c7d2fe;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(79, 70, 229, 0.3);
+      color: #a5b4fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #4f46e5; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #4338ca; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 12px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-badge-pts {
+      background: var(--correct);
+      color: white;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--correct-border);
+    }
+    .step-box {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 4px 0;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+    .step-box strong { color: var(--text-main); }
+    .step-formula {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #4338ca;
+      font-weight: 700;
+      background: #e0e7ff;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+    .error-box {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin-top: 4px;
+      font-size: 7.6pt;
+      color: #991b1b;
+    }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+    .ans-highlight {
+      background: #eef2ff;
+      font-weight: 700;
+      color: #3730a3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn active">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn">✅ Bloc 6</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 3</div>
+        <div class="header-title">El Sistema Elèctric Català: Catàleg de Centrals i Balanç de Xarxa</div>
+        <div class="header-desc">Pauta d'autoavaluació per a les Activitats A3 (tecnologies de generació, potència vs energia i mix 2023) i A4 (experiments amb el simulador de xarxa, estabilitat i corba de demanda) sobre 10 punts.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field"><strong>Alumne/a:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Grup:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Data:</strong> <div class="line"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A3: LES CENTRALS DE CATALUNYA                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  
+  <div class="task-header no-break">
+    <span>A3 · Tasca 1: Taula Comparativa de les Tecnologies de Generació Elèctrica</span>
+    <span class="task-badge-pts">2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Dades Oficials del Catàleg i Identificació d'Inconvenients</span>
+      <span class="solution-points">6 tecnologies &times; ~0,33 pt = 2,00 pts</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Tecnologia</th>
+          <th style="text-align:center;">MW instal·lats</th>
+          <th style="text-align:center;">GWh/any reals</th>
+          <th style="text-align:center;">Hores equiv.</th>
+          <th style="text-align:center;">CO₂ (g/kWh)</th>
+          <th>Principal inconvenient tècnic / ambiental</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>☢️ Nuclear</strong></td>
+          <td style="text-align:center;">3.000</td>
+          <td style="text-align:center;">24.000</td>
+          <td style="text-align:center;">~8.000 h</td>
+          <td style="text-align:center;">~12</td>
+          <td>Residus radioactius d'alta activitat; cost i lentitud de desmantellament; risc sever en cas d'accident.</td>
+        </tr>
+        <tr>
+          <td><strong>🔥 Cicle Combinat (Gas)</strong></td>
+          <td style="text-align:center;" class="ans-highlight">3.600</td>
+          <td style="text-align:center;" class="ans-highlight">9.000</td>
+          <td style="text-align:center;" class="ans-highlight">~2.500 h</td>
+          <td style="text-align:center;">~490</td>
+          <td>Emissions elevades de CO₂; dependència del preu internacional del metà i vulnerabilitat geopolítica.</td>
+        </tr>
+        <tr>
+          <td><strong>💧 Hidroelèctrica</strong></td>
+          <td style="text-align:center;" class="ans-highlight">2.050</td>
+          <td style="text-align:center;" class="ans-highlight">3.200</td>
+          <td style="text-align:center;" class="ans-highlight">~1.560 h</td>
+          <td style="text-align:center;">~24</td>
+          <td>Molt dependent de la pluja (greument afectada per sequeres); impacte ecològic en cabals fluvials.</td>
+        </tr>
+        <tr>
+          <td><strong>💨 Eòlica Terrestre</strong></td>
+          <td style="text-align:center;" class="ans-highlight">1.350</td>
+          <td style="text-align:center;" class="ans-highlight">2.500</td>
+          <td style="text-align:center;" class="ans-highlight">~1.850 h</td>
+          <td style="text-align:center;">~11</td>
+          <td>Intermitència (depèn del vent); rebuig veïnal i impacte paisatgístic/fauna; necessita xarxes de transport.</td>
+        </tr>
+        <tr>
+          <td><strong>☀️ Solar Fotovoltaica</strong></td>
+          <td style="text-align:center;" class="ans-highlight">1.800</td>
+          <td style="text-align:center;" class="ans-highlight">2.100</td>
+          <td style="text-align:center;" class="ans-highlight">~1.167 h</td>
+          <td style="text-align:center;">~45</td>
+          <td>No produeix de nit; rendiment variable per nuvolositat; ocupa grans superfícies de terreny o cobertes.</td>
+        </tr>
+        <tr>
+          <td><strong>🌿 Biomassa</strong></td>
+          <td style="text-align:center;" class="ans-highlight">330</td>
+          <td style="text-align:center;" class="ans-highlight">2.000</td>
+          <td style="text-align:center;" class="ans-highlight">~6.000 h</td>
+          <td style="text-align:center;">~230</td>
+          <td>Emissió de partícules en combustió; logística de recollida de fusta o purins; limitació del recurs local.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A3 · Tasca 2: Preguntes d'Anàlisi de Rendiment, Factor de Capacitat i Substitució</span>
+    <span class="task-badge-pts">1,5 punts (3 &times; 0,50 pt)</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Valoració de les 3 Preguntes d'Enginyeria Elèctrica</span>
+      <span class="solution-points">0,50 pt per cada resposta raonada</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Analogia del cotxe (Potència en MW vs Energia en GWh):</strong><br>
+      • Els <span class="step-formula">MW</span> representen la <em>velocitat punta</em> (quanta energia pot donar en un instant). Els <span class="step-formula">GWh</span> són els <em>quilòmetres totals recorreguts</em> en un any.<br>
+      • La nuclear té menys potència punta (3.000 MW vs 3.600 MW del gas) però circula <strong>8.000 hores a l'any</strong> (gairebé ininterrompuda), mentre que el gas només arrenca <strong>2.500 hores/any</strong> com a backup. Per això la nuclear genera gairebé el triple d'energia (24.000 vs 9.000 GWh).
+    </div>
+    <div class="step-box">
+      <strong>2. Interpretació del rendiment solar (22%):</strong><br>
+      • No és un defecte tecnològic: reflecteix el cicle natural de 24 hores (la meitat del dia és de nit i la radiació màxima dura unes hores).<br>
+      • Els seus avantatges compensen el factor d'utilització: cost de plaques reduït en un 90%, zero emissions, generació a les hores diürnes de consum i facilitat d'instal·lació en teulades.
+    </div>
+    <div class="step-box">
+      <strong>3. El repte de substituir 24.000 GWh nuclears:</strong><br>
+      • Mostra una combinació tècnicament viable: multiplicar per 3 l'eòlica (+7.500 GWh), quadruplicar la solar (+8.400 GWh), eòlica marina (+3.500 GWh), biomassa (+2.000 GWh) i interconnexió internacional (+2.600 GWh).<br>
+      • Destaca que el veritable repte és l'<strong>emmagatzematge massiu</strong> per suplir la nit i els dies en calma.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A3 · Tasca 3: Mix de Generació 2023, CO₂ i Impacte de la Sequera</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Procediment Matemàtic de les Preguntes 4 i 5</span>
+      <span class="solution-points">Pregunta 4 (0,75 pt) + Pregunta 5 (0,75 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 4: Percentatge de generació elèctrica catalana lliure d'emissions directes de CO₂ (2023):</strong><br>
+      • Fonts lliures de CO₂: Nuclear (59,6%) + Eòlica (7,4%) + Hidroelèctrica (6,2%) + Solar FV (3,7%).<br>
+      • Càlcul: <span class="step-formula">59,6% + 7,4% + 6,2% + 3,7% = 76,9%</span> (aprox. <strong>77%</strong> del total català lliure de CO₂).<br>
+      • <em>Comprensió clau:</em> La paradoxa de Catalunya és que el 77% de l'electricitat no emet CO₂, però el 60% d'aquest mèrit prové de la nuclear.
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 5: Caiguda de la producció hidroelèctrica per la sequera i impacte al Trilema:</strong><br>
+      • Producció hidroelèctrica mitjana normal: 4.500 GWh. Producció 2023: 2.378 GWh (o ~2.498 GWh segons taula).<br>
+      • Caiguda percentual: <span class="step-formula">(4.500 - 2.378) / 4.500 &times; 100 = 47,15%</span> de caiguda (gairebé es redueix a la meitat!).<br>
+      • <em>Compensació i efecte al Trilema:</em> Aquesta pèrdua d'aigua s'ha de cobrir cremant més gas als <strong>Cicles Combinats</strong>. Això perjudica la <em>Sostenibilitat</em> (augmenten les emissions de CO₂) i la <em>Competitivitat</em> (el gas és més car que l'aigua), tot i que salva la <em>Seguretat de Subministrament</em>.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A4: SIMULADOR DE XARXA I CORBA DE CÀRREGA            -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A4 · Tasca 1: Experiments Guiats amb el Simulador Interactiu de Xarxa</span>
+    <span class="task-badge-pts">2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Interpretació de Balanços, Dèficits i Impacte Econòmic</span>
+      <span class="solution-points">4 experiments &times; 0,50 pt = 2,00 pts</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Configuració Estudiada</th>
+          <th style="text-align:center;">Producció (MW)</th>
+          <th style="text-align:center;">Demanda (MW)</th>
+          <th style="text-align:center;">Balanç de Potència</th>
+          <th>Impacte Financer i Operatiu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Q2 Normal, totes actives, Demanda 7.000 MW</td>
+          <td style="text-align:center;">~8.200 MW</td>
+          <td style="text-align:center;">7.000 MW</td>
+          <td style="text-align:center; color:#047857; font-weight:700;">+1.200 MW (Excedent)</td>
+          <td>Ingressos per exportació d'electricitat a xarxes veïnes.</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Q2 Tòrrid, totes actives, Demanda 7.000 MW</td>
+          <td style="text-align:center;">~7.900 MW</td>
+          <td style="text-align:center;">8.400 MW</td>
+          <td style="text-align:center; color:#b91c1c; font-weight:700;">-500 MW (Dèficit)</td>
+          <td>Cal importar energia cara per cobrir els aires condicionats.</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Q2 Normal, Nuclear inactiva, Demanda 7.000 MW</td>
+          <td style="text-align:center;">~5.200 MW</td>
+          <td style="text-align:center;">7.000 MW</td>
+          <td style="text-align:center; color:#b91c1c; font-weight:700;">-1.800 MW (Dèficit crític)</td>
+          <td>Risc greu de black-out o despesa astronòmica d'importació.</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Q3 DANA, totes actives, Demanda 6.500 MW</td>
+          <td style="text-align:center;">~7.100 MW</td>
+          <td style="text-align:center;">6.500 MW</td>
+          <td style="text-align:center; color:#047857; font-weight:700;">+600 MW (Excedent)</td>
+          <td>Producció hidràulica al màxim; solar enfonsada per nuvolositat.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A4 · Tasca 2: Reflexió sobre la Gestió i Estabilitat de la Xarxa</span>
+    <span class="task-badge-pts">1,5 punts (2 &times; 0,75 pt)</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Correcció de les 2 Preguntes de Gestió Elèctrica</span>
+      <span class="solution-points">0,75 pt per resposta completa</span>
+    </div>
+    <div class="step-box">
+      <strong>Reflexió 1 (L'experiment més revelador):</strong><br>
+      • La resposta excel·lent destaca l'<strong>Experiment 3 (sense nuclear)</strong>: evidencia que apagar la nuclear sense tenir prèviament un parc renovable gegant i bateries instal·lades aboca Catalunya a un dèficit immediat de quasi 2.000 MW, amb risc de talls elèctrics o factures desorbitades.
+    </div>
+    <div class="step-box">
+      <strong>Reflexió 2 (Escenari de cost màxim d'importació i solucions):</strong><br>
+      • El cost es dispara quan coincideix <em>alta demanda</em> (onada de calor/fred) amb <em>baixa renovable</em> (sequera o calma eòlica) i fallades de centrals de base.<br>
+      • Les solucions tècniques imprescindibles són: (1) Emmagatzematge per bombament hidràulic i bateries; (2) Reducció de puntes amb gestió de la demanda i aïllament d'edificis; (3) Interconnexions d'alta capacitat.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A4 · Tasca 3: Anàlisi de la Corba de Càrrega Diària a Catalunya</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Diferències Estacionals i el Repte del Desacoblament Solar</span>
+      <span class="solution-points">Pregunta 3 (0,75 pt) + Pregunta 4 (0,75 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 3: Per què el pic d'estiu és a les 14h-15h i el d'hivern a les 20h-21h?</strong><br>
+      • <em>Estiu:</em> Pic tèrmic diürn. La calor màxima del migdia fa coincidir la demanda industrial i d'oficines amb la màxima potència d'aire condicionat.<br>
+      • <em>Hivern:</em> Pic social i de foscor nocturna. A les 20h s'acaba la jornada escolar/laboral, les famílies arriben a casa, s'encenen llums (ja és fosc), cuines, electrodomèstics i la calefacció elèctrica.
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 4: Pot la solar cobrir directament el pic d'hivern de les 20:30h?</strong><br>
+      • <em>Resposta directa:</em> <strong>No de forma directa</strong>, perquè a les 20:30h d'un dia d'hivern la radiació solar a Catalunya és exactament 0 W/m² (és de nit).<br>
+      • <em>Solucions imprescindibles:</em> Emmagatzematge en embassaments hidroelèctrics reversibles (bombeig a la nit amb l'aigua pujada de dia), bateries estacionals de gran escala i flexibilitat de demanda (carregar cotxes elèctrics al migdia).
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 8px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 9.8pt; color: #4f46e5; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Suma directa sobre 10 punts)</span>
+      <span style="font-size: 7.8pt; color: var(--text-muted); font-weight: 600;">Bloc 3 · Centrals i Xarxa Elèctrica</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A3 · Tasca 1:</strong> Taula comparativa de tecnologies de generació</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>A3 · Tasca 2:</strong> Rendiment, potència vs energia i substitució nuclear</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A3 · Tasca 3:</strong> Mix elèctric 2023, percentatge sense CO₂ i sequera</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A4 · Tasca 1:</strong> Experiments guiats amb el simulador de xarxa (4 casos)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>A4 · Tasca 2:</strong> Reflexió sobre la gestió i estabilitat del sistema elèctric</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A4 · Tasca 3:</strong> Anàlisi de la corba de càrrega diària i desacoblament solar</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (BLOC 3):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #4f46e5; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div><strong>Punts forts del treball:</strong> __________________________________________________</div>
+      <div><strong>Aspectes a millorar per al proper bloc:</strong> ________________________________</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

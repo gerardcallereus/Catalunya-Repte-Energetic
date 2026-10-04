@@ -2409,28 +2409,84 @@
           <svg style="width:24px; height:24px; fill:var(--secondary)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
           Dades Reals: El Repte Geopolític de la Dependència Energètica Exterior
         </h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
-          Catalunya té una taxa de dependència exterior de l'<strong>84,2%</strong> (2023), una de les més altes de la Unió Europea a causa d'importar el 100% de fòssils i urani. Passa el ratolí per sobre de les barres per veure on es consumeix cada recurs.
+        <p style="color: var(--text-muted); margin-bottom: 1.25rem; font-size: 0.95rem;">
+          Catalunya té una taxa de dependència energètica exterior de l'<strong>84,2%</strong> (2023), una de les més altes d'Europa. Això vol dir que més de 8 de cada 10 unitats d'energia que consumeix el país s'han de comprar a l'estranger.
         </p>
+
+        <!-- Macro-Balanç Global explicatiu: D'on surt el 15,8% autòcton? -->
+        <div style="background: rgba(0, 0, 0, 0.16); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.15rem; margin-bottom: 1.5rem;">
+          <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-main); margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <span>🧭 Balanç Global d'Energia Primària a Catalunya (ICAEN)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Consum total = 100%</span>
+          </div>
+
+          <div style="height: 28px; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 0.75rem; background: rgba(0,0,0,0.25);">
+            <div style="width: 84.2%; background: linear-gradient(90deg, #f43f5e, #be123c); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5);" title="84,2% Dependència Exterior">
+              84,2% Importat de l'Exterior
+            </div>
+            <div style="width: 15.8%; background: linear-gradient(90deg, #059669, #10b981); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5);" title="15,8% Recursos Renovables Autòctons">
+              15,8% Autòcton
+            </div>
+          </div>
+
+          <div class="grid-2" style="gap: 1rem; font-size: 0.83rem;">
+            <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+              <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--rose); margin-top: 3px; flex-shrink: 0;"></span>
+              <div>
+                <strong style="color: var(--text-main);">84,2% Dependència Exterior:</strong> Combustibles fòssils i urani que Catalunya <strong>no té al seu subsòl</strong> (petroli ~46%, gas natural ~21%, urani nuclear ~17%). S'han de comprar íntegrament a països estrangers.
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+              <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--primary); margin-top: 3px; flex-shrink: 0;"></span>
+              <div>
+                <strong style="color: var(--primary);">15,8% Producció Autòctona:</strong> Generada amb <strong>recursos naturals propis</strong> (sol, vent, aigua i biomassa). Cap d'aquests recursos s'importa (0% importat), però la seva producció actual <strong>només cobreix el 15,8% de tota l'energia que consumim</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-weight: 600; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          📊 Grau d'Importació per Cada Font d'Energia (passa el ratolí per veure'n la clau geopolítica):
+        </div>
 
         <div class="dependency-grid-layout">
           <div class="dep-chart-bars">
-            <div class="dep-bar-row" data-fuel="petroli" data-import="100%" data-desc="Consumit principalment en el sector transport i la indústria petroquímica de Tarragona. Prové en la seva totalitat d'importacions per vaixell." style="--color: var(--rose);">
-              <div class="dep-bar-label">🛢️ Petroli (100% Importat)</div>
-              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--rose);">100% importat</div></div>
+            <div class="dep-bar-row" data-fuel="petroli" data-import="100%" data-desc="Consumit principalment en el sector transport i la indústria petroquímica de Tarragona. Prové íntegrament d'importacions per vaixell." style="--color: var(--rose);">
+              <div class="dep-bar-label" style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span>🛢️ Petroli (Cru i combustibles líquids)</span>
+                <span style="color: var(--rose); font-size: 0.8rem; font-weight: 700;">100% Importat · ~46% del consum català</span>
+              </div>
+              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--rose);">100% importat de l'exterior</div></div>
             </div>
-            <div class="dep-bar-row" data-fuel="gas" data-import="100%" data-desc="Consumit en calefacció, indústries i processos tèrmics. Prové d'Algèria i vaixells metaners de GNL d'EUA o Sibèria." style="--color: var(--rose);">
-              <div class="dep-bar-label">🔥 Gas Natural (100% Importat)</div>
-              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--rose);">100% importat</div></div>
+
+            <div class="dep-bar-row" data-fuel="gas" data-import="100%" data-desc="Consumit en calefacció, indústries i centrals de cicle combinat elèctric. Arriba a través de gasoductes d'Algèria i vaixells metaners de GNL d'EUA o Nigèria." style="--color: var(--rose);">
+              <div class="dep-bar-label" style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span>🔥 Gas Natural (Metà fòssil)</span>
+                <span style="color: var(--rose); font-size: 0.8rem; font-weight: 700;">100% Importat · ~21% del consum català</span>
+              </div>
+              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--rose);">100% importat de l'exterior</div></div>
             </div>
-            <div class="dep-bar-row" data-fuel="urani" data-import="100%" data-desc="Combustible nuclear mineral d'altíssima densitat energètica. Tot l'urani es compra a l'estranger." style="--color: var(--indigo);">
-              <div class="dep-bar-label">☢️ Urani (100% Importat)</div>
-              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--indigo);">100% importat</div></div>
+
+            <div class="dep-bar-row" data-fuel="urani" data-import="100%" data-desc="Combustible nuclear per a les centrals d'Ascó i Vandellòs. Tot i que l'electricitat es genera a Catalunya, el 100% del mineral d'urani prové de mines a l'estranger (Níger, Kazakhstan, Canadà)." style="--color: var(--indigo);">
+              <div class="dep-bar-label" style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span>☢️ Urani (Central Nuclear)</span>
+                <span style="color: var(--indigo); font-size: 0.8rem; font-weight: 700;">100% Importat · ~17% de l'energia primària</span>
+              </div>
+              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 100%; background: var(--indigo);">100% importat de l'exterior</div></div>
             </div>
-            <div class="dep-bar-row" data-fuel="renovables" data-import="0%" data-desc="Eòlica, solar i hidroelèctrica autòctona catalana. Són els únics recursos reals de producció 100% local." style="--color: var(--primary);">
-              <div class="dep-bar-label">🌿 Renovables Autòctones (0% Importat)</div>
-              <div class="dep-bar-track"><div class="dep-bar-fill" style="width: 15.8%; background: var(--primary);">15,8% Autòcton</div></div>
+
+            <div class="dep-bar-row" data-fuel="renovables" data-import="0%" data-desc="Eòlica, solar, hidroelèctrica i biomassa catalanes. El recurs és 100% net i autòcton (0% importat), però la seva producció actual només cobreix el 15,8% de tot el consum energètic català." style="--color: var(--primary);">
+              <div class="dep-bar-label" style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span>🌿 Fonts Renovables Autòctones</span>
+                <span style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">0% Importat · 100% Autòcton (15,8% del total consumit)</span>
+              </div>
+              <div class="dep-bar-track">
+                <div class="dep-bar-fill" style="width: 100%; background: linear-gradient(90deg, #059669, var(--primary));">
+                  0% importat · 100% captat a Catalunya (Cobreix el 15,8% del consum total)
+                </div>
+              </div>
             </div>
+
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem; text-align: right; grid-column: span 2; width: 100%;">
               <strong>Font:</strong> Balanç Energètic de Catalunya, Institut Català d'Energia (ICAEN).
             </div>
@@ -2443,6 +2499,130 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <!-- 1c. LA INDÚSTRIA EXTRACTIVA: PROBLEMES CLÀSSICS I NOUS REPTES -->
+      <div class="glass-card" style="border-left: 4px solid var(--amber);">
+        <h2 style="color: var(--amber); display: flex; align-items: center; gap: 0.6rem;">
+          <svg style="width:26px; height:26px; fill:var(--amber)" viewBox="0 0 24 24"><path d="M19.78 4.22a.75.75 0 0 0-1.06 0L14.4 8.54l-1.06-1.06a.75.75 0 0 0-1.06 1.06l1.06 1.06-6.52 6.52-2.12-.7a.75.75 0 0 0-.91.91l.7 2.12-2.19 2.19a.75.75 0 1 0 1.06 1.06l2.19-2.19 2.12.7a.75.75 0 0 0 .91-.91l-.7-2.12 6.52-6.52 1.06 1.06a.75.75 0 0 0 1.06-1.06l-1.06-1.06 4.32-4.32a.75.75 0 0 0 0-1.06z"/></svg>
+          La Indústria Extractiva: Problemes Clàssics i Nous Reptes
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6;">
+          Cap model energètic és immaterial: per transformar energia sempre cal extreure materials de l'escorça de la Terra. Ara bé, existeix una diferència conceptual decisiva entre la indústria extractiva dels <strong>combustibles fòssils</strong> (extrets de manera massiva i contínua per ser cremats i destruïts irreversiblement en qüestió de segons) i l'extracció de <strong>minerals crítics</strong> per a la <strong>transició ecològica</strong> (inversió material inicial per construir la infraestructura d'aerogeneradors, plaques solars i bateries, els materials de la qual es poden reciclar).
+        </p>
+
+        <!-- Graella comparativa dels dos models extractius -->
+        <div class="grid-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+          
+          <!-- Columna 1: Problemes Clàssics dels Fòssils -->
+          <div style="background: rgba(244, 63, 94, 0.03); border: 1px solid rgba(244, 63, 94, 0.15); border-radius: 14px; padding: 1.3rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
+              <span style="font-size: 1.3rem;">🛢️</span>
+              <h3 style="font-size: 1.05rem; color: var(--rose); margin: 0; font-weight: 700;">1. Problemes Clàssics (L'era dels combustibles fòssils)</h3>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+              La humanitat consumeix cada dia més de <strong>100 milions de barrils de petroli</strong>, juntament amb milers de milions de m³ de gas natural i tones de carbó. Aquest model extractiu comporta impactes greus i acumulatius:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.84rem;">
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--rose);">
+                <strong style="color: var(--text-main);">🪨 Mineria del Carbó:</strong>
+                <span style="color: var(--text-muted);"> Destrucció radical del paisatge a cel obert, <em>drenatge àcid de mines</em> (aigües amb sulfurs i metalls pesants que contaminen rius durant segles) i greus malalties laborals (silicosi o «pulmó negre»).</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--rose);">
+                <strong style="color: var(--text-main);">🌊 Plataformes Offshore i Marees Negres:</strong>
+                <span style="color: var(--text-muted);"> Accidents catastròfics en pous marins (ex: <em>Deepwater Horizon</em>) o petroliers (ex: <em>Prestige</em>), i degradació crònica d'ecosistemes d'alta biodiversitat (delta del Níger o l'Amazònia).</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--rose);">
+                <strong style="color: var(--text-main);">💥 Fracking i Fuites Fugitives de Metà:</strong>
+                <span style="color: var(--text-muted);"> La fracturació hidràulica per a gas d'esquist requereix milions de litres d'aigua amb químics tòxics que amenacen els aqüífers, indueix terratrèmols i allibera fuites de metà (CH₄), un gas d'efecte d'hivernacle 80 vegades més potent que el CO₂ a curt termini.</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--rose);">
+                <strong style="color: var(--text-main);">🔥 La destrucció definitiva del recurs:</strong>
+                <span style="color: var(--text-muted);"> El combustible fòssil <strong>es consumeix una sola vegada</strong>. No es pot reciclar ni reutilitzar: es converteix en gasos d'efecte d'hivernacle (CO₂) i partícules contaminants que s'acumulen a l'atmosfera.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna 2: Nous Reptes de la Transició -->
+          <div style="background: rgba(245, 158, 11, 0.03); border: 1px solid rgba(245, 158, 11, 0.15); border-radius: 14px; padding: 1.3rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
+              <span style="font-size: 1.3rem;">⚡</span>
+              <h3 style="font-size: 1.05rem; color: var(--amber); margin: 0; font-weight: 700;">2. Nous Reptes (La transició renovable i l'electrificació)</h3>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+              Generar electricitat amb sol o vent no crema combustible, però construir la tecnologia de captació requereix <strong>molt més material mineral inicial</strong> per unitat d'energia produïda que una central tèrmica convencional:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.84rem;">
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--amber);">
+                <strong style="color: var(--text-main);">💧 Liti (Salars d'alta muntanya als Andes):</strong>
+                <span style="color: var(--text-muted);"> Essencial per a les bateries. L'extracció per bombeig i evaporació de salmorra als salars d'Atacama (Xile, Bolívia, Argentina) consumeix milions de litres d'aigua en ecosistemes extremadament àrids, afectant les comunitats locals.</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--amber);">
+                <strong style="color: var(--text-main);">⛓️ Cobalt (República Democràtica del Congo):</strong>
+                <span style="color: var(--text-muted);"> Més del 70% del cobalt mundial es concentra a la RDC. L'extracció artesanal sovint implica greus vulneracions dels drets humans, explotació laboral i treball infantil en condicions d'alta toxicitat.</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--amber);">
+                <strong style="color: var(--text-main);">🌴 Níquel (Indonèsia i Filipines):</strong>
+                <span style="color: var(--text-muted);"> Clau per a bateries de gran densitat. La seva extracció massiva ha causat desforestació accelerada de selves equatorials i vessaments de fangs tòxics als oceans.</span>
+              </div>
+              <div style="background: rgba(0,0,0,0.1); padding: 0.7rem; border-radius: 8px; border-left: 3px solid var(--amber);">
+                <strong style="color: var(--text-main);">🧲 Terres Rares (Neodimi, Disprosi):</strong>
+                <span style="color: var(--text-muted);"> Fonamentals per als imants permanents dels aerogeneradors marins i motors de cotxe elèctric. El seu processament químic genera llots àcids i residus amb radioactivitat associada (tori/urani).</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Targeta geopolítica: Canvi de dependència -->
+        <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+            <span style="font-size: 1.2rem;">🌐</span>
+            <strong style="font-size: 0.95rem; color: var(--indigo);">La Nova Geopolítica: Canviem l'OPEP pel monopoli del refinament industrial?</strong>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+            A diferència del petroli (on el poder rau a tenir el pou), en els minerals crítics el coll d'ampolla geopolític és el <strong>refinament industrial i la manufactura química</strong>. Actualment, la <strong>Xina controla entre el 60% i el 90% del refinament mundial de liti, cobalt i terres rares</strong>. Això planteja un gran repte estratègic per a Europa: per alliberar-se de la dependència del petroli i gas de països com Rússia o les monarquies del Golf, cal evitar una dependència tecnològica exclusiva de la cadena de subministrament xinesa mitjançant mines responsables, diversificació i reciclatge local.
+          </p>
+        </div>
+
+        <!-- Respostes i Economia Circular: La Gran Diferència -->
+        <div style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.18); border-radius: 14px; padding: 1.3rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
+            <span style="font-size: 1.3rem;">🔄</span>
+            <h3 style="font-size: 1.05rem; color: var(--primary); margin: 0; font-weight: 700;">3. Respostes Clau: De l'Extractivisme a l'Economia Circular</h3>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+            Tot i la intensitat material inicial, la tecnologia renovable ofereix una oportunitat que els combustibles fòssils mai podran tenir: <strong>la matèria no es crema; roman a la màquina i es pot reciclar de manera indefinida</strong>.
+          </p>
+
+          <div class="grid-3" style="gap: 1rem; font-size: 0.83rem;">
+            <div style="background: rgba(0,0,0,0.12); padding: 0.85rem; border-radius: 10px;">
+              <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.3rem;">
+                <span>♻️</span> Reciclatge en Cicle Tancat
+              </div>
+              <p style="color: var(--text-muted); margin: 0; line-height: 1.4;">
+                La nova <strong>Directiva Europea de Bateries (2023)</strong> obliga a recuperar el <strong>90% del cobalt i níquel</strong> i el <strong>80% del liti</strong> el 2031, i exigeix un passaport digital per garantir una procedència neta i sense violacions de drets humans.
+              </p>
+            </div>
+            <div style="background: rgba(0,0,0,0.12); padding: 0.85rem; border-radius: 10px;">
+              <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.3rem;">
+                <span>🧪</span> Innovació Química Sense Conflicte
+              </div>
+              <p style="color: var(--text-muted); margin: 0; line-height: 1.4;">
+                Desenvolupament de bateries <strong>LFP (fosfat de ferro i liti)</strong> que eliminen completament el cobalt i el níquel, noves bateries de <strong>sodi</strong> (abundant a la sal comuna marina) i aerogeneradors de transmissió directa sense terres rares.
+              </p>
+            </div>
+            <div style="background: rgba(0,0,0,0.12); padding: 0.85rem; border-radius: 10px;">
+              <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.3rem;">
+                <span>🚆</span> Sobrietat i Mobilitat Col·lectiva
+              </div>
+              <p style="color: var(--text-muted); margin: 0; line-height: 1.4;">
+                La transició ecològica no consisteix a canviar 1.400 milions de cotxes de combustió per 1.400 milions de cotxes elèctrics privats. La clau és prioritzar el <strong>transport públic, el tren i la mobilitat compartida</strong>, reduint dràsticament els milions de tones de minerals a extreure.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- 2. FONTS NO RENOVABLES -->
@@ -7782,24 +7962,28 @@
 
     const fuelDetails = {
       petroli: {
-        title: "🛢️ Petroli (100% Importat)",
-        import: "100%",
-        desc: "Consumit en el transport (cotxes, camions, avions) i en la potent indústria petroquímica de Tarragona. En no tenir jaciments propis, prové en la seva totalitat de vaixells petroliers estrangers que arriben al port de Tarragona."
+        title: "🛢️ Petroli (Cru i derivats)",
+        import: "100% Importat de l'exterior (0% autòcton)",
+        share: "~46% del consum d'energia primària a Catalunya",
+        desc: "Consumit majoritàriament en el sector transport (gasolina, dièsel, querosè d'aviació) i com a matèria primera de la potent indústria petroquímica de Tarragona. En no disposar de jaciments propis, el 100% arriba en vaixells petroliers des de països com Nigèria, Mèxic, Líbia o l'Aràbia Saudita."
       },
       gas: {
-        title: "🔥 Gas Natural (100% Importat)",
-        import: "100%",
-        desc: "S'utilitza per a calefacció domèstica, processes industrials i per alimentar les turbines de cicle combinat. Catalunya depèn totalment de les importacions, que arriben a través de gasoductes d'Algèria o com a GNL liquat per vaixells."
+        title: "🔥 Gas Natural (Metà fòssil)",
+        import: "100% Importat de l'exterior (0% autòcton)",
+        share: "~21% del consum d'energia primària a Catalunya",
+        desc: "S'utilitza per a calefacció domèstica, processos tèrmics industrials i per alimentar les centrals de cicle combinat elèctric. Catalunya depèn totalment de les importacions per gasoducte submarí (Medgaz des d'Algèria) o mitjançant vaixells metaners de gas natural liquat (GNL dels EUA, Qatar o Nigèria)."
       },
       urani: {
-        title: "☢️ Urani (100% Importat)",
-        import: "100%",
-        desc: "Combustible per a les centrals d'Ascó i Vandellòs. Tot i que s'assembla a una font nacional perquè la generació es fa a Catalunya i és lliure de CO₂ directe, tot el mineral d'urani prové de mines a l'estranger (Níger, Kazakhstan, Canadà)."
+        title: "☢️ Urani (Central Nuclear)",
+        import: "100% Importat de l'exterior (0% autòcton)",
+        share: "~17% de l'energia primària consumida",
+        desc: "Combustible nuclear per als reactors d'Ascó I, Ascó II i Vandellòs II. Tot i que l'electricitat es genera a Catalunya i no emet gasos d'efecte d'hivernacle a les xemeneies, el 100% del mineral d'urani s'extreu i s'enriqueix fora (Níger, Kazakhstan, Canadà, Austràlia o Rússia)."
       },
       renovables: {
-        title: "🌿 Renovables Autòctones (0% Importat)",
-        import: "0%",
-        desc: "Energia generada directament pel sol, el vent, la biomassa forestal local i els embassaments de Catalunya. Són els únics recursos 100% propis, lliures de peatges geopolítics, que reforcen directament la sobirania energètica del país."
+        title: "🌿 Fonts Renovables Autòctones",
+        import: "0% Importat (100% recursos naturals autòctons)",
+        share: "15,8% de l'energia primària total de Catalunya",
+        desc: "Energia captada directament del sol, el vent, els salts d'aigua i la biomassa dels nostres boscos. Són recursos 100% locals i lliures de peatges geopolítics. Ara bé, la infraestructura instal·lada actualment només cobreix el 15,8% de tota l'energia que necessita Catalunya; l'altre 84,2% s'ha d'importar en forma de fòssils i urani."
       }
     };
 
@@ -7959,9 +8143,10 @@
             const tooltip = document.getElementById('dep-tooltip-box');
             tooltip.innerHTML = `
               <h4 style="margin-bottom: 0.5rem; color: ${row.style.getPropertyValue('--color') || 'var(--secondary)'}; font-weight: 700;">${details.title}</h4>
-              <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 0.5rem;">
-                <strong>Dependència exterior:</strong> ${details.import}
+              <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 0.35rem;">
+                <strong>Grau d'importació:</strong> ${details.import}
               </p>
+              ${details.share ? `<p style="font-size: 0.82rem; color: var(--secondary); margin-bottom: 0.5rem; font-weight: 600;"><strong>Pes en el consum català:</strong> ${details.share}</p>` : ''}
               <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">${details.desc}</p>
             `;
             tooltip.style.borderColor = row.style.getPropertyValue('--color') || 'var(--primary)';

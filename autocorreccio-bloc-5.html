@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 5 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #059669;
+      --correct-bg: #ecfdf5;
+      --correct-border: #a7f3d0;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(5, 150, 105, 0.3);
+      color: #34d399;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #059669; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #059669;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #047857; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 12px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-badge-pts {
+      background: var(--correct);
+      color: white;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--correct-border);
+    }
+    .step-box {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 4px 0;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+    .step-box strong { color: var(--text-main); }
+    .step-formula {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #047857;
+      font-weight: 700;
+      background: #d1fae5;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn active">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn">✅ Bloc 6</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 5</div>
+        <div class="header-title">Polítiques Públiques (3.000 M€) i Planificació Territorial (PLATER)</div>
+        <div class="header-desc">Pauta d'autoavaluació per a les Activitats A7 (pla de transició de 3.000 M€, indicadors i dades d'autoconsum) i A8 (ordenació territorial del PLATER, SIG, teulades vs conreus i justícia espacial) sobre 10 punts.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field"><strong>Alumne/a:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Grup:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Data:</strong> <div class="line"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A7: PLANIFICADOR DE POLÍTIQUES PÚBLIQUES             -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A7 · Tasca 1: Selecció i Registre de Polítiques del Pla de Transició (Màx. 3.000 M€)</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Model de Pla Coherent i Compliment del Límit Pressupostari</span>
+      <span class="solution-points">Límit &le; 3.000 M€ (0,75 pt) + Coherència de mesures (0,75 pt)</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Mesura Seleccionada (Exemple Model)</th>
+          <th style="text-align:center;">Cost (M€)</th>
+          <th>Efecte Principal sobre el Sistema</th>
+          <th>Justificació Estratègica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Rehabilitació Energètica d'Habitatges</strong></td>
+          <td style="text-align:center;">1.200 M€</td>
+          <td>-150 MW de demanda estructural</td>
+          <td>Redueix despesa de famílies vulnerables i combat la pobresa energètica.</td>
+        </tr>
+        <tr>
+          <td><strong>Impuls a l'Autoconsum Solar</strong></td>
+          <td style="text-align:center;">500 M€</td>
+          <td>-100 MW de demanda a la xarxa</td>
+          <td>Descentralitza la generació amb alt consens social i zero conflicte de sòl.</td>
+        </tr>
+        <tr>
+          <td><strong>Desbloqueig de l'Eòlica Marina</strong></td>
+          <td style="text-align:center;">1.000 M€</td>
+          <td>Habilita la tecnologia marina</td>
+          <td>Prepara el terreny per a grans parcs eòlics sense ocupar terreny terrestre.</td>
+        </tr>
+        <tr>
+          <td><strong>Simplificació Burocràtica</strong></td>
+          <td style="text-align:center;">150 M€</td>
+          <td>-1 trimestre de construcció</td>
+          <td>Accelera l'execució de projectes verds amb molt baix cost públic.</td>
+        </tr>
+        <tr style="background:#ecfdf5; font-weight:700;">
+          <td>TOTAL CONSUMIT / ESTALVI</td>
+          <td style="text-align:center; color:#047857;">2.850 M€ (&le; 3.000 M€)</td>
+          <td colspan="2" style="color:#047857;">Estalvi net de demanda: -250 MW a la xarxa</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A7 · Tasques 2 i 3: Anàlisi d'Indicadors, Justificació i Consciència de Renúncies</span>
+    <span class="task-badge-pts">2,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Valoració de l'Anàlisi i l'Argumentació de Govern</span>
+      <span class="solution-points">Indicadors (1,50 pts) + Renúncies i Justificació (1,00 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Tasca 2 · Anàlisi dels Indicadors (1,50 pts):</strong><br>
+      • L'alumnat registra els valors resultants al simulador: balanç fiscal restant, reducció d'emissions de CO₂, nous MW habilitats i impacte en l'aprovació dels 4 col·lectius socials.<br>
+      • Es valora que el pla no enfonsi l'aprovació de cap grup per sota del 25% (evitant conflictes crítics).
+    </div>
+    <div class="step-box">
+      <strong>Tasca 3 · Justificació Argumentada i Renúncies (1,00 pt):</strong><br>
+      • <em>Justificació (0,50 pt):</em> Defensa clara de per què es prioritza reduir demanda (l'energia més barata és la que no es consumeix) o accelerar infraestructures.<br>
+      • <em>Renúncia assumida (0,50 pt):</em> Identifica quina política clau ha hagut de deixar fora per manca de pressupost (ex: <strong>Bateries d'Emmagatzematge</strong> de 2.000 M€) i proposa com compensar-ho (fons europeus NextGen o inversió privada).
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A7 · Tasca 4: Anàlisi de Dades de l'Autoconsum Solar a Catalunya</span>
+    <span class="task-badge-pts">1,0 punt</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Càlcul del Factor Multiplicatiu i Paradoxa Potència vs Generació Neta</span>
+      <span class="solution-points">Càlcul factor (0,50 pt) + Justificació física (0,50 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 3 · Factor Multiplicatiu 2020-2023 (0,50 pt):</strong><br>
+      • Dades oficials: any 2020 = 6.000 teulades; any 2023 = 102.000 teulades.<br>
+      • Càlcul: <span class="step-formula">102.000 / 6.000 = 17 vegades</span>.<br>
+      • El nombre de teulades solars s'ha multiplicat per 17 en només 3 anys per la fi del "tribut al sol" i l'encariment de la llum.
+    </div>
+    <div class="step-box">
+      <strong>Pregunta 4 · Paradoxa: 102.000 teulades però només el 3,7% de generació neta (0,50 pt):</strong><br>
+      • <em>Factor de capacitat baix (~15-18%):</em> Les plaques només generen de dia amb sol (~1.500 h/any), mentre que una nuclear funciona 8.000 h/any (90%). Per al mateix MW instal·lat, una central de base produeix 5 cops més energia.<br>
+      • <em>Consum directe darrere del comptador:</em> Molta d'aquesta energia es gasta a la mateixa llar o fàbrica a l'instant i no arriba a la xarxa de transport general (ICAEN).
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A8: PLANIFICACIÓ TERRITORIAL (PLATER)                -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A8 · Tasca 1: El Filtre Digital — El SIG i les 141 Capes Territorials</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Correcció sobre Planificació Pública vs Mercat Lliure</span>
+      <span class="solution-points">Necessitat del SIG (0,75 pt) + 3 capes de dades (0,75 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Per què cal un SIG públic en lloc de deixar-ho al lliure mercat? (0,75 pt):</strong><br>
+      • Si les elèctriques privades trien lliurement, s'instal·len només on el sòl és més barat i pla, provocant la <strong>saturació injusta de poques comarques rurals</strong> (com la Terra Alta) i amenaçant espais naturals d'alt interès ecològic. El SIG garanteix l'interès general i l'equilibri territorial.
+    </div>
+    <div class="step-box">
+      <strong>2. Tres capes territorials essencials que es creuen (0,75 pt):</strong><br>
+      • <em>Ecològica / Biodiversitat:</em> Parcs naturals (PEIN), Xarxa Natura 2000 i corredors d'aus protegides (zones no aptes).<br>
+      • <em>Agrària:</em> Sòls fèrtils d'alt valor agrícola i regadius que cal blindar per garantir la sobirania alimentària.<br>
+      • <em>Infraestructura Elèctrica:</em> Proximitat a subestacions i línies d'alta tensió per evitar construir quilòmetres d'esteses elèctriques.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A8 · Tasca 2: Fem Números — Teulades o Camps de Conreu?</span>
+    <span class="task-badge-pts">2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Càlcul Físic i Motius pels quals les Teulades No Són Suficients</span>
+      <span class="solution-points">Densitat de potència (1,00 pt) + Demanda industrial (1,00 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Baixa densitat de potència (\(\text{W/m}^2\)) i límits urbans (1,00 pt):</strong><br>
+      • La radiació solar té una densitat dispersa: per obtenir 1.000 MW calen entre 1.500 i 2.000 hectàrees de terreny (més de 2.000 camps de futbol!).<br>
+      • A les ciutats, els blocs de pisos acullen moltes famílies però tenen teulades molt petites i sovint amb ombres d'altres edificis o orientacions incorrectes.
+    </div>
+    <div class="step-box">
+      <strong>2. Desconnexió amb la demanda industrial i transport (1,00 pt):</strong><br>
+      • La major part del consum energètic català no són les llums domèstiques sinó la <strong>gran indústria</strong> (química de Tarragona, acereries, cimenteres, fàbriques) i els trens/ports.<br>
+      • Aquests grans consumidors treballen 24 hores al dia i estan lluny dels sostres urbans. Calen grans parcs de generació en sòl obert per poder abastir aquest volum d'energia.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A8 · Tasca 3: El Debat de la Solidaritat Territorial i Justícia Energètica</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Mecanismes del PLATER i Valoració Argumentada de la Justícia Espacial</span>
+      <span class="solution-points">Mecanisme PLATER (0,75 pt) + Opinió crítica madura (0,75 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Com resol el PLATER la queixa dels municipis rurals? (0,75 pt):</strong><br>
+      • Fixa <strong>objectius obligatoris a cadascuna de les 42 comarques catalanes</strong> ponderats per la seva superfície útil, evitant que Barcelona consumeixi el 70% de l'energia mentre 2 o 3 comarques del sud i ponent suporten el 80% dels molins.
+    </div>
+    <div class="step-box">
+      <strong>2. Opinió sobre la distribució justa i compensacions (0,75 pt):</strong><br>
+      • L'alumnat formula una proposta madura: per exemple, que les comarques rurals productores rebin compensacions econòmiques directes (rebaixes a l'IBI, llum més barata per a empreses locals, reinversió de cànons eòlics en salut i escoles rurals) per garantir que la transició energètica no buidi el món rural.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 8px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 9.8pt; color: #059669; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Suma directa sobre 10 punts)</span>
+      <span style="font-size: 7.8pt; color: var(--text-muted); font-weight: 600;">Bloc 5 · Polítiques Públiques i PLATER</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A7 · Tasca 1:</strong> Selecció de polítiques del pla (&le; 3.000 M€)</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A7 · Tasques 2 i 3:</strong> Indicadors, justificació i renúncies de govern</td>
+          <td style="text-align: center; font-weight: 700;">2,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,5</td>
+        </tr>
+        <tr>
+          <td><strong>A7 · Tasca 4:</strong> Anàlisi de dades: Creixement x17 i paradoxa solar</td>
+          <td style="text-align: center; font-weight: 700;">1,0 pt</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,0</td>
+        </tr>
+        <tr>
+          <td><strong>A8 · Tasca 1:</strong> Filtre digital: El SIG i creuament de 141 capes</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A8 · Tasca 2:</strong> Fem números: Teulades vs camps de conreu (W/m²)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>A8 · Tasca 3:</strong> Solidaritat territorial, quotes comarcals i justícia</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (BLOC 5):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #059669; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div><strong>Punts forts del treball:</strong> __________________________________________________</div>
+      <div><strong>Aspectes a millorar per al proper bloc:</strong> ________________________________</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocorrecció Bloc 4 — Catalunya: Repte Energètic</title>
+  <style>
+    /* ─── VARIABLES I TEMA GENERAL ─── */
+    :root {
+      --primary: #059669;
+      --secondary: #0284c7;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --indigo: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --border: #cbd5e1;
+      --correct: #e11d48;
+      --correct-bg: #fff1f2;
+      --correct-border: #fecdd3;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.4;
+      font-size: 8.8pt;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+      }
+      body {
+        background: #fff !important;
+        font-size: 8.5pt;
+        color: #0f172a !important;
+      }
+      .page-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .no-print { display: none !important; }
+      .page-break { display: none !important; }
+      .no-break { break-inside: avoid; page-break-inside: avoid; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* ─── NAVIGATION BAR (NO PRINT) ─── */
+    .block-nav-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      margin-bottom: 14px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .nav-tag {
+      font-size: 9.5px;
+      background: rgba(225, 29, 72, 0.3);
+      color: #fda4af;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .nav-btn.active { background: #e11d48; color: #fff; font-weight: 700; }
+    .nav-btn.secondary { background: rgba(2, 132, 199, 0.2); color: #7dd3fc; }
+    .nav-separator { color: #475569; font-size: 11px; margin: 0 2px; }
+    
+    .print-action-btn {
+      background: #e11d48;
+      color: #fff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 11.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .print-action-btn:hover { background: #be123c; }
+
+    /* ─── HEADER CARDS ─── */
+    .header-card {
+      border: 1.5px solid var(--border);
+      border-top: 4px solid var(--correct);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      background: #ffffff;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .header-badge {
+      font-size: 7.5pt;
+      font-weight: 800;
+      color: var(--correct);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .header-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 1px 0 2px 0;
+      line-height: 1.2;
+    }
+    .header-desc {
+      font-size: 8pt;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      font-size: 8.2pt;
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px dashed var(--border);
+    }
+    .student-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .student-field .line {
+      flex: 1;
+      border-bottom: 1px dotted var(--text-muted);
+      height: 14px;
+    }
+
+    /* ─── ENCAPÇALAMENT DE TASCA ─── */
+    .task-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 6px 10px;
+      font-size: 9.5pt;
+      font-weight: 800;
+      margin: 12px 0 8px 0;
+      border-radius: 6px;
+      border-left: 5px solid var(--correct);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    .task-badge-pts {
+      background: var(--correct);
+      color: white;
+      font-size: 8pt;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* ─── BLOCS DE SOLUCIÓ PAS A PAS ─── */
+    .solution-block {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 3.5px solid var(--correct);
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+    .solution-title {
+      font-weight: 700;
+      font-size: 8.8pt;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .solution-points {
+      background: var(--correct-bg);
+      color: var(--correct);
+      font-size: 7.2pt;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--correct-border);
+    }
+    .step-box {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 5px 8px;
+      margin: 4px 0;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+    .step-box strong { color: var(--text-main); }
+
+    /* ─── TAULES COMPACTES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th {
+      background: #0f172a;
+      color: white;
+      padding: 4px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGACIÓ (NO PRINT) -->
+<div class="block-nav-bar no-print">
+  <div class="nav-brand">
+    <span>⚡ Catalunya: Repte Energètic</span>
+    <span class="nav-tag">Dossiers & Autocorrecció</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn secondary">🏠 Portada Web</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Dossiers:</span>
+    <a href="dossier-bloc-1.html" class="nav-btn">Bloc 1 (A1)</a>
+    <a href="dossier-bloc-2.html" class="nav-btn">Bloc 2 (A2)</a>
+    <a href="dossier-bloc-3.html" class="nav-btn">Bloc 3 (A3-A4)</a>
+    <a href="dossier-bloc-4.html" class="nav-btn">Bloc 4 (A5-A6)</a>
+    <a href="dossier-bloc-5.html" class="nav-btn">Bloc 5 (A7-A8)</a>
+    <a href="dossier-bloc-6.html" class="nav-btn">Bloc 6 (A9-A10)</a>
+    <span class="nav-separator">|</span>
+    <span style="font-size: 10px; color: #34d399; font-weight: 700; text-transform: uppercase;">Autocorrecció:</span>
+    <a href="autocorreccio-bloc-1.html" class="nav-btn">✅ Bloc 1</a>
+    <a href="autocorreccio-bloc-2.html" class="nav-btn">✅ Bloc 2</a>
+    <a href="autocorreccio-bloc-3.html" class="nav-btn">✅ Bloc 3</a>
+    <a href="autocorreccio-bloc-4.html" class="nav-btn active">✅ Bloc 4</a>
+    <a href="autocorreccio-bloc-5.html" class="nav-btn">✅ Bloc 5</a>
+    <a href="autocorreccio-bloc-6.html" class="nav-btn">✅ Bloc 6</a>
+  </div>
+  <button class="print-action-btn" onclick="window.print()">🖨️ Imprimir Autocorrecció (PDF)</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- CAPÇALERA -->
+  <div class="header-card no-break">
+    <div class="header-top">
+      <div>
+        <div class="header-badge">GUIA D'AUTOCORRECCIÓ I AUTOAVALUACIÓ · BLOC 4</div>
+        <div class="header-title">Conflicte Social, Mediació i Joc d'Actors Socials</div>
+        <div class="header-desc">Pauta d'autoavaluació per a les Activitats A5 (el debat del Prat, rols i consens) i A6 (mini-joc de presa de decisions i anàlisi sociològica del CEO) sobre 10 punts.</div>
+      </div>
+      <div style="text-align: right; font-size: 8pt; color: var(--text-muted); white-space: nowrap;">
+        Institut Escola Tramuntana<br>
+        <strong>Tecnologia - 4t d'ESO</strong>
+      </div>
+    </div>
+    <div class="student-fields">
+      <div class="student-field"><strong>Alumne/a:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Grup:</strong> <div class="line"></div></div>
+      <div class="student-field"><strong>Data:</strong> <div class="line"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A5: DILEMA DE L'AEROPORT DEL PRAT                    -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A5 · Tasques 1 i 2: Documentació de Premsa i Preparació dels 4 Rols</span>
+    <span class="task-badge-pts">2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Rigor dels Arguments i Dades Extretes dels Retalls de Premsa</span>
+      <span class="solution-points">4 rols &times; 0,50 pt = 2,00 pts</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Rol Representat</th>
+          <th>Arguments Principals i Dades Documentades</th>
+          <th>Punt Feble o Renúncia que han de Reconèixer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>✈️ Grup A: Patronals / AENA</strong></td>
+          <td>Hub intercontinental; allargar pista 500m; creixement del PIB del 6,2% al 8,9%; creació de fins a 10.000 llocs de treball directes.</td>
+          <td>Emissions creixents de CO₂ del transport aeri sense alternativa tecnològica a curt termini.</td>
+        </tr>
+        <tr>
+          <td><strong>🦆 Grup B: Ecologistes</strong></td>
+          <td>Protecció de la llacuna de La Ricarda i aiguamolls del Delta (Xarxa Natura 2000); risc de sancions de la UE; biodiversitat irrecuperable.</td>
+          <td>No ofereixen una alternativa econòmica directa per als milers de llocs de treball potencials.</td>
+        </tr>
+        <tr>
+          <td><strong>🏘️ Grup C: Veïns (Gavà/Castelldefels)</strong></td>
+          <td>Contaminació acústica greu; alteració del descans nocturn; danys a la salut per sobre dels llindars recomanats per l'OMS.</td>
+          <td>Part de la població metropolitana i del comerç local es beneficia indirectament de l'activitat.</td>
+        </tr>
+        <tr>
+          <td><strong>🏛️ Grup D: Conseller/a (Govern)</strong></td>
+          <td>Obligació de buscar el bé comú, complir les directives europees i equilibrar economia i conservació.</td>
+          <td>Competència d'Aena en mans del Ministeri de Transports de l'Estat (límit competencial).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A5 · Tasca 3: Participació al Debat Estructurat a l'Aula</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris d'Avaluació Oral de l'Exposició i el Torn de Preguntes</span>
+      <span class="solution-points">3 criteris &times; 0,50 pt = 1,50 pts</span>
+    </div>
+    <div class="step-box">
+      • <strong>Defensa del Rol (0,50 pt):</strong> Exposició inicial de 2 minuts utilitzant el vocabulari tècnic i les dades del dossier sense desviar-se del paper assignat.<br>
+      • <strong>Preguntes Creuades i Rèplica (0,50 pt):</strong> Formular una pregunta punyent basada en les limitacions d'un altre grup i respondre a les interpel·lacions amb arguments sòlids.<br>
+      • <strong>Respecte i To Constructiu (0,50 pt):</strong> Mantenir el to de negociació política sense atacs personals, orientant les intervencions cap a la cerca de solucions.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A5 · Tasca 4: Conclusions Individuals i Proposta de Consens</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Model de Proposta de Consens i Identificació de l'Argument Sòlid</span>
+      <span class="solution-points">Proposta (1,00 pt) + Argument (0,50 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>Proposta de Consens Model (1,00 pt):</strong><br>
+      <em>"Modernització i optimització de la gestió del trànsit aeri sense invasió física de La Ricarda:"</em><br>
+      1. Digitalitzar i millorar l'operativa de pistes actuals per augmentar freqüències de llarg radi sense allargar els 500m sobre la llacuna protegida.<br>
+      2. Connectar amb alta velocitat ferroviària (AVE) els aeroports de Girona i Reus amb el Prat en 30-40 minuts, descentralitzant els vols curts.<br>
+      3. Crear un cànon ambiental aeroportuari per finançar l'aïllament acústic de les vivendes de Gavà i Castelldefels i la restauració ambiental del Delta.
+    </div>
+    <div class="step-box">
+      <strong>Identificació de l'Actor amb l'Argument més Fort (0,50 pt):</strong><br>
+      L'alumne ha d'escollir un actor i fonamentar la tria amb maduresa: per exemple, els ecologistes per la irreversibilitat de la destrucció ecològica (un bosc o un aiguamoll destruït no es pot fabricar), o les patronals per la pèrdua de competitivitat internacional de Catalunya.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- ACTIVITAT A6: MINI-JOC DE CONSENS SOCIAL                       -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+
+  <div class="task-header no-break">
+    <span>A6 · Tasca 1: Registre de la Partida del Mini-Joc de Consens</span>
+    <span class="task-badge-pts">1,5 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de Valoració del Registre de Decisions</span>
+      <span class="solution-points">1,50 pts (Registre complet dels canvis de percentatge)</span>
+    </div>
+    <div class="step-box">
+      • Ha anotat correctament el seu rol assignat al mini-joc, les 3 decisions preses durant la partida i l'evolució final del suport dels 4 grups socials (Empresaris, Ecologistes, Veïns i Ciutadania).<br>
+      • <em>Comprensió:</em> No s'avalua si ha guanyat o perdut, sinó que hagi registrat les dades reals que permeten fer l'anàlisi de la Tasca 2.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A6 · Tasca 2: Reflexió Post-Joc i Gestió de la Polarització</span>
+    <span class="task-badge-pts">1,5 punts (2 &times; 0,75 pt)</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris de les 2 Preguntes de Reflexió Política</span>
+      <span class="solution-points">0,75 pt per resposta raonada</span>
+    </div>
+    <div class="step-box">
+      <strong>Reflexió 1 (Anàlisi del veredicte i consens):</strong><br>
+      • Reconeix que governar acontentant exclusivament la pròpia facció porta a la paràlisi (polarització), ja que els grups oposats tenen capacitat de bloqueig social i jurídic. L'èxit d'una política pública requereix concessions mútues.
+    </div>
+    <div class="step-box">
+      <strong>Reflexió 2 (Asimetria d'impactes entre col·lectius):</strong><br>
+      • Identifica una decisió concreta on afavorir un grup perjudicava molt als altres (ex: donar llum verda a l'aeroport donava +10 a empreses però -15 a ecologistes), explicant que els guanys econòmics sovint es concentren en un sector mentre que els costos ecològics i acústics els pateix tota la comunitat.
+    </div>
+  </div>
+
+  <div class="task-header no-break">
+    <span>A6 · Tasca 3: Anàlisi Sociològica del CEO (Suport Social: 92% vs 48%)</span>
+    <span class="task-badge-pts">2,0 punts</span>
+  </div>
+
+  <div class="solution-block no-break">
+    <div class="solution-title">
+      <span>Criteris d'Explicació del Fenomen NIMBY i Models Territorials</span>
+      <span class="solution-points">Solar Teulades (1,00 pt) + Eòlica Marina (1,00 pt)</span>
+    </div>
+    <div class="step-box">
+      <strong>1. Per què la Solar a Teulades assoleix un 92% de consens? (1,00 pt):</strong><br>
+      • <em>Ocupació de sòl zero:</em> S'instal·la sobre sostres d'edificis i cobertes industrials ja existents, sense malmetre camps ni parcs naturals.<br>
+      • <em>Benefici econòmic tangible:</em> Redueix directament la factura de llum de la família o empresa propietària.<br>
+      • <em>Sense impacte de transport:</em> L'energia es consumeix allà mateix on es genera, evitant noves línies d'alta tensió.
+    </div>
+    <div class="step-box">
+      <strong>2. Quins conflictes expliquen que l'Eòlica Marina només tingui un 48% de suport? (1,00 pt):</strong><br>
+      • <em>Conflicte pesquer:</em> Els pescadors temen danys als fons marins, pèrdua de caladors d'arrossegament i dificultats per feinejar.<br>
+      • <em>Conflicte turístic i paisatgístic:</em> Oposició d'ajuntaments i sector hoteler per l'impacte visual de molins de 250 m a la línia d'horitzó del Cap de Creus / Golf de Roses.<br>
+      • <em>Conflicte ecològic:</em> Preocupació per la col·lisió d'aus marines migratòries i alteració dels cetacis pels camps acústics submarins.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- GRAELLA FINAL DE QUALIFICACIÓ                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div class="no-break" style="margin-top: 8px; border: 2px solid var(--correct); border-radius: 8px; padding: 10px 14px; background: #ffffff;">
+    <div style="font-weight: 800; font-size: 9.8pt; color: #e11d48; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <span>📊 Graella de Càlcul de la Qualificació Final (Suma directa sobre 10 punts)</span>
+      <span style="font-size: 7.8pt; color: var(--text-muted); font-weight: 600;">Bloc 4 · Conflicte Social i Consens</span>
+    </div>
+
+    <table style="font-size: 8.2pt; margin-bottom: 6px;">
+      <thead>
+        <tr>
+          <th>Tasca / Àmbit Competencial Avaluat</th>
+          <th style="text-align: center; width: 22%;">Puntuació Màxima</th>
+          <th style="text-align: center; width: 22%;">Punts Obtinguts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A5 · Tasques 1 i 2:</strong> Documentació de premsa i preparació dels 4 rols</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr>
+          <td><strong>A5 · Tasca 3:</strong> Participació al debat estructurat oral a l'aula</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A5 · Tasca 4:</strong> Conclusions individuals i proposta de consens integradora</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A6 · Tasca 1:</strong> Registre de les 3 decisions del mini-joc de consens</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A6 · Tasca 2:</strong> Reflexió post-joc sobre polarització i asimetria d'impactes</td>
+          <td style="text-align: center; font-weight: 700;">1,5 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 1,5</td>
+        </tr>
+        <tr>
+          <td><strong>A6 · Tasca 3:</strong> Anàlisi de suport social CEO (Teulades 92% vs Marina 48%)</td>
+          <td style="text-align: center; font-weight: 700;">2,0 pts</td>
+          <td style="text-align: center; font-weight: 700;">____ / 2,0</td>
+        </tr>
+        <tr style="background: var(--correct-bg); border-top: 2px solid var(--correct); font-size: 9.5pt;">
+          <td><strong>SUMA TOTAL DE LA NOTA FINAL (BLOC 4):</strong></td>
+          <td style="text-align: center; font-weight: 800; font-size: 10.5pt;">10,0 pts</td>
+          <td style="text-align: center; font-weight: 800; color: #e11d48; font-size: 11.5pt;">____ / 10</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; font-size: 7.8pt; color: var(--text-muted);">
+      <div><strong>Punts forts del treball:</strong> __________________________________________________</div>
+      <div><strong>Aspectes a millorar per al proper bloc:</strong> ________________________________</div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+</body>
+</html>
