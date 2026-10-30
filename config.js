@@ -12,8 +12,9 @@ window.APP_CONFIG = {
   tabs: {
     repte: true,        // 'El Repte de Govern' (Portada / Introducció)
     fonts: true,        // 'Fonts d'Energia'
-    centrals: false,    // 'Catàleg de Centrals'
-    balanca: false,     // 'Demanda i consum d'energia' (inclou balanç i simulador de xarxa)
+    centrals: true,     // 'Catàleg de Centrals'
+    xarxa: true,        // 'Distribució i Xarxa Elèctrica' (Smart Grid & Supply)
+    balanca: false,     // 'Demanda i consum d'energia' (antiga pestanya de balanç)
     actors: false,      // 'Guia d'Actors Socials'
     politiques: false   // 'Polítiques Públiques'
   },
@@ -22,5 +23,5 @@ window.APP_CONFIG = {
   // Si és false:
   // 1) S'oculta el botó/targeta de la capçalera a la portada.
   // 2) Es bloqueja l'accés directe a la URL /joc/index.html amb una pantalla de bloqueig.
-  simulator: false
+  simulator: true
 };

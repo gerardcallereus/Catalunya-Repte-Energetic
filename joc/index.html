@@ -47,7 +47,7 @@
   <script src="../config.js"></script>
   <script>
     if (window.APP_CONFIG && window.APP_CONFIG.simulator === false) {
-      window.stop(); // Stops loading React and assets
+      document.write('<style>#root, #save-load-trigger-btn, #save-load-modal { display: none !important; }</style>');
       document.addEventListener('DOMContentLoaded', () => {
         document.body.innerHTML = `
           <div class="min-h-screen bg-slate-900 flex items-center justify-center p-4 text-slate-100 font-sans">
@@ -66,9 +66,14 @@
           </div>
         `;
       });
+    } else {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.crossOrigin = 'anonymous';
+      script.src = './assets/index-BacU10Dc.js';
+      document.head.appendChild(script);
     }
   </script>
-  <script type="module" crossorigin src="./assets/index-BacU10Dc.js"></script>
 </head>
   <body class="text-slate-800 m-0 bg-slate-50 font-sans">
     <div id="root"></div>
